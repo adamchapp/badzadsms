@@ -7,11 +7,12 @@
 //
 
 #import "MapViewController.h"
+#import "UIViewController+MMDrawerController.h"
+#import "Constants.h"
 
 @interface MapViewController ()
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) HistoryViewController *historyViewController;
 
 @end
 
@@ -32,30 +33,9 @@ bool is3dOn = NO;
     return self;
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-        
-    if (![self.slidingViewController.underLeftViewController isKindOfClass:[HistoryViewController class]]) {
-        
-        self.historyViewController = (HistoryViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"HistoryView"];
-        [self.historyViewController setLocationModel:self.locationModel];
-        
-        self.slidingViewController.underLeftViewController = self.historyViewController;
-    }
-    
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
-    [self.slidingViewController setAnchorRightRevealAmount:280.0f];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    NSLog(@"View did load");
-    
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(sendSMS:)];
         
     self.locationManager = [[CLLocationManager alloc] init];
     
@@ -65,7 +45,25 @@ bool is3dOn = NO;
         [self.locationManager startUpdatingLocation];
     }
     
-    self.navigationItem.rightBarButtonItem = rightButton;
+    [self setupLeftMenuButton];
+    [self setupRightMenuButton];
+   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateDataChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateViewDataChanged object:nil];
+}
+
+-(void)setupLeftMenuButton{
+    MMDrawerBarButtonItem * leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(leftDrawerButtonPress:)];
+    [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
+}
+
+-(void)setupRightMenuButton{
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(sendSMS:)];
+    [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
+}
+
+-(void)leftDrawerButtonPress:(id)sender{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
 - (void)loadAnnotations {
@@ -73,15 +71,14 @@ bool is3dOn = NO;
     NSLog(@"Loading annotations");
     
     NSArray *coordinates = self.locationModel.coordinates;
-    
-    [self.historyViewController.tableView reloadData];
-    
+        
     if ( [coordinates count] > 0 ) {
 
         [self.mapView removeAnnotations:coordinates];
         
         for (BZLocation *location in coordinates) {
-            BOOL showItem = [[self.locationModel.coordinateDisplayMap valueForKey:location.title] boolValue];
+            NSString *key = [self.locationModel makeKeyFromLocation:location];
+            BOOL showItem = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
             if (  showItem == YES ) {
                 [self.mapView addAnnotation:location];
             }
@@ -91,11 +88,6 @@ bool is3dOn = NO;
         NSLog(@"No annotations to add");
     }
 
-}
-
-- (IBAction)revealMenu:(id)sender
-{
-    [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 - (IBAction)toggleCompass:(id)sender {
@@ -241,17 +233,6 @@ bool is3dOn = NO;
     self.longitude.text =
     [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
     
-}
-
-//////////////////////////////////////////////////////////////
-#pragma mark  - Getters and setters
-//////////////////////////////////////////////////////////////
-
-- (LocationModel *)locationModel {
-    if ( !_locationModel ) {
-        _locationModel = [[LocationModel alloc] init];
-    }
-    return _locationModel;
 }
 
 @end

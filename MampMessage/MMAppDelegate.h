@@ -10,6 +10,7 @@
 #import "URLParser.h"
 #import <MapKit/MapKit.h>
 #import "MapViewController.h"
+#import "HistoryViewController.h"
 
 @interface MMAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -20,6 +21,8 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (strong, nonatomic) URLParser *parser;
+
+@property (strong, nonatomic) LocationModel *locationModel;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

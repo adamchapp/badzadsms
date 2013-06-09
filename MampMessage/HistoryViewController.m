@@ -6,7 +6,10 @@
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
+#import "MMSideDrawerTableViewCell.h"
+#import "MMSideDrawerSectionHeaderView.h"
 #import "HistoryViewController.h"
+#import "Constants.h"
 
 @interface HistoryViewController ()
 
@@ -32,6 +35,34 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSLog(@"History view init");
+    
+    [self.tableView setSeparatorColor:[UIColor colorWithRed:49.0/255.0
+                                                      green:54.0/255.0
+                                                       blue:57.0/255.0
+                                                      alpha:1.0]];
+    [self.tableView setBackgroundColor:[UIColor colorWithRed:77.0/255.0
+                                                       green:79.0/255.0
+                                                        blue:80.0/255.0
+                                                       alpha:1.0]];
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:66.0/255.0
+                                                  green:69.0/255.0
+                                                   blue:71.0/255.0
+                                                  alpha:1.0]];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHistoryView:) name:BZCoordinateDataChanged object:nil];
+}
+
+- (void)reloadHistoryView:(id)sender {
+    NSLog(@"Reloading history view items");
+    [self.tableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  //  [self.locationModel removeObserver:self forKeyPath:@"coordinates" context:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,12 +88,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    MMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if ( !cell ) {
+        cell = [[MMSideDrawerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+    }
     
     BZLocation *location = [self.locationModel.coordinates objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = location.title;
-    cell.detailTextLabel.text = location.subtitle;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)",location.title, location.subtitle];
+    
+    NSString *key = [self.locationModel makeKeyFromLocation:location];
+    BOOL showCoordinate = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
+    
+    if ( showCoordinate == YES ) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
     
     return cell;
 }
@@ -90,33 +134,20 @@
 }
 */
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    BZLocation *location = [[self.locationModel coordinates] objectAtIndex:indexPath.row];
+    
+    if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [self.locationModel showLocation:location];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        [self.locationModel hideLocation:location];
+    }
 }
 
 @end

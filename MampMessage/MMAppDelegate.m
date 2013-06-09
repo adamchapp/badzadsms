@@ -8,6 +8,8 @@
 
 #import "MMAppDelegate.h"
 #import "BZLocation.h"
+#import "MMDrawerController.h"
+#import "MMDrawerVisualState.h"
 
 @implementation MMAppDelegate
 
@@ -17,6 +19,31 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    
+    self.locationModel = [[LocationModel alloc] init];
+    
+    HistoryViewController *historyController = [[HistoryViewController alloc] initWithStyle:UITableViewStylePlain];
+    historyController.locationModel = self.locationModel;
+    
+    MapViewController *mapController = (MapViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MapView"];
+    mapController.locationModel = self.locationModel;
+    
+    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:mapController];
+    
+    MMDrawerController * drawerController = [[MMDrawerController alloc]
+                                             initWithCenterViewController:navigationController
+                                             leftDrawerViewController:historyController
+                                             rightDrawerViewController:nil];
+    [drawerController setMaximumRightDrawerWidth:240.0];
+    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+        
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window setRootViewController:drawerController];
+    // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -35,12 +62,7 @@
     
     NSLog(@"Setting coordinates");
     
-    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
-    MapViewController *rootViewController = (MapViewController *)[[nav childViewControllers] objectAtIndex:0];
-    
-    [[rootViewController locationModel] addLocation:location];
-    
-    [rootViewController loadAnnotations];
+    [self.locationModel addLocation:location];
     
     return YES;
 }

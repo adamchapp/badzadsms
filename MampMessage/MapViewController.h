@@ -11,11 +11,11 @@
 #import <MessageUI/MessageUI.h>
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
-#import "ECSlidingViewController.h"
 #import "HistoryViewController.h"
 #import "BZLocation.h"
 #import "URLParser.h"
 #import "LocationModel.h"
+#import "MMDrawerBarButtonItem.h"
 
 @interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
 
@@ -27,7 +27,6 @@
 
 - (void)loadAnnotations;
 - (IBAction)sendSMS:(id)sender;
-- (IBAction)revealMenu:(id)sender;
 - (IBAction)toggleCompass:(id)sender;
 
 @end
