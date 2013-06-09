@@ -7,7 +7,7 @@
 //
 
 #import "MMAppDelegate.h"
-#import "MMLocation.h"
+#import "BZLocation.h"
 
 @implementation MMAppDelegate
 
@@ -31,14 +31,14 @@
     
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
     
-    MMLocation *location = [[MMLocation alloc] initWithName:title subtitle:subtitle coordinate:coordinate];
+    BZLocation *location = [[BZLocation alloc] initWithName:title subtitle:subtitle coordinate:coordinate];
     
     NSLog(@"Setting coordinates");
     
     UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
-    MMRootViewController *rootViewController = (MMRootViewController *)[[nav childViewControllers] objectAtIndex:0];
+    MapViewController *rootViewController = (MapViewController *)[[nav childViewControllers] objectAtIndex:0];
     
-    [[rootViewController coordinates] addObject:location];
+    [[rootViewController locationModel] addLocation:location];
     
     [rootViewController loadAnnotations];
     

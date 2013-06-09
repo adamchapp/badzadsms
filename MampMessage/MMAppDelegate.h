@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "URLParser.h"
 #import <MapKit/MapKit.h>
-#import "MMRootViewController.h"
+#import "MapViewController.h"
 
 @interface MMAppDelegate : UIResponder <UIApplicationDelegate>
 

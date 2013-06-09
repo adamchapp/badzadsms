@@ -10,16 +10,24 @@
 #import <MapKit/MapKit.h>
 #import <MessageUI/MessageUI.h>
 #import <CoreLocation/CoreLocation.h>
+#import <QuartzCore/QuartzCore.h>
+#import "ECSlidingViewController.h"
+#import "HistoryViewController.h"
+#import "BZLocation.h"
 #import "URLParser.h"
+#import "LocationModel.h"
 
-@interface MMRootViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
+@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UILabel *latitude;
 @property (strong, nonatomic) IBOutlet UILabel *longitude;
 
-@property (strong, nonatomic) NSMutableArray *coordinates;
+@property (strong, nonatomic) LocationModel *locationModel;
 
--(void)loadAnnotations;
+- (void)loadAnnotations;
+- (IBAction)sendSMS:(id)sender;
+- (IBAction)revealMenu:(id)sender;
+- (IBAction)toggleCompass:(id)sender;
 
 @end

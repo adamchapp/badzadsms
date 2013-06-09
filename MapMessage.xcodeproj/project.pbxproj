@@ -25,12 +25,20 @@
 		3F60C4541763BE140043EB2A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F60C4521763BE140043EB2A /* InfoPlist.strings */; };
 		3F60C4571763BE140043EB2A /* MapMessageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60C4561763BE140043EB2A /* MapMessageTests.m */; };
 		3F60C4611763C0800043EB2A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C4601763C0800043EB2A /* MessageUI.framework */; };
-		3F60C4641763C3270043EB2A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F60C4631763C3270043EB2A /* MainStoryboard.storyboard */; };
-		3F60C4671763C3AA0043EB2A /* MMRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60C4661763C3AA0043EB2A /* MMRootViewController.m */; };
+		3F60C4641763C3270043EB2A /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F60C4631763C3270043EB2A /* iPhone.storyboard */; };
+		3F60C4671763C3AA0043EB2A /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60C4661763C3AA0043EB2A /* MapViewController.m */; };
 		3F60C4691763C3CB0043EB2A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C4681763C3CB0043EB2A /* MapKit.framework */; };
 		3F60C46D1763CE140043EB2A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C46C1763CE140043EB2A /* CoreLocation.framework */; };
 		3F60C4711763F3A70043EB2A /* URLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60C4701763F3A70043EB2A /* URLParser.m */; };
-		3F60C4751763F64C0043EB2A /* MMLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60C4741763F64C0043EB2A /* MMLocation.m */; };
+		3F60C4751763F64C0043EB2A /* BZLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60C4741763F64C0043EB2A /* BZLocation.m */; };
+		3F8111141764179F00975702 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8111111764179F00975702 /* ECSlidingViewController.m */; };
+		3F8111151764179F00975702 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8111131764179F00975702 /* UIImage+ImageWithUIView.m */; };
+		3F8111181764180C00975702 /* SlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8111171764180C00975702 /* SlidingViewController.m */; };
+		3F81111B1764195400975702 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81111A1764195400975702 /* HistoryViewController.m */; };
+		3F81111D176419B600975702 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F81111C176419B600975702 /* QuartzCore.framework */; };
+		3F81112117642EE300975702 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81112017642EE300975702 /* LocationModel.m */; };
+		3F8111241765127A00975702 /* 71-compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8111221765127A00975702 /* 71-compass.png */; };
+		3F8111251765127A00975702 /* 71-compass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8111231765127A00975702 /* 71-compass@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,15 +74,28 @@
 		3F60C4551763BE140043EB2A /* MapMessageTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapMessageTests.h; sourceTree = "<group>"; };
 		3F60C4561763BE140043EB2A /* MapMessageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapMessageTests.m; sourceTree = "<group>"; };
 		3F60C4601763C0800043EB2A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		3F60C4631763C3270043EB2A /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		3F60C4651763C3AA0043EB2A /* MMRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMRootViewController.h; sourceTree = "<group>"; };
-		3F60C4661763C3AA0043EB2A /* MMRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMRootViewController.m; sourceTree = "<group>"; };
+		3F60C4631763C3270043EB2A /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
+		3F60C4651763C3AA0043EB2A /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		3F60C4661763C3AA0043EB2A /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		3F60C4681763C3CB0043EB2A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3F60C46C1763CE140043EB2A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3F60C46F1763F3A70043EB2A /* URLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLParser.h; sourceTree = "<group>"; };
 		3F60C4701763F3A70043EB2A /* URLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLParser.m; sourceTree = "<group>"; };
-		3F60C4731763F64C0043EB2A /* MMLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMLocation.h; sourceTree = "<group>"; };
-		3F60C4741763F64C0043EB2A /* MMLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMLocation.m; sourceTree = "<group>"; };
+		3F60C4731763F64C0043EB2A /* BZLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZLocation.h; sourceTree = "<group>"; };
+		3F60C4741763F64C0043EB2A /* BZLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZLocation.m; sourceTree = "<group>"; };
+		3F8111101764179F00975702 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
+		3F8111111764179F00975702 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
+		3F8111121764179F00975702 /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
+		3F8111131764179F00975702 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
+		3F8111161764180C00975702 /* SlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingViewController.h; sourceTree = "<group>"; };
+		3F8111171764180C00975702 /* SlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingViewController.m; sourceTree = "<group>"; };
+		3F8111191764195400975702 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		3F81111A1764195400975702 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		3F81111C176419B600975702 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3F81111F17642EE300975702 /* LocationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationModel.h; sourceTree = "<group>"; };
+		3F81112017642EE300975702 /* LocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationModel.m; sourceTree = "<group>"; };
+		3F8111221765127A00975702 /* 71-compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "71-compass.png"; sourceTree = "<group>"; };
+		3F8111231765127A00975702 /* 71-compass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "71-compass@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F81111D176419B600975702 /* QuartzCore.framework in Frameworks */,
 				3F60C46D1763CE140043EB2A /* CoreLocation.framework in Frameworks */,
 				3F60C4691763C3CB0043EB2A /* MapKit.framework in Frameworks */,
 				3F60C4611763C0800043EB2A /* MessageUI.framework in Frameworks */,
@@ -128,6 +150,7 @@
 		3F60C4241763BE140043EB2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F81111C176419B600975702 /* QuartzCore.framework */,
 				3F60C46C1763CE140043EB2A /* CoreLocation.framework */,
 				3F60C4681763C3CB0043EB2A /* MapKit.framework */,
 				3F60C4601763C0800043EB2A /* MessageUI.framework */,
@@ -143,12 +166,13 @@
 		3F60C42D1763BE140043EB2A /* MapMessage */ = {
 			isa = PBXGroup;
 			children = (
+				3F81110E1764179F00975702 /* Libraries */,
 				3F60C42E1763BE140043EB2A /* Supporting Files */,
 				3F60C46B1763C48F0043EB2A /* Classes */,
 				3F60C4361763BE140043EB2A /* MMAppDelegate.h */,
 				3F60C4371763BE140043EB2A /* MMAppDelegate.m */,
 				3F60C43F1763BE140043EB2A /* MapMessage.xcdatamodeld */,
-				3F60C4631763C3270043EB2A /* MainStoryboard.storyboard */,
+				3F60C4631763C3270043EB2A /* iPhone.storyboard */,
 			);
 			name = MapMessage;
 			path = MampMessage;
@@ -157,6 +181,8 @@
 		3F60C42E1763BE140043EB2A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3F8111221765127A00975702 /* 71-compass.png */,
+				3F8111231765127A00975702 /* 71-compass@2x.png */,
 				3F60C42F1763BE140043EB2A /* MapMessage-Info.plist */,
 				3F60C4301763BE140043EB2A /* InfoPlist.strings */,
 				3F60C4331763BE140043EB2A /* main.m */,
@@ -191,8 +217,12 @@
 		3F60C46A1763C4810043EB2A /* views */ = {
 			isa = PBXGroup;
 			children = (
-				3F60C4651763C3AA0043EB2A /* MMRootViewController.h */,
-				3F60C4661763C3AA0043EB2A /* MMRootViewController.m */,
+				3F60C4651763C3AA0043EB2A /* MapViewController.h */,
+				3F60C4661763C3AA0043EB2A /* MapViewController.m */,
+				3F8111161764180C00975702 /* SlidingViewController.h */,
+				3F8111171764180C00975702 /* SlidingViewController.m */,
+				3F8111191764195400975702 /* HistoryViewController.h */,
+				3F81111A1764195400975702 /* HistoryViewController.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -219,10 +249,40 @@
 		3F60C4721763F63B0043EB2A /* model */ = {
 			isa = PBXGroup;
 			children = (
-				3F60C4731763F64C0043EB2A /* MMLocation.h */,
-				3F60C4741763F64C0043EB2A /* MMLocation.m */,
+				3F81111E17642E4700975702 /* value objects */,
+				3F81111F17642EE300975702 /* LocationModel.h */,
+				3F81112017642EE300975702 /* LocationModel.m */,
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		3F81110E1764179F00975702 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				3F81110F1764179F00975702 /* ECSlidingViewController */,
+			);
+			name = Libraries;
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		3F81110F1764179F00975702 /* ECSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3F8111101764179F00975702 /* ECSlidingViewController.h */,
+				3F8111111764179F00975702 /* ECSlidingViewController.m */,
+				3F8111121764179F00975702 /* UIImage+ImageWithUIView.h */,
+				3F8111131764179F00975702 /* UIImage+ImageWithUIView.m */,
+			);
+			path = ECSlidingViewController;
+			sourceTree = "<group>";
+		};
+		3F81111E17642E4700975702 /* value objects */ = {
+			isa = PBXGroup;
+			children = (
+				3F60C4731763F64C0043EB2A /* BZLocation.h */,
+				3F60C4741763F64C0043EB2A /* BZLocation.m */,
+			);
+			name = "value objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,7 +361,9 @@
 				3F60C43A1763BE140043EB2A /* Default.png in Resources */,
 				3F60C43C1763BE140043EB2A /* Default@2x.png in Resources */,
 				3F60C43E1763BE140043EB2A /* Default-568h@2x.png in Resources */,
-				3F60C4641763C3270043EB2A /* MainStoryboard.storyboard in Resources */,
+				3F60C4641763C3270043EB2A /* iPhone.storyboard in Resources */,
+				3F8111241765127A00975702 /* 71-compass.png in Resources */,
+				3F8111251765127A00975702 /* 71-compass@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,9 +401,14 @@
 				3F60C4341763BE140043EB2A /* main.m in Sources */,
 				3F60C4381763BE140043EB2A /* MMAppDelegate.m in Sources */,
 				3F60C4411763BE140043EB2A /* MapMessage.xcdatamodeld in Sources */,
-				3F60C4671763C3AA0043EB2A /* MMRootViewController.m in Sources */,
+				3F60C4671763C3AA0043EB2A /* MapViewController.m in Sources */,
 				3F60C4711763F3A70043EB2A /* URLParser.m in Sources */,
-				3F60C4751763F64C0043EB2A /* MMLocation.m in Sources */,
+				3F60C4751763F64C0043EB2A /* BZLocation.m in Sources */,
+				3F8111141764179F00975702 /* ECSlidingViewController.m in Sources */,
+				3F8111151764179F00975702 /* UIImage+ImageWithUIView.m in Sources */,
+				3F8111181764180C00975702 /* SlidingViewController.m in Sources */,
+				3F81111B1764195400975702 /* HistoryViewController.m in Sources */,
+				3F81112117642EE300975702 /* LocationModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +581,7 @@
 				3F60C45C1763BE140043EB2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F60C45D1763BE140043EB2A /* Build configuration list for PBXNativeTarget "MapMessageTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +590,7 @@
 				3F60C45F1763BE140043EB2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

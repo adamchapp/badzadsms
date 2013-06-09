@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
-#import "MMLocation.h"
+#import "BZLocation.h"
 
-@implementation MMLocation
+@implementation BZLocation
 
 -(id)initWithName:(NSString *)title subtitle:(NSString *)subtitle coordinate:(CLLocationCoordinate2D)coordinate
 {
