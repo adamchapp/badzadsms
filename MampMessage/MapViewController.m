@@ -58,28 +58,14 @@ bool is3dOn = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateDataChanged object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateViewDataChanged object:nil];
     
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"glasto" ofType:@"kml"];
-//    NSURL *url = [NSURL fileURLWithPath:path];
-//    kmlParser = [[KMLParser alloc] initWithURL:url];
-//    [kmlParser parseKML];
-//    
-//    // Add all of the MKOverlay objects parsed from the KML file to the map.
-//    NSArray *overlays = [kmlParser overlays];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"glasto" ofType:@"kml"];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    kmlParser = [[KMLParser alloc] initWithURL:url];
+    [kmlParser parseKML];
+    
+    // Add all of the MKOverlay objects parsed from the KML file to the map.
+    NSArray *overlays = [kmlParser overlays];
 //    [mapView addOverlays:overlays];
-//    
-//    // Walk the list of overlays and annotations and create a MKMapRect that
-//    // bounds all of them and store it into flyTo.
-//    MKMapRect flyTo = MKMapRectNull;
-//    for (id <MKOverlay> overlay in overlays) {
-//        if (MKMapRectIsNull(flyTo)) {
-//            flyTo = [overlay boundingMapRect];
-//        } else {
-//            flyTo = MKMapRectUnion(flyTo, [overlay boundingMapRect]);
-//        }
-//    }
-//    
-//    // Position the map so that all overlays and annotations are visible on screen.
-//    mapView.visibleMapRect = flyTo;
     
     [self loadAnnotations];
 }
@@ -137,15 +123,18 @@ bool is3dOn = NO;
         BOOL showItem = [[self.locationModel.overlayDisplayMap valueForKey:key] boolValue];
         
         if ( showItem == YES ) {
-            [mapView addOverlays:bzOverlay.overlays];
             
-            for (id <MKOverlay> overlay in bzOverlay.overlays) {
-                if (MKMapRectIsNull(zoomRect)) {
-                    zoomRect = [overlay boundingMapRect];
-                } else {
-                    zoomRect = MKMapRectUnion(zoomRect, [overlay boundingMapRect]);
-                }
-            }
+            NSArray *overlays = [bzOverlay overlays];
+            
+            [mapView addOverlays:overlays];
+            
+//            for (id <MKOverlay> overlay in bzOverlay.overlays) {
+//                if (MKMapRectIsNull(zoomRect)) {
+//                    zoomRect = [overlay boundingMapRect];
+//                } else {
+//                    zoomRect = MKMapRectUnion(zoomRect, [overlay boundingMapRect]);
+//                }
+//            }
         }
     }
 }
