@@ -19,9 +19,9 @@
 
 @interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) IBOutlet UILabel *latitude;
-@property (strong, nonatomic) IBOutlet UILabel *longitude;
+@property (nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) NSString *latitude;
+@property (strong, nonatomic) NSString *longitude;
 
 @property (strong, nonatomic) LocationModel *locationModel;
 

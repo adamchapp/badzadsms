@@ -60,8 +60,6 @@
             <relationships>
                 <relationship kind="action" name="sendSMS:"/>
                 <relationship kind="action" name="toggleCompass:"/>
-                <relationship kind="outlet" name="latitude" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="longitude" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
             </relationships>
         </class>

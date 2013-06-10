@@ -16,6 +16,16 @@
 		3F0E2F09176544F100D41BD6 /* MMSideDrawerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EFC17652AA000D41BD6 /* MMSideDrawerTableViewCell.m */; };
 		3F0E2F0A176544F100D41BD6 /* MMCenterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EF817652AA000D41BD6 /* MMCenterTableViewCell.m */; };
 		3F0E2F0B176544F100D41BD6 /* MMSideDrawerSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EFA17652AA000D41BD6 /* MMSideDrawerSectionHeaderView.m */; };
+		3F0E2F101765504200D41BD6 /* PrettyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F0F1765504200D41BD6 /* PrettyNavigationController.m */; };
+		3F0E2F251765508B00D41BD6 /* PrettyCustomViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F131765508B00D41BD6 /* PrettyCustomViewTableViewCell.m */; };
+		3F0E2F261765508B00D41BD6 /* PrettyGridTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F151765508B00D41BD6 /* PrettyGridTableViewCell.m */; };
+		3F0E2F271765508B00D41BD6 /* PrettySegmentedControlTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F171765508B00D41BD6 /* PrettySegmentedControlTableViewCell.m */; };
+		3F0E2F281765508B00D41BD6 /* PrettyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F191765508B00D41BD6 /* PrettyTableViewCell.m */; };
+		3F0E2F291765508B00D41BD6 /* PrettyDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F1B1765508B00D41BD6 /* PrettyDrawing.m */; };
+		3F0E2F2A1765508B00D41BD6 /* PrettyNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F1E1765508B00D41BD6 /* PrettyNavigationBar.m */; };
+		3F0E2F2B1765508B00D41BD6 /* PrettyShadowPlainTableview.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F201765508B00D41BD6 /* PrettyShadowPlainTableview.m */; };
+		3F0E2F2C1765508B00D41BD6 /* PrettyTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F221765508B00D41BD6 /* PrettyTabBar.m */; };
+		3F0E2F2D1765508B00D41BD6 /* PrettyToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F241765508B00D41BD6 /* PrettyToolbar.m */; };
 		3F60C4261763BE140043EB2A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C4251763BE140043EB2A /* UIKit.framework */; };
 		3F60C4281763BE140043EB2A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C4271763BE140043EB2A /* Foundation.framework */; };
 		3F60C42A1763BE140043EB2A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C4291763BE140043EB2A /* CoreGraphics.framework */; };
@@ -76,6 +86,27 @@
 		3F0E2EFE17652AA000D41BD6 /* MMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTableViewCell.m; sourceTree = "<group>"; };
 		3F0E2F0417653E3000D41BD6 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		3F0E2F0517653E3000D41BD6 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		3F0E2F0E1765504200D41BD6 /* PrettyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyNavigationController.h; path = PrettyKit/PrettyNavigationController.h; sourceTree = "<group>"; };
+		3F0E2F0F1765504200D41BD6 /* PrettyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyNavigationController.m; path = PrettyKit/PrettyNavigationController.m; sourceTree = "<group>"; };
+		3F0E2F121765508B00D41BD6 /* PrettyCustomViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrettyCustomViewTableViewCell.h; sourceTree = "<group>"; };
+		3F0E2F131765508B00D41BD6 /* PrettyCustomViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrettyCustomViewTableViewCell.m; sourceTree = "<group>"; };
+		3F0E2F141765508B00D41BD6 /* PrettyGridTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrettyGridTableViewCell.h; sourceTree = "<group>"; };
+		3F0E2F151765508B00D41BD6 /* PrettyGridTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrettyGridTableViewCell.m; sourceTree = "<group>"; };
+		3F0E2F161765508B00D41BD6 /* PrettySegmentedControlTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrettySegmentedControlTableViewCell.h; sourceTree = "<group>"; };
+		3F0E2F171765508B00D41BD6 /* PrettySegmentedControlTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrettySegmentedControlTableViewCell.m; sourceTree = "<group>"; };
+		3F0E2F181765508B00D41BD6 /* PrettyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrettyTableViewCell.h; sourceTree = "<group>"; };
+		3F0E2F191765508B00D41BD6 /* PrettyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrettyTableViewCell.m; sourceTree = "<group>"; };
+		3F0E2F1A1765508B00D41BD6 /* PrettyDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyDrawing.h; path = PrettyKit/PrettyDrawing.h; sourceTree = "<group>"; };
+		3F0E2F1B1765508B00D41BD6 /* PrettyDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyDrawing.m; path = PrettyKit/PrettyDrawing.m; sourceTree = "<group>"; };
+		3F0E2F1C1765508B00D41BD6 /* PrettyKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyKit.h; path = PrettyKit/PrettyKit.h; sourceTree = "<group>"; };
+		3F0E2F1D1765508B00D41BD6 /* PrettyNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyNavigationBar.h; path = PrettyKit/PrettyNavigationBar.h; sourceTree = "<group>"; };
+		3F0E2F1E1765508B00D41BD6 /* PrettyNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyNavigationBar.m; path = PrettyKit/PrettyNavigationBar.m; sourceTree = "<group>"; };
+		3F0E2F1F1765508B00D41BD6 /* PrettyShadowPlainTableview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyShadowPlainTableview.h; path = PrettyKit/PrettyShadowPlainTableview.h; sourceTree = "<group>"; };
+		3F0E2F201765508B00D41BD6 /* PrettyShadowPlainTableview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyShadowPlainTableview.m; path = PrettyKit/PrettyShadowPlainTableview.m; sourceTree = "<group>"; };
+		3F0E2F211765508B00D41BD6 /* PrettyTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyTabBar.h; path = PrettyKit/PrettyTabBar.h; sourceTree = "<group>"; };
+		3F0E2F221765508B00D41BD6 /* PrettyTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyTabBar.m; path = PrettyKit/PrettyTabBar.m; sourceTree = "<group>"; };
+		3F0E2F231765508B00D41BD6 /* PrettyToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyToolbar.h; path = PrettyKit/PrettyToolbar.h; sourceTree = "<group>"; };
+		3F0E2F241765508B00D41BD6 /* PrettyToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrettyToolbar.m; path = PrettyKit/PrettyToolbar.m; sourceTree = "<group>"; };
 		3F60C4221763BE140043EB2A /* MapMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F60C4251763BE140043EB2A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3F60C4271763BE140043EB2A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -175,6 +206,43 @@
 				3F0E2EFA17652AA000D41BD6 /* MMSideDrawerSectionHeaderView.m */,
 			);
 			name = TableViewHelpers;
+			sourceTree = "<group>";
+		};
+		3F0E2F0D1765502800D41BD6 /* PrettyKit */ = {
+			isa = PBXGroup;
+			children = (
+				3F0E2F111765508B00D41BD6 /* Cells */,
+				3F0E2F1A1765508B00D41BD6 /* PrettyDrawing.h */,
+				3F0E2F1B1765508B00D41BD6 /* PrettyDrawing.m */,
+				3F0E2F1C1765508B00D41BD6 /* PrettyKit.h */,
+				3F0E2F1D1765508B00D41BD6 /* PrettyNavigationBar.h */,
+				3F0E2F1E1765508B00D41BD6 /* PrettyNavigationBar.m */,
+				3F0E2F1F1765508B00D41BD6 /* PrettyShadowPlainTableview.h */,
+				3F0E2F201765508B00D41BD6 /* PrettyShadowPlainTableview.m */,
+				3F0E2F211765508B00D41BD6 /* PrettyTabBar.h */,
+				3F0E2F221765508B00D41BD6 /* PrettyTabBar.m */,
+				3F0E2F231765508B00D41BD6 /* PrettyToolbar.h */,
+				3F0E2F241765508B00D41BD6 /* PrettyToolbar.m */,
+				3F0E2F0E1765504200D41BD6 /* PrettyNavigationController.h */,
+				3F0E2F0F1765504200D41BD6 /* PrettyNavigationController.m */,
+			);
+			name = PrettyKit;
+			sourceTree = "<group>";
+		};
+		3F0E2F111765508B00D41BD6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3F0E2F121765508B00D41BD6 /* PrettyCustomViewTableViewCell.h */,
+				3F0E2F131765508B00D41BD6 /* PrettyCustomViewTableViewCell.m */,
+				3F0E2F141765508B00D41BD6 /* PrettyGridTableViewCell.h */,
+				3F0E2F151765508B00D41BD6 /* PrettyGridTableViewCell.m */,
+				3F0E2F161765508B00D41BD6 /* PrettySegmentedControlTableViewCell.h */,
+				3F0E2F171765508B00D41BD6 /* PrettySegmentedControlTableViewCell.m */,
+				3F0E2F181765508B00D41BD6 /* PrettyTableViewCell.h */,
+				3F0E2F191765508B00D41BD6 /* PrettyTableViewCell.m */,
+			);
+			name = Cells;
+			path = PrettyKit/Cells;
 			sourceTree = "<group>";
 		};
 		3F60C4191763BE140043EB2A = {
@@ -308,6 +376,7 @@
 		3F81110E1764179F00975702 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3F0E2F0D1765502800D41BD6 /* PrettyKit */,
 				3F0E2EE917652A4A00D41BD6 /* MMDrawerController */,
 			);
 			name = Libraries;
@@ -453,6 +522,16 @@
 				3F0E2F09176544F100D41BD6 /* MMSideDrawerTableViewCell.m in Sources */,
 				3F0E2F0A176544F100D41BD6 /* MMCenterTableViewCell.m in Sources */,
 				3F0E2F0B176544F100D41BD6 /* MMSideDrawerSectionHeaderView.m in Sources */,
+				3F0E2F101765504200D41BD6 /* PrettyNavigationController.m in Sources */,
+				3F0E2F251765508B00D41BD6 /* PrettyCustomViewTableViewCell.m in Sources */,
+				3F0E2F261765508B00D41BD6 /* PrettyGridTableViewCell.m in Sources */,
+				3F0E2F271765508B00D41BD6 /* PrettySegmentedControlTableViewCell.m in Sources */,
+				3F0E2F281765508B00D41BD6 /* PrettyTableViewCell.m in Sources */,
+				3F0E2F291765508B00D41BD6 /* PrettyDrawing.m in Sources */,
+				3F0E2F2A1765508B00D41BD6 /* PrettyNavigationBar.m in Sources */,
+				3F0E2F2B1765508B00D41BD6 /* PrettyShadowPlainTableview.m in Sources */,
+				3F0E2F2C1765508B00D41BD6 /* PrettyTabBar.m in Sources */,
+				3F0E2F2D1765508B00D41BD6 /* PrettyToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

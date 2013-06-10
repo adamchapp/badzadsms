@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSMutableDictionary *coordinateDisplayMap;
 
 - (void)addLocation:(BZLocation *)location;
-- (void)removeLocation:(BZLocation *)location;
+- (void)removeLocationAtIndex:(NSInteger)index;
 
 - (void)showLocation:(BZLocation *)location;
 - (void)hideLocation:(BZLocation *)location;

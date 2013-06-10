@@ -20,9 +20,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
-- (void)removeLocation:(BZLocation *)location
+- (void)removeLocationAtIndex:(NSInteger)index
 {
-    NSLog(@"NOT YET IMPLEMENTED");
+    [self.coordinates removeObjectAtIndex:index];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
 - (void)showLocation:(BZLocation *)location

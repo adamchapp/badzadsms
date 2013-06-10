@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import "BZLocation.h"
 #import "UIViewController+MMDrawerController.h"
 #import "Constants.h"
 
@@ -41,9 +42,11 @@ bool is3dOn = NO;
     
     if ( [CLLocationManager locationServicesEnabled] ) {
         self.locationManager.delegate = self;
-        self.locationManager.distanceFilter = 1000;
+        self.locationManager.distanceFilter = 200;
         [self.locationManager startUpdatingLocation];
     }
+    
+    self.navigationItem.title = @"Bad Zad!";
     
     [self setupLeftMenuButton];
     [self setupRightMenuButton];
@@ -68,26 +71,40 @@ bool is3dOn = NO;
 
 - (void)loadAnnotations {
     
-    NSLog(@"Loading annotations");
-    
+    [self.mapView removeAnnotations:self.mapView.annotations];
+
     NSArray *coordinates = self.locationModel.coordinates;
-        
-    if ( [coordinates count] > 0 ) {
 
-        [self.mapView removeAnnotations:coordinates];
+    [self.mapView setShowsUserLocation:NO];
+    [self.mapView setShowsUserLocation:YES];
         
-        for (BZLocation *location in coordinates) {
-            NSString *key = [self.locationModel makeKeyFromLocation:location];
-            BOOL showItem = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
-            if (  showItem == YES ) {
-                [self.mapView addAnnotation:location];
-            }
+    for (BZLocation *location in coordinates) {
+        NSString *key = [self.locationModel makeKeyFromLocation:location];
+        BOOL showItem = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
+        if (  showItem == YES ) {
+            [self.mapView addAnnotation:location];
         }
-        
-    } else {
-        NSLog(@"No annotations to add");
     }
-
+    
+    //now update zoom rect
+    MKMapRect zoomRect = MKMapRectNull;
+    for (BZLocation* annotation in self.locationModel.coordinates)
+    {
+        NSString *key = [self.locationModel makeKeyFromLocation:annotation];
+        BOOL showCoordinate = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
+        if ( showCoordinate == YES ) {
+            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+            zoomRect = MKMapRectUnion(zoomRect, pointRect);                
+        }
+    }
+    
+    //now get user location and add to zoom rect
+    MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationManager.location.coordinate);
+    MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+    zoomRect = MKMapRectUnion(zoomRect, pointRect);
+            
+    [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
 }
 
 - (IBAction)toggleCompass:(id)sender {
@@ -124,7 +141,7 @@ bool is3dOn = NO;
         
         NSString *name = [names objectAtIndex:0];
         
-        NSString *urlString = [NSString stringWithFormat:@"%@ sent you a new location at %@. \n\nbadzad://badzad.com/message?lat=%@&long=%@&title=%@&timestamp=%@",name, timestamp, self.latitude.text, self.longitude.text, name, timestamp];
+        NSString *urlString = [NSString stringWithFormat:@"%@ sent you a new location at %@. \n\nbadzad://badzad.com/message?lat=%@&long=%@&title=%@&timestamp=%@",name, timestamp, self.latitude, self.longitude, name, timestamp];
         
         controller.body = urlString;
         
@@ -208,29 +225,19 @@ bool is3dOn = NO;
     MKCoordinateSpan span;
     span.latitudeDelta = miles/69.0;
     span.longitudeDelta = miles/( scalingFactor*69.0 );
-   
-    if ( [self.locationModel.coordinates count] > 0 ) {
-        MKMapRect zoomRect = MKMapRectNull;
-        for (id <MKAnnotation> annotation in self.locationModel.coordinates)
-        {
-            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-            zoomRect = MKMapRectUnion(zoomRect, pointRect);
-        }
-       // [self.mapView setVisibleMapRect:zoomRect animated:YES];
-    } else {
-        MKCoordinateRegion region;
-        region.span = span;
-        region.center = newLocation.coordinate;
-        
-        [self.mapView setRegion:region animated:YES];
-    }
+
+    //update view rect
+    MKCoordinateRegion region;
+    region.span = span;
+    region.center = newLocation.coordinate;
+    
+    [self.mapView setRegion:region animated:YES];
     
     self.mapView.showsUserLocation = YES;
     
-    self.latitude.text =
+    self.latitude =
     [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
-    self.longitude.text =
+    self.longitude =
     [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
     
 }

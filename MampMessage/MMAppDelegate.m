@@ -10,6 +10,7 @@
 #import "BZLocation.h"
 #import "MMDrawerController.h"
 #import "MMDrawerVisualState.h"
+#import "PrettyNavigationController.h"
 
 @implementation MMAppDelegate
 
@@ -29,7 +30,7 @@
     MapViewController *mapController = (MapViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MapView"];
     mapController.locationModel = self.locationModel;
     
-    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:mapController];
+    PrettyNavigationController * navigationController = [[PrettyNavigationController alloc] initWithRootViewController:mapController];
     
     MMDrawerController * drawerController = [[MMDrawerController alloc]
                                              initWithCenterViewController:navigationController
