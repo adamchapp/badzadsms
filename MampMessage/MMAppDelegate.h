@@ -11,8 +11,12 @@
 #import <MapKit/MapKit.h>
 #import "MapViewController.h"
 #import "HistoryViewController.h"
+#import "KMLParser.h"
 
 @interface MMAppDelegate : UIResponder <UIApplicationDelegate>
+{
+    KMLParser *kmlParser;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

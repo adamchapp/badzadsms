@@ -77,12 +77,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.locationModel.coordinates count];
+    if ( section == 0 ) {
+        return [self.locationModel.coordinates count];
+    }
+    return [self.locationModel.overlays count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,12 +98,24 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
     }
     
-    BZLocation *location = [self.locationModel.coordinates objectAtIndex:indexPath.row];
+    NSString *title;
+    BOOL showCoordinate;
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@)",location.title, location.subtitle];
+    if ( indexPath.section == 0 ) {
+        BZLocation *location = [self.locationModel.coordinates objectAtIndex:indexPath.row];
+        NSString *key = [self.locationModel makeKeyFromLocation:location];
+        
+        title = [NSString stringWithFormat:@"%@ (%@)",location.title, location.subtitle];
+        showCoordinate = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
+    } else {
+        BZOverlay *overlay = [self.locationModel.overlays objectAtIndex:indexPath.row];
+        NSString *key = [self.locationModel makeKeyFromOverlay:overlay];
+        
+        title = [NSString stringWithFormat:@"%@", overlay.title];
+        showCoordinate = [[self.locationModel.overlayDisplayMap valueForKey:key] boolValue];
+    }
     
-    NSString *key = [self.locationModel makeKeyFromLocation:location];
-    BOOL showCoordinate = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
+    cell.textLabel.text = title;
     
     if ( showCoordinate == YES ) {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
@@ -116,7 +131,7 @@
         case 0:
             return @"Recent History";
         case 1:
-            return @"Saved Locations";
+            return @"Overlays";
         default:
             return nil;
     }

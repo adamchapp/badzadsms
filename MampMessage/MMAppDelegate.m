@@ -24,6 +24,8 @@
     
     self.locationModel = [[LocationModel alloc] init];
     
+    [self addGlastoOverlayToModel];
+    
     HistoryViewController *historyController = [[HistoryViewController alloc] initWithStyle:UITableViewStylePlain];
     historyController.locationModel = self.locationModel;
     
@@ -189,6 +191,21 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - Glasto overlay
+//////////////////////////////////////////////////////////////
+
+- (void)addGlastoOverlayToModel {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"glasto" ofType:@"kml"];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    kmlParser = [[KMLParser alloc] initWithURL:url];
+    [kmlParser parseKML];
+    
+    BZOverlay *glastoOverlay = [[BZOverlay alloc] initWithTitle:@"Glasto 2013" overlays:[kmlParser overlays]];
+    
+    [self.locationModel addOverlay:glastoOverlay];
 }
 
 @end

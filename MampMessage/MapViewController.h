@@ -17,9 +17,11 @@
 #import "LocationModel.h"
 #import "MMDrawerBarButtonItem.h"
 
-@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
+@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate>
+{
+    IBOutlet MKMapView *mapView;
+}
 
-@property (nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) NSString *latitude;
 @property (strong, nonatomic) NSString *longitude;
 

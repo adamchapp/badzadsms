@@ -10,8 +10,12 @@
 #import "BZLocation.h"
 #import "UIViewController+MMDrawerController.h"
 #import "Constants.h"
+#import "KMLParser.h"
 
 @interface MapViewController ()
+{
+    KMLParser *kmlParser;
+}
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
@@ -53,6 +57,31 @@ bool is3dOn = NO;
    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateDataChanged object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateViewDataChanged object:nil];
+    
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"glasto" ofType:@"kml"];
+//    NSURL *url = [NSURL fileURLWithPath:path];
+//    kmlParser = [[KMLParser alloc] initWithURL:url];
+//    [kmlParser parseKML];
+//    
+//    // Add all of the MKOverlay objects parsed from the KML file to the map.
+//    NSArray *overlays = [kmlParser overlays];
+//    [mapView addOverlays:overlays];
+//    
+//    // Walk the list of overlays and annotations and create a MKMapRect that
+//    // bounds all of them and store it into flyTo.
+//    MKMapRect flyTo = MKMapRectNull;
+//    for (id <MKOverlay> overlay in overlays) {
+//        if (MKMapRectIsNull(flyTo)) {
+//            flyTo = [overlay boundingMapRect];
+//        } else {
+//            flyTo = MKMapRectUnion(flyTo, [overlay boundingMapRect]);
+//        }
+//    }
+//    
+//    // Position the map so that all overlays and annotations are visible on screen.
+//    mapView.visibleMapRect = flyTo;
+    
+    [self loadAnnotations];
 }
 
 -(void)setupLeftMenuButton{
@@ -71,51 +100,65 @@ bool is3dOn = NO;
 
 - (void)loadAnnotations {
     
-    [self.mapView removeAnnotations:self.mapView.annotations];
+    [mapView removeAnnotations:mapView.annotations];
 
-    NSArray *coordinates = self.locationModel.coordinates;
+    [mapView setShowsUserLocation:NO];
+    [mapView setShowsUserLocation:YES];
 
-    [self.mapView setShowsUserLocation:NO];
-    [self.mapView setShowsUserLocation:YES];
-        
-    for (BZLocation *location in coordinates) {
-        NSString *key = [self.locationModel makeKeyFromLocation:location];
-        BOOL showItem = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
-        if (  showItem == YES ) {
-            [self.mapView addAnnotation:location];
-        }
-    }
-    
-    //now update zoom rect
     MKMapRect zoomRect = MKMapRectNull;
-    for (BZLocation* annotation in self.locationModel.coordinates)
-    {
-        NSString *key = [self.locationModel makeKeyFromLocation:annotation];
-        BOOL showCoordinate = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
-        if ( showCoordinate == YES ) {
-            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-            zoomRect = MKMapRectUnion(zoomRect, pointRect);                
-        }
-    }
+    
+    [self loadCoordinates:zoomRect];
+    [self loadOverlays:zoomRect];
     
     //now get user location and add to zoom rect
     MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationManager.location.coordinate);
     MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
     zoomRect = MKMapRectUnion(zoomRect, pointRect);
             
-    [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
+    [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
+}
+
+- (void)loadCoordinates:(MKMapRect)zoomRect {
+    for (BZLocation *annotation in self.locationModel.coordinates) {
+        NSString *key = [self.locationModel makeKeyFromLocation:annotation];
+        BOOL showItem = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
+        if (  showItem == YES ) {
+            [mapView addAnnotation:annotation];
+            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+        }
+    }
+}
+
+- (void)loadOverlays:(MKMapRect)zoomRect {
+    for ( BZOverlay *bzOverlay in self.locationModel.overlays ) {
+        NSString *key = [self.locationModel makeKeyFromOverlay:bzOverlay];
+        BOOL showItem = [[self.locationModel.overlayDisplayMap valueForKey:key] boolValue];
+        
+        if ( showItem == YES ) {
+            [mapView addOverlays:bzOverlay.overlays];
+            
+            for (id <MKOverlay> overlay in bzOverlay.overlays) {
+                if (MKMapRectIsNull(zoomRect)) {
+                    zoomRect = [overlay boundingMapRect];
+                } else {
+                    zoomRect = MKMapRectUnion(zoomRect, [overlay boundingMapRect]);
+                }
+            }
+        }
+    }
 }
 
 - (IBAction)toggleCompass:(id)sender {
     isCompassOn = !isCompassOn;
     
-    MKUserTrackingMode mode = [self.mapView userTrackingMode];
+    MKUserTrackingMode mode = [mapView userTrackingMode];
     
     if ( mode == MKUserTrackingModeNone ) {
-        [self.mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading];
+        [mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading];
     } else {
-        [self.mapView setUserTrackingMode:MKUserTrackingModeNone];
+        [mapView setUserTrackingMode:MKUserTrackingModeNone];
     }
 }
 
@@ -183,6 +226,16 @@ bool is3dOn = NO;
 }
 
 //////////////////////////////////////////////////////////////
+#pragma mark  - MKMapViewDelegate methods
+//////////////////////////////////////////////////////////////
+
+
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
+{
+    return [kmlParser viewForOverlay:overlay];
+}
+
+//////////////////////////////////////////////////////////////
 #pragma mark  - MFMessageComposeViewControllerDelegate methods
 //////////////////////////////////////////////////////////////
 
@@ -231,9 +284,9 @@ bool is3dOn = NO;
     region.span = span;
     region.center = newLocation.coordinate;
     
-    [self.mapView setRegion:region animated:YES];
+    [mapView setRegion:region animated:YES];
     
-    self.mapView.showsUserLocation = YES;
+    mapView.showsUserLocation = YES;
     
     self.latitude =
     [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];

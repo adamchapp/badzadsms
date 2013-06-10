@@ -55,6 +55,23 @@
 		3F81112117642EE300975702 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81112017642EE300975702 /* LocationModel.m */; };
 		3F8111241765127A00975702 /* 71-compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8111221765127A00975702 /* 71-compass.png */; };
 		3F8111251765127A00975702 /* 71-compass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8111231765127A00975702 /* 71-compass@2x.png */; };
+		EE6E827D1765E96C00A17859 /* RMSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */; };
+		EE6E827E1765E96C00A17859 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EE6E827B1765E96C00A17859 /* README.md */; };
+		EE6E827F1765E96C00A17859 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EE6E827C1765E96C00A17859 /* LICENSE */; };
+		EE6E82821765F15E00A17859 /* HistoryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E82811765F15E00A17859 /* HistoryViewCell.m */; };
+		EE6E828E1765F1B800A17859 /* CheckmarkGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E82841765F1B800A17859 /* CheckmarkGreen.png */; };
+		EE6E828F1765F1B800A17859 /* CheckmarkGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E82851765F1B800A17859 /* CheckmarkGreen@2x.png */; };
+		EE6E82901765F1B800A17859 /* CheckmarkGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E82861765F1B800A17859 /* CheckmarkGrey.png */; };
+		EE6E82911765F1B800A17859 /* CheckmarkGrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E82871765F1B800A17859 /* CheckmarkGrey@2x.png */; };
+		EE6E82921765F1B800A17859 /* CheckmarkProfileImage.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E82881765F1B800A17859 /* CheckmarkProfileImage.png */; };
+		EE6E82931765F1B800A17859 /* CheckmarkProfileImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E82891765F1B800A17859 /* CheckmarkProfileImage@2x.png */; };
+		EE6E82941765F1B800A17859 /* DeleteGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E828A1765F1B800A17859 /* DeleteGrey.png */; };
+		EE6E82951765F1B800A17859 /* DeleteGrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E828B1765F1B800A17859 /* DeleteGrey@2x.png */; };
+		EE6E82961765F1B800A17859 /* DeleteRed.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E828C1765F1B800A17859 /* DeleteRed.png */; };
+		EE6E82971765F1B800A17859 /* DeleteRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E828D1765F1B800A17859 /* DeleteRed@2x.png */; };
+		EE6E829F17660E0200A17859 /* glasto.kml in Resources */ = {isa = PBXBuildFile; fileRef = EE6E829E17660E0200A17859 /* glasto.kml */; };
+		EE6E82A217660E9200A17859 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E82A117660E9200A17859 /* KMLParser.m */; };
+		EE6E82A517660FBB00A17859 /* BZOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E82A417660FBB00A17859 /* BZOverlay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +162,27 @@
 		3F81112017642EE300975702 /* LocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationModel.m; sourceTree = "<group>"; };
 		3F8111221765127A00975702 /* 71-compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "71-compass.png"; sourceTree = "<group>"; };
 		3F8111231765127A00975702 /* 71-compass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "71-compass@2x.png"; sourceTree = "<group>"; };
+		EE6E82791765E96C00A17859 /* RMSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSwipeTableViewCell.h; sourceTree = "<group>"; };
+		EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSwipeTableViewCell.m; sourceTree = "<group>"; };
+		EE6E827B1765E96C00A17859 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		EE6E827C1765E96C00A17859 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		EE6E82801765F15E00A17859 /* HistoryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewCell.h; sourceTree = "<group>"; };
+		EE6E82811765F15E00A17859 /* HistoryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewCell.m; sourceTree = "<group>"; };
+		EE6E82841765F1B800A17859 /* CheckmarkGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckmarkGreen.png; sourceTree = "<group>"; };
+		EE6E82851765F1B800A17859 /* CheckmarkGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CheckmarkGreen@2x.png"; sourceTree = "<group>"; };
+		EE6E82861765F1B800A17859 /* CheckmarkGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckmarkGrey.png; sourceTree = "<group>"; };
+		EE6E82871765F1B800A17859 /* CheckmarkGrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CheckmarkGrey@2x.png"; sourceTree = "<group>"; };
+		EE6E82881765F1B800A17859 /* CheckmarkProfileImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckmarkProfileImage.png; sourceTree = "<group>"; };
+		EE6E82891765F1B800A17859 /* CheckmarkProfileImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CheckmarkProfileImage@2x.png"; sourceTree = "<group>"; };
+		EE6E828A1765F1B800A17859 /* DeleteGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeleteGrey.png; sourceTree = "<group>"; };
+		EE6E828B1765F1B800A17859 /* DeleteGrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DeleteGrey@2x.png"; sourceTree = "<group>"; };
+		EE6E828C1765F1B800A17859 /* DeleteRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DeleteRed.png; sourceTree = "<group>"; };
+		EE6E828D1765F1B800A17859 /* DeleteRed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DeleteRed@2x.png"; sourceTree = "<group>"; };
+		EE6E829E17660E0200A17859 /* glasto.kml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = glasto.kml; sourceTree = "<group>"; };
+		EE6E82A017660E9200A17859 /* KMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLParser.h; sourceTree = "<group>"; };
+		EE6E82A117660E9200A17859 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
+		EE6E82A317660FBB00A17859 /* BZOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZOverlay.h; sourceTree = "<group>"; };
+		EE6E82A417660FBB00A17859 /* BZOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZOverlay.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,8 +336,8 @@
 		3F60C42E1763BE140043EB2A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3F8111221765127A00975702 /* 71-compass.png */,
-				3F8111231765127A00975702 /* 71-compass@2x.png */,
+				EE6E829E17660E0200A17859 /* glasto.kml */,
+				EE6E82831765F19E00A17859 /* images */,
 				3F60C42F1763BE140043EB2A /* MapMessage-Info.plist */,
 				3F60C4301763BE140043EB2A /* InfoPlist.strings */,
 				3F60C4331763BE140043EB2A /* main.m */,
@@ -338,6 +376,8 @@
 				3F60C4661763C3AA0043EB2A /* MapViewController.m */,
 				3F8111191764195400975702 /* HistoryViewController.h */,
 				3F81111A1764195400975702 /* HistoryViewController.m */,
+				EE6E82801765F15E00A17859 /* HistoryViewCell.h */,
+				EE6E82811765F15E00A17859 /* HistoryViewCell.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -355,6 +395,8 @@
 		3F60C46E1763F3960043EB2A /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				EE6E82A017660E9200A17859 /* KMLParser.h */,
+				EE6E82A117660E9200A17859 /* KMLParser.m */,
 				3F60C46F1763F3A70043EB2A /* URLParser.h */,
 				3F60C4701763F3A70043EB2A /* URLParser.m */,
 			);
@@ -376,6 +418,7 @@
 		3F81110E1764179F00975702 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				EE6E82781765E95A00A17859 /* RMSwipeTableViewCell */,
 				3F0E2F0D1765502800D41BD6 /* PrettyKit */,
 				3F0E2EE917652A4A00D41BD6 /* MMDrawerController */,
 			);
@@ -388,8 +431,40 @@
 			children = (
 				3F60C4731763F64C0043EB2A /* BZLocation.h */,
 				3F60C4741763F64C0043EB2A /* BZLocation.m */,
+				EE6E82A317660FBB00A17859 /* BZOverlay.h */,
+				EE6E82A417660FBB00A17859 /* BZOverlay.m */,
 			);
 			name = "value objects";
+			sourceTree = "<group>";
+		};
+		EE6E82781765E95A00A17859 /* RMSwipeTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EE6E82791765E96C00A17859 /* RMSwipeTableViewCell.h */,
+				EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */,
+				EE6E827B1765E96C00A17859 /* README.md */,
+				EE6E827C1765E96C00A17859 /* LICENSE */,
+			);
+			name = RMSwipeTableViewCell;
+			sourceTree = "<group>";
+		};
+		EE6E82831765F19E00A17859 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				EE6E82841765F1B800A17859 /* CheckmarkGreen.png */,
+				EE6E82851765F1B800A17859 /* CheckmarkGreen@2x.png */,
+				EE6E82861765F1B800A17859 /* CheckmarkGrey.png */,
+				EE6E82871765F1B800A17859 /* CheckmarkGrey@2x.png */,
+				EE6E82881765F1B800A17859 /* CheckmarkProfileImage.png */,
+				EE6E82891765F1B800A17859 /* CheckmarkProfileImage@2x.png */,
+				EE6E828A1765F1B800A17859 /* DeleteGrey.png */,
+				EE6E828B1765F1B800A17859 /* DeleteGrey@2x.png */,
+				EE6E828C1765F1B800A17859 /* DeleteRed.png */,
+				EE6E828D1765F1B800A17859 /* DeleteRed@2x.png */,
+				3F8111221765127A00975702 /* 71-compass.png */,
+				3F8111231765127A00975702 /* 71-compass@2x.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,6 +546,19 @@
 				3F60C4641763C3270043EB2A /* iPhone.storyboard in Resources */,
 				3F8111241765127A00975702 /* 71-compass.png in Resources */,
 				3F8111251765127A00975702 /* 71-compass@2x.png in Resources */,
+				EE6E827E1765E96C00A17859 /* README.md in Resources */,
+				EE6E827F1765E96C00A17859 /* LICENSE in Resources */,
+				EE6E828E1765F1B800A17859 /* CheckmarkGreen.png in Resources */,
+				EE6E828F1765F1B800A17859 /* CheckmarkGreen@2x.png in Resources */,
+				EE6E82901765F1B800A17859 /* CheckmarkGrey.png in Resources */,
+				EE6E82911765F1B800A17859 /* CheckmarkGrey@2x.png in Resources */,
+				EE6E82921765F1B800A17859 /* CheckmarkProfileImage.png in Resources */,
+				EE6E82931765F1B800A17859 /* CheckmarkProfileImage@2x.png in Resources */,
+				EE6E82941765F1B800A17859 /* DeleteGrey.png in Resources */,
+				EE6E82951765F1B800A17859 /* DeleteGrey@2x.png in Resources */,
+				EE6E82961765F1B800A17859 /* DeleteRed.png in Resources */,
+				EE6E82971765F1B800A17859 /* DeleteRed@2x.png in Resources */,
+				EE6E829F17660E0200A17859 /* glasto.kml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +620,10 @@
 				3F0E2F2B1765508B00D41BD6 /* PrettyShadowPlainTableview.m in Sources */,
 				3F0E2F2C1765508B00D41BD6 /* PrettyTabBar.m in Sources */,
 				3F0E2F2D1765508B00D41BD6 /* PrettyToolbar.m in Sources */,
+				EE6E827D1765E96C00A17859 /* RMSwipeTableViewCell.m in Sources */,
+				EE6E82821765F15E00A17859 /* HistoryViewCell.m in Sources */,
+				EE6E82A217660E9200A17859 /* KMLParser.m in Sources */,
+				EE6E82A517660FBB00A17859 /* BZOverlay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

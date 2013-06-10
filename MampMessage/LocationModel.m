@@ -11,6 +11,10 @@
 
 @implementation LocationModel
 
+//////////////////////////////////////////////////////////////
+#pragma mark  - BZ Locations
+//////////////////////////////////////////////////////////////
+
 - (void)addLocation:(BZLocation *)location
 {
     NSLog(@"adding location to model");
@@ -40,6 +44,37 @@
 }
 
 //////////////////////////////////////////////////////////////
+#pragma mark  - BZ Overlays
+//////////////////////////////////////////////////////////////
+
+- (void)addOverlay:(BZOverlay *)overlay
+{
+    [self.overlays addObject:overlay];
+    [self.overlayDisplayMap setValue:[NSNumber numberWithBool:YES] forKey:[self makeKeyFromOverlay:overlay]];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
+}
+
+- (void)removeOverlayAtIndex:(NSInteger)index
+{
+    [self.overlays removeObjectAtIndex:index];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
+}
+
+- (void)showOverlay:(BZOverlay *)overlay
+{
+    [self.overlayDisplayMap setValue:[NSNumber numberWithBool:YES] forKey:[self makeKeyFromOverlay:overlay]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+}
+
+- (void)hideOverlay:(BZOverlay *)overlay
+{
+    [self.overlayDisplayMap setValue:[NSNumber numberWithBool:NO] forKey:[self makeKeyFromOverlay:overlay]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+}
+
+//////////////////////////////////////////////////////////////
 #pragma mark  - Getters and setters
 //////////////////////////////////////////////////////////////
 
@@ -59,9 +94,35 @@
     return _coordinates;
 }
 
+- (NSMutableDictionary *)overlayDisplayMap
+{
+    if ( !_overlayDisplayMap ) {
+        _overlayDisplayMap = [[NSMutableDictionary alloc] init];
+    }
+    return _overlayDisplayMap;
+}
+
+- (NSMutableArray *)overlays
+{
+    if ( !_overlays ) {
+        _overlays = [NSMutableArray array];
+    }
+    return _overlays;
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - Utility methods
+//////////////////////////////////////////////////////////////
+
 - (NSString *)makeKeyFromLocation:(BZLocation *)location
 {
     return [NSString stringWithFormat:@"%@|%@|%f|%f", location.title, location.subtitle, location.coordinate.latitude, location.coordinate.longitude];
+}
+
+#warning Overlay key is title only, which means there could be duplicates
+- (NSString *)makeKeyFromOverlay:(BZOverlay *)overlay
+{
+    return [NSString stringWithFormat:@"%@", overlay.title];
 }
 
 @end
