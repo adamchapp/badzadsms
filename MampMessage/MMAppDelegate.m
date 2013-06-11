@@ -24,8 +24,6 @@
     
     self.locationModel = [[LocationModel alloc] init];
     
-    [self addGlastoOverlayToModel];
-    
     HistoryViewController *historyController = [[HistoryViewController alloc] initWithStyle:UITableViewStylePlain];
     historyController.locationModel = self.locationModel;
     
@@ -52,20 +50,32 @@
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    self.parser = [[URLParser alloc] initWithURLString:url.absoluteString];
-    
-    NSString *title = [self.parser valueForVariable:@"title"];
-    NSString *subtitle = [self.parser valueForVariable:@"timestamp"];
-    double latitude = [[self.parser valueForVariable:@"lat"] doubleValue];
-    double longitude = [[self.parser valueForVariable:@"long"] doubleValue];
-    
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
-    
-    BZLocation *location = [[BZLocation alloc] initWithName:title subtitle:subtitle coordinate:coordinate];
-    
-    NSLog(@"Setting coordinates");
-    
-    [self.locationModel addLocation:location];
+    if ( [url isFileURL] ) {
+        NSLog(@"Open overlay here");
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"glasto" ofType:@"kml"];
+        
+        NSLog(@"test path %@ actual path %@", path, url.path);
+        
+        BZOverlay *glastoOverlay = [[BZOverlay alloc] initWithTitle:@"Glasto 2013" path:url.path];
+        
+        [self.locationModel addOverlay:glastoOverlay];
+    } else {
+        NSLog(@"Add coordinates");
+        self.parser = [[URLParser alloc] initWithURLString:url.absoluteString];
+        
+        NSString *title = [self.parser valueForVariable:@"title"];
+        NSString *subtitle = [self.parser valueForVariable:@"timestamp"];
+        double latitude = [[self.parser valueForVariable:@"lat"] doubleValue];
+        double longitude = [[self.parser valueForVariable:@"long"] doubleValue];
+        
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
+        
+        BZLocation *location = [[BZLocation alloc] initWithName:title subtitle:subtitle coordinate:coordinate];
+        
+        NSLog(@"Setting coordinates");
+        
+        [self.locationModel addLocation:location];
+    }
     
     return YES;
 }
@@ -191,18 +201,6 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
-//////////////////////////////////////////////////////////////
-#pragma mark  - Glasto overlay
-//////////////////////////////////////////////////////////////
-
-- (void)addGlastoOverlayToModel {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"glasto" ofType:@"kml"];
-    
-    BZOverlay *glastoOverlay = [[BZOverlay alloc] initWithTitle:@"Glasto 2013" path:path];
-    
-    [self.locationModel addOverlay:glastoOverlay];
 }
 
 @end

@@ -50,7 +50,7 @@ bool is3dOn = NO;
         [self.locationManager startUpdatingLocation];
     }
     
-    self.navigationItem.title = @"Bad Zad!";
+    self.navigationItem.title = @"MapMessage";
     
     [self setupLeftMenuButton];
     [self setupRightMenuButton];
@@ -85,6 +85,8 @@ bool is3dOn = NO;
 
     MKMapRect zoomRect = MKMapRectNull;
     
+    BOOL overlayLoaded = NO;
+    
     for ( BZOverlay *bzOverlay in self.locationModel.overlays ) {
         NSString *key = [self.locationModel makeKeyFromOverlay:bzOverlay];
         BOOL showItem = [[self.locationModel.overlayDisplayMap valueForKey:key] boolValue];
@@ -99,6 +101,8 @@ bool is3dOn = NO;
             NSArray *overlays = [kmlParser overlays];
             
             [mapView addOverlays:overlays];
+            
+            overlayLoaded = YES;
             
             for (id <MKOverlay> overlay in overlays) {
                 if (MKMapRectIsNull(zoomRect)) {
@@ -115,16 +119,23 @@ bool is3dOn = NO;
         BOOL showItem = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
         if (  showItem == YES ) {
             [mapView addAnnotation:annotation];
-            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+            
+            //only zoom to fit annotations if there is no overlay
+            if ( overlayLoaded == NO ) {
+                MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+                MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+                zoomRect = MKMapRectUnion(zoomRect, pointRect);
+            }
+            
         }
     }
     
-    //now get user location and add to zoom rect
-    MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationManager.location.coordinate);
-    MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-    zoomRect = MKMapRectUnion(zoomRect, pointRect);
+    if ( overlayLoaded == NO ) {
+        //now get user location and add to zoom rect (if there is no overlay)
+        MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationManager.location.coordinate);
+        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+        zoomRect = MKMapRectUnion(zoomRect, pointRect);
+    }
     
     [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
 }
