@@ -199,11 +199,8 @@
 
 - (void)addGlastoOverlayToModel {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"glasto" ofType:@"kml"];
-    NSURL *url = [NSURL fileURLWithPath:path];
-    kmlParser = [[KMLParser alloc] initWithURL:url];
-    [kmlParser parseKML];
     
-    BZOverlay *glastoOverlay = [[BZOverlay alloc] initWithTitle:@"Glasto 2013" overlays:[kmlParser overlays]];
+    BZOverlay *glastoOverlay = [[BZOverlay alloc] initWithTitle:@"Glasto 2013" path:path];
     
     [self.locationModel addOverlay:glastoOverlay];
 }

@@ -11,8 +11,8 @@
 @interface BZOverlay : NSObject
 
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, strong) NSArray *overlays;
+@property (nonatomic, strong) NSString *overlayPath;
 
--(id)initWithTitle:(NSString *)title overlays:(NSArray *)overlays;
+-(id)initWithTitle:(NSString *)title path:(NSString *)overlayPath;
 
 @end

@@ -10,13 +10,13 @@
 
 @implementation BZOverlay
 
--(id)initWithTitle:(NSString *)title overlays:(NSArray *)overlays
+-(id)initWithTitle:(NSString *)title path:(NSString *)overlayPath
 {
     self = [super init];
     
     if ( self ) {
         self.title = title;
-        self.overlays = overlays;
+        self.overlayPath = overlayPath;
     }
     
     return self;
@@ -26,8 +26,8 @@
     return _title;
 }
 
-- (NSArray *)overlays {
-    return _overlays;
+- (NSString *)overlayPath  {
+    return _overlayPath;
 }
 
 @end

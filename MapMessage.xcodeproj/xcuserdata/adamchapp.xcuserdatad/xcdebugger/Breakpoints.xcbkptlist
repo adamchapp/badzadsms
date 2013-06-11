@@ -86,12 +86,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MampMessage/MapViewController.m"
-         timestampString = "392519607.895293"
+         timestampString = "392571149.510251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
-         landmarkName = "-loadAnnotations"
+         startingLineNumber = "70"
+         endingLineNumber = "70"
+         landmarkName = "-setupRightMenuButton"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -117,7 +117,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "32"
          endingLineNumber = "32"
-         landmarkName = "-showLocation:"
+         landmarkName = "-removeLocationAtIndex:"
          landmarkType = "5">
          <Actions>
             <BreakpointActionProxy
@@ -139,7 +139,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "38"
          endingLineNumber = "38"
-         landmarkName = "-hideLocation:"
+         landmarkName = "-showLocation:"
          landmarkType = "5">
          <Actions>
             <BreakpointActionProxy
@@ -161,7 +161,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "65"
          endingLineNumber = "65"
-         landmarkName = "-makeKeyFromLocation:"
+         landmarkName = "-showOverlay:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -174,7 +174,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "25"
          endingLineNumber = "25"
-         landmarkName = "-removeLocationAtIndex:"
+         landmarkName = "-addLocation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -182,12 +182,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MampMessage/MapViewController.m"
-         timestampString = "392519607.895293"
+         timestampString = "392571149.510251"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
-         landmarkName = "-loadAnnotations"
+         startingLineNumber = "70"
+         endingLineNumber = "70"
+         landmarkName = "-setupRightMenuButton"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -183,15 +183,29 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    BZLocation *location = [[self.locationModel coordinates] objectAtIndex:indexPath.row];
     
-    if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-        [self.locationModel showLocation:location];
+    if ( indexPath.section == 0 ) {
+        BZLocation *location = [[self.locationModel coordinates] objectAtIndex:indexPath.row];
+        
+        if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+            [self.locationModel showLocation:location];
+        } else {
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
+            [self.locationModel hideLocation:location];
+        }        
     } else {
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
-        [self.locationModel hideLocation:location];
+        BZOverlay *overlay = [[self.locationModel overlays] objectAtIndex:indexPath.row];
+        
+        if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+            [self.locationModel showOverlay:overlay];
+        } else {
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
+            [self.locationModel hideOverlay:overlay];
+        }
     }
+    
 }
 
 @end
