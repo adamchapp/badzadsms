@@ -948,6 +948,7 @@ static void strToCoords(NSString *str, CLLocationCoordinate2D **coordsOut, NSUIn
         if (annotation) {
             MKPinAnnotationView *pin =
                 [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
+            pin.pinColor = MKPinAnnotationColorGreen;
             pin.canShowCallout = YES;
             pin.animatesDrop = YES;
             annotationView = pin;

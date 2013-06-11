@@ -99,8 +99,10 @@ bool is3dOn = NO;
             
             // Add all of the MKOverlay objects parsed from the KML file to the map.
             NSArray *overlays = [kmlParser overlays];
+            NSArray *overlayAnnotations = [kmlParser points];
             
             [mapView addOverlays:overlays];
+            [mapView addAnnotations:overlayAnnotations];
             
             overlayLoaded = YES;
             
@@ -223,6 +225,11 @@ bool is3dOn = NO;
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
 {
     return [kmlParser viewForOverlay:overlay];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    return [kmlParser viewForAnnotation:annotation];
 }
 
 //////////////////////////////////////////////////////////////

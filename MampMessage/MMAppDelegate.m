@@ -52,10 +52,7 @@
 {
     if ( [url isFileURL] ) {
         NSLog(@"Open overlay here");
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"glasto" ofType:@"kml"];
-        
-        NSLog(@"test path %@ actual path %@", path, url.path);
-        
+                
         BZOverlay *glastoOverlay = [[BZOverlay alloc] initWithTitle:@"Glasto 2013" path:url.path];
         
         [self.locationModel addOverlay:glastoOverlay];
