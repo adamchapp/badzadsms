@@ -10,16 +10,21 @@
 
 @implementation BZOverlay
 
--(id)initWithTitle:(NSString *)title path:(NSString *)overlayPath
+-(id)initWithTitle:(NSString *)title path:(NSString *)overlayPath isVisible:(BOOL)visible
 {
     self = [super init];
     
     if ( self ) {
         self.title = title;
         self.overlayPath = overlayPath;
+        self.isVisible = visible;
     }
     
     return self;
+}
+
+- (BOOL)visible {
+    return _isVisible;
 }
 
 - (NSString *)title {

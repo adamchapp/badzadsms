@@ -11,27 +11,24 @@
 #import "BZOverlay.h"
 
 @interface LocationModel : NSObject
-
-@property (strong, nonatomic) NSMutableArray *coordinates;
-@property (strong, nonatomic) NSMutableDictionary *coordinateDisplayMap;
-
-@property (strong, nonatomic) NSMutableArray *overlays;
-@property (strong, nonatomic) NSMutableDictionary *overlayDisplayMap;
+{
+    NSMutableDictionary *coordinateDictionary;
+    NSMutableDictionary *overlayDictionary;
+}
 
 - (void)addLocation:(BZLocation *)location;
-- (void)removeLocationAtIndex:(NSInteger)index;
+- (void)removeLocation:(BZLocation *)location;
 
 - (void)showLocation:(BZLocation *)location;
 - (void)hideLocation:(BZLocation *)location;
 
-
 - (void)addOverlay:(BZOverlay *)overlay;
-- (void)removeOverlayAtIndex:(NSInteger)index;
+- (void)removeOverlay:(BZOverlay *)overlay;
 
 - (void)showOverlay:(BZOverlay *)overlay;
 - (void)hideOverlay:(BZOverlay *)overlay;
 
-- (NSString *)makeKeyFromLocation:(BZLocation *)location;
-- (NSString *)makeKeyFromOverlay:(BZOverlay *)overlay;
+- (NSArray *)coordinates;
+- (NSArray *)overlays;
 
 @end

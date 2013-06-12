@@ -24,6 +24,8 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+@property (strong, nonatomic) NSDateFormatter *formatter;
+
 @property (strong, nonatomic) URLParser *parser;
 
 @property (strong, nonatomic) LocationModel *locationModel;

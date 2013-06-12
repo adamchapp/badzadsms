@@ -12,7 +12,8 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) NSString *overlayPath;
+@property (nonatomic) BOOL isVisible;
 
--(id)initWithTitle:(NSString *)title path:(NSString *)overlayPath;
+- (id)initWithTitle:(NSString *)title path:(NSString *)overlayPath isVisible:(BOOL)visible;
 
 @end

@@ -13,8 +13,10 @@
 
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
+@property (nonatomic, strong) NSDate *timestamp;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic) BOOL isVisible;
 
-- (id)initWithName:(NSString *)title subtitle:(NSString *)subtitle coordinate:(CLLocationCoordinate2D)coordinate;
+- (id)initWithName:(NSString *)title timestamp:(NSDate *)date coordinate:(CLLocationCoordinate2D)coordinate isVisible:(BOOL)visible;
 
 @end

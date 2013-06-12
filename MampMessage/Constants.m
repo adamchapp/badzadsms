@@ -13,4 +13,8 @@
 NSString * const BZCoordinateDataChanged = @"coordinateDataChanged";
 NSString * const BZCoordinateViewDataChanged = @"coordinateViewDataChanged";
 
+NSString * const BZDateFormat = @"dd-MM-HH:mm";
+
+NSString * const BZReadableDateFormat = @"dd-MM (HH:mm)";
+
 @end

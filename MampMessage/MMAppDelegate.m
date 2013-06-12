@@ -8,6 +8,8 @@
 
 #import "MMAppDelegate.h"
 #import "BZLocation.h"
+#import "BZOverlay.h"
+#import "Constants.h"
 #import "MMDrawerController.h"
 #import "MMDrawerVisualState.h"
 #import "PrettyNavigationController.h"
@@ -29,6 +31,11 @@
     
     MapViewController *mapController = (MapViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MapView"];
     mapController.locationModel = self.locationModel;
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:BZDateFormat];
+    
+    self.formatter = formatter;
     
     UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:mapController];
     
@@ -48,32 +55,35 @@
     [self.window setRootViewController:drawerController];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    [self.window makeKeyAndVisible];    
     return YES;
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     if ( [url isFileURL] ) {
-        NSLog(@"Open overlay here");
-                
-        BZOverlay *glastoOverlay = [[BZOverlay alloc] initWithTitle:@"Glasto 2013" path:url.path];
+        
+        NSLog(@"%@", [url lastPathComponent]);
+        
+        BZOverlay *glastoOverlay = [[BZOverlay alloc] initWithTitle:@"Glasto 2013" path:url.path isVisible:YES];
         
         [self.locationModel addOverlay:glastoOverlay];
-    } else {
-        NSLog(@"Add coordinates");
+    }
+    else
+    {
         self.parser = [[URLParser alloc] initWithURLString:url.absoluteString];
         
         NSString *title = [self.parser valueForVariable:@"title"];
-        NSString *subtitle = [self.parser valueForVariable:@"timestamp"];
+        NSString *timeStampString = [self.parser valueForVariable:@"timestamp"];
+        
+        NSDate *timestamp = [self.formatter dateFromString:timeStampString];
+        
         double latitude = [[self.parser valueForVariable:@"lat"] doubleValue];
         double longitude = [[self.parser valueForVariable:@"long"] doubleValue];
         
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
         
-        BZLocation *location = [[BZLocation alloc] initWithName:title subtitle:subtitle coordinate:coordinate];
-        
-        NSLog(@"Setting coordinates");
+        BZLocation *location = [[BZLocation alloc] initWithName:title timestamp:timestamp coordinate:coordinate isVisible:YES];
         
         [self.locationModel addLocation:location];
     }

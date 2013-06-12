@@ -91,8 +91,7 @@ bool is3dOn = NO;
     BOOL overlayLoaded = NO;
     
     for ( BZOverlay *bzOverlay in self.locationModel.overlays ) {
-        NSString *key = [self.locationModel makeKeyFromOverlay:bzOverlay];
-        BOOL showItem = [[self.locationModel.overlayDisplayMap valueForKey:key] boolValue];
+        BOOL showItem = [bzOverlay isVisible];
         
         if ( showItem == YES ) {
             
@@ -120,8 +119,8 @@ bool is3dOn = NO;
     }
     
     for (BZLocation *annotation in self.locationModel.coordinates) {
-        NSString *key = [self.locationModel makeKeyFromLocation:annotation];
-        BOOL showItem = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
+        BOOL showItem = [annotation isVisible];
+        
         if (  showItem == YES ) {
             [mapView addAnnotation:annotation];
             
@@ -185,7 +184,7 @@ bool is3dOn = NO;
         
         NSDate *date = [NSDate date];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"dd-MM HH:mm"];
+        [formatter setDateFormat:BZDateFormat];
         
         NSString *timestamp = [formatter stringFromDate:date];
         
@@ -193,14 +192,12 @@ bool is3dOn = NO;
         
         NSString *name = [names objectAtIndex:0];
         
-        NSString *urlString = [NSString stringWithFormat:@"%@ sent you a new location at %@. \n\nbadzad://badzad.com/message?lat=%@&long=%@&title=%@&timestamp=%@",name, timestamp, self.latitude, self.longitude, name, timestamp];
+        NSString *urlString = [NSString stringWithFormat:@"%@ sent you a new location at %@. \n\nbadzad://mapmessage.com/message?lat=%@&long=%@&title=%@&timestamp=%@",name, timestamp, self.latitude, self.longitude, name, timestamp];
         
         controller.body = urlString;
         
         [self presentViewController:controller animated:YES completion:nil];
         
-    } else {
-        NSLog(@"Cannot send SMS from this device");
     }
 }
 

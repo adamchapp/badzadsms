@@ -15,31 +15,42 @@
 #pragma mark  - BZ Locations
 //////////////////////////////////////////////////////////////
 
+-(id)init {
+    
+    self = [super init];
+    
+    if ( self ) {
+        coordinateDictionary = [[NSMutableDictionary alloc] init];
+        overlayDictionary = [[NSMutableDictionary alloc] init];
+    }
+    
+    return self;
+}
+
 - (void)addLocation:(BZLocation *)location
 {
-    NSLog(@"adding location to model");
-    [self.coordinates addObject:location];
-    [self.coordinateDisplayMap setValue:[NSNumber numberWithBool:YES] forKey:[self makeKeyFromLocation:location]];
-    
+    [coordinateDictionary setObject:location forKey:[self makeKeyFromLocation:location]];
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
-- (void)removeLocationAtIndex:(NSInteger)index
+- (void)removeLocation:(BZLocation *)location
 {
-    [self.coordinates removeObjectAtIndex:index];
-    
+    [coordinateDictionary removeObjectForKey:[self makeKeyFromLocation:location]];
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
 - (void)showLocation:(BZLocation *)location
 {
-    [self.coordinateDisplayMap setValue:[NSNumber numberWithBool:YES] forKey:[self makeKeyFromLocation:location]];
+    [location setIsVisible:YES];
+    [coordinateDictionary setObject:location forKey:[self makeKeyFromLocation:location]];
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
 }
 
 - (void)hideLocation:(BZLocation *)location
 {
-    [self.coordinateDisplayMap setValue:[NSNumber numberWithBool:NO] forKey:[self makeKeyFromLocation:location]];
+    [location setIsVisible:NO];
+    [coordinateDictionary setObject:location forKey:[self makeKeyFromLocation:location]];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
 }
 
@@ -49,28 +60,31 @@
 
 - (void)addOverlay:(BZOverlay *)overlay
 {
-    [self.overlays addObject:overlay];
-    [self.overlayDisplayMap setValue:[NSNumber numberWithBool:YES] forKey:[self makeKeyFromOverlay:overlay]];
+    [overlayDictionary setObject:overlay forKey:[self makeKeyFromOverlay:overlay]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
-- (void)removeOverlayAtIndex:(NSInteger)index
+- (void)removeOverlay:(BZOverlay *)overlay
 {
-    [self.overlays removeObjectAtIndex:index];
+    [overlayDictionary removeObjectForKey:[self makeKeyFromOverlay:overlay]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
 - (void)showOverlay:(BZOverlay *)overlay
 {
-    [self.overlayDisplayMap setValue:[NSNumber numberWithBool:YES] forKey:[self makeKeyFromOverlay:overlay]];
+    [overlay setIsVisible:YES];
+    [overlayDictionary setObject:overlay forKey:[self makeKeyFromOverlay:overlay]];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
 }
 
 - (void)hideOverlay:(BZOverlay *)overlay
 {
-    [self.overlayDisplayMap setValue:[NSNumber numberWithBool:NO] forKey:[self makeKeyFromOverlay:overlay]];
+    [overlay setIsVisible:NO];
+    [overlayDictionary setObject:overlay forKey:[self makeKeyFromOverlay:overlay]];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
 }
 
@@ -78,36 +92,25 @@
 #pragma mark  - Getters and setters
 //////////////////////////////////////////////////////////////
 
-- (NSMutableDictionary *)coordinateDisplayMap
-{
-    if ( !_coordinateDisplayMap ) {
-        _coordinateDisplayMap = [[NSMutableDictionary alloc] init];
-    }
-    return _coordinateDisplayMap;
+- (NSArray *)coordinates {
+    NSSortDescriptor *dateDescriptor = [NSSortDescriptor
+                                        sortDescriptorWithKey:@"timestamp"
+                                        ascending:YES
+                                        selector:@selector(compare:)];
+
+    NSArray *coordinates = [[coordinateDictionary allValues] sortedArrayUsingDescriptors:@[dateDescriptor]];
+    
+    return coordinates;
 }
 
-- (NSMutableArray *)coordinates
-{
-    if ( !_coordinates ) {
-        _coordinates = [NSMutableArray array];
-    }
-    return _coordinates;
-}
-
-- (NSMutableDictionary *)overlayDisplayMap
-{
-    if ( !_overlayDisplayMap ) {
-        _overlayDisplayMap = [[NSMutableDictionary alloc] init];
-    }
-    return _overlayDisplayMap;
-}
-
-- (NSMutableArray *)overlays
-{
-    if ( !_overlays ) {
-        _overlays = [NSMutableArray array];
-    }
-    return _overlays;
+- (NSArray *)overlays {
+    NSSortDescriptor *nameDescriptor = [NSSortDescriptor
+                                        sortDescriptorWithKey:@"title"
+                                        ascending:YES];
+    
+    NSArray *overlays = [[overlayDictionary allValues] sortedArrayUsingDescriptors:@[nameDescriptor]];
+    
+    return overlays;
 }
 
 //////////////////////////////////////////////////////////////
@@ -116,10 +119,9 @@
 
 - (NSString *)makeKeyFromLocation:(BZLocation *)location
 {
-    return [NSString stringWithFormat:@"%@|%@|%f|%f", location.title, location.subtitle, location.coordinate.latitude, location.coordinate.longitude];
+    return [NSString stringWithFormat:@"%@", location.title];
 }
 
-#warning Overlay key is title only, which means there could be duplicates
 - (NSString *)makeKeyFromOverlay:(BZOverlay *)overlay
 {
     return [NSString stringWithFormat:@"%@", overlay.title];

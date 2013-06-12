@@ -103,16 +103,14 @@
     
     if ( indexPath.section == 0 ) {
         BZLocation *location = [self.locationModel.coordinates objectAtIndex:indexPath.row];
-        NSString *key = [self.locationModel makeKeyFromLocation:location];
         
-        title = [NSString stringWithFormat:@"%@ (%@)",location.title, location.subtitle];
-        showCoordinate = [[self.locationModel.coordinateDisplayMap valueForKey:key] boolValue];
+        title = [NSString stringWithFormat:@"%@ %@",location.title, location.subtitle];
+        showCoordinate = location.isVisible;
     } else {
         BZOverlay *overlay = [self.locationModel.overlays objectAtIndex:indexPath.row];
-        NSString *key = [self.locationModel makeKeyFromOverlay:overlay];
         
         title = [NSString stringWithFormat:@"%@", overlay.title];
-        showCoordinate = [[self.locationModel.overlayDisplayMap valueForKey:key] boolValue];
+        showCoordinate = overlay.isVisible;
     }
     
     cell.textLabel.text = title;
@@ -170,9 +168,22 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+
         [tableView beginUpdates];
-        [self.locationModel removeLocationAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        if ( indexPath.section == 0 ) {
+            BZLocation *location = [self.locationModel.coordinates objectAtIndex:indexPath.row];
+            
+            [self.locationModel removeLocation:location];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+        } else if ( indexPath.section == 1 ) {
+            BZOverlay *overlay = [self.locationModel.overlays objectAtIndex:indexPath.row];
+            
+            [self.locationModel removeOverlay:overlay];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        
         [tableView endUpdates];
     }
 }
@@ -207,5 +218,11 @@
     }
     
 }
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - Getters and setters
+//////////////////////////////////////////////////////////////
+
+
 
 @end
