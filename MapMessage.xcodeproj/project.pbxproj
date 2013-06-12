@@ -32,9 +32,6 @@
 		3F0E2F3A1767DCC200D41BD6 /* CompassSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E2F361767DCC200D41BD6 /* CompassSelected@2x.png */; };
 		3F0E2F3B1767DCC200D41BD6 /* CompassUnselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E2F371767DCC200D41BD6 /* CompassUnselected.png */; };
 		3F0E2F3C1767DCC200D41BD6 /* CompassUnselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E2F381767DCC200D41BD6 /* CompassUnselected@2x.png */; };
-		3F0E2F3F1767DCED00D41BD6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E2F3E1767DCED00D41BD6 /* Default.png */; };
-		3F0E2F411767DCF200D41BD6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E2F401767DCF200D41BD6 /* Default@2x.png */; };
-		3F0E2F431767DCF600D41BD6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0E2F421767DCF600D41BD6 /* Default-568h@2x.png */; };
 		3F60C4261763BE140043EB2A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C4251763BE140043EB2A /* UIKit.framework */; };
 		3F60C4281763BE140043EB2A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C4271763BE140043EB2A /* Foundation.framework */; };
 		3F60C42A1763BE140043EB2A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C4291763BE140043EB2A /* CoreGraphics.framework */; };
@@ -70,6 +67,9 @@
 		3FFA272C1767DD9700E7B9F3 /* SidebarButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA27241767DD9700E7B9F3 /* SidebarButton@2x.png */; };
 		3FFA272D1767DD9700E7B9F3 /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA27251767DD9700E7B9F3 /* title.png */; };
 		3FFA272E1767DD9700E7B9F3 /* title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA27261767DD9700E7B9F3 /* title@2x.png */; };
+		3FFA273B1767E48200E7B9F3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA273A1767E48200E7B9F3 /* Default.png */; };
+		3FFA273D1767E48C00E7B9F3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA273C1767E48C00E7B9F3 /* Default@2x.png */; };
+		3FFA273F1767E49400E7B9F3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA273E1767E49400E7B9F3 /* Default-568h@2x.png */; };
 		EE6E827D1765E96C00A17859 /* RMSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */; };
 		EE6E827E1765E96C00A17859 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EE6E827B1765E96C00A17859 /* README.md */; };
 		EE6E827F1765E96C00A17859 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EE6E827C1765E96C00A17859 /* LICENSE */; };
@@ -144,9 +144,6 @@
 		3F0E2F361767DCC200D41BD6 /* CompassSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CompassSelected@2x.png"; sourceTree = "<group>"; };
 		3F0E2F371767DCC200D41BD6 /* CompassUnselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CompassUnselected.png; sourceTree = "<group>"; };
 		3F0E2F381767DCC200D41BD6 /* CompassUnselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CompassUnselected@2x.png"; sourceTree = "<group>"; };
-		3F0E2F3E1767DCED00D41BD6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		3F0E2F401767DCF200D41BD6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		3F0E2F421767DCF600D41BD6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3F60C4221763BE140043EB2A /* MapMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F60C4251763BE140043EB2A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3F60C4271763BE140043EB2A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -191,6 +188,9 @@
 		3FFA27241767DD9700E7B9F3 /* SidebarButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SidebarButton@2x.png"; sourceTree = "<group>"; };
 		3FFA27251767DD9700E7B9F3 /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		3FFA27261767DD9700E7B9F3 /* title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title@2x.png"; sourceTree = "<group>"; };
+		3FFA273A1767E48200E7B9F3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		3FFA273C1767E48C00E7B9F3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		3FFA273E1767E49400E7B9F3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		EE6E82791765E96C00A17859 /* RMSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSwipeTableViewCell.h; sourceTree = "<group>"; };
 		EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSwipeTableViewCell.m; sourceTree = "<group>"; };
 		EE6E827B1765E96C00A17859 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -342,9 +342,6 @@
 		3F60C4191763BE140043EB2A = {
 			isa = PBXGroup;
 			children = (
-				3F0E2F421767DCF600D41BD6 /* Default-568h@2x.png */,
-				3F0E2F401767DCF200D41BD6 /* Default@2x.png */,
-				3F0E2F3E1767DCED00D41BD6 /* Default.png */,
 				3F60C42D1763BE140043EB2A /* MapMessage */,
 				3F60C44F1763BE140043EB2A /* MapMessageTests */,
 				3F60C4241763BE140043EB2A /* Frameworks */,
@@ -495,13 +492,16 @@
 			name = "value objects";
 			sourceTree = "<group>";
 		};
-		3FFA271E1767DD7900E7B9F3 /* app icons */ = {
+		3FFA271E1767DD7900E7B9F3 /* app icons and splash */ = {
 			isa = PBXGroup;
 			children = (
+				3FFA273E1767E49400E7B9F3 /* Default-568h@2x.png */,
+				3FFA273C1767E48C00E7B9F3 /* Default@2x.png */,
+				3FFA273A1767E48200E7B9F3 /* Default.png */,
 				3F0E2F321767DC4000D41BD6 /* AppIcons_Icon@2x.png */,
 				3F0E2F301767DC3D00D41BD6 /* AppIcons_Icon.png */,
 			);
-			name = "app icons";
+			name = "app icons and splash";
 			sourceTree = "<group>";
 		};
 		3FFA272F1767DD9B00E7B9F3 /* misc */ = {
@@ -534,7 +534,7 @@
 			isa = PBXGroup;
 			children = (
 				3FFA272F1767DD9B00E7B9F3 /* misc */,
-				3FFA271E1767DD7900E7B9F3 /* app icons */,
+				3FFA271E1767DD7900E7B9F3 /* app icons and splash */,
 				3F0E2F3D1767DCCA00D41BD6 /* compass */,
 				3F0E2F341767DCA400D41BD6 /* tableviews */,
 			);
@@ -636,9 +636,6 @@
 				3F0E2F3A1767DCC200D41BD6 /* CompassSelected@2x.png in Resources */,
 				3F0E2F3B1767DCC200D41BD6 /* CompassUnselected.png in Resources */,
 				3F0E2F3C1767DCC200D41BD6 /* CompassUnselected@2x.png in Resources */,
-				3F0E2F3F1767DCED00D41BD6 /* Default.png in Resources */,
-				3F0E2F411767DCF200D41BD6 /* Default@2x.png in Resources */,
-				3F0E2F431767DCF600D41BD6 /* Default-568h@2x.png in Resources */,
 				3FFA27271767DD9700E7B9F3 /* header.png in Resources */,
 				3FFA27281767DD9700E7B9F3 /* header@2x.png in Resources */,
 				3FFA27291767DD9700E7B9F3 /* plus.png in Resources */,
@@ -647,6 +644,9 @@
 				3FFA272C1767DD9700E7B9F3 /* SidebarButton@2x.png in Resources */,
 				3FFA272D1767DD9700E7B9F3 /* title.png in Resources */,
 				3FFA272E1767DD9700E7B9F3 /* title@2x.png in Resources */,
+				3FFA273B1767E48200E7B9F3 /* Default.png in Resources */,
+				3FFA273D1767E48C00E7B9F3 /* Default@2x.png in Resources */,
+				3FFA273F1767E49400E7B9F3 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -815,7 +815,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MampMessage/MapMessage-Prefix.pch";
 				INFOPLIST_FILE = "MampMessage/MapMessage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = MapMessage;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -828,7 +828,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MampMessage/MapMessage-Prefix.pch";
 				INFOPLIST_FILE = "MampMessage/MapMessage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = MapMessage;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

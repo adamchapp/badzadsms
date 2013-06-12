@@ -124,18 +124,18 @@
     
     //// Color Declarations
     UIColor*  buttonColor = [self menuButtonColorForState:self.state];
-    UIColor*  shadowColor = [self shadowColorForState:self.state];
+//    UIColor*  shadowColor = [self shadowColorForState:self.state];
 
     
     //// Shadow Declarations
-    UIColor* shadow =  shadowColor;
-    CGSize shadowOffset = CGSizeMake(0.0, 1.0);
-    CGFloat shadowBlurRadius = 0;
+//    UIColor* shadow =  shadowColor;
+//    CGSize shadowOffset = CGSizeMake(0.0, 1.0);
+//    CGFloat shadowBlurRadius = 0;
     
     //// Top Bun Drawing
     UIBezierPath* topBunPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(xOffset, yOffset, buttonWidth, buttonHeight) cornerRadius:cornerRadius];
     CGContextSaveGState(context);
-    CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, shadow.CGColor);
+//    CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, shadow.CGColor);
     [buttonColor setFill];
     [topBunPath fill];
     CGContextRestoreGState(context);
@@ -143,7 +143,7 @@
     //// Meat Drawing
     UIBezierPath* meatPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(xOffset, yOffset*2 + buttonHeight, buttonWidth, buttonHeight) cornerRadius:cornerRadius];
     CGContextSaveGState(context);
-    CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, shadow.CGColor);
+//    CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, shadow.CGColor);
     [buttonColor setFill];
     [meatPath fill];
     CGContextRestoreGState(context);
@@ -151,7 +151,7 @@
     //// Bottom Bun Drawing
     UIBezierPath* bottomBunPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(xOffset, yOffset*3 + buttonHeight*2, buttonWidth, buttonHeight) cornerRadius:cornerRadius];
     CGContextSaveGState(context);
-    CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, shadow.CGColor);
+//    CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, shadow.CGColor);
     [buttonColor setFill];
     [bottomBunPath fill];
     CGContextRestoreGState(context);

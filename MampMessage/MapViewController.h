@@ -20,6 +20,7 @@
 @interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate>
 {
     IBOutlet MKMapView *mapView;
+    IBOutlet UIButton *compassButton;
 }
 
 @property (strong, nonatomic) NSString *latitude;
@@ -30,5 +31,6 @@
 - (void)loadAnnotations;
 - (IBAction)sendSMS:(id)sender;
 - (IBAction)toggleCompass:(id)sender;
+- (IBAction)toggleViewMode:(id)sender;
 
 @end

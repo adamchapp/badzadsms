@@ -30,7 +30,11 @@
     MapViewController *mapController = (MapViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MapView"];
     mapController.locationModel = self.locationModel;
     
-    PrettyNavigationController * navigationController = [[PrettyNavigationController alloc] initWithRootViewController:mapController];
+    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:mapController];
+    
+    UINavigationBar *navBar = [navigationController navigationBar];
+    UIImage *backgroundImage = [UIImage imageNamed:@"header"];
+    [navBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
     
     MMDrawerController * drawerController = [[MMDrawerController alloc]
                                              initWithCenterViewController:navigationController

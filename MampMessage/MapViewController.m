@@ -50,7 +50,7 @@ bool is3dOn = NO;
         [self.locationManager startUpdatingLocation];
     }
     
-    self.navigationItem.title = @"MapMessage";
+    [self.navigationItem setTitleView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title"]]];
     
     [self setupLeftMenuButton];
     [self setupRightMenuButton];
@@ -67,7 +67,10 @@ bool is3dOn = NO;
 }
 
 -(void)setupRightMenuButton{
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(sendSMS:)];
+    UIButton *buttonOverlay = [[UIButton alloc] initWithFrame:CGRectMake(-10, 0, 16, 16)];
+    [buttonOverlay addTarget:self action:@selector(sendSMS:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonOverlay setBackgroundImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:buttonOverlay];
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
 }
 
@@ -148,10 +151,24 @@ bool is3dOn = NO;
     MKUserTrackingMode mode = [mapView userTrackingMode];
     
     if ( mode == MKUserTrackingModeNone ) {
+        [compassButton setBackgroundImage:[UIImage imageNamed:@"CompassSelected"] forState:UIControlStateNormal];
         [mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading];
     } else {
+        [compassButton setBackgroundImage:[UIImage imageNamed:@"CompassUnselected"] forState:UIControlStateNormal];
         [mapView setUserTrackingMode:MKUserTrackingModeNone];
     }
+}
+
+- (IBAction)toggleViewMode:(id)sender {
+    
+    if ( [mapView mapType] == MKMapTypeStandard ) {
+        [mapView setMapType:MKMapTypeSatellite];
+    } else if ( [mapView mapType] == MKMapTypeSatellite ) {
+        [mapView setMapType:MKMapTypeHybrid];
+    } else {
+        [mapView setMapType:MKMapTypeStandard];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
