@@ -54,6 +54,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
 }
 
+- (BZLocation *)getLocationByName:(NSString *)name
+{
+    return [coordinateDictionary objectForKey:name];
+}
+
 //////////////////////////////////////////////////////////////
 #pragma mark  - BZ Overlays
 //////////////////////////////////////////////////////////////

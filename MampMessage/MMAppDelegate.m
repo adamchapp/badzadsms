@@ -13,6 +13,7 @@
 #import "MMDrawerController.h"
 #import "MMDrawerVisualState.h"
 #import "PrettyNavigationController.h"
+#import "UIAlertView+Blocks.h"
 
 @implementation MMAppDelegate
 
@@ -65,7 +66,10 @@
         
         NSLog(@"%@", [url lastPathComponent]);
         
-        BZOverlay *glastoOverlay = [[BZOverlay alloc] initWithTitle:@"Glasto 2013" path:url.path isVisible:YES];
+        NSString *filenameWithExtension = [url lastPathComponent];
+        NSString *filename = [filenameWithExtension stringByDeletingPathExtension];
+        
+        BZOverlay *glastoOverlay = [[BZOverlay alloc] initWithTitle:filename path:url.path isVisible:YES];
         
         [self.locationModel addOverlay:glastoOverlay];
     }
@@ -85,10 +89,49 @@
         
         BZLocation *location = [[BZLocation alloc] initWithName:title timestamp:timestamp coordinate:coordinate isVisible:YES];
         
-        [self.locationModel addLocation:location];
+        BZLocation *previousLocation = [self.locationModel getLocationByName:title];
+        
+        if ( previousLocation ) {
+            
+            NSDate *previousDate = [previousLocation timestamp];
+            NSDate *newDate = [location timestamp];
+            
+            if ([previousDate compare:newDate] == NSOrderedDescending) {
+                
+                NSString *message = [NSString stringWithFormat:@"Are you sure you want to replace the current location for %@ with an older one?", location.title];
+                
+                RIButtonItem *noButton = [RIButtonItem itemWithLabel:@"No" action:nil];
+                RIButtonItem *yesButton = [RIButtonItem itemWithLabel:@"Yes" action:^{
+                    [self.locationModel addLocation:location];
+                }];
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:message cancelButtonItem:noButton otherButtonItems:yesButton, nil];
+                
+                [alertView show];
+                
+            } else if ([previousDate compare:newDate] == NSOrderedAscending) {
+                [self.locationModel addLocation:location];
+            }
+        } else {
+            NSLog(@"There is no previous location that matches this one. Add as normal");
+            [self.locationModel addLocation:location];
+        }
     }
     
     return YES;
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - UIAlertViewDelegate
+//////////////////////////////////////////////////////////////
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( buttonIndex == 0 ) {
+        NSLog(@"Clicked NO");
+    } else {
+        NSLog(@"Clicked YES");
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -22,6 +22,8 @@
 - (void)showLocation:(BZLocation *)location;
 - (void)hideLocation:(BZLocation *)location;
 
+- (BZLocation *)getLocationByName:(NSString *)name;
+
 - (void)addOverlay:(BZOverlay *)overlay;
 - (void)removeOverlay:(BZOverlay *)overlay;
 

@@ -70,6 +70,10 @@
 		3FFA273B1767E48200E7B9F3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA273A1767E48200E7B9F3 /* Default.png */; };
 		3FFA273D1767E48C00E7B9F3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA273C1767E48C00E7B9F3 /* Default@2x.png */; };
 		3FFA273F1767E49400E7B9F3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA273E1767E49400E7B9F3 /* Default-568h@2x.png */; };
+		3FFF3CA51768FE7A00813BD9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3C9E1768FE7A00813BD9 /* README.md */; };
+		3FFF3CA61768FE7A00813BD9 /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF3CA01768FE7A00813BD9 /* RIButtonItem.m */; };
+		3FFF3CA71768FE7A00813BD9 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF3CA21768FE7A00813BD9 /* UIActionSheet+Blocks.m */; };
+		3FFF3CA81768FE7A00813BD9 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF3CA41768FE7A00813BD9 /* UIAlertView+Blocks.m */; };
 		EE6E827D1765E96C00A17859 /* RMSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */; };
 		EE6E827E1765E96C00A17859 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EE6E827B1765E96C00A17859 /* README.md */; };
 		EE6E827F1765E96C00A17859 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EE6E827C1765E96C00A17859 /* LICENSE */; };
@@ -191,6 +195,13 @@
 		3FFA273A1767E48200E7B9F3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		3FFA273C1767E48C00E7B9F3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		3FFA273E1767E49400E7B9F3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		3FFF3C9E1768FE7A00813BD9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		3FFF3C9F1768FE7A00813BD9 /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
+		3FFF3CA01768FE7A00813BD9 /* RIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIButtonItem.m; sourceTree = "<group>"; };
+		3FFF3CA11768FE7A00813BD9 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		3FFF3CA21768FE7A00813BD9 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
+		3FFF3CA31768FE7A00813BD9 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		3FFF3CA41768FE7A00813BD9 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		EE6E82791765E96C00A17859 /* RMSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSwipeTableViewCell.h; sourceTree = "<group>"; };
 		EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSwipeTableViewCell.m; sourceTree = "<group>"; };
 		EE6E827B1765E96C00A17859 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -473,6 +484,7 @@
 		3F81110E1764179F00975702 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3FFF3C9D1768FE7A00813BD9 /* UIAlertView-Blocks */,
 				EE6E82781765E95A00A17859 /* RMSwipeTableViewCell */,
 				3F0E2F0D1765502800D41BD6 /* PrettyKit */,
 				3F0E2EE917652A4A00D41BD6 /* MMDrawerController */,
@@ -517,6 +529,20 @@
 				3FFA27261767DD9700E7B9F3 /* title@2x.png */,
 			);
 			name = misc;
+			sourceTree = "<group>";
+		};
+		3FFF3C9D1768FE7A00813BD9 /* UIAlertView-Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				3FFF3C9E1768FE7A00813BD9 /* README.md */,
+				3FFF3C9F1768FE7A00813BD9 /* RIButtonItem.h */,
+				3FFF3CA01768FE7A00813BD9 /* RIButtonItem.m */,
+				3FFF3CA11768FE7A00813BD9 /* UIActionSheet+Blocks.h */,
+				3FFF3CA21768FE7A00813BD9 /* UIActionSheet+Blocks.m */,
+				3FFF3CA31768FE7A00813BD9 /* UIAlertView+Blocks.h */,
+				3FFF3CA41768FE7A00813BD9 /* UIAlertView+Blocks.m */,
+			);
+			path = "UIAlertView-Blocks";
 			sourceTree = "<group>";
 		};
 		EE6E82781765E95A00A17859 /* RMSwipeTableViewCell */ = {
@@ -630,6 +656,7 @@
 				EE6E82951765F1B800A17859 /* DeleteGrey@2x.png in Resources */,
 				EE6E82961765F1B800A17859 /* DeleteRed.png in Resources */,
 				EE6E82971765F1B800A17859 /* DeleteRed@2x.png in Resources */,
+				3FFF3CA51768FE7A00813BD9 /* README.md in Resources */,
 				3F0E2F311767DC3D00D41BD6 /* AppIcons_Icon.png in Resources */,
 				3F0E2F331767DC4000D41BD6 /* AppIcons_Icon@2x.png in Resources */,
 				3F0E2F391767DCC200D41BD6 /* CompassSelected.png in Resources */,
@@ -688,6 +715,7 @@
 				3F60C4711763F3A70043EB2A /* URLParser.m in Sources */,
 				3F60C4751763F64C0043EB2A /* BZLocation.m in Sources */,
 				3F81111B1764195400975702 /* HistoryViewController.m in Sources */,
+				3FFF3CA71768FE7A00813BD9 /* UIActionSheet+Blocks.m in Sources */,
 				3F81112117642EE300975702 /* LocationModel.m in Sources */,
 				3F0E2EF217652A4A00D41BD6 /* MMDrawerBarButtonItem.m in Sources */,
 				3F0E2EF317652A4A00D41BD6 /* MMDrawerController.m in Sources */,
@@ -696,6 +724,8 @@
 				3F0E2F0717653F1900D41BD6 /* Constants.m in Sources */,
 				3F0E2F08176544F100D41BD6 /* MMTableViewCell.m in Sources */,
 				3F0E2F09176544F100D41BD6 /* MMSideDrawerTableViewCell.m in Sources */,
+				3FFF3CA61768FE7A00813BD9 /* RIButtonItem.m in Sources */,
+				3FFF3CA81768FE7A00813BD9 /* UIAlertView+Blocks.m in Sources */,
 				3F0E2F0A176544F100D41BD6 /* MMCenterTableViewCell.m in Sources */,
 				3F0E2F0B176544F100D41BD6 /* MMSideDrawerSectionHeaderView.m in Sources */,
 				3F0E2F101765504200D41BD6 /* PrettyNavigationController.m in Sources */,
