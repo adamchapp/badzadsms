@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "BZLocation.h"
 #import "LocationModel.h"
-#import "RMSwipeTableViewCell.h"
 
-@interface HistoryViewController : UITableViewController <RMSwipeTableViewCellDelegate>
+@interface HistoryViewController : UITableViewController
 
 @property (nonatomic, strong) LocationModel *locationModel;
 

@@ -27,34 +27,34 @@
     return self;
 }
 
-- (void)addLocation:(BZLocation *)location
+- (void)addLocation:(Location *)location
 {
     [coordinateDictionary setObject:location forKey:[self makeKeyFromLocation:location]];
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
-- (void)removeLocation:(BZLocation *)location
+- (void)removeLocation:(Location *)location
 {
     [coordinateDictionary removeObjectForKey:[self makeKeyFromLocation:location]];
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
-- (void)showLocation:(BZLocation *)location
+- (void)showLocation:(Location *)location
 {
-    [location setIsVisible:YES];
+    [location setIsVisible:[NSNumber numberWithBool:YES]];
     [coordinateDictionary setObject:location forKey:[self makeKeyFromLocation:location]];
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
 }
 
-- (void)hideLocation:(BZLocation *)location
+- (void)hideLocation:(Location *)location
 {
-    [location setIsVisible:NO];
+    [location setIsVisible:[NSNumber numberWithBool:NO]];
     [coordinateDictionary setObject:location forKey:[self makeKeyFromLocation:location]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
 }
 
-- (BZLocation *)getLocationByName:(NSString *)name
+- (Location *)getLocationByName:(NSString *)name
 {
     return [coordinateDictionary objectForKey:name];
 }
@@ -63,29 +63,29 @@
 #pragma mark  - BZ Overlays
 //////////////////////////////////////////////////////////////
 
-- (void)addOverlay:(BZOverlay *)overlay
+- (void)addOverlay:(Overlay *)overlay
 {
     [overlayDictionary setObject:overlay forKey:[self makeKeyFromOverlay:overlay]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
-- (void)removeOverlay:(BZOverlay *)overlay
+- (void)removeOverlay:(Overlay *)overlay
 {
     [overlayDictionary removeObjectForKey:[self makeKeyFromOverlay:overlay]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
-- (void)showOverlay:(BZOverlay *)overlay
+- (void)showOverlay:(Overlay *)overlay
 {
-    [overlay setIsVisible:YES];
+    [overlay setIsVisible:[NSNumber numberWithBool:YES]];
     [overlayDictionary setObject:overlay forKey:[self makeKeyFromOverlay:overlay]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
 }
 
-- (void)hideOverlay:(BZOverlay *)overlay
+- (void)hideOverlay:(Overlay *)overlay
 {
     [overlay setIsVisible:NO];
     [overlayDictionary setObject:overlay forKey:[self makeKeyFromOverlay:overlay]];
@@ -122,12 +122,12 @@
 #pragma mark  - Utility methods
 //////////////////////////////////////////////////////////////
 
-- (NSString *)makeKeyFromLocation:(BZLocation *)location
+- (NSString *)makeKeyFromLocation:(Location *)location
 {
     return [NSString stringWithFormat:@"%@", location.title];
 }
 
-- (NSString *)makeKeyFromOverlay:(BZOverlay *)overlay
+- (NSString *)makeKeyFromOverlay:(Overlay *)overlay
 {
     return [NSString stringWithFormat:@"%@", overlay.title];
 }

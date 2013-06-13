@@ -18,13 +18,4 @@
 @dynamic latitude;
 @dynamic longitude;
 
--(CLLocationCoordinate2D)coordinate {
-    return CLLocationCoordinate2DMake([self.latitude doubleValue], [self.longitude doubleValue]);
-}
-
-- (void)setCoordinate:(CLLocationCoordinate2D)coordinate {
-    self.latitude = [NSNumber numberWithDouble:coordinate.latitude];
-    self.longitude = [NSNumber numberWithDouble:coordinate.longitude];
-}
-
 @end

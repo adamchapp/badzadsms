@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "URLParser.h"
 #import <MapKit/MapKit.h>
+#import "MMDrawerController.h"
+#import "MMDrawerVisualState.h"
 #import "MapViewController.h"
+#import "MapItemCreator.h"
 #import "HistoryViewController.h"
+#import "Location+Extensions.h"
+#import "Overlay+Extensions.h"
+#import "Constants.h"
 #import "KMLParser.h"
 
 typedef void (^UIAlertViewBlock)(void);
@@ -28,8 +34,6 @@ typedef void (^UIAlertViewBlock)(void);
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (strong, nonatomic) NSDateFormatter *formatter;
-
-@property (strong, nonatomic) URLParser *parser;
 
 @property (strong, nonatomic) LocationModel *locationModel;
 

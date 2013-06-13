@@ -81,12 +81,12 @@
     
     BOOL overlayLoaded = NO;
     
-    for ( BZOverlay *bzOverlay in self.locationModel.overlays ) {
-        BOOL showItem = [bzOverlay isVisible];
+    for ( Overlay *overlay in self.locationModel.overlays ) {
+        BOOL showItem = [[overlay isVisible] boolValue];
         
         if ( showItem == YES ) {
             
-            NSURL *url = [NSURL fileURLWithPath:[bzOverlay overlayPath]];
+            NSURL *url = [NSURL fileURLWithPath:[overlay overlayPath]];
             self.kmlParser = [[KMLParser alloc] initWithURL:url];
             [self.kmlParser parseKML];
             

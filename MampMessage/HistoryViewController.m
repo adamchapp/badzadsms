@@ -107,10 +107,10 @@
         title = [NSString stringWithFormat:@"%@ %@",location.title, location.subtitle];
         showCoordinate = location.isVisible;
     } else {
-        BZOverlay *overlay = [self.locationModel.overlays objectAtIndex:indexPath.row];
+        Overlay *overlay = [self.locationModel.overlays objectAtIndex:indexPath.row];
         
         title = [NSString stringWithFormat:@"%@", overlay.title];
-        showCoordinate = overlay.isVisible;
+        showCoordinate = [overlay.isVisible boolValue];
     }
     
     cell.textLabel.text = title;
@@ -172,13 +172,13 @@
         [tableView beginUpdates];
         
         if ( indexPath.section == 0 ) {
-            BZLocation *location = [self.locationModel.coordinates objectAtIndex:indexPath.row];
+            Location *location = [self.locationModel.coordinates objectAtIndex:indexPath.row];
             
             [self.locationModel removeLocation:location];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
         } else if ( indexPath.section == 1 ) {
-            BZOverlay *overlay = [self.locationModel.overlays objectAtIndex:indexPath.row];
+            Overlay *overlay = [self.locationModel.overlays objectAtIndex:indexPath.row];
             
             [self.locationModel removeOverlay:overlay];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -196,7 +196,7 @@
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     if ( indexPath.section == 0 ) {
-        BZLocation *location = [[self.locationModel coordinates] objectAtIndex:indexPath.row];
+        Location *location = [[self.locationModel coordinates] objectAtIndex:indexPath.row];
         
         if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
             [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
@@ -206,7 +206,7 @@
             [self.locationModel hideLocation:location];
         }        
     } else {
-        BZOverlay *overlay = [[self.locationModel overlays] objectAtIndex:indexPath.row];
+        Overlay *overlay = [[self.locationModel overlays] objectAtIndex:indexPath.row];
         
         if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
             [cell setAccessoryType:UITableViewCellAccessoryCheckmark];

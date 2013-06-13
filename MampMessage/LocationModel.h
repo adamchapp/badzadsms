@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BZLocation.h"
-#import "BZOverlay.h"
+#import "Location+Extensions.h"
+#import "Overlay+Extensions.h"
 
 @interface LocationModel : NSObject
 {
@@ -16,19 +16,19 @@
     NSMutableDictionary *overlayDictionary;
 }
 
-- (void)addLocation:(BZLocation *)location;
-- (void)removeLocation:(BZLocation *)location;
+- (void)addLocation:(Location *)location;
+- (void)removeLocation:(Location *)location;
 
-- (void)showLocation:(BZLocation *)location;
-- (void)hideLocation:(BZLocation *)location;
+- (void)showLocation:(Location *)location;
+- (void)hideLocation:(Location *)location;
 
-- (BZLocation *)getLocationByName:(NSString *)name;
+- (Location *)getLocationByName:(NSString *)name;
 
-- (void)addOverlay:(BZOverlay *)overlay;
-- (void)removeOverlay:(BZOverlay *)overlay;
+- (void)addOverlay:(Overlay *)overlay;
+- (void)removeOverlay:(Overlay *)overlay;
 
-- (void)showOverlay:(BZOverlay *)overlay;
-- (void)hideOverlay:(BZOverlay *)overlay;
+- (void)showOverlay:(Overlay *)overlay;
+- (void)hideOverlay:(Overlay *)overlay;
 
 - (NSArray *)coordinates;
 - (NSArray *)overlays;

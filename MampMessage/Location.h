@@ -10,7 +10,6 @@
 #import <CoreData/CoreData.h>
 #import <MapKit/MapKit.h>
 
-
 @interface Location : NSManagedObject
 
 @property (nonatomic, retain) NSString * title;
