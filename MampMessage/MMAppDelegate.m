@@ -13,7 +13,6 @@
 #import "MMDrawerController.h"
 #import "MMDrawerVisualState.h"
 #import "PrettyNavigationController.h"
-#import "UIAlertView+Blocks.h"
 
 @implementation MMAppDelegate
 
@@ -75,6 +74,8 @@
     }
     else
     {
+        LocationModel *locationModel = self.locationModel;
+        
         self.parser = [[URLParser alloc] initWithURLString:url.absoluteString];
         
         NSString *title = [self.parser valueForVariable:@"title"];
@@ -100,21 +101,21 @@
                 
                 NSString *message = [NSString stringWithFormat:@"Are you sure you want to replace the current location for %@ with an older one?", location.title];
                 
-                RIButtonItem *noButton = [RIButtonItem itemWithLabel:@"No" action:nil];
-                RIButtonItem *yesButton = [RIButtonItem itemWithLabel:@"Yes" action:^{
-                    [self.locationModel addLocation:location];
-                }];
                 
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:message cancelButtonItem:noButton otherButtonItems:yesButton, nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:message delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+
+                completionBlock = ^{
+                    [locationModel addLocation:location];
+                };
                 
                 [alertView show];
                 
             } else if ([previousDate compare:newDate] == NSOrderedAscending) {
-                [self.locationModel addLocation:location];
+                [locationModel addLocation:location];
             }
         } else {
             NSLog(@"There is no previous location that matches this one. Add as normal");
-            [self.locationModel addLocation:location];
+            [locationModel addLocation:location];
         }
     }
     
@@ -131,6 +132,7 @@
         NSLog(@"Clicked NO");
     } else {
         NSLog(@"Clicked YES");
+        completionBlock();
     }
 }
 

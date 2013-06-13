@@ -50,12 +50,13 @@
 		3F81111B1764195400975702 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81111A1764195400975702 /* HistoryViewController.m */; };
 		3F81111D176419B600975702 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F81111C176419B600975702 /* QuartzCore.framework */; };
 		3F81112117642EE300975702 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81112017642EE300975702 /* LocationModel.m */; };
+		3F8AC878176946D600F78ED9 /* annotation-view.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8AC876176946D600F78ED9 /* annotation-view.png */; };
+		3F8AC879176946D600F78ED9 /* annotation-view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8AC877176946D600F78ED9 /* annotation-view@2x.png */; };
+		3F8AC87D17694C7900F78ED9 /* Whitney-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3F8AC87C17694C7900F78ED9 /* Whitney-Light.otf */; };
+		3F8AC88117694D4100F78ED9 /* WhitneyCondensed-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3F8AC88017694D4100F78ED9 /* WhitneyCondensed-Black.otf */; };
+		3F8AC888176955A800F78ED9 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8AC8871769556400F78ED9 /* CustomAnnotationView.m */; };
 		3FFA27271767DD9700E7B9F3 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA271F1767DD9700E7B9F3 /* header.png */; };
 		3FFA27281767DD9700E7B9F3 /* header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFA27201767DD9700E7B9F3 /* header@2x.png */; };
-		3FFF3CA51768FE7A00813BD9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3C9E1768FE7A00813BD9 /* README.md */; };
-		3FFF3CA61768FE7A00813BD9 /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF3CA01768FE7A00813BD9 /* RIButtonItem.m */; };
-		3FFF3CA71768FE7A00813BD9 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF3CA21768FE7A00813BD9 /* UIActionSheet+Blocks.m */; };
-		3FFF3CA81768FE7A00813BD9 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF3CA41768FE7A00813BD9 /* UIAlertView+Blocks.m */; };
 		3FFF3CAC1769013C00813BD9 /* MapMessage_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CA91769013C00813BD9 /* MapMessage_Icon.png */; };
 		3FFF3CAD1769013C00813BD9 /* MapMessage_Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CAA1769013C00813BD9 /* MapMessage_Icon@2x.png */; };
 		3FFF3CAE1769013C00813BD9 /* MapMessage_iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CAB1769013C00813BD9 /* MapMessage_iTunesArtwork.png */; };
@@ -74,9 +75,9 @@
 		3FFF3CC81769021F00813BD9 /* SidebarButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CC61769021F00813BD9 /* SidebarButton@2x.png */; };
 		3FFF3CCB1769022C00813BD9 /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CC91769022C00813BD9 /* title.png */; };
 		3FFF3CCC1769022C00813BD9 /* title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCA1769022C00813BD9 /* title@2x.png */; };
-		3FFF3CD01769023500813BD9 /* SplashScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCD1769023500813BD9 /* SplashScreen.png */; };
-		3FFF3CD11769023500813BD9 /* SplashScreenRetina_iPhone_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCE1769023500813BD9 /* SplashScreenRetina_iPhone_5.png */; };
-		3FFF3CD21769023500813BD9 /* SplashScreenRetina.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCF1769023500813BD9 /* SplashScreenRetina.png */; };
+		3FFF3CD01769023500813BD9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCD1769023500813BD9 /* Default.png */; };
+		3FFF3CD11769023500813BD9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCE1769023500813BD9 /* Default-568h@2x.png */; };
+		3FFF3CD21769023500813BD9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCF1769023500813BD9 /* Default@2x.png */; };
 		EE6E827D1765E96C00A17859 /* RMSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */; };
 		EE6E827E1765E96C00A17859 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EE6E827B1765E96C00A17859 /* README.md */; };
 		EE6E827F1765E96C00A17859 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EE6E827C1765E96C00A17859 /* LICENSE */; };
@@ -178,15 +179,14 @@
 		3F81111C176419B600975702 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3F81111F17642EE300975702 /* LocationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationModel.h; sourceTree = "<group>"; };
 		3F81112017642EE300975702 /* LocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationModel.m; sourceTree = "<group>"; };
+		3F8AC876176946D600F78ED9 /* annotation-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view.png"; sourceTree = "<group>"; };
+		3F8AC877176946D600F78ED9 /* annotation-view@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view@2x.png"; sourceTree = "<group>"; };
+		3F8AC87C17694C7900F78ED9 /* Whitney-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Whitney-Light.otf"; sourceTree = "<group>"; };
+		3F8AC88017694D4100F78ED9 /* WhitneyCondensed-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WhitneyCondensed-Black.otf"; sourceTree = "<group>"; };
+		3F8AC8861769556400F78ED9 /* CustomAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
+		3F8AC8871769556400F78ED9 /* CustomAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		3FFA271F1767DD9700E7B9F3 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
 		3FFA27201767DD9700E7B9F3 /* header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header@2x.png"; sourceTree = "<group>"; };
-		3FFF3C9E1768FE7A00813BD9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		3FFF3C9F1768FE7A00813BD9 /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
-		3FFF3CA01768FE7A00813BD9 /* RIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIButtonItem.m; sourceTree = "<group>"; };
-		3FFF3CA11768FE7A00813BD9 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
-		3FFF3CA21768FE7A00813BD9 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
-		3FFF3CA31768FE7A00813BD9 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
-		3FFF3CA41768FE7A00813BD9 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		3FFF3CA91769013C00813BD9 /* MapMessage_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapMessage_Icon.png; sourceTree = "<group>"; };
 		3FFF3CAA1769013C00813BD9 /* MapMessage_Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapMessage_Icon@2x.png"; sourceTree = "<group>"; };
 		3FFF3CAB1769013C00813BD9 /* MapMessage_iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapMessage_iTunesArtwork.png; sourceTree = "<group>"; };
@@ -205,9 +205,9 @@
 		3FFF3CC61769021F00813BD9 /* SidebarButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SidebarButton@2x.png"; sourceTree = "<group>"; };
 		3FFF3CC91769022C00813BD9 /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		3FFF3CCA1769022C00813BD9 /* title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title@2x.png"; sourceTree = "<group>"; };
-		3FFF3CCD1769023500813BD9 /* SplashScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashScreen.png; sourceTree = "<group>"; };
-		3FFF3CCE1769023500813BD9 /* SplashScreenRetina_iPhone_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashScreenRetina_iPhone_5.png; sourceTree = "<group>"; };
-		3FFF3CCF1769023500813BD9 /* SplashScreenRetina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashScreenRetina.png; sourceTree = "<group>"; };
+		3FFF3CCD1769023500813BD9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		3FFF3CCE1769023500813BD9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		3FFF3CCF1769023500813BD9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		EE6E82791765E96C00A17859 /* RMSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSwipeTableViewCell.h; sourceTree = "<group>"; };
 		EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSwipeTableViewCell.m; sourceTree = "<group>"; };
 		EE6E827B1765E96C00A17859 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -448,6 +448,8 @@
 				3F81111A1764195400975702 /* HistoryViewController.m */,
 				EE6E82801765F15E00A17859 /* HistoryViewCell.h */,
 				EE6E82811765F15E00A17859 /* HistoryViewCell.m */,
+				3F8AC8861769556400F78ED9 /* CustomAnnotationView.h */,
+				3F8AC8871769556400F78ED9 /* CustomAnnotationView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -488,7 +490,6 @@
 		3F81110E1764179F00975702 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				3FFF3C9D1768FE7A00813BD9 /* UIAlertView-Blocks */,
 				EE6E82781765E95A00A17859 /* RMSwipeTableViewCell */,
 				3F0E2F0D1765502800D41BD6 /* PrettyKit */,
 				3F0E2EE917652A4A00D41BD6 /* MMDrawerController */,
@@ -514,9 +515,9 @@
 				3FFF3CA91769013C00813BD9 /* MapMessage_Icon.png */,
 				3FFF3CAA1769013C00813BD9 /* MapMessage_Icon@2x.png */,
 				3FFF3CAB1769013C00813BD9 /* MapMessage_iTunesArtwork.png */,
-				3FFF3CCD1769023500813BD9 /* SplashScreen.png */,
-				3FFF3CCE1769023500813BD9 /* SplashScreenRetina_iPhone_5.png */,
-				3FFF3CCF1769023500813BD9 /* SplashScreenRetina.png */,
+				3FFF3CCD1769023500813BD9 /* Default.png */,
+				3FFF3CCE1769023500813BD9 /* Default-568h@2x.png */,
+				3FFF3CCF1769023500813BD9 /* Default@2x.png */,
 			);
 			name = "app icons and splash";
 			sourceTree = "<group>";
@@ -524,6 +525,10 @@
 		3FFA272F1767DD9B00E7B9F3 /* misc */ = {
 			isa = PBXGroup;
 			children = (
+				3F8AC88017694D4100F78ED9 /* WhitneyCondensed-Black.otf */,
+				3F8AC87C17694C7900F78ED9 /* Whitney-Light.otf */,
+				3F8AC876176946D600F78ED9 /* annotation-view.png */,
+				3F8AC877176946D600F78ED9 /* annotation-view@2x.png */,
 				3FFF3CC51769021F00813BD9 /* SidebarButton.png */,
 				3FFF3CC61769021F00813BD9 /* SidebarButton@2x.png */,
 				3FFA271F1767DD9700E7B9F3 /* header.png */,
@@ -538,20 +543,6 @@
 				3FFF3CCA1769022C00813BD9 /* title@2x.png */,
 			);
 			name = misc;
-			sourceTree = "<group>";
-		};
-		3FFF3C9D1768FE7A00813BD9 /* UIAlertView-Blocks */ = {
-			isa = PBXGroup;
-			children = (
-				3FFF3C9E1768FE7A00813BD9 /* README.md */,
-				3FFF3C9F1768FE7A00813BD9 /* RIButtonItem.h */,
-				3FFF3CA01768FE7A00813BD9 /* RIButtonItem.m */,
-				3FFF3CA11768FE7A00813BD9 /* UIActionSheet+Blocks.h */,
-				3FFF3CA21768FE7A00813BD9 /* UIActionSheet+Blocks.m */,
-				3FFF3CA31768FE7A00813BD9 /* UIAlertView+Blocks.h */,
-				3FFF3CA41768FE7A00813BD9 /* UIAlertView+Blocks.m */,
-			);
-			path = "UIAlertView-Blocks";
 			sourceTree = "<group>";
 		};
 		EE6E82781765E95A00A17859 /* RMSwipeTableViewCell */ = {
@@ -650,9 +641,11 @@
 			files = (
 				3FFF3CB01769015A00813BD9 /* Media.xcassets in Resources */,
 				3F60C4321763BE140043EB2A /* InfoPlist.strings in Resources */,
-				3FFF3CD11769023500813BD9 /* SplashScreenRetina_iPhone_5.png in Resources */,
+				3FFF3CD11769023500813BD9 /* Default-568h@2x.png in Resources */,
+				3F8AC878176946D600F78ED9 /* annotation-view.png in Resources */,
 				3FFF3CBC176901FC00813BD9 /* plus@2x.png in Resources */,
 				3F60C4641763C3270043EB2A /* iPhone.storyboard in Resources */,
+				3F8AC88117694D4100F78ED9 /* WhitneyCondensed-Black.otf in Resources */,
 				3FFF3CCC1769022C00813BD9 /* title@2x.png in Resources */,
 				EE6E827E1765E96C00A17859 /* README.md in Resources */,
 				EE6E827F1765E96C00A17859 /* LICENSE in Resources */,
@@ -660,6 +653,7 @@
 				3FFF3CB7176901E400813BD9 /* CompassUnselected.png in Resources */,
 				EE6E828F1765F1B800A17859 /* CheckmarkGreen@2x.png in Resources */,
 				3FFF3CAC1769013C00813BD9 /* MapMessage_Icon.png in Resources */,
+				3F8AC879176946D600F78ED9 /* annotation-view@2x.png in Resources */,
 				EE6E82901765F1B800A17859 /* CheckmarkGrey.png in Resources */,
 				EE6E82911765F1B800A17859 /* CheckmarkGrey@2x.png in Resources */,
 				3FFF3CBB176901FC00813BD9 /* plus.png in Resources */,
@@ -669,13 +663,13 @@
 				EE6E82941765F1B800A17859 /* DeleteGrey.png in Resources */,
 				3FFF3CAE1769013C00813BD9 /* MapMessage_iTunesArtwork.png in Resources */,
 				3FFF3CCB1769022C00813BD9 /* title.png in Resources */,
-				3FFF3CD21769023500813BD9 /* SplashScreenRetina.png in Resources */,
+				3FFF3CD21769023500813BD9 /* Default@2x.png in Resources */,
 				3FFF3CC41769020500813BD9 /* SatelliteUnselected@2x.png in Resources */,
 				EE6E82951765F1B800A17859 /* DeleteGrey@2x.png in Resources */,
 				EE6E82961765F1B800A17859 /* DeleteRed.png in Resources */,
 				EE6E82971765F1B800A17859 /* DeleteRed@2x.png in Resources */,
-				3FFF3CA51768FE7A00813BD9 /* README.md in Resources */,
 				3FFF3CC71769021F00813BD9 /* SidebarButton.png in Resources */,
+				3F8AC87D17694C7900F78ED9 /* Whitney-Light.otf in Resources */,
 				3FFF3CAD1769013C00813BD9 /* MapMessage_Icon@2x.png in Resources */,
 				3FFF3CC21769020500813BD9 /* SatelliteSelected@2x.png in Resources */,
 				3FFA27271767DD9700E7B9F3 /* header.png in Resources */,
@@ -684,7 +678,7 @@
 				3FFF3CB8176901E400813BD9 /* CompassUnselected@2x.png in Resources */,
 				3FFF3CC31769020500813BD9 /* SatelliteUnselected.png in Resources */,
 				3FFF3CB5176901E400813BD9 /* CompassSelected.png in Resources */,
-				3FFF3CD01769023500813BD9 /* SplashScreen.png in Resources */,
+				3FFF3CD01769023500813BD9 /* Default.png in Resources */,
 				3FFF3CB6176901E400813BD9 /* CompassSelected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,12 +716,12 @@
 			files = (
 				3F60C4341763BE140043EB2A /* main.m in Sources */,
 				3F60C4381763BE140043EB2A /* MMAppDelegate.m in Sources */,
+				3F8AC888176955A800F78ED9 /* CustomAnnotationView.m in Sources */,
 				3F60C4411763BE140043EB2A /* MapMessage.xcdatamodeld in Sources */,
 				3F60C4671763C3AA0043EB2A /* MapViewController.m in Sources */,
 				3F60C4711763F3A70043EB2A /* URLParser.m in Sources */,
 				3F60C4751763F64C0043EB2A /* BZLocation.m in Sources */,
 				3F81111B1764195400975702 /* HistoryViewController.m in Sources */,
-				3FFF3CA71768FE7A00813BD9 /* UIActionSheet+Blocks.m in Sources */,
 				3F81112117642EE300975702 /* LocationModel.m in Sources */,
 				3F0E2EF217652A4A00D41BD6 /* MMDrawerBarButtonItem.m in Sources */,
 				3F0E2EF317652A4A00D41BD6 /* MMDrawerController.m in Sources */,
@@ -736,8 +730,6 @@
 				3F0E2F0717653F1900D41BD6 /* Constants.m in Sources */,
 				3F0E2F08176544F100D41BD6 /* MMTableViewCell.m in Sources */,
 				3F0E2F09176544F100D41BD6 /* MMSideDrawerTableViewCell.m in Sources */,
-				3FFF3CA61768FE7A00813BD9 /* RIButtonItem.m in Sources */,
-				3FFF3CA81768FE7A00813BD9 /* UIAlertView+Blocks.m in Sources */,
 				3F0E2F0A176544F100D41BD6 /* MMCenterTableViewCell.m in Sources */,
 				3F0E2F0B176544F100D41BD6 /* MMSideDrawerSectionHeaderView.m in Sources */,
 				3F0E2F101765504200D41BD6 /* PrettyNavigationController.m in Sources */,
@@ -855,11 +847,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MampMessage/MapMessage-Prefix.pch";
 				INFOPLIST_FILE = "MampMessage/MapMessage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = MapMessage;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -870,11 +861,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MampMessage/MapMessage-Prefix.pch";
 				INFOPLIST_FILE = "MampMessage/MapMessage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = MapMessage;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

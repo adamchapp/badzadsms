@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <development version="4600" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.6"/>
     </dependencies>
     <scenes>
         <!--Map View Controller - Where Am I-->
@@ -13,13 +15,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Aef-BF-inF">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <connections>
                                     <outlet property="delegate" destination="and-pa-BXH" id="ntk-Es-wIa"/>
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DM-Gt-Bft">
+                                <rect key="frame" x="252" y="480" width="48" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="EgZ-AQ-AwK"/>
                                     <constraint firstAttribute="width" constant="48" id="Zu4-do-dDC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
@@ -33,9 +36,14 @@
                                     <action selector="toggleCompass:" destination="and-pa-BXH" eventType="touchUpInside" id="mWI-CC-JUF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbV-0A-WsS">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbV-0A-WsS">
+                                <rect key="frame" x="186" y="480" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="0ac-S5-jgp"/>
+                                    <constraint firstAttribute="height" constant="48" id="kJu-Wy-W63"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Map / Satellite">
+                                <state key="normal" backgroundImage="SatelliteUnselected">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -50,19 +58,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Aef-BF-inF" firstAttribute="leading" secondItem="31L-au-yx9" secondAttribute="leading" type="default" id="9Fb-7e-Veo"/>
-                            <constraint firstItem="kbV-0A-WsS" firstAttribute="leading" secondItem="31L-au-yx9" secondAttribute="leading" constant="109" id="Cph-RX-ZCa"/>
                             <constraint firstItem="Aef-BF-inF" firstAttribute="bottom" secondItem="31L-au-yx9" secondAttribute="bottom" type="default" id="Lfi-Be-cTe"/>
                             <constraint firstItem="Aef-BF-inF" firstAttribute="trailing" secondItem="31L-au-yx9" secondAttribute="trailing" type="default" id="QMZ-qB-Pqi"/>
-                            <constraint firstAttribute="bottom" secondItem="kbV-0A-WsS" secondAttribute="bottom" constant="23" id="i0S-B8-Qsm"/>
+                            <constraint firstItem="kbV-0A-WsS" firstAttribute="bottom" secondItem="3DM-Gt-Bft" secondAttribute="bottom" type="default" id="Rxk-fl-pc2"/>
+                            <constraint firstAttribute="trailing" secondItem="kbV-0A-WsS" secondAttribute="trailing" constant="86" id="XPc-5I-HQZ"/>
                             <constraint firstItem="Aef-BF-inF" firstAttribute="top" secondItem="31L-au-yx9" secondAttribute="top" type="default" id="kH5-sO-9U5"/>
                             <constraint firstAttribute="trailing" secondItem="3DM-Gt-Bft" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="n1D-Fv-hJj"/>
-                            <constraint firstAttribute="bottom" secondItem="3DM-Gt-Bft" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="ye9-dY-pau"/>
+                            <constraint firstItem="kbV-0A-WsS" firstAttribute="top" secondItem="3DM-Gt-Bft" secondAttribute="top" type="default" id="o5u-P4-T7w"/>
+                            <constraint firstAttribute="bottom" secondItem="kbV-0A-WsS" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="qLU-4O-C39"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Where Am I" id="u3U-yb-IHg"/>
                     <connections>
                         <outlet property="compassButton" destination="3DM-Gt-Bft" id="ycE-Qb-IeP"/>
                         <outlet property="mapView" destination="Aef-BF-inF" id="h2w-NF-uJc"/>
+                        <outlet property="satelliteButton" destination="kbV-0A-WsS" id="09Q-6j-3WK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eGp-y1-Uhp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -72,23 +83,8 @@
     </scenes>
     <resources>
         <image name="CompassUnselected" width="16" height="16"/>
+        <image name="SatelliteUnselected" width="16" height="16"/>
     </resources>
-    <classes>
-        <class className="MapViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="sendSMS:"/>
-                <relationship kind="action" name="toggleCompass:"/>
-                <relationship kind="action" name="toggleViewMode:"/>
-                <relationship kind="outlet" name="compassButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="toggleViewMode" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

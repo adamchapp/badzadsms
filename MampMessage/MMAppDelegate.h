@@ -13,9 +13,12 @@
 #import "HistoryViewController.h"
 #import "KMLParser.h"
 
+typedef void (^UIAlertViewBlock)(void);
+
 @interface MMAppDelegate : UIResponder <UIApplicationDelegate>
 {
     KMLParser *kmlParser;
+    UIAlertViewBlock completionBlock;
 }
 
 @property (strong, nonatomic) UIWindow *window;

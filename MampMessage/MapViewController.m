@@ -7,24 +7,14 @@
 //
 
 #import "MapViewController.h"
-#import "BZLocation.h"
-#import "UIViewController+MMDrawerController.h"
-#import "Constants.h"
-#import "KMLParser.h"
 
 @interface MapViewController ()
-{
-    KMLParser *kmlParser;
-}
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
 @implementation MapViewController
-
-bool isCompassOn = NO;
-bool is3dOn = NO;
 
 @synthesize locationManager = _locationManager;
 
@@ -57,7 +47,8 @@ bool is3dOn = NO;
    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateDataChanged object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateViewDataChanged object:nil];
-        
+
+    
     [self loadAnnotations];
 }
 
@@ -67,7 +58,7 @@ bool is3dOn = NO;
 }
 
 -(void)setupRightMenuButton{
-    UIButton *buttonOverlay = [[UIButton alloc] initWithFrame:CGRectMake(-10, 0, 16, 16)];
+    UIButton *buttonOverlay = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 16)];
     [buttonOverlay addTarget:self action:@selector(sendSMS:) forControlEvents:UIControlEventTouchUpInside];
     [buttonOverlay setBackgroundImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:buttonOverlay];
@@ -96,24 +87,20 @@ bool is3dOn = NO;
         if ( showItem == YES ) {
             
             NSURL *url = [NSURL fileURLWithPath:[bzOverlay overlayPath]];
-            kmlParser = [[KMLParser alloc] initWithURL:url];
-            [kmlParser parseKML];
+            self.kmlParser = [[KMLParser alloc] initWithURL:url];
+            [self.kmlParser parseKML];
             
             // Add all of the MKOverlay objects parsed from the KML file to the map.
-            NSArray *overlays = [kmlParser overlays];
-            NSArray *overlayAnnotations = [kmlParser points];
+            NSArray *overlays = [self.kmlParser overlays];
+            NSArray *overlayAnnotations = [self.kmlParser points];
             
             [mapView addOverlays:overlays];
             [mapView addAnnotations:overlayAnnotations];
-            
+                        
             overlayLoaded = YES;
-            
+
             for (id <MKOverlay> overlay in overlays) {
-                if (MKMapRectIsNull(zoomRect)) {
-                    zoomRect = [overlay boundingMapRect];
-                } else {
-                    zoomRect = MKMapRectUnion(zoomRect, [overlay boundingMapRect]);
-                }
+                zoomRect = [overlay boundingMapRect];
             }
         }
     }
@@ -125,12 +112,9 @@ bool is3dOn = NO;
             [mapView addAnnotation:annotation];
             
             //only zoom to fit annotations if there is no overlay
-            if ( overlayLoaded == NO ) {
-                MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-                MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-                zoomRect = MKMapRectUnion(zoomRect, pointRect);
-            }
-            
+            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+            zoomRect = MKMapRectUnion(zoomRect, pointRect);
         }
     }
     
@@ -145,15 +129,9 @@ bool is3dOn = NO;
 }
 
 - (IBAction)toggleCompass:(id)sender {
-    isCompassOn = !isCompassOn;
-    
-    MKUserTrackingMode mode = [mapView userTrackingMode];
-    
-    if ( mode == MKUserTrackingModeNone ) {
-        [compassButton setBackgroundImage:[UIImage imageNamed:@"CompassSelected"] forState:UIControlStateNormal];
+    if ( [mapView userTrackingMode] == MKUserTrackingModeNone ) {
         [mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading];
     } else {
-        [compassButton setBackgroundImage:[UIImage imageNamed:@"CompassUnselected"] forState:UIControlStateNormal];
         [mapView setUserTrackingMode:MKUserTrackingModeNone];
     }
 }
@@ -161,13 +139,34 @@ bool is3dOn = NO;
 - (IBAction)toggleViewMode:(id)sender {
     
     if ( [mapView mapType] == MKMapTypeStandard ) {
-        [mapView setMapType:MKMapTypeSatellite];
-    } else if ( [mapView mapType] == MKMapTypeSatellite ) {
         [mapView setMapType:MKMapTypeHybrid];
-    } else {
+        [satelliteButton setBackgroundImage:[UIImage imageNamed:@"SatelliteSelected"] forState:UIControlStateNormal];
+        [self toggleAnnotationLabelColors:YES];
+    } else if ( [mapView mapType] == MKMapTypeHybrid ) {
         [mapView setMapType:MKMapTypeStandard];
+        [satelliteButton setBackgroundImage:[UIImage imageNamed:@"SatelliteUnselected"] forState:UIControlStateNormal];
+        [self toggleAnnotationLabelColors:NO];
     }
-    
+}
+
+- (void)toggleAnnotationLabelColors:(BOOL)isWhite
+{
+    for (id<MKAnnotation> annotation in mapView.annotations){
+        CustomAnnotationView* view = (CustomAnnotationView *)[mapView viewForAnnotation:annotation];
+        if (view){
+
+            UIColor *textColor = (isWhite == YES) ? [UIColor whiteColor] : [UIColor blackColor];
+            [view.annotationLabel setTextColor:textColor];
+        }
+    }
+}
+
+-(void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated {
+    if ( mode == MKUserTrackingModeNone ) {
+        [compassButton setBackgroundImage:[UIImage imageNamed:@"CompassUnselected"] forState:UIControlStateNormal];
+    } else {
+        [compassButton setBackgroundImage:[UIImage imageNamed:@"CompassSelected"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -238,12 +237,28 @@ bool is3dOn = NO;
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
 {
-    return [kmlParser viewForOverlay:overlay];
+    return [self.kmlParser viewForOverlay:overlay];
 }
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+- (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    return [kmlParser viewForAnnotation:annotation];
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        //Don't trample the user location annotation (pulsing blue dot).
+        return nil;
+    }
+    
+    static NSString *annotationViewReuseIdentifier = @"annotationViewReuseIdentifier";
+    
+    CustomAnnotationView *annotationView = (CustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewReuseIdentifier];
+    
+    if (annotationView == nil)
+    {
+        annotationView = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewReuseIdentifier];
+    }
+        
+    [annotationView.annotationLabel setText:[annotation title]];
+    
+    return annotationView;
 }
 
 //////////////////////////////////////////////////////////////
