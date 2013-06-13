@@ -60,7 +60,6 @@
 		3FFF3CAC1769013C00813BD9 /* MapMessage_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CA91769013C00813BD9 /* MapMessage_Icon.png */; };
 		3FFF3CAD1769013C00813BD9 /* MapMessage_Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CAA1769013C00813BD9 /* MapMessage_Icon@2x.png */; };
 		3FFF3CAE1769013C00813BD9 /* MapMessage_iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CAB1769013C00813BD9 /* MapMessage_iTunesArtwork.png */; };
-		3FFF3CB01769015A00813BD9 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CAF1769015A00813BD9 /* Media.xcassets */; };
 		3FFF3CB5176901E400813BD9 /* CompassSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CB1176901E400813BD9 /* CompassSelected.png */; };
 		3FFF3CB6176901E400813BD9 /* CompassSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CB2176901E400813BD9 /* CompassSelected@2x.png */; };
 		3FFF3CB7176901E400813BD9 /* CompassUnselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CB3176901E400813BD9 /* CompassUnselected.png */; };
@@ -96,6 +95,8 @@
 		EE6E82971765F1B800A17859 /* DeleteRed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE6E828D1765F1B800A17859 /* DeleteRed@2x.png */; };
 		EE6E82A217660E9200A17859 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E82A117660E9200A17859 /* KMLParser.m */; };
 		EE6E82A517660FBB00A17859 /* BZOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E82A417660FBB00A17859 /* BZOverlay.m */; };
+		EEE9CF601769CFF000070A29 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE9CF5F1769CFF000070A29 /* Location.m */; };
+		EEE9CF631769CFF100070A29 /* Overlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE9CF621769CFF100070A29 /* Overlay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,7 +193,6 @@
 		3FFF3CA91769013C00813BD9 /* MapMessage_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapMessage_Icon.png; sourceTree = "<group>"; };
 		3FFF3CAA1769013C00813BD9 /* MapMessage_Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapMessage_Icon@2x.png"; sourceTree = "<group>"; };
 		3FFF3CAB1769013C00813BD9 /* MapMessage_iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapMessage_iTunesArtwork.png; sourceTree = "<group>"; };
-		3FFF3CAF1769015A00813BD9 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = MapMessage/Media.xcassets; sourceTree = "<group>"; };
 		3FFF3CB1176901E400813BD9 /* CompassSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CompassSelected.png; sourceTree = "<group>"; };
 		3FFF3CB2176901E400813BD9 /* CompassSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CompassSelected@2x.png"; sourceTree = "<group>"; };
 		3FFF3CB3176901E400813BD9 /* CompassUnselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CompassUnselected.png; sourceTree = "<group>"; };
@@ -232,6 +232,10 @@
 		EE6E82A117660E9200A17859 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
 		EE6E82A317660FBB00A17859 /* BZOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZOverlay.h; sourceTree = "<group>"; };
 		EE6E82A417660FBB00A17859 /* BZOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZOverlay.m; sourceTree = "<group>"; };
+		EEE9CF5E1769CFF000070A29 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = MampMessage/Location.h; sourceTree = "<group>"; };
+		EEE9CF5F1769CFF000070A29 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = MampMessage/Location.m; sourceTree = "<group>"; };
+		EEE9CF611769CFF100070A29 /* Overlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Overlay.h; path = MampMessage/Overlay.h; sourceTree = "<group>"; };
+		EEE9CF621769CFF100070A29 /* Overlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Overlay.m; path = MampMessage/Overlay.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,7 +367,6 @@
 		3F60C4191763BE140043EB2A = {
 			isa = PBXGroup;
 			children = (
-				3FFF3CAF1769015A00813BD9 /* Media.xcassets */,
 				3F60C42D1763BE140043EB2A /* MapMessage */,
 				3F60C44F1763BE140043EB2A /* MapMessageTests */,
 				3F60C4241763BE140043EB2A /* Frameworks */,
@@ -482,6 +485,7 @@
 		3F60C4721763F63B0043EB2A /* model */ = {
 			isa = PBXGroup;
 			children = (
+				EEE9CF641769D00000070A29 /* core data */,
 				3F81111E17642E4700975702 /* value objects */,
 				3F81111F17642EE300975702 /* LocationModel.h */,
 				3F81112017642EE300975702 /* LocationModel.m */,
@@ -573,6 +577,18 @@
 			name = images;
 			sourceTree = "<group>";
 		};
+		EEE9CF641769D00000070A29 /* core data */ = {
+			isa = PBXGroup;
+			children = (
+				EEE9CF611769CFF100070A29 /* Overlay.h */,
+				EEE9CF621769CFF100070A29 /* Overlay.m */,
+				EEE9CF5E1769CFF000070A29 /* Location.h */,
+				EEE9CF5F1769CFF000070A29 /* Location.m */,
+			);
+			name = "core data";
+			path = ..;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -645,7 +661,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FFF3CB01769015A00813BD9 /* Media.xcassets in Resources */,
 				3F60C4321763BE140043EB2A /* InfoPlist.strings in Resources */,
 				3FFF3CD11769023500813BD9 /* Default-568h@2x.png in Resources */,
 				3F8AC878176946D600F78ED9 /* annotation-view.png in Resources */,
@@ -726,6 +741,7 @@
 				3F60C4381763BE140043EB2A /* MMAppDelegate.m in Sources */,
 				3F8AC888176955A800F78ED9 /* CustomAnnotationView.m in Sources */,
 				3F60C4411763BE140043EB2A /* MapMessage.xcdatamodeld in Sources */,
+				EEE9CF601769CFF000070A29 /* Location.m in Sources */,
 				3F60C4671763C3AA0043EB2A /* MapViewController.m in Sources */,
 				3F60C4711763F3A70043EB2A /* URLParser.m in Sources */,
 				3F60C4751763F64C0043EB2A /* BZLocation.m in Sources */,
@@ -749,6 +765,7 @@
 				3F0E2F2A1765508B00D41BD6 /* PrettyNavigationBar.m in Sources */,
 				3F0E2F2B1765508B00D41BD6 /* PrettyShadowPlainTableview.m in Sources */,
 				3F0E2F2C1765508B00D41BD6 /* PrettyTabBar.m in Sources */,
+				EEE9CF631769CFF100070A29 /* Overlay.m in Sources */,
 				3F0E2F2D1765508B00D41BD6 /* PrettyToolbar.m in Sources */,
 				EE6E827D1765E96C00A17859 /* RMSwipeTableViewCell.m in Sources */,
 				EE6E82821765F15E00A17859 /* HistoryViewCell.m in Sources */,

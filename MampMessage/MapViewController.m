@@ -152,11 +152,15 @@
 - (void)toggleAnnotationLabelColors:(BOOL)isWhite
 {
     for (id<MKAnnotation> annotation in mapView.annotations){
-        CustomAnnotationView* view = (CustomAnnotationView *)[mapView viewForAnnotation:annotation];
-        if (view){
+        
+        if ( ![annotation isKindOfClass:[MKUserLocation class]]) {
 
-            UIColor *textColor = (isWhite == YES) ? [UIColor whiteColor] : [UIColor blackColor];
-            [view.annotationLabel setTextColor:textColor];
+            CustomAnnotationView* view = (CustomAnnotationView *)[mapView viewForAnnotation:annotation];
+            if (view){
+                
+                UIColor *textColor = (isWhite == YES) ? [UIColor whiteColor] : [UIColor blackColor];
+                [view.annotationLabel setTextColor:textColor];
+            }
         }
     }
 }

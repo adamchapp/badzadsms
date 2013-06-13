@@ -128,10 +128,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ( buttonIndex == 0 ) {
-        NSLog(@"Clicked NO");
-    } else {
-        NSLog(@"Clicked YES");
+    if ( buttonIndex == 1 ) {
         completionBlock();
     }
 }
@@ -178,7 +175,9 @@
     }
 }
 
-#pragma mark - Core Data stack
+//////////////////////////////////////////////////////////////
+#pragma mark  - Core Data stack
+//////////////////////////////////////////////////////////////
 
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
@@ -251,7 +250,9 @@
     return _persistentStoreCoordinator;
 }
 
-#pragma mark - Application's Documents directory
+//////////////////////////////////////////////////////////////
+#pragma mark  - Application's Documents directory
+//////////////////////////////////////////////////////////////
 
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory
