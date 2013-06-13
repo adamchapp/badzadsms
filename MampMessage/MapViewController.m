@@ -245,6 +245,8 @@
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         //Don't trample the user location annotation (pulsing blue dot).
         return nil;
+    } else if ( [annotation isKindOfClass:[BZLocation class]]) {
+        return nil;
     }
     
     static NSString *annotationViewReuseIdentifier = @"annotationViewReuseIdentifier";

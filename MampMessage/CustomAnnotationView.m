@@ -20,11 +20,23 @@
         [self.annotationLabel setBackgroundColor:[UIColor clearColor]];
         [self addSubview:self.annotationLabel];
 
-        self.image = [UIImage imageNamed:@"annotation-view"];
+        self.image = [UIImage imageNamed:@"annotation-view-unselected"];
         self.layer.anchorPoint = CGPointMake(0.5f, 1.0f);
         self.canShowCallout = YES;
     }
     return self;
+}
+
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    if ( selected ) {
+        self.image = [UIImage imageNamed:@"annotation-view"];
+        [self.annotationLabel setHidden:YES];
+    } else {
+        self.image = [UIImage imageNamed:@"annotation-view-unselected"];
+        [self.annotationLabel setHidden:NO];
+    }
 }
 
 /*

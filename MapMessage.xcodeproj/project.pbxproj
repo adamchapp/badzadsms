@@ -78,6 +78,8 @@
 		3FFF3CD01769023500813BD9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCD1769023500813BD9 /* Default.png */; };
 		3FFF3CD11769023500813BD9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCE1769023500813BD9 /* Default-568h@2x.png */; };
 		3FFF3CD21769023500813BD9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCF1769023500813BD9 /* Default@2x.png */; };
+		3FFFD17A176962A300409E91 /* annotation-view-unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFFD178176962A300409E91 /* annotation-view-unselected.png */; };
+		3FFFD17B176962A300409E91 /* annotation-view-unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFFD179176962A300409E91 /* annotation-view-unselected@2x.png */; };
 		EE6E827D1765E96C00A17859 /* RMSwipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */; };
 		EE6E827E1765E96C00A17859 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EE6E827B1765E96C00A17859 /* README.md */; };
 		EE6E827F1765E96C00A17859 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EE6E827C1765E96C00A17859 /* LICENSE */; };
@@ -208,6 +210,8 @@
 		3FFF3CCD1769023500813BD9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3FFF3CCE1769023500813BD9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3FFF3CCF1769023500813BD9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		3FFFD178176962A300409E91 /* annotation-view-unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-unselected.png"; sourceTree = "<group>"; };
+		3FFFD179176962A300409E91 /* annotation-view-unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-unselected@2x.png"; sourceTree = "<group>"; };
 		EE6E82791765E96C00A17859 /* RMSwipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSwipeTableViewCell.h; sourceTree = "<group>"; };
 		EE6E827A1765E96C00A17859 /* RMSwipeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSwipeTableViewCell.m; sourceTree = "<group>"; };
 		EE6E827B1765E96C00A17859 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -527,6 +531,8 @@
 			children = (
 				3F8AC88017694D4100F78ED9 /* WhitneyCondensed-Black.otf */,
 				3F8AC87C17694C7900F78ED9 /* Whitney-Light.otf */,
+				3FFFD178176962A300409E91 /* annotation-view-unselected.png */,
+				3FFFD179176962A300409E91 /* annotation-view-unselected@2x.png */,
 				3F8AC876176946D600F78ED9 /* annotation-view.png */,
 				3F8AC877176946D600F78ED9 /* annotation-view@2x.png */,
 				3FFF3CC51769021F00813BD9 /* SidebarButton.png */,
@@ -644,6 +650,7 @@
 				3FFF3CD11769023500813BD9 /* Default-568h@2x.png in Resources */,
 				3F8AC878176946D600F78ED9 /* annotation-view.png in Resources */,
 				3FFF3CBC176901FC00813BD9 /* plus@2x.png in Resources */,
+				3FFFD17A176962A300409E91 /* annotation-view-unselected.png in Resources */,
 				3F60C4641763C3270043EB2A /* iPhone.storyboard in Resources */,
 				3F8AC88117694D4100F78ED9 /* WhitneyCondensed-Black.otf in Resources */,
 				3FFF3CCC1769022C00813BD9 /* title@2x.png in Resources */,
@@ -651,6 +658,7 @@
 				EE6E827F1765E96C00A17859 /* LICENSE in Resources */,
 				EE6E828E1765F1B800A17859 /* CheckmarkGreen.png in Resources */,
 				3FFF3CB7176901E400813BD9 /* CompassUnselected.png in Resources */,
+				3FFFD17B176962A300409E91 /* annotation-view-unselected@2x.png in Resources */,
 				EE6E828F1765F1B800A17859 /* CheckmarkGreen@2x.png in Resources */,
 				3FFF3CAC1769013C00813BD9 /* MapMessage_Icon.png in Resources */,
 				3F8AC879176946D600F78ED9 /* annotation-view@2x.png in Resources */,
