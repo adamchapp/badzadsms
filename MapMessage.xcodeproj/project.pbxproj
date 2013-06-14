@@ -19,6 +19,8 @@
 		3F03B6BD176A9D8C00469072 /* KMLLocation+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F03B6BC176A9D8C00469072 /* KMLLocation+Extensions.m */; };
 		3F03B6C4176AA1A900469072 /* annotation-view-user.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6C2176AA1A900469072 /* annotation-view-user.png */; };
 		3F03B6C5176AA1A900469072 /* annotation-view-user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6C3176AA1A900469072 /* annotation-view-user@2x.png */; };
+		3F03B6CB176AA2C200469072 /* MapTileCollection+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F03B6CA176AA2C200469072 /* MapTileCollection+Extension.m */; };
+		3F03B6D1176AA34300469072 /* MapTileCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F03B6D0176AA34300469072 /* MapTileCollection.m */; };
 		3F0E2EF217652A4A00D41BD6 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EEB17652A4A00D41BD6 /* MMDrawerBarButtonItem.m */; };
 		3F0E2EF317652A4A00D41BD6 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EED17652A4A00D41BD6 /* MMDrawerController.m */; };
 		3F0E2EF417652A4A00D41BD6 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EEF17652A4A00D41BD6 /* MMDrawerVisualState.m */; };
@@ -147,6 +149,10 @@
 		3F03B6BC176A9D8C00469072 /* KMLLocation+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KMLLocation+Extensions.m"; sourceTree = "<group>"; };
 		3F03B6C2176AA1A900469072 /* annotation-view-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-user.png"; sourceTree = "<group>"; };
 		3F03B6C3176AA1A900469072 /* annotation-view-user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-user@2x.png"; sourceTree = "<group>"; };
+		3F03B6C9176AA2C200469072 /* MapTileCollection+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MapTileCollection+Extension.h"; sourceTree = "<group>"; };
+		3F03B6CA176AA2C200469072 /* MapTileCollection+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MapTileCollection+Extension.m"; sourceTree = "<group>"; };
+		3F03B6CF176AA34300469072 /* MapTileCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapTileCollection.h; sourceTree = "<group>"; };
+		3F03B6D0176AA34300469072 /* MapTileCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapTileCollection.m; sourceTree = "<group>"; };
 		3F0E2EEA17652A4A00D41BD6 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		3F0E2EEB17652A4A00D41BD6 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		3F0E2EEC17652A4A00D41BD6 /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
@@ -696,6 +702,8 @@
 		EEE9CF641769D00000070A29 /* core data */ = {
 			isa = PBXGroup;
 			children = (
+				3F03B6CF176AA34300469072 /* MapTileCollection.h */,
+				3F03B6D0176AA34300469072 /* MapTileCollection.m */,
 				3F03B6B5176A9D0C00469072 /* UserLocation.h */,
 				3F03B6B6176A9D0C00469072 /* UserLocation.m */,
 				3F03B6B2176A9D0C00469072 /* KMLLocation.h */,
@@ -814,6 +822,8 @@
 				3F03B6B9176A9D6100469072 /* UserLocation+Extensions.m */,
 				3F03B6BB176A9D8C00469072 /* KMLLocation+Extensions.h */,
 				3F03B6BC176A9D8C00469072 /* KMLLocation+Extensions.m */,
+				3F03B6C9176AA2C200469072 /* MapTileCollection+Extension.h */,
+				3F03B6CA176AA2C200469072 /* MapTileCollection+Extension.m */,
 			);
 			name = categories;
 			sourceTree = "<group>";
@@ -972,7 +982,9 @@
 				EEE9CFAB1769D6B800070A29 /* NSNumber+MagicalDataImport.m in Sources */,
 				3F60C4411763BE140043EB2A /* MapMessage.xcdatamodeld in Sources */,
 				3F60C4671763C3AA0043EB2A /* MapViewController.m in Sources */,
+				3F03B6D1176AA34300469072 /* MapTileCollection.m in Sources */,
 				3F60C4711763F3A70043EB2A /* URLParser.m in Sources */,
+				3F03B6CB176AA2C200469072 /* MapTileCollection+Extension.m in Sources */,
 				3FEE8426176A375400E54628 /* MapTile.m in Sources */,
 				3F60C4751763F64C0043EB2A /* BZLocation.m in Sources */,
 				3F81111B1764195400975702 /* HistoryViewController.m in Sources */,

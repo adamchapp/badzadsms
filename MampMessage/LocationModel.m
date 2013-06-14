@@ -142,7 +142,7 @@
 }
 
 //////////////////////////////////////////////////////////////
-#pragma mark  - BZ Overlays
+#pragma mark  - KML Locations
 //////////////////////////////////////////////////////////////
 
 - (void)addKMLLocationFromURL:(NSURL *)url
@@ -153,31 +153,31 @@
         
     KMLLocation *location = [KMLLocation MR_createInContext:self.context];
     location.title = filename;
-    location.overlayPath = url.path;
+    location.locationFilePath = url.path;
     location.isVisible = [NSNumber numberWithBool:YES];
     
     [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if ( success ) {
-            NSLog(@"overlay was created in persistent store");
+            NSLog(@"kmlLocation was saved in persistent store");
         }
         else {
-            NSLog(@"overlay was not created");
+            NSLog(@"kmlLocation was not saved");
         }
     }];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
-- (void)removeKMLAnnotation:(KMLLocation *)location
+- (void)removeKMLLocation:(KMLLocation *)location
 {
     [location MR_deleteInContext:self.context];
     
     [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if ( success ) {
-            NSLog(@"overlay was deleted from persistent store");
+            NSLog(@"kmlLocation was deleted from persistent store");
         }
         else {
-            NSLog(@"overlay was not deleted");
+            NSLog(@"kmlLocation was not deleted");
         }
     }];
     
@@ -189,10 +189,10 @@
     [location setIsVisible:[NSNumber numberWithBool:YES]];
     [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if ( success ) {
-            NSLog(@"overlay show/hide was updated in persistent store (to show)");
+            NSLog(@"kmlLocation show/hide was updated in persistent store (to show)");
         }
         else {
-            NSLog(@"overlay show/hide was not updated");
+            NSLog(@"kmlLocation show/hide was not updated");
         }
     }];
     
@@ -201,13 +201,78 @@
 
 - (void)hideKMLLocation:(KMLLocation *)location
 {
-    [location setIsVisible:NO];
+    [location setIsVisible:[NSNumber numberWithBool:NO]];
     [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if ( success ) {
-            NSLog(@"overlay show/hide was updated in persistent store (to hide)");
+            NSLog(@"kmlLocation show/hide was updated in persistent store (to hide)");
         }
         else {
-            NSLog(@"overlay show/hide was not updated");
+            NSLog(@"kmlLocation show/hide was not updated");
+        }
+    }];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - MapTile Collections
+//////////////////////////////////////////////////////////////
+
+- (void)addMapTileCollectionWithName:(NSString *)name directoryPath:(NSString *)path
+{
+    MapTileCollection *collection = [MapTileCollection MR_createInContext:self.context];
+    collection.title = name;
+    collection.directoryPath = path;
+    collection.isVisible = [NSNumber numberWithBool:NO];
+    
+    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if ( success ) {
+            NSLog(@"MapTileCollection was added in persistent store");
+        }
+        else {
+            NSLog(@"MapTileCollection was not added");
+        }
+    }];
+}
+
+- (void)removeMapTileCollection:(MapTileCollection *)location
+{
+    [location MR_deleteInContext:self.context];
+    
+    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if ( success ) {
+            NSLog(@"MapTileCollection was deleted from persistent store");
+        }
+        else {
+            NSLog(@"MapTileCollection was not delete");
+        }
+    }];
+}
+
+- (void)showMapTileCollection:(MapTileCollection *)location
+{
+    [location setIsVisible:[NSNumber numberWithBool:YES]];
+    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if ( success ) {
+            NSLog(@"maptilecollection show/hide was updated in persistent store (to show)");
+        }
+        else {
+            NSLog(@"maptilecollection show/hide was not updated");
+        }
+    }];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+}
+
+- (void)hideMapTileCollection:(MapTileCollection *)location
+{
+    [location setIsVisible:[NSNumber numberWithBool:NO]];
+    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if ( success ) {
+            NSLog(@"maptilecollection show/hide was updated in persistent store (to hide)");
+        }
+        else {
+            NSLog(@"maptilecollection show/hide was not updated");
         }
     }];
     
@@ -241,6 +306,11 @@
 - (NSArray *)kmlLocations {
     NSArray *_kmlLocations = [KMLLocation MR_findAllSortedBy:@"title" ascending:YES inContext:self.context];
     return _kmlLocations;
+}
+
+- (NSArray *)mapTileCollections {
+    NSArray *_mapTileCollections = [MapTileCollection MR_findAllSortedBy:@"title" ascending:YES inContext:self.context];
+    return _mapTileCollections;
 }
 
 //////////////////////////////////////////////////////////////

@@ -1,18 +1,18 @@
 //
-//  KMLLocation.m
+//  MapTileCollection.m
 //  MapMessage
 //
 //  Created by Adam Chappell on 14/06/2013.
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
-#import "KMLLocation.h"
+#import "MapTileCollection.h"
 
 
-@implementation KMLLocation
+@implementation MapTileCollection
 
-@dynamic isVisible;
-@dynamic locationFilePath;
 @dynamic title;
+@dynamic isVisible;
+@dynamic directoryPath;
 
 @end

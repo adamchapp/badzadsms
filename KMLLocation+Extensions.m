@@ -16,7 +16,7 @@
     
     if ( self ) {
         self.title = title;
-        self.overlayPath = overlayPath;
+        self.locationFilePath = overlayPath;
         self.isVisible = [NSNumber numberWithBool:visible];
     }
     

@@ -1,5 +1,5 @@
 //
-//  KMLLocation.h
+//  MapTileCollection.h
 //  MapMessage
 //
 //  Created by Adam Chappell on 14/06/2013.
@@ -10,10 +10,10 @@
 #import <CoreData/CoreData.h>
 
 
-@interface KMLLocation : NSManagedObject
+@interface MapTileCollection : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * isVisible;
-@property (nonatomic, retain) NSString * locationFilePath;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSNumber * isVisible;
+@property (nonatomic, retain) NSString * directoryPath;
 
 @end

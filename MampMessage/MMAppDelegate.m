@@ -18,7 +18,12 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
     
+    [MagicalRecord setupAutoMigratingCoreDataStack];
+    
     self.locationModel = [[LocationModel alloc] init];
+    
+//    [self.locationModel addMapTileCollectionWithName:@"Glasto details" directoryPath:@"detailed"];
+//    [self.locationModel addMapTileCollectionWithName:@"Glasto OpenStreetMap" directoryPath:@"OpenStreetMap"];
     
     HistoryViewController *historyController = [[HistoryViewController alloc] initWithStyle:UITableViewStylePlain];
     historyController.locationModel = self.locationModel;
@@ -39,8 +44,6 @@
     [drawerController setMaximumRightDrawerWidth:240.0];
     [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
-    
-    [MagicalRecord setupAutoMigratingCoreDataStack];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window setRootViewController:drawerController];

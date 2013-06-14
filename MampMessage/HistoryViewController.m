@@ -77,15 +77,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ( section == 0 ) {
         return [self.locationModel.userLocations count];
+    } else if ( section == 1 ) {
+        return [self.locationModel.kmlLocations count];
     }
-    return [self.locationModel.kmlLocations count];
+    return [self.locationModel.mapTileCollections count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -102,15 +104,20 @@
     BOOL showCoordinate;
     
     if ( indexPath.section == 0 ) {
-        BZLocation *location = [self.locationModel.userLocations objectAtIndex:indexPath.row];
+        UserLocation *location = [self.locationModel.userLocations objectAtIndex:indexPath.row];
         
         title = [NSString stringWithFormat:@"%@ %@",location.title, location.subtitle];
-        showCoordinate = location.isVisible;
-    } else {
+        showCoordinate = [location.isVisible boolValue];
+    } else if ( indexPath.section == 1 ) {
         KMLLocation *location = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
         
         title = [NSString stringWithFormat:@"%@", location.title];
         showCoordinate = [location.isVisible boolValue];
+    } else {
+        MapTileCollection *collection = [self.locationModel.mapTileCollections objectAtIndex:indexPath.row];
+        
+        title = [NSString stringWithFormat:@"%@", collection.title];
+        showCoordinate = [collection.isVisible boolValue];
     }
     
     cell.textLabel.text = title;
@@ -127,9 +134,11 @@
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     switch (section) {
         case 0:
-            return @"Recent History";
+            return @"User locations";
         case 1:
-            return @"Overlays";
+            return @"KML preset locations";
+        case 2:
+            return @"Map tiles";
         default:
             return nil;
     }
@@ -173,17 +182,16 @@
         
         if ( indexPath.section == 0 ) {
             UserLocation *userLocation = [self.locationModel.userLocations objectAtIndex:indexPath.row];
-            
             [self.locationModel removeUserLocation:userLocation];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            
         } else if ( indexPath.section == 1 ) {
             KMLLocation *kmlLocation = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
-            
-            [self.locationModel removeKMLAnnotation:kmlLocation];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.locationModel removeKMLLocation:kmlLocation];
+        } else {
+            MapTileCollection *collection = [self.locationModel.mapTileCollections objectAtIndex:indexPath.row];
+            [self.locationModel removeMapTileCollection:collection];
         }
-        
+
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
     }
 }
@@ -205,7 +213,7 @@
             [cell setAccessoryType:UITableViewCellAccessoryNone];
             [self.locationModel hideUserLocation:userLocation];
         }        
-    } else {
+    } else if ( indexPath.section == 1 ){
         KMLLocation *kmlLocation = [[self.locationModel kmlLocations] objectAtIndex:indexPath.row];
         
         if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
@@ -214,6 +222,16 @@
         } else {
             [cell setAccessoryType:UITableViewCellAccessoryNone];
             [self.locationModel hideKMLLocation:kmlLocation];
+        }
+    } else {
+        MapTileCollection *collection = [[self.locationModel mapTileCollections] objectAtIndex:indexPath.row];
+        
+        if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+            [self.locationModel showMapTileCollection:collection];
+        } else {
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
+            [self.locationModel hideMapTileCollection:collection];
         }
     }
     

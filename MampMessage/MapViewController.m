@@ -83,12 +83,16 @@
     [mapView removeOverlays:mapView.overlays];
     [mapView removeAnnotations:mapView.annotations];
 
-    //load static map tiles.
-    // Initialize the map overlay with tiles in the app's bundle.
-//    NSString *tileDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Tiles"];
-//    
-//    MapOverlay *overlay = [[MapOverlay alloc] initWithDirectory:tileDirectory];
-//    [mapView addOverlay:overlay];
+    for ( MapTileCollection *collection in self.locationModel.mapTileCollections ) {
+        BOOL showItem = [collection.isVisible boolValue];
+        
+        if ( showItem ) {
+            NSString *tileDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:collection.directoryPath];
+
+            MapOverlay *overlay = [[MapOverlay alloc] initWithDirectory:tileDirectory];
+            [mapView addOverlay:overlay];
+        }
+    }
     
     MKMapRect zoomRect = MKMapRectNull;
     
@@ -104,7 +108,7 @@
         
         if ( showItem == YES ) {
             
-            NSURL *url = [NSURL fileURLWithPath:[location overlayPath]];
+            NSURL *url = [NSURL fileURLWithPath:[location locationFilePath]];
             self.kmlParser = [[KMLParser alloc] initWithURL:url];
             [self.kmlParser parseKML];
             

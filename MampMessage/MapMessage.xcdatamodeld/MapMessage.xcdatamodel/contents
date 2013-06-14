@@ -2,8 +2,13 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3381.3" systemVersion="12E55" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="KMLLocation" representedClassName="KMLLocation" syncable="YES">
         <attribute name="isVisible" attributeType="Boolean" syncable="YES"/>
-        <attribute name="overlayPath" attributeType="String" syncable="YES"/>
+        <attribute name="locationFilePath" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MapTileCollection" representedClassName="MapTileCollection" syncable="YES">
+        <attribute name="directoryPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isVisible" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="UserLocation" representedClassName="UserLocation" syncable="YES">
         <attribute name="isVisible" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -14,7 +19,8 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="UserLocation" positionX="385" positionY="45" width="128" height="133"/>
-        <element name="KMLLocation" positionX="405" positionY="261" width="128" height="88"/>
+        <element name="KMLLocation" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MapTileCollection" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="UserLocation" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>
