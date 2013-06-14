@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="and-pa-BXH">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.6"/>
     </dependencies>
@@ -57,15 +57,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Aef-BF-inF" firstAttribute="leading" secondItem="31L-au-yx9" secondAttribute="leading" type="default" id="9Fb-7e-Veo"/>
+                            <constraint firstItem="Aef-BF-inF" firstAttribute="trailing" secondItem="31L-au-yx9" secondAttribute="trailing" type="default" id="8y3-Oi-3iQ"/>
                             <constraint firstItem="Aef-BF-inF" firstAttribute="bottom" secondItem="31L-au-yx9" secondAttribute="bottom" type="default" id="Lfi-Be-cTe"/>
-                            <constraint firstItem="Aef-BF-inF" firstAttribute="trailing" secondItem="31L-au-yx9" secondAttribute="trailing" type="default" id="QMZ-qB-Pqi"/>
                             <constraint firstItem="kbV-0A-WsS" firstAttribute="bottom" secondItem="3DM-Gt-Bft" secondAttribute="bottom" type="default" id="Rxk-fl-pc2"/>
-                            <constraint firstAttribute="trailing" secondItem="kbV-0A-WsS" secondAttribute="trailing" constant="86" id="XPc-5I-HQZ"/>
-                            <constraint firstItem="Aef-BF-inF" firstAttribute="top" secondItem="31L-au-yx9" secondAttribute="top" type="default" id="kH5-sO-9U5"/>
+                            <constraint firstAttribute="trailing" secondItem="kbV-0A-WsS" secondAttribute="trailing" constant="86" id="epy-fu-UMq"/>
                             <constraint firstAttribute="trailing" secondItem="3DM-Gt-Bft" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="n1D-Fv-hJj"/>
                             <constraint firstItem="kbV-0A-WsS" firstAttribute="top" secondItem="3DM-Gt-Bft" secondAttribute="top" type="default" id="o5u-P4-T7w"/>
                             <constraint firstAttribute="bottom" secondItem="kbV-0A-WsS" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="qLU-4O-C39"/>
+                            <constraint firstItem="Aef-BF-inF" firstAttribute="leading" secondItem="31L-au-yx9" secondAttribute="leading" type="default" id="qdT-en-sTH"/>
+                            <constraint firstItem="Aef-BF-inF" firstAttribute="top" secondItem="31L-au-yx9" secondAttribute="top" type="default" id="xde-0V-oKV"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -85,6 +85,22 @@
         <image name="CompassUnselected" width="16" height="16"/>
         <image name="SatelliteUnselected" width="16" height="16"/>
     </resources>
+    <classes>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="sendSMS:"/>
+                <relationship kind="action" name="toggleCompass:"/>
+                <relationship kind="action" name="toggleViewMode:"/>
+                <relationship kind="outlet" name="compassButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="satelliteButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

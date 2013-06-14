@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3F03B68B176A8FB400469072 /* OpenStreetMap in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B68A176A8FB400469072 /* OpenStreetMap */; };
-		3F03B68D176A912700469072 /* detailed in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B68C176A912700469072 /* detailed */; };
 		3F03B6A0176A97F800469072 /* annotation-view.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B69E176A97F800469072 /* annotation-view.png */; };
 		3F03B6A1176A97F800469072 /* annotation-view@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B69F176A97F800469072 /* annotation-view@2x.png */; };
 		3F03B6A4176A986A00469072 /* annotation-view-unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6A2176A986A00469072 /* annotation-view-unselected.png */; };
@@ -21,6 +20,18 @@
 		3F03B6C5176AA1A900469072 /* annotation-view-user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6C3176AA1A900469072 /* annotation-view-user@2x.png */; };
 		3F03B6CB176AA2C200469072 /* MapTileCollection+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F03B6CA176AA2C200469072 /* MapTileCollection+Extension.m */; };
 		3F03B6D1176AA34300469072 /* MapTileCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F03B6D0176AA34300469072 /* MapTileCollection.m */; };
+		3F03B6D3176B4CBF00469072 /* detailed in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6D2176B4CBF00469072 /* detailed */; };
+		3F03B6E6176B60B500469072 /* annotation-view-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6E4176B60B500469072 /* annotation-view-menu.png */; };
+		3F03B6E7176B60B500469072 /* annotation-view-menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6E5176B60B500469072 /* annotation-view-menu@2x.png */; };
+		3F03B6F2176B71B600469072 /* drop-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6F0176B71B600469072 /* drop-pin.png */; };
+		3F03B6F3176B71B600469072 /* drop-pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6F1176B71B600469072 /* drop-pin@2x.png */; };
+		3F03B6FA176B80ED00469072 /* header-with-text.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6F8176B80ED00469072 /* header-with-text.png */; };
+		3F03B6FB176B80ED00469072 /* header-with-text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6F9176B80ED00469072 /* header-with-text@2x.png */; };
+		3F03B703176B8C6000469072 /* cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6FF176B8C6000469072 /* cancel-button.png */; };
+		3F03B704176B8C6000469072 /* cancel-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B700176B8C6000469072 /* cancel-button@2x.png */; };
+		3F03B705176B8C6000469072 /* ok-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B701176B8C6000469072 /* ok-button.png */; };
+		3F03B706176B8C6000469072 /* ok-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B702176B8C6000469072 /* ok-button@2x.png */; };
+		3F03B70A176B8EC600469072 /* PinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F03B709176B8EC600469072 /* PinView.m */; };
 		3F0E2EF217652A4A00D41BD6 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EEB17652A4A00D41BD6 /* MMDrawerBarButtonItem.m */; };
 		3F0E2EF317652A4A00D41BD6 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EED17652A4A00D41BD6 /* MMDrawerController.m */; };
 		3F0E2EF417652A4A00D41BD6 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EEF17652A4A00D41BD6 /* MMDrawerVisualState.m */; };
@@ -134,7 +145,6 @@
 
 /* Begin PBXFileReference section */
 		3F03B68A176A8FB400469072 /* OpenStreetMap */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OpenStreetMap; sourceTree = "<group>"; };
-		3F03B68C176A912700469072 /* detailed */ = {isa = PBXFileReference; lastKnownFileType = folder; path = detailed; sourceTree = "<group>"; };
 		3F03B69E176A97F800469072 /* annotation-view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view.png"; sourceTree = "<group>"; };
 		3F03B69F176A97F800469072 /* annotation-view@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view@2x.png"; sourceTree = "<group>"; };
 		3F03B6A2176A986A00469072 /* annotation-view-unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-unselected.png"; sourceTree = "<group>"; };
@@ -153,6 +163,19 @@
 		3F03B6CA176AA2C200469072 /* MapTileCollection+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MapTileCollection+Extension.m"; sourceTree = "<group>"; };
 		3F03B6CF176AA34300469072 /* MapTileCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapTileCollection.h; sourceTree = "<group>"; };
 		3F03B6D0176AA34300469072 /* MapTileCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapTileCollection.m; sourceTree = "<group>"; };
+		3F03B6D2176B4CBF00469072 /* detailed */ = {isa = PBXFileReference; lastKnownFileType = folder; path = detailed; sourceTree = "<group>"; };
+		3F03B6E4176B60B500469072 /* annotation-view-menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-menu.png"; sourceTree = "<group>"; };
+		3F03B6E5176B60B500469072 /* annotation-view-menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-menu@2x.png"; sourceTree = "<group>"; };
+		3F03B6F0176B71B600469072 /* drop-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drop-pin.png"; sourceTree = "<group>"; };
+		3F03B6F1176B71B600469072 /* drop-pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drop-pin@2x.png"; sourceTree = "<group>"; };
+		3F03B6F8176B80ED00469072 /* header-with-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-with-text.png"; sourceTree = "<group>"; };
+		3F03B6F9176B80ED00469072 /* header-with-text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-with-text@2x.png"; sourceTree = "<group>"; };
+		3F03B6FF176B8C6000469072 /* cancel-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel-button.png"; sourceTree = "<group>"; };
+		3F03B700176B8C6000469072 /* cancel-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel-button@2x.png"; sourceTree = "<group>"; };
+		3F03B701176B8C6000469072 /* ok-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ok-button.png"; sourceTree = "<group>"; };
+		3F03B702176B8C6000469072 /* ok-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ok-button@2x.png"; sourceTree = "<group>"; };
+		3F03B708176B8EC600469072 /* PinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinView.h; sourceTree = "<group>"; };
+		3F03B709176B8EC600469072 /* PinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinView.m; sourceTree = "<group>"; };
 		3F0E2EEA17652A4A00D41BD6 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		3F0E2EEB17652A4A00D41BD6 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		3F0E2EEC17652A4A00D41BD6 /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
@@ -350,6 +373,10 @@
 		3F03B697176A968000469072 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				3F03B6F0176B71B600469072 /* drop-pin.png */,
+				3F03B6F1176B71B600469072 /* drop-pin@2x.png */,
+				3F03B6E4176B60B500469072 /* annotation-view-menu.png */,
+				3F03B6E5176B60B500469072 /* annotation-view-menu@2x.png */,
 				3F03B6C2176AA1A900469072 /* annotation-view-user.png */,
 				3F03B6C3176AA1A900469072 /* annotation-view-user@2x.png */,
 				3F03B6A2176A986A00469072 /* annotation-view-unselected.png */,
@@ -374,6 +401,7 @@
 		3F03B699176A96A200469072 /* buttons */ = {
 			isa = PBXGroup;
 			children = (
+				3F03B707176B8C6C00469072 /* dialog */,
 				3F03B698176A969000469072 /* satellite */,
 				3F0E2F3D1767DCCA00D41BD6 /* compass */,
 				3FFA272F1767DD9B00E7B9F3 /* other */,
@@ -384,7 +412,7 @@
 		3F03B69A176A96B200469072 /* tiles */ = {
 			isa = PBXGroup;
 			children = (
-				3F03B68C176A912700469072 /* detailed */,
+				3F03B6D2176B4CBF00469072 /* detailed */,
 				3F03B68A176A8FB400469072 /* OpenStreetMap */,
 			);
 			name = tiles;
@@ -415,8 +443,21 @@
 				3FFF3CCA1769022C00813BD9 /* title@2x.png */,
 				3FFA271F1767DD9700E7B9F3 /* header.png */,
 				3FFA27201767DD9700E7B9F3 /* header@2x.png */,
+				3F03B6F8176B80ED00469072 /* header-with-text.png */,
+				3F03B6F9176B80ED00469072 /* header-with-text@2x.png */,
 			);
 			name = header;
+			sourceTree = "<group>";
+		};
+		3F03B707176B8C6C00469072 /* dialog */ = {
+			isa = PBXGroup;
+			children = (
+				3F03B6FF176B8C6000469072 /* cancel-button.png */,
+				3F03B700176B8C6000469072 /* cancel-button@2x.png */,
+				3F03B701176B8C6000469072 /* ok-button.png */,
+				3F03B702176B8C6000469072 /* ok-button@2x.png */,
+			);
+			name = dialog;
 			sourceTree = "<group>";
 		};
 		3F0E2EE917652A4A00D41BD6 /* MMDrawerController */ = {
@@ -660,6 +701,8 @@
 				3FEE8421176A375400E54628 /* MapOverlayView.m */,
 				3FEE8422176A375400E54628 /* MapTile.h */,
 				3FEE8423176A375400E54628 /* MapTile.m */,
+				3F03B708176B8EC600469072 /* PinView.h */,
+				3F03B709176B8EC600469072 /* PinView.m */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -900,10 +943,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F03B704176B8C6000469072 /* cancel-button@2x.png in Resources */,
+				3F03B6FB176B80ED00469072 /* header-with-text@2x.png in Resources */,
 				3F60C4321763BE140043EB2A /* InfoPlist.strings in Resources */,
 				3FFF3CD11769023500813BD9 /* Default-568h@2x.png in Resources */,
+				3F03B6F2176B71B600469072 /* drop-pin.png in Resources */,
+				3F03B6D3176B4CBF00469072 /* detailed in Resources */,
 				3FFF3CBC176901FC00813BD9 /* plus@2x.png in Resources */,
-				3F03B68D176A912700469072 /* detailed in Resources */,
+				3F03B6E6176B60B500469072 /* annotation-view-menu.png in Resources */,
 				3F60C4641763C3270043EB2A /* iPhone.storyboard in Resources */,
 				3F8AC88117694D4100F78ED9 /* WhitneyCondensed-Black.otf in Resources */,
 				3FFF3CCC1769022C00813BD9 /* title@2x.png in Resources */,
@@ -911,16 +958,20 @@
 				3FFF3CAC1769013C00813BD9 /* MapMessage_Icon.png in Resources */,
 				3FFF3CBB176901FC00813BD9 /* plus.png in Resources */,
 				3FFF3CC81769021F00813BD9 /* SidebarButton@2x.png in Resources */,
+				3F03B6F3176B71B600469072 /* drop-pin@2x.png in Resources */,
 				3FFF3CAE1769013C00813BD9 /* MapMessage_iTunesArtwork.png in Resources */,
 				3FFF3CCB1769022C00813BD9 /* title.png in Resources */,
 				3FFF3CD21769023500813BD9 /* Default@2x.png in Resources */,
+				3F03B6FA176B80ED00469072 /* header-with-text.png in Resources */,
 				3F03B6C4176AA1A900469072 /* annotation-view-user.png in Resources */,
 				3F03B6A5176A986A00469072 /* annotation-view-unselected@2x.png in Resources */,
 				3FFF3CC41769020500813BD9 /* SatelliteUnselected@2x.png in Resources */,
 				3FFF3CC71769021F00813BD9 /* SidebarButton.png in Resources */,
+				3F03B705176B8C6000469072 /* ok-button.png in Resources */,
 				3F8AC87D17694C7900F78ED9 /* Whitney-Light.otf in Resources */,
 				3FFF3CAD1769013C00813BD9 /* MapMessage_Icon@2x.png in Resources */,
 				3F03B68B176A8FB400469072 /* OpenStreetMap in Resources */,
+				3F03B703176B8C6000469072 /* cancel-button.png in Resources */,
 				3FFF3CC21769020500813BD9 /* SatelliteSelected@2x.png in Resources */,
 				3F03B6A1176A97F800469072 /* annotation-view@2x.png in Resources */,
 				3FFA27271767DD9700E7B9F3 /* header.png in Resources */,
@@ -928,9 +979,11 @@
 				3F03B6A0176A97F800469072 /* annotation-view.png in Resources */,
 				3FFF3CC11769020500813BD9 /* SatelliteSelected.png in Resources */,
 				3FFF3CB8176901E400813BD9 /* CompassUnselected@2x.png in Resources */,
+				3F03B6E7176B60B500469072 /* annotation-view-menu@2x.png in Resources */,
 				3FFF3CC31769020500813BD9 /* SatelliteUnselected.png in Resources */,
 				3F03B6C5176AA1A900469072 /* annotation-view-user@2x.png in Resources */,
 				3FFF3CB5176901E400813BD9 /* CompassSelected.png in Resources */,
+				3F03B706176B8C6000469072 /* ok-button@2x.png in Resources */,
 				3FFF3CD01769023500813BD9 /* Default.png in Resources */,
 				3FFF3CB6176901E400813BD9 /* CompassSelected@2x.png in Resources */,
 				3F03B6A4176A986A00469072 /* annotation-view-unselected.png in Resources */,
@@ -999,6 +1052,7 @@
 				3F03B6B4176A9D0C00469072 /* KMLLocation.m in Sources */,
 				3F0E2EF517652A4A00D41BD6 /* UIViewController+MMDrawerController.m in Sources */,
 				3F0E2F0717653F1900D41BD6 /* Constants.m in Sources */,
+				3F03B70A176B8EC600469072 /* PinView.m in Sources */,
 				3F0E2F08176544F100D41BD6 /* MMTableViewCell.m in Sources */,
 				3F0E2F09176544F100D41BD6 /* MMSideDrawerTableViewCell.m in Sources */,
 				EEE9CFB91769D6B800070A29 /* NSPersistentStore+MagicalRecord.m in Sources */,

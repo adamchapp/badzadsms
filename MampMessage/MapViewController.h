@@ -21,8 +21,11 @@
 #import "KMLParser.h"
 #import "URLParser.h"
 #import "CustomAnnotationView.h"
+#import "MapOverlay.h"
+#import "MapOverlayView.h"
+#import "PinView.h"
 
-@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
+@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
 {
     IBOutlet MKMapView *mapView;
     IBOutlet UIButton *compassButton;
@@ -31,6 +34,16 @@
 
 @property (strong, nonatomic) NSString *latitude;
 @property (strong, nonatomic) NSString *longitude;
+
+//@property (strong, nonatomic) PinView *pinView;
+
+@property (strong, nonatomic) UIImageView *dropPin;
+
+@property (strong, nonatomic) UIButton *cancelButton;
+@property (strong, nonatomic) UIButton *okButton;
+@property (strong, nonatomic) UIImageView *headerBackground;
+
+@property (strong, nonatomic) UITextField *textField;
 
 @property (strong, nonatomic) LocationModel *locationModel;
 @property (strong, nonatomic) KMLParser *kmlParser;

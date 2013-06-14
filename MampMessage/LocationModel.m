@@ -61,9 +61,6 @@
 {
     self.urlParser = [[URLParser alloc] initWithURLString:url.absoluteString];
     
-    NSDateFormatter *readableFormatter = [[NSDateFormatter alloc] init];
-    [readableFormatter setDateFormat:BZReadableDateFormat];
-    
     NSString *title = [self.urlParser valueForVariable:@"title"];
     NSString *timeStampString = [self.urlParser valueForVariable:@"timestamp"];
     
@@ -71,6 +68,18 @@
     
     double latitude = [[self.urlParser valueForVariable:@"lat"] doubleValue];
     double longitude = [[self.urlParser valueForVariable:@"long"] doubleValue];
+    
+    [self addUserLocationWithTitle:title timestamp:timestamp latitude:latitude longitude:longitude isVisible:YES];
+}
+
+- (void)addUserLocationWithTitle:(NSString *)title
+                       timestamp:(NSDate *)timestamp
+                        latitude:(NSInteger)latitude
+                       longitude:(NSInteger)longitude
+                       isVisible:(BOOL)isVisible
+{
+    NSDateFormatter *readableFormatter = [[NSDateFormatter alloc] init];
+    [readableFormatter setDateFormat:BZReadableDateFormat];
     
     UserLocation *location = [UserLocation MR_createInContext:self.context];
     location.title = title;

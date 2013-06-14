@@ -7,8 +7,6 @@
 //
 
 #import "MapViewController.h"
-#import "MapOverlay.h"
-#import "MapOverlayView.h"
 
 @interface MapViewController ()
 
@@ -47,8 +45,17 @@
     [self setupLeftMenuButton];
     [self setupRightMenuButton];
    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(mapLongPress:)];
+    longPress.minimumPressDuration = 1.0;
+    [mapView addGestureRecognizer:longPress];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateDataChanged object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateViewDataChanged object:nil];
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard:)];
+    gestureRecognizer.delegate = self;
+    gestureRecognizer.cancelsTouchesInView = NO;
+    
+    [self.view addGestureRecognizer:gestureRecognizer];
     
     // Set the starting game location.
     CLLocationCoordinate2D startingLocation;
@@ -61,6 +68,17 @@
     [self loadAnnotations];
 }
 
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - Drawing methods
+//////////////////////////////////////////////////////////////
+
 -(void)setupLeftMenuButton{
     MMDrawerBarButtonItem * leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(leftDrawerButtonPress:)];
     [self.navigationItem setLeftBarButtonItem:leftDrawerButton animated:YES];
@@ -72,10 +90,6 @@
     [buttonOverlay setBackgroundImage:[UIImage imageNamed:@"plus"] forState:UIControlStateNormal];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:buttonOverlay];
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
-}
-
--(void)leftDrawerButtonPress:(id)sender{
-    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
 - (void)loadAnnotations {
@@ -145,6 +159,128 @@
 //    [mapView setVisibleMapRect:zoomRect animated:NO];//edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
 }
 
+
+- (void)setAnnotationLabelColors:(BOOL)isWhite
+{
+    for (id<MKAnnotation> annotation in mapView.annotations){
+        
+        if ( ![annotation isKindOfClass:[MKUserLocation class]]) {
+            
+            CustomAnnotationView* view = (CustomAnnotationView *)[mapView viewForAnnotation:annotation];
+            if (view){
+                
+                UIColor *textColor = (isWhite == YES) ? [UIColor whiteColor] : [UIColor blackColor];
+                [view.annotationLabel setTextColor:textColor];
+            }
+        }
+    }
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - User actions
+//////////////////////////////////////////////////////////////
+
+-(void)mapLongPress:(UIGestureRecognizer *)gesture {
+    if (gesture.state != UIGestureRecognizerStateBegan)
+        return;
+
+    // Get the screen coordinates for the touch relative
+    // to our map view.
+    CGPoint point = [gesture locationInView:mapView];
+    // Get the world coordinates that corresponds to
+    // the screen coordinates.
+    CLLocationCoordinate2D coordinates = [mapView
+                                          convertPoint:point
+                                          toCoordinateFromView:mapView];
+    
+    // Create and add an annotation with the coordinates.
+    [self.locationModel addUserLocationWithTitle:@"Dropped pin" timestamp:[NSDate date] latitude:coordinates.latitude longitude:coordinates.longitude isVisible:YES];
+    
+//    [self.navigationItem setLeftBarButtonItem:nil];
+//    [self.navigationItem.rightBarButtonItem setCustomView:[[UIView alloc] init]];
+//    
+//    NSInteger pin_width = 29;
+//    NSInteger pin_height = 40;
+//    
+//    // Get the screen coordinates for the touch relative
+//    // to our map view.
+//    CGPoint point = [gesture locationInView:mapView];
+//    point.y -= pin_height/2;
+//    
+//    self.dropPin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"drop-pin"]];
+//    [self.dropPin setFrame:CGRectMake(0, 0, pin_width, pin_height)];
+//    [self.dropPin setCenter:point];
+//        
+//    [mapView addSubview:self.dropPin];
+//    
+//    NSLog(@"Dropping pins at %f / %f", point.x, point.y);
+//    
+//    self.headerBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header-with-text"]];
+//    
+//    self.cancelButton = [[UIButton alloc] init];
+//    [self.cancelButton setFrame:CGRectMake(244, 10, 24, 24)];
+//    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel-button"] forState:UIControlStateNormal];
+//    [self.cancelButton addTarget:self action:@selector(cancelSelection) forControlEvents:UIControlEventAllEvents];
+//    
+//    self.okButton = [[UIButton alloc] init];
+//    [self.okButton setFrame:CGRectMake(276, 10, 24, 24)];
+//    [self.okButton setBackgroundImage:[UIImage imageNamed:@"ok-button"] forState:UIControlStateNormal];
+//    [self.okButton addTarget:self action:@selector(confirmSelection) forControlEvents:UIControlEventAllEvents];
+//    
+//    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(26, 7, 214, 30)];
+//    [self.textField setOpaque:NO];
+//    [self.textField setPlaceholder:@"Enter a name for your pin"];
+//    [self.textField setBorderStyle:UITextBorderStyleNone];
+//    [self.textField setFont:[UIFont fontWithName:@"Whitney-Light" size:13]];
+//    [self.textField setDelegate:self];
+//    
+//    [mapView addSubview:self.headerBackground];
+//    [mapView addSubview:self.textField];
+//    [mapView addSubview:self.cancelButton];
+//    [mapView addSubview:self.okButton];
+}
+
+- (void)cancelSelection {
+    NSLog(@"cancelled");
+    [self removePinView];
+}
+
+- (void)confirmSelection {
+    NSLog(@"Adding new pin at pin view coordinate %f %f", self.dropPin.frame.origin.x, self.dropPin.frame.origin.y );
+    
+    CGPoint point = self.dropPin.bounds.origin;
+    
+    CLLocationCoordinate2D coordinates = [mapView
+                                          convertPoint:point
+                                          toCoordinateFromView:mapView];
+    
+    
+    NSLog(@"Coordinates are %f %f", coordinates.latitude, coordinates.longitude);
+    
+    [self.locationModel addUserLocationWithTitle:self.textField.text timestamp:[NSDate date] latitude:coordinates.latitude longitude:coordinates.longitude isVisible:YES];
+        
+    [self removePinView];
+}
+
+- (void)removePinView {
+    
+    [self.cancelButton removeTarget:self action:@selector(cancelSelection) forControlEvents:UIControlEventAllEvents];
+    [self.okButton removeTarget:self action:@selector(confirmSelection) forControlEvents:UIControlEventAllEvents];
+    
+    [self.textField removeFromSuperview];
+    [self.headerBackground removeFromSuperview];
+    [self.cancelButton removeFromSuperview];
+    [self.okButton removeFromSuperview];
+    [self.dropPin removeFromSuperview];
+    
+    [self setupLeftMenuButton];
+    [self setupRightMenuButton];
+}
+
+-(void)leftDrawerButtonPress:(id)sender{
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
+
 - (IBAction)toggleCompass:(id)sender {
     if ( [mapView userTrackingMode] == MKUserTrackingModeNone ) {
         [mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading];
@@ -158,42 +294,12 @@
     if ( [mapView mapType] == MKMapTypeStandard ) {
         [mapView setMapType:MKMapTypeHybrid];
         [satelliteButton setBackgroundImage:[UIImage imageNamed:@"SatelliteSelected"] forState:UIControlStateNormal];
-        [self toggleAnnotationLabelColors:YES];
+        [self setAnnotationLabelColors:YES];
     } else if ( [mapView mapType] == MKMapTypeHybrid ) {
         [mapView setMapType:MKMapTypeStandard];
         [satelliteButton setBackgroundImage:[UIImage imageNamed:@"SatelliteUnselected"] forState:UIControlStateNormal];
-        [self toggleAnnotationLabelColors:NO];
+        [self setAnnotationLabelColors:NO];
     }
-}
-
-- (void)toggleAnnotationLabelColors:(BOOL)isWhite
-{
-    for (id<MKAnnotation> annotation in mapView.annotations){
-        
-        if ( ![annotation isKindOfClass:[MKUserLocation class]]) {
-
-            CustomAnnotationView* view = (CustomAnnotationView *)[mapView viewForAnnotation:annotation];
-            if (view){
-                
-                UIColor *textColor = (isWhite == YES) ? [UIColor whiteColor] : [UIColor blackColor];
-                [view.annotationLabel setTextColor:textColor];
-            }
-        }
-    }
-}
-
--(void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated {
-    if ( mode == MKUserTrackingModeNone ) {
-        [compassButton setBackgroundImage:[UIImage imageNamed:@"CompassUnselected"] forState:UIControlStateNormal];
-    } else {
-        [compassButton setBackgroundImage:[UIImage imageNamed:@"CompassSelected"] forState:UIControlStateNormal];
-    }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)sendSMS:(id)sender
@@ -288,6 +394,15 @@
     return annotationView;
 }
 
+
+-(void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated {
+    if ( mode == MKUserTrackingModeNone ) {
+        [compassButton setBackgroundImage:[UIImage imageNamed:@"CompassUnselected"] forState:UIControlStateNormal];
+    } else {
+        [compassButton setBackgroundImage:[UIImage imageNamed:@"CompassSelected"] forState:UIControlStateNormal];
+    }
+}
+
 //////////////////////////////////////////////////////////////
 #pragma mark  - MFMessageComposeViewControllerDelegate methods
 //////////////////////////////////////////////////////////////
@@ -346,6 +461,21 @@
     self.longitude =
     [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
     
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - UITextFieldDelegate methods
+//////////////////////////////////////////////////////////////
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (void)hideKeyboard:(id)sender
+{
+    NSLog(@"running hide keyboard");
+    [self.textField endEditing:NO];
 }
 
 @end

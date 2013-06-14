@@ -31,6 +31,8 @@ typedef void (^UIAlertViewBlock)(void);
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+@property (strong, nonatomic) HistoryViewController *historyController;
+@property (strong, nonatomic) MapViewController *mapController;
 @property (strong, nonatomic) LocationModel *locationModel;
 
 - (void)saveContext;

@@ -15,6 +15,7 @@
 @interface LocationModel : NSObject
 
 - (void)addUserLocationFromURL:(NSURL *)url;
+- (void)addUserLocationWithTitle:(NSString *)title timestamp:(NSDate *)timestamp latitude:(NSInteger)latitude longitude:(NSInteger)longitude isVisible:(BOOL)isVisible;
 - (void)removeUserLocation:(UserLocation *)location;
 
 - (void)showUserLocation:(UserLocation *)location;

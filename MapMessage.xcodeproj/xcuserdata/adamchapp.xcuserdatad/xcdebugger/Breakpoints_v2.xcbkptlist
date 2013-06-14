@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/MMAppDelegate.m"
-            timestampString = "392865588.365821"
+            timestampString = "392907570.561747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "-application:openURL:sourceApplication:annotation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/MMAppDelegate.m"
-            timestampString = "392865588.365821"
+            timestampString = "392907570.561747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "-application:openURL:sourceApplication:annotation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/MMAppDelegate.m"
-            timestampString = "392865588.365821"
+            timestampString = "392907570.561747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "-application:openURL:sourceApplication:annotation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/MapViewController.m"
-            timestampString = "392842919.981681"
+            timestampString = "392926505.374069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-setupRightMenuButton"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,36 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "MampMessage/LocationModel.m"
-            timestampString = "392863735.330689"
+            timestampString = "392928219.618884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "-addUserLocationFromURL:"
-            landmarkType = "5">
-            <Actions>
-               <BreakpointActionProxy
-                  ActionExtensionID = "Xcode.BreakpointAction.Log">
-                  <ActionContent
-                     message = "setting location to show in model"
-                     conveyanceType = "0">
-                  </ActionContent>
-               </BreakpointActionProxy>
-            </Actions>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "Yes"
-            filePath = "MampMessage/LocationModel.m"
-            timestampString = "392863735.330689"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "-removeUserLocation:"
             landmarkType = "5">
             <Actions>
@@ -188,11 +163,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/LocationModel.m"
-            timestampString = "392863735.330689"
+            timestampString = "392928219.618884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "-addKMLLocationFromURL:"
             landmarkType = "5">
          </BreakpointContent>
@@ -204,11 +179,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/MapViewController.m"
-            timestampString = "392842919.981681"
+            timestampString = "392926505.374069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-setupRightMenuButton"
             landmarkType = "5">
          </BreakpointContent>
@@ -220,11 +195,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/MMAppDelegate.m"
-            timestampString = "392865588.365821"
+            timestampString = "392907570.561747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "-application:openURL:sourceApplication:annotation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -236,11 +211,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/MapViewController.m"
-            timestampString = "392865588.365821"
+            timestampString = "392928780.694976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "438"
+            endingLineNumber = "438"
             landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -252,27 +227,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/MapViewController.m"
-            timestampString = "392865588.365821"
+            timestampString = "392926505.374069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "-toggleAnnotationLabelColors:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MampMessage/MapViewController.m"
-            timestampString = "392865588.365821"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "-loadAnnotations"
             landmarkType = "5">
          </BreakpointContent>
@@ -284,11 +243,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/LocationModel.m"
-            timestampString = "392863735.330689"
+            timestampString = "392928219.618884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "-addUserLocationFromURL:"
             landmarkType = "5">
          </BreakpointContent>
@@ -300,11 +259,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MampMessage/MapViewController.m"
-            timestampString = "392865588.365821"
+            timestampString = "392926505.374069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "-loadAnnotations"
             landmarkType = "5">
          </BreakpointContent>
