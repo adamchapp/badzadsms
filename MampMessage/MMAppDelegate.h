@@ -12,10 +12,9 @@
 #import "MMDrawerController.h"
 #import "MMDrawerVisualState.h"
 #import "MapViewController.h"
-#import "MapItemCreator.h"
 #import "HistoryViewController.h"
-#import "Location+Extensions.h"
-#import "Overlay+Extensions.h"
+#import "UserLocation+Extensions.h"
+#import "KMLLocation+Extensions.h"
 #import "Constants.h"
 #import "KMLParser.h"
 
@@ -23,7 +22,6 @@ typedef void (^UIAlertViewBlock)(void);
 
 @interface MMAppDelegate : UIResponder <UIApplicationDelegate>
 {
-    KMLParser *kmlParser;
     UIAlertViewBlock completionBlock;
 }
 
@@ -32,8 +30,6 @@ typedef void (^UIAlertViewBlock)(void);
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-@property (strong, nonatomic) NSDateFormatter *formatter;
 
 @property (strong, nonatomic) LocationModel *locationModel;
 

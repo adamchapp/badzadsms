@@ -83,9 +83,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ( section == 0 ) {
-        return [self.locationModel.coordinates count];
+        return [self.locationModel.userLocations count];
     }
-    return [self.locationModel.overlays count];
+    return [self.locationModel.kmlLocations count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -102,15 +102,15 @@
     BOOL showCoordinate;
     
     if ( indexPath.section == 0 ) {
-        BZLocation *location = [self.locationModel.coordinates objectAtIndex:indexPath.row];
+        BZLocation *location = [self.locationModel.userLocations objectAtIndex:indexPath.row];
         
         title = [NSString stringWithFormat:@"%@ %@",location.title, location.subtitle];
         showCoordinate = location.isVisible;
     } else {
-        Overlay *overlay = [self.locationModel.overlays objectAtIndex:indexPath.row];
+        KMLLocation *location = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
         
-        title = [NSString stringWithFormat:@"%@", overlay.title];
-        showCoordinate = [overlay.isVisible boolValue];
+        title = [NSString stringWithFormat:@"%@", location.title];
+        showCoordinate = [location.isVisible boolValue];
     }
     
     cell.textLabel.text = title;
@@ -172,15 +172,15 @@
         [tableView beginUpdates];
         
         if ( indexPath.section == 0 ) {
-            Location *location = [self.locationModel.coordinates objectAtIndex:indexPath.row];
+            UserLocation *userLocation = [self.locationModel.userLocations objectAtIndex:indexPath.row];
             
-            [self.locationModel removeLocation:location];
+            [self.locationModel removeUserLocation:userLocation];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
         } else if ( indexPath.section == 1 ) {
-            Overlay *overlay = [self.locationModel.overlays objectAtIndex:indexPath.row];
+            KMLLocation *kmlLocation = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
             
-            [self.locationModel removeOverlay:overlay];
+            [self.locationModel removeKMLAnnotation:kmlLocation];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
         
@@ -196,24 +196,24 @@
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     if ( indexPath.section == 0 ) {
-        Location *location = [[self.locationModel coordinates] objectAtIndex:indexPath.row];
+        UserLocation *userLocation = [[self.locationModel userLocations] objectAtIndex:indexPath.row];
         
         if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
             [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-            [self.locationModel showLocation:location];
+            [self.locationModel showUserLocation:userLocation];
         } else {
             [cell setAccessoryType:UITableViewCellAccessoryNone];
-            [self.locationModel hideLocation:location];
+            [self.locationModel hideUserLocation:userLocation];
         }        
     } else {
-        Overlay *overlay = [[self.locationModel overlays] objectAtIndex:indexPath.row];
+        KMLLocation *kmlLocation = [[self.locationModel kmlLocations] objectAtIndex:indexPath.row];
         
         if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
             [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-            [self.locationModel showOverlay:overlay];
+            [self.locationModel showKMLLocation:kmlLocation];
         } else {
             [cell setAccessoryType:UITableViewCellAccessoryNone];
-            [self.locationModel hideOverlay:overlay];
+            [self.locationModel hideKMLLocation:kmlLocation];
         }
     }
     

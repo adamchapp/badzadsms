@@ -25,12 +25,7 @@
     
     MapViewController *mapController = (MapViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MapView"];
     mapController.locationModel = self.locationModel;
-
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:BZDateFormat];
-    
-    self.formatter = formatter;
-    
+        
     UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:mapController];
     
     UINavigationBar *navBar = [navigationController navigationBar];
@@ -57,47 +52,12 @@
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    MapItemCreator *creator = [[MapItemCreator alloc] init];
-    
     if ( [url isFileURL] ) {
-        Overlay *overlay = [creator overlayFromURL:url];
-        [self.locationModel addOverlay:overlay];
+        [self.locationModel addKMLLocationFromURL:url];
     }
     else
     {
-        URLParser *parser = [[URLParser alloc] initWithURLString:url.absoluteString];
-        
-        LocationModel *locationModel = self.locationModel;
-        
-        Location *location = [creator locationFromURL:url parser:parser formatter:self.formatter];
-        
-        Location *previousLocation = [self.locationModel getLocationByName:location.title];
-        
-        if ( previousLocation ) {
-            
-            NSDate *previousDate = [previousLocation timestamp];
-            NSDate *newDate = [location timestamp];
-            
-            if ([previousDate compare:newDate] == NSOrderedDescending) {
-                
-                NSString *message = [NSString stringWithFormat:@"Are you sure you want to replace the current location for %@ with an older one?", location.title];
-                
-                
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:message delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-
-                completionBlock = ^{
-                    [locationModel addLocation:location];
-                };
-                
-                [alertView show];
-                
-            } else if ([previousDate compare:newDate] == NSOrderedAscending) {
-                [locationModel addLocation:location];
-            }
-        } else {
-            NSLog(@"There is no previous location that matches this one. Add as normal");
-            [locationModel addLocation:location];
-        }
+        [self.locationModel addUserLocationFromURL:url];
     }
     
     return YES;

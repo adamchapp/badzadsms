@@ -7,6 +7,8 @@
 //
 
 #import "MapViewController.h"
+#import "MapOverlay.h"
+#import "MapOverlayView.h"
 
 @interface MapViewController ()
 
@@ -47,7 +49,14 @@
    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateDataChanged object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateViewDataChanged object:nil];
-
+    
+    // Set the starting game location.
+    CLLocationCoordinate2D startingLocation;
+    startingLocation.latitude = 51.154047246473084;
+    startingLocation.longitude =-2.5871944427490234;
+    
+    mapView.region = MKCoordinateRegionMakeWithDistance(startingLocation, 10000, 10000);
+    [mapView setCenterCoordinate:startingLocation];
     
     [self loadAnnotations];
 }
@@ -74,58 +83,62 @@
     [mapView removeOverlays:mapView.overlays];
     [mapView removeAnnotations:mapView.annotations];
 
-    [mapView setShowsUserLocation:NO];
-    [mapView setShowsUserLocation:YES];
-
+    //load static map tiles.
+    // Initialize the map overlay with tiles in the app's bundle.
+//    NSString *tileDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Tiles"];
+//    
+//    MapOverlay *overlay = [[MapOverlay alloc] initWithDirectory:tileDirectory];
+//    [mapView addOverlay:overlay];
+    
     MKMapRect zoomRect = MKMapRectNull;
     
+    //            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+    //            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+    //            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+    
+    //load kml overlay
     BOOL overlayLoaded = NO;
     
-    for ( Overlay *overlay in self.locationModel.overlays ) {
-        BOOL showItem = [[overlay isVisible] boolValue];
+    for ( KMLLocation *location in self.locationModel.kmlLocations ) {
+        BOOL showItem = [[location isVisible] boolValue];
         
         if ( showItem == YES ) {
             
-            NSURL *url = [NSURL fileURLWithPath:[overlay overlayPath]];
+            NSURL *url = [NSURL fileURLWithPath:[location overlayPath]];
             self.kmlParser = [[KMLParser alloc] initWithURL:url];
             [self.kmlParser parseKML];
             
             // Add all of the MKOverlay objects parsed from the KML file to the map.
-            NSArray *overlays = [self.kmlParser overlays];
             NSArray *overlayAnnotations = [self.kmlParser points];
             
-            [mapView addOverlays:overlays];
             [mapView addAnnotations:overlayAnnotations];
                         
             overlayLoaded = YES;
-
-            for (id <MKOverlay> overlay in overlays) {
-                zoomRect = [overlay boundingMapRect];
-            }
         }
     }
     
-    for (BZLocation *annotation in self.locationModel.coordinates) {
-        BOOL showItem = [annotation isVisible];
+    //load user annotations
+    for (UserLocation *location in self.locationModel.userLocations) {
+        BOOL showItem = [[location isVisible] boolValue];
         
         if (  showItem == YES ) {
-            [mapView addAnnotation:annotation];
+            [mapView addAnnotation:location];
             
             //only zoom to fit annotations if there is no overlay
-            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+            MKMapPoint annotationPoint = MKMapPointForCoordinate(location.coordinate);
             MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
             zoomRect = MKMapRectUnion(zoomRect, pointRect);
         }
     }
+//
+//    if ( overlayLoaded == NO ) {
+//        //now get user location and add to zoom rect (if there is no overlay)
+//        MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationManager.location.coordinate);
+//        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+//        zoomRect = MKMapRectUnion(zoomRect, pointRect);
+//    }
     
-    if ( overlayLoaded == NO ) {
-        //now get user location and add to zoom rect (if there is no overlay)
-        MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationManager.location.coordinate);
-        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-        zoomRect = MKMapRectUnion(zoomRect, pointRect);
-    }
-    
-    [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
+//    [mapView setVisibleMapRect:zoomRect animated:NO];//edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
 }
 
 - (IBAction)toggleCompass:(id)sender {
@@ -241,7 +254,9 @@
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
 {
-    return [self.kmlParser viewForOverlay:overlay];
+    MapOverlayView *view = [[MapOverlayView alloc] initWithOverlay:overlay];
+    view.overlayAlpha = 1.0;
+    return view;
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
@@ -249,10 +264,8 @@
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         //Don't trample the user location annotation (pulsing blue dot).
         return nil;
-    } else if ( [annotation isKindOfClass:[BZLocation class]]) {
-        return nil;
     }
-    
+   
     static NSString *annotationViewReuseIdentifier = @"annotationViewReuseIdentifier";
     
     CustomAnnotationView *annotationView = (CustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewReuseIdentifier];
@@ -261,7 +274,11 @@
     {
         annotationView = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewReuseIdentifier];
     }
-        
+    
+    if ( [annotation isKindOfClass:[UserLocation class]]) {
+        [annotationView setImage:[UIImage imageNamed:@"annotation-view-user"]];
+    }
+    
     [annotationView.annotationLabel setText:[annotation title]];
     
     return annotationView;

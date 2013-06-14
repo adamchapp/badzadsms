@@ -7,30 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Location+Extensions.h"
-#import "Overlay+Extensions.h"
+#import "URLParser.h"
+#import "UserLocation+Extensions.h"
+#import "KMLLocation+Extensions.h"
 
 @interface LocationModel : NSObject
-{
-    NSMutableDictionary *coordinateDictionary;
-    NSMutableDictionary *overlayDictionary;
-}
 
-- (void)addLocation:(Location *)location;
-- (void)removeLocation:(Location *)location;
+- (void)addUserLocationFromURL:(NSURL *)url;
+- (void)removeUserLocation:(UserLocation *)location;
 
-- (void)showLocation:(Location *)location;
-- (void)hideLocation:(Location *)location;
+- (void)showUserLocation:(UserLocation *)location;
+- (void)hideUserLocation:(UserLocation *)location;
 
-- (Location *)getLocationByName:(NSString *)name;
+- (UserLocation *)getUserLocationByName:(NSString *)name;
 
-- (void)addOverlay:(Overlay *)overlay;
-- (void)removeOverlay:(Overlay *)overlay;
+- (void)addKMLLocationFromURL:(NSURL *)url;
+- (void)removeKMLAnnotation:(KMLLocation *)location;
 
-- (void)showOverlay:(Overlay *)overlay;
-- (void)hideOverlay:(Overlay *)overlay;
+- (void)showKMLLocation:(KMLLocation *)location;
+- (void)hideKMLLocation:(KMLLocation *)location;
 
-- (NSArray *)coordinates;
-- (NSArray *)overlays;
+- (NSArray *)userLocations;
+- (NSArray *)kmlLocations;
 
 @end
