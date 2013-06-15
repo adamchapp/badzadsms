@@ -23,13 +23,22 @@ static NSInteger zoomScaleToZoomLevel(MKZoomScale scale)
     return zoomLevel;
 }
 
+@interface MapOverlay ()
+{
+    //NB IMPORTANT - Some maps use a flipped y axis 
+    BOOL isFlipped;
+}
+
+@end
+
 @implementation MapOverlay
 
-- (id)initWithDirectory:(NSString *)directory
+- (id)initWithDirectory:(NSString *)directory shouldFlipOrigin:(BOOL)flipOrigin
 {
     
     if (self = [super init])
     {
+        isFlipped = flipOrigin;
         NSString *filePath = nil;
         NSMutableSet *pathSet = [NSMutableSet set];
         NSInteger minZ = INT_MAX;
@@ -101,13 +110,25 @@ static NSInteger zoomScaleToZoomLevel(MKZoomScale scale)
         double zSize = zTiles * OVERLAY_SIZE;
         double minZZoomScale = zSize / MKMapSizeWorld.width;
         
-        NSInteger flippedMinY = abs(minY + 1 - zTiles);
-        NSInteger flippedMaxY = abs(maxY + 1 - zTiles);
+        double x0;
+        double x1;
+        double y0;
+        double y1;
         
-        double x0 = (minX * OVERLAY_SIZE) / minZZoomScale;
-        double x1 = ((maxX + 1) * OVERLAY_SIZE) / minZZoomScale;
-        double y0 = (flippedMaxY * OVERLAY_SIZE) / minZZoomScale;
-        double y1 = ((flippedMinY + 1) * OVERLAY_SIZE) / minZZoomScale;
+        if ( isFlipped ) {
+            NSInteger flippedMinY = abs(minY + 1 - zTiles);
+            NSInteger flippedMaxY = abs(maxY + 1 - zTiles);
+            
+            x0 = (minX * OVERLAY_SIZE) / minZZoomScale;
+            x1 = ((maxX + 1) * OVERLAY_SIZE) / minZZoomScale;
+            y0 = (flippedMaxY * OVERLAY_SIZE) / minZZoomScale;
+            y1 = ((flippedMinY + 1) * OVERLAY_SIZE) / minZZoomScale;
+        } else {
+            x0 = (minX * OVERLAY_SIZE) / minZZoomScale;
+            x1 = ((maxX + 1) * OVERLAY_SIZE) / minZZoomScale;
+            y0 = (minY * OVERLAY_SIZE) / minZZoomScale;
+            y1 = ((maxY + 1) * OVERLAY_SIZE) / minZZoomScale;
+        }
         
         boundingRect = MKMapRectMake(x0, y0, x1 - x0, y1 - y0);
         
@@ -137,7 +158,12 @@ static NSInteger zoomScaleToZoomLevel(MKZoomScale scale)
         {
             // Flip the y index to properly reference overlay files.
             NSInteger flippedY = abs(y + 1 - zTiles);
-            NSString *tileKey = [[NSString alloc] initWithFormat:@"%d/%d/%d", z, x, flippedY];
+
+            NSInteger yValue = ( isFlipped ) ? flippedY : y;
+            
+            NSString *tileKey = [[NSString alloc] initWithFormat:@"%d/%d/%d", z, x, yValue];
+            
+            NSLog(@"%@", tileKey);
             
             if ([paths containsObject:tileKey])
             {

@@ -74,8 +74,8 @@
 
 - (void)addUserLocationWithTitle:(NSString *)title
                        timestamp:(NSDate *)timestamp
-                        latitude:(NSInteger)latitude
-                       longitude:(NSInteger)longitude
+                        latitude:(double)latitude
+                       longitude:(double)longitude
                        isVisible:(BOOL)isVisible
 {
     NSDateFormatter *readableFormatter = [[NSDateFormatter alloc] init];
@@ -227,12 +227,13 @@
 #pragma mark  - MapTile Collections
 //////////////////////////////////////////////////////////////
 
-- (void)addMapTileCollectionWithName:(NSString *)name directoryPath:(NSString *)path
+- (void)addMapTileCollectionWithName:(NSString *)name directoryPath:(NSString *)path isFlippedAxis:(BOOL)flipped
 {
     MapTileCollection *collection = [MapTileCollection MR_createInContext:self.context];
     collection.title = name;
     collection.directoryPath = path;
     collection.isVisible = [NSNumber numberWithBool:NO];
+    collection.isFlippedAxis = [NSNumber numberWithBool:flipped];
     
     [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if ( success ) {

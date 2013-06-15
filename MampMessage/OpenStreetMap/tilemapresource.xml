@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TileMap version="1.0.0" tilemapservice="http://tms.osgeo.org/1.0.0">
+<Title></Title>
+<Abstract></Abstract>
+<SRS>EPSG:900913</SRS>
+<BoundingBox minx="-289834.76581409008941" miny="6646186.36754110362381" maxx="-285969.42063536832575" maxy="6650246.57065579015762"/>
+<Origin x="-20037508.34278924390674" y="-20037508.34278924390674"/>
+<TileFormat width="256" height="256" mime-type="image/png" extension="png"/>
+<TileSets profile="global-mercator">
+<TileSet href="13" units-per-pixel="9.55462853564703" order="13"/>
+<TileSet href="14" units-per-pixel="4.77731426782352" order="14"/>
+<TileSet href="15" units-per-pixel="2.38865713391176" order="15"/>
+<TileSet href="16" units-per-pixel="1.19432856695588" order="16"/>
+</TileSets>
+</TileMap>

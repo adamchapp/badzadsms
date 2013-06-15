@@ -7,6 +7,7 @@
     </entity>
     <entity name="MapTileCollection" representedClassName="MapTileCollection" syncable="YES">
         <attribute name="directoryPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFlippedAxis" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isVisible" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>

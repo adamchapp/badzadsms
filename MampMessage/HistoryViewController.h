@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BZLocation.h"
+#import "UserLocation+Extensions.h"
 #import "LocationModel.h"
 
 @interface HistoryViewController : UITableViewController

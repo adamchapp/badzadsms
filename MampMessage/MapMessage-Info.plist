@@ -48,7 +48,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.5.4</string>
+	<string>0.6.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -72,6 +72,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Whitney-MediumSC.otf</string>
 		<string>WhitneyCondensed-Black.otf</string>
 		<string>Whitney-Light.otf</string>
 	</array>

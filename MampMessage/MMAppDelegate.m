@@ -9,7 +9,9 @@
 #import "MMAppDelegate.h"
 
 @implementation MMAppDelegate
-
+{
+    BOOL firstRun;
+}
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -23,8 +25,8 @@
     UIImage *backgroundImage = [UIImage imageNamed:@"header"];
     [navBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
     
-    [self.locationModel addMapTileCollectionWithName:@"Glasto HD map" directoryPath:@"detailed"];
-    [self.locationModel addMapTileCollectionWithName:@"Glasto OS map" directoryPath:@"OpenStreetMap"];
+   
+    [self checkForFirstRun];
     
     MMDrawerController * drawerController = [[MMDrawerController alloc]
                                              initWithCenterViewController:navigationController
@@ -38,6 +40,21 @@
     [self.window setRootViewController:drawerController];
     [self.window makeKeyAndVisible];    
     return YES;
+}
+
+- (void)checkForFirstRun
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    BOOL hasRunBefore = [defaults boolForKey:@"hasRunBefore"];
+    
+    if ( !hasRunBefore ) {
+        [self.locationModel addMapTileCollectionWithName:@"Glasto HD map" directoryPath:@"detailed" isFlippedAxis:YES];
+        [self.locationModel addMapTileCollectionWithName:@"Glasto OpenStreetMap" directoryPath:@"OpenStreetMap" isFlippedAxis:YES];
+        [self.locationModel addMapTileCollectionWithName:@"EE Map" directoryPath:@"tiles" isFlippedAxis:NO];
+    }
+    
+    [defaults setBool:YES forKey:@"hasRunBefore"];
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

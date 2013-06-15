@@ -17,7 +17,7 @@
 }
 
 // Initializes the overlay with a directory containing map tile images.
-- (id)initWithDirectory:(NSString *)directory;
+- (id)initWithDirectory:(NSString *)directory shouldFlipOrigin:(BOOL)flipOrigin;
 
 // Returns an array of image tiles for the current map rectangle and zoom scale.
 - (NSArray *)tilesInMapRect:(MKMapRect)rect zoomScale:(MKZoomScale)scale;

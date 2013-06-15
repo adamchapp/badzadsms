@@ -1,0 +1,11 @@
+{
+  "name": "OpenStreetMap transparent tiles",
+  "version": "1.0.0",
+  "description": "",
+  "type": "overlay",
+  "format": "png",
+  "minzoom": "13",
+  "maxzoom": "16",
+  "bounds": "-2.60363000,51.14051178,-2.56890701,51.16339000",
+  "profile": "mercator"
+}

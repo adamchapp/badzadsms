@@ -20,7 +20,8 @@
 #import "Constants.h"
 #import "KMLParser.h"
 #import "URLParser.h"
-#import "CustomAnnotationView.h"
+#import "KMLAnnotationView.h"
+#import "UserAnnotationView.h"
 #import "MapOverlay.h"
 #import "MapOverlayView.h"
 #import "PinView.h"
@@ -34,8 +35,6 @@
 
 @property (strong, nonatomic) NSString *latitude;
 @property (strong, nonatomic) NSString *longitude;
-
-//@property (strong, nonatomic) PinView *pinView;
 
 @property (strong, nonatomic) UIImageView *dropPin;
 

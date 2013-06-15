@@ -15,7 +15,7 @@
 @interface LocationModel : NSObject
 
 - (void)addUserLocationFromURL:(NSURL *)url;
-- (void)addUserLocationWithTitle:(NSString *)title timestamp:(NSDate *)timestamp latitude:(NSInteger)latitude longitude:(NSInteger)longitude isVisible:(BOOL)isVisible;
+- (void)addUserLocationWithTitle:(NSString *)title timestamp:(NSDate *)timestamp latitude:(double)latitude longitude:(double)longitude isVisible:(BOOL)isVisible;
 - (void)removeUserLocation:(UserLocation *)location;
 
 - (void)showUserLocation:(UserLocation *)location;
@@ -29,7 +29,7 @@
 - (void)showKMLLocation:(KMLLocation *)location;
 - (void)hideKMLLocation:(KMLLocation *)location;
 
-- (void)addMapTileCollectionWithName:(NSString *)name directoryPath:(NSString *)path;
+- (void)addMapTileCollectionWithName:(NSString *)name directoryPath:(NSString *)path isFlippedAxis:(BOOL)flipped;
 - (void)removeMapTileCollection:(MapTileCollection *)location;
 
 - (void)showMapTileCollection:(MapTileCollection *)location;

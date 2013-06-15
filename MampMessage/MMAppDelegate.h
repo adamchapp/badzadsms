@@ -13,7 +13,7 @@
 #import "MMDrawerVisualState.h"
 #import "MapViewController.h"
 #import "HistoryViewController.h"
-#import "UserLocation+Extensions.h"
+#import "UserLocation.h"
 #import "KMLLocation+Extensions.h"
 #import "Constants.h"
 #import "KMLParser.h"

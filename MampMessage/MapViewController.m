@@ -9,7 +9,12 @@
 #import "MapViewController.h"
 
 @interface MapViewController ()
-
+{
+    NSInteger pin_width;
+    NSInteger pin_height;
+    
+    BOOL pinViewIsActive;
+}
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
@@ -31,7 +36,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
+    pin_width = 29;
+    pin_height = 40;
+    
     self.locationManager = [[CLLocationManager alloc] init];
     
     if ( [CLLocationManager locationServicesEnabled] ) {
@@ -62,8 +70,10 @@
     startingLocation.latitude = 51.154047246473084;
     startingLocation.longitude =-2.5871944427490234;
     
-    mapView.region = MKCoordinateRegionMakeWithDistance(startingLocation, 10000, 10000);
+    mapView.region = MKCoordinateRegionMakeWithDistance(startingLocation, 1000, 1000);
     [mapView setCenterCoordinate:startingLocation];
+    
+    pinViewIsActive = NO;
     
     [self loadAnnotations];
 }
@@ -96,23 +106,17 @@
     
     [mapView removeOverlays:mapView.overlays];
     [mapView removeAnnotations:mapView.annotations];
-
+    
     for ( MapTileCollection *collection in self.locationModel.mapTileCollections ) {
         BOOL showItem = [collection.isVisible boolValue];
         
         if ( showItem ) {
             NSString *tileDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:collection.directoryPath];
 
-            MapOverlay *overlay = [[MapOverlay alloc] initWithDirectory:tileDirectory];
+            MapOverlay *overlay = [[MapOverlay alloc] initWithDirectory:tileDirectory shouldFlipOrigin:[collection.isFlippedAxis boolValue]];
             [mapView addOverlay:overlay];
         }
     }
-    
-    MKMapRect zoomRect = MKMapRectNull;
-    
-    //            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-    //            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-    //            zoomRect = MKMapRectUnion(zoomRect, pointRect);
     
     //load kml overlay
     BOOL overlayLoaded = NO;
@@ -137,15 +141,8 @@
     
     //load user annotations
     for (UserLocation *location in self.locationModel.userLocations) {
-        BOOL showItem = [[location isVisible] boolValue];
-        
-        if (  showItem == YES ) {
+        if (  [[location isVisible] boolValue] == YES ) {
             [mapView addAnnotation:location];
-            
-            //only zoom to fit annotations if there is no overlay
-            MKMapPoint annotationPoint = MKMapPointForCoordinate(location.coordinate);
-            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-            zoomRect = MKMapRectUnion(zoomRect, pointRect);
         }
     }
 //
@@ -166,7 +163,7 @@
         
         if ( ![annotation isKindOfClass:[MKUserLocation class]]) {
             
-            CustomAnnotationView* view = (CustomAnnotationView *)[mapView viewForAnnotation:annotation];
+            KMLAnnotationView* view = (KMLAnnotationView *)[mapView viewForAnnotation:annotation];
             if (view){
                 
                 UIColor *textColor = (isWhite == YES) ? [UIColor whiteColor] : [UIColor blackColor];
@@ -181,63 +178,49 @@
 //////////////////////////////////////////////////////////////
 
 -(void)mapLongPress:(UIGestureRecognizer *)gesture {
-    if (gesture.state != UIGestureRecognizerStateBegan)
+    if (gesture.state != UIGestureRecognizerStateBegan || pinViewIsActive )
         return;
-
+   
+    pinViewIsActive = YES;
+    
+    
+    [self.navigationItem setLeftBarButtonItem:nil];
+    [self.navigationItem.rightBarButtonItem setCustomView:[[UIView alloc] init]];
+    
     // Get the screen coordinates for the touch relative
     // to our map view.
     CGPoint point = [gesture locationInView:mapView];
-    // Get the world coordinates that corresponds to
-    // the screen coordinates.
-    CLLocationCoordinate2D coordinates = [mapView
-                                          convertPoint:point
-                                          toCoordinateFromView:mapView];
+    point.y -= pin_height/2;
     
-    // Create and add an annotation with the coordinates.
-    [self.locationModel addUserLocationWithTitle:@"Dropped pin" timestamp:[NSDate date] latitude:coordinates.latitude longitude:coordinates.longitude isVisible:YES];
+    self.dropPin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"drop-pin"]];
+    [self.dropPin setFrame:CGRectMake(0, 0, pin_width, pin_height)];
+    [self.dropPin setCenter:point];
+        
+    [mapView addSubview:self.dropPin];
     
-//    [self.navigationItem setLeftBarButtonItem:nil];
-//    [self.navigationItem.rightBarButtonItem setCustomView:[[UIView alloc] init]];
-//    
-//    NSInteger pin_width = 29;
-//    NSInteger pin_height = 40;
-//    
-//    // Get the screen coordinates for the touch relative
-//    // to our map view.
-//    CGPoint point = [gesture locationInView:mapView];
-//    point.y -= pin_height/2;
-//    
-//    self.dropPin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"drop-pin"]];
-//    [self.dropPin setFrame:CGRectMake(0, 0, pin_width, pin_height)];
-//    [self.dropPin setCenter:point];
-//        
-//    [mapView addSubview:self.dropPin];
-//    
-//    NSLog(@"Dropping pins at %f / %f", point.x, point.y);
-//    
-//    self.headerBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header-with-text"]];
-//    
-//    self.cancelButton = [[UIButton alloc] init];
-//    [self.cancelButton setFrame:CGRectMake(244, 10, 24, 24)];
-//    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel-button"] forState:UIControlStateNormal];
-//    [self.cancelButton addTarget:self action:@selector(cancelSelection) forControlEvents:UIControlEventAllEvents];
-//    
-//    self.okButton = [[UIButton alloc] init];
-//    [self.okButton setFrame:CGRectMake(276, 10, 24, 24)];
-//    [self.okButton setBackgroundImage:[UIImage imageNamed:@"ok-button"] forState:UIControlStateNormal];
-//    [self.okButton addTarget:self action:@selector(confirmSelection) forControlEvents:UIControlEventAllEvents];
-//    
-//    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(26, 7, 214, 30)];
-//    [self.textField setOpaque:NO];
-//    [self.textField setPlaceholder:@"Enter a name for your pin"];
-//    [self.textField setBorderStyle:UITextBorderStyleNone];
-//    [self.textField setFont:[UIFont fontWithName:@"Whitney-Light" size:13]];
-//    [self.textField setDelegate:self];
-//    
-//    [mapView addSubview:self.headerBackground];
-//    [mapView addSubview:self.textField];
-//    [mapView addSubview:self.cancelButton];
-//    [mapView addSubview:self.okButton];
+    self.headerBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header-with-text"]];
+    
+    self.cancelButton = [[UIButton alloc] init];
+    [self.cancelButton setFrame:CGRectMake(244, 10, 24, 24)];
+    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel-button"] forState:UIControlStateNormal];
+    [self.cancelButton addTarget:self action:@selector(cancelSelection) forControlEvents:UIControlEventAllEvents];
+    
+    self.okButton = [[UIButton alloc] init];
+    [self.okButton setFrame:CGRectMake(276, 10, 24, 24)];
+    [self.okButton setBackgroundImage:[UIImage imageNamed:@"ok-button"] forState:UIControlStateNormal];
+    [self.okButton addTarget:self action:@selector(confirmSelection) forControlEvents:UIControlEventAllEvents];
+    
+    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(26, 7, 214, 30)];
+    [self.textField setOpaque:NO];
+    [self.textField setPlaceholder:@"Enter a name for your pin"];
+    [self.textField setBorderStyle:UITextBorderStyleNone];
+    [self.textField setFont:[UIFont fontWithName:@"Whitney-Light" size:13]];
+    [self.textField setDelegate:self];
+    
+    [mapView addSubview:self.headerBackground];
+    [mapView addSubview:self.textField];
+    [mapView addSubview:self.cancelButton];
+    [mapView addSubview:self.okButton];
 }
 
 - (void)cancelSelection {
@@ -246,18 +229,19 @@
 }
 
 - (void)confirmSelection {
-    NSLog(@"Adding new pin at pin view coordinate %f %f", self.dropPin.frame.origin.x, self.dropPin.frame.origin.y );
     
-    CGPoint point = self.dropPin.bounds.origin;
+    CGPoint point = self.dropPin.center;
+    point.y += pin_height/2;
     
     CLLocationCoordinate2D coordinates = [mapView
                                           convertPoint:point
                                           toCoordinateFromView:mapView];
     
-    
-    NSLog(@"Coordinates are %f %f", coordinates.latitude, coordinates.longitude);
-    
-    [self.locationModel addUserLocationWithTitle:self.textField.text timestamp:[NSDate date] latitude:coordinates.latitude longitude:coordinates.longitude isVisible:YES];
+    [self.locationModel addUserLocationWithTitle:self.textField.text
+                                       timestamp:[NSDate date]
+                                        latitude:coordinates.latitude
+                                       longitude:coordinates.longitude
+                                       isVisible:YES];
         
     [self removePinView];
 }
@@ -275,6 +259,8 @@
     
     [self setupLeftMenuButton];
     [self setupRightMenuButton];
+    
+    pinViewIsActive = NO;
 }
 
 -(void)leftDrawerButtonPress:(id)sender{
@@ -376,22 +362,28 @@
         return nil;
     }
    
-    static NSString *annotationViewReuseIdentifier = @"annotationViewReuseIdentifier";
-    
-    CustomAnnotationView *annotationView = (CustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewReuseIdentifier];
-    
-    if (annotationView == nil)
-    {
-        annotationView = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewReuseIdentifier];
-    }
+    static NSString *kmlIdentifier = @"kmlIdentifier";
+    static NSString *userIdentifier = @"userIdentifier";
     
     if ( [annotation isKindOfClass:[UserLocation class]]) {
-        [annotationView setImage:[UIImage imageNamed:@"annotation-view-user"]];
+        UserAnnotationView *annotationView = (UserAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:userIdentifier];
+        
+        if (annotationView == nil) {
+            annotationView = [[UserAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:userIdentifier];
+        }
+        [annotationView.annotationLabel setText:[annotation title]];
+        
+        return annotationView;
+    } else {
+        KMLAnnotationView *annotationView = (KMLAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:kmlIdentifier];
+        
+        if (annotationView == nil) {
+            annotationView = [[KMLAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kmlIdentifier];
+        }
+        [annotationView.annotationLabel setText:[annotation title]];
+        
+        return annotationView;
     }
-    
-    [annotationView.annotationLabel setText:[annotation title]];
-    
-    return annotationView;
 }
 
 
@@ -474,7 +466,7 @@
 
 - (void)hideKeyboard:(id)sender
 {
-    NSLog(@"running hide keyboard");
+    NSLog(@"is this being called too much");
     [self.textField endEditing:NO];
 }
 
