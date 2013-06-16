@@ -20,7 +20,7 @@
 
 typedef void (^UIAlertViewBlock)(void);
 
-@interface MMAppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
     UIAlertViewBlock completionBlock;
 }

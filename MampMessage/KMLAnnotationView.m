@@ -7,7 +7,8 @@
 //
 
 #import "KMLAnnotationView.h"
-#import "UserLocation+Extensions.h"
+#import <QuartzCore/QuartzCore.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 @implementation KMLAnnotationView
 

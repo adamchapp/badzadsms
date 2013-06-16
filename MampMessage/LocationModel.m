@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (strong, nonatomic) NSDateFormatter *formatter;
 @property (strong, nonatomic) URLParser *urlParser;
+@property (nonatomic, strong) KMLParser *kmlParser;
 
 @end
 
@@ -61,18 +62,20 @@
 {
     self.urlParser = [[URLParser alloc] initWithURLString:url.absoluteString];
     
-    NSString *title = [self.urlParser valueForVariable:@"title"];
+    NSString *title = [[self.urlParser valueForVariable:@"title"] stringByReplacingOccurrencesOfString:@"-" withString:@" "];
     NSString *timeStampString = [self.urlParser valueForVariable:@"timestamp"];
+    NSString *sender = [self.urlParser valueForVariable:@"sender"];
     
     NSDate *timestamp = [self.formatter dateFromString:timeStampString];
     
     double latitude = [[self.urlParser valueForVariable:@"lat"] doubleValue];
     double longitude = [[self.urlParser valueForVariable:@"long"] doubleValue];
     
-    [self addUserLocationWithTitle:title timestamp:timestamp latitude:latitude longitude:longitude isVisible:YES];
+    [self addUserLocationWithTitle:title sender:sender timestamp:timestamp latitude:latitude longitude:longitude isVisible:YES];
 }
 
 - (void)addUserLocationWithTitle:(NSString *)title
+                          sender:(NSString *)sender
                        timestamp:(NSDate *)timestamp
                         latitude:(double)latitude
                        longitude:(double)longitude
@@ -82,6 +85,7 @@
     [readableFormatter setDateFormat:BZReadableDateFormat];
     
     UserLocation *location = [UserLocation MR_createInContext:self.context];
+    location.sender = sender;
     location.title = title;
     location.subtitle = [readableFormatter stringFromDate:timestamp];
     location.timestamp = timestamp;
@@ -308,6 +312,7 @@
     return _formatter;
 }
 
+
 - (NSArray *)userLocations {
     NSArray *_userLocations = [UserLocation MR_findAllSortedBy:@"timestamp" ascending:YES inContext:self.context];
     return _userLocations;
@@ -321,6 +326,49 @@
 - (NSArray *)mapTileCollections {
     NSArray *_mapTileCollections = [MapTileCollection MR_findAllSortedBy:@"title" ascending:YES inContext:self.context];
     return _mapTileCollections;
+}
+
+- (NSArray *)mapTileCollectionViews {
+    
+    NSArray *tileCollections = [MapTileCollection MR_findAllSortedBy:@"title" ascending:YES inContext:self.context];
+    
+    NSMutableArray *collectionViews = [NSMutableArray arrayWithCapacity:[tileCollections count]];
+    
+    for ( MapTileCollection *collection in tileCollections ) {
+        if ( [collection.isVisible boolValue] ) {
+            NSString *tileDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:collection.directoryPath];
+            
+            MapOverlay *overlay = [[MapOverlay alloc] initWithDirectory:tileDirectory shouldFlipOrigin:[collection.isFlippedAxis boolValue]];
+            
+            [collectionViews addObject:overlay];
+        }
+    }
+    
+    return collectionViews;
+}
+
+- (NSArray *)kmlLocationViews {
+    NSArray *kmlLocations = [KMLLocation MR_findAllSortedBy:@"title" ascending:YES inContext:self.context];
+    
+    NSMutableArray *kmlViews = [NSMutableArray array];
+    
+    for ( KMLLocation *location in kmlLocations ) {
+        BOOL showItem = [[location isVisible] boolValue];
+        
+        if ( showItem == YES ) {
+            
+            NSURL *url = [NSURL fileURLWithPath:[location locationFilePath]];
+            self.kmlParser = [[KMLParser alloc] initWithURL:url];
+            [self.kmlParser parseKML];
+            
+            // Add all of the MKOverlay objects parsed from the KML file to the map.
+            NSArray *kmlAnnotations = [self.kmlParser points];
+            
+            [kmlViews addObject:kmlAnnotations];
+        }
+    }
+    
+    return kmlViews;
 }
 
 //////////////////////////////////////////////////////////////

@@ -2,7 +2,7 @@
 //  UserLocation.m
 //  MapMessage
 //
-//  Created by Adam Chappell on 14/06/2013.
+//  Created by Adam Chappell on 15/06/2013.
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
@@ -17,5 +17,6 @@
 @dynamic subtitle;
 @dynamic timestamp;
 @dynamic title;
+@dynamic sender;
 
 @end

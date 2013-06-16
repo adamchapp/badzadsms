@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
-#import "MMAppDelegate.h"
+#import "AppDelegate.h"
 
-@implementation MMAppDelegate
+@implementation AppDelegate
 {
     BOOL firstRun;
 }
@@ -22,6 +22,7 @@
     
     UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:self.mapController];
     UINavigationBar *navBar = [navigationController navigationBar];
+    [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor]];
     UIImage *backgroundImage = [UIImage imageNamed:@"header"];
     [navBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
     
@@ -33,7 +34,7 @@
                                              leftDrawerViewController:self.historyController
                                              rightDrawerViewController:nil];
     [drawerController setMaximumRightDrawerWidth:240.0];
-    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
     [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

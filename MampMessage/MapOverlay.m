@@ -159,12 +159,11 @@ static NSInteger zoomScaleToZoomLevel(MKZoomScale scale)
             // Flip the y index to properly reference overlay files.
             NSInteger flippedY = abs(y + 1 - zTiles);
 
+            // Use flippedY or original Y value (OSGEO or OpenGIS / WMTS)
             NSInteger yValue = ( isFlipped ) ? flippedY : y;
             
             NSString *tileKey = [[NSString alloc] initWithFormat:@"%d/%d/%d", z, x, yValue];
-            
-            NSLog(@"%@", tileKey);
-            
+                        
             if ([paths containsObject:tileKey])
             {
                 if (!tiles)

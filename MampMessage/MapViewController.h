@@ -18,15 +18,17 @@
 #import "KMLLocation+Extensions.h"
 #import "UIViewController+MMDrawerController.h"
 #import "Constants.h"
-#import "KMLParser.h"
 #import "URLParser.h"
 #import "KMLAnnotationView.h"
 #import "UserAnnotationView.h"
 #import "MapOverlay.h"
 #import "MapOverlayView.h"
-#import "PinView.h"
+#import "PinViewHeader.h"
+#import "DeviceNameUtil.h"
+#import "SMSController.h"
+#import "AnnotationDetailViewController.h"
 
-@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
+@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, AnnotationDetailViewDelegate>
 {
     IBOutlet MKMapView *mapView;
     IBOutlet UIButton *compassButton;
@@ -38,17 +40,14 @@
 
 @property (strong, nonatomic) UIImageView *dropPin;
 
-@property (strong, nonatomic) UIButton *cancelButton;
-@property (strong, nonatomic) UIButton *okButton;
-@property (strong, nonatomic) UIImageView *headerBackground;
-
-@property (strong, nonatomic) UITextField *textField;
-
 @property (strong, nonatomic) LocationModel *locationModel;
-@property (strong, nonatomic) KMLParser *kmlParser;
+
+@property (nonatomic, strong) SMSController *smsController;
+
+@property (nonatomic, strong) PinViewHeader *pinViewHeader;
 
 - (void)loadAnnotations;
-- (IBAction)sendSMS:(id)sender;
+- (IBAction)handleSMSButtonClicked:(id)sender;
 - (IBAction)toggleCompass:(id)sender;
 - (IBAction)toggleViewMode:(id)sender;
 

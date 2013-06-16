@@ -7,6 +7,7 @@
 //
 
 #import <MapKit/MapKit.h>
+#import "UserLocation+Extensions.h"
 
 @interface KMLAnnotationView : MKAnnotationView
 

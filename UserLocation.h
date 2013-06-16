@@ -2,7 +2,7 @@
 //  UserLocation.h
 //  MapMessage
 //
-//  Created by Adam Chappell on 14/06/2013.
+//  Created by Adam Chappell on 15/06/2013.
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
@@ -18,5 +18,6 @@
 @property (nonatomic, retain) NSString * subtitle;
 @property (nonatomic, retain) NSDate * timestamp;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * sender;
 
 @end

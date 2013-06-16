@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Constants.h"
 #import "URLParser.h"
+#import "KMLParser.h"
+#import "MapOverlay.h"
 #import "UserLocation+Extensions.h"
 #import "KMLLocation+Extensions.h"
 #import "MapTileCollection+Extension.h"
@@ -15,7 +18,7 @@
 @interface LocationModel : NSObject
 
 - (void)addUserLocationFromURL:(NSURL *)url;
-- (void)addUserLocationWithTitle:(NSString *)title timestamp:(NSDate *)timestamp latitude:(double)latitude longitude:(double)longitude isVisible:(BOOL)isVisible;
+- (void)addUserLocationWithTitle:(NSString *)title sender:(NSString *)sender timestamp:(NSDate *)timestamp latitude:(double)latitude longitude:(double)longitude isVisible:(BOOL)isVisible;
 - (void)removeUserLocation:(UserLocation *)location;
 
 - (void)showUserLocation:(UserLocation *)location;
@@ -38,5 +41,8 @@
 - (NSArray *)userLocations;
 - (NSArray *)kmlLocations;
 - (NSArray *)mapTileCollections;
+
+- (NSArray *)kmlLocationViews;
+- (NSArray *)mapTileCollectionViews;
 
 @end

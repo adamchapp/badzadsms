@@ -23,6 +23,7 @@
         self.image = [UIImage imageNamed:[self pathForUnselectedImage]];
         self.layer.anchorPoint = CGPointMake(0.5f, 1.0f);
         self.canShowCallout = YES;
+        self.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     return self;
 }

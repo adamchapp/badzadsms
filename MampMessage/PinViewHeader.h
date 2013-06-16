@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PinView : UIView
-
-@property (nonatomic, strong) UIButton *cancelButton;
-@property (nonatomic, strong) UIButton *okButton;
+@interface PinViewHeader : UIView <UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITextField *textField;
+@property (strong, nonatomic) UITapGestureRecognizer *gestureRecognizer;
+
+- (void)hideKeyboard:(id)sender;
 
 @end

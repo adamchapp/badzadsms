@@ -91,7 +91,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "70"
          endingLineNumber = "70"
-         landmarkName = "-leftDrawerButtonPress:"
+         landmarkName = "-createMenuButtons"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -187,7 +187,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "70"
          endingLineNumber = "70"
-         landmarkName = "-leftDrawerButtonPress:"
+         landmarkName = "-createMenuButtons"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -200,8 +200,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "134"
          endingLineNumber = "134"
-         landmarkName = "@implementation MapViewController"
-         landmarkType = "3">
+         landmarkName = "-setStartingLocation"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -227,6 +227,19 @@
          startingLineNumber = "106"
          endingLineNumber = "106"
          landmarkName = "-application:openURL:sourceApplication:annotation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MampMessage/MapViewController.m"
+         timestampString = "393032045.950693"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "242"
+         endingLineNumber = "242"
+         landmarkName = "-handleSMSButtonClicked:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

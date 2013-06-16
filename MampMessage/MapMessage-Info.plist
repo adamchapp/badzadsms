@@ -34,7 +34,11 @@
 			<key>CFBundleIconFiles</key>
 			<array>
 				<string>MapMessage_Icon</string>
+				<string>MapMessage_Icon.png</string>
+				<string>MapMessage_Icon@2x.png</string>
 			</array>
+			<key>UIPrerenderedIcon</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>CFBundleIcons~ipad</key>
@@ -48,7 +52,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.6.2</string>
+	<string>0.8.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -72,6 +76,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Whitney-Book.otf</string>
 		<string>Whitney-MediumSC.otf</string>
 		<string>WhitneyCondensed-Black.otf</string>
 		<string>Whitney-Light.otf</string>
