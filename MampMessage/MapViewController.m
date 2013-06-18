@@ -76,7 +76,7 @@
 - (void)addGestureRecognisers
 {
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showNewAnnotationView:)];
-    longPress.minimumPressDuration = 1.0;
+    longPress.minimumPressDuration = 0.7;
     [mapView addGestureRecognizer:longPress];
 }
 
@@ -166,11 +166,12 @@
     //move the header off screen
     [self.pinViewHeader setFrame:CGRectMake(0, -pinFrame.size.height, pinFrame.size.width, pinFrame.size.height)];
     
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.1
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseIn
+                        options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                         [self.pinViewHeader setFrame:CGRectMake(0, 0, pinFrame.size.width, pinFrame.size.height)];
+
                      }
                      completion:nil];
 }
@@ -196,9 +197,9 @@
 
     [self.pinViewHeader.textField setText:@""];
     
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.1
                           delay:0
-                        options:UIViewAnimationOptionCurveEaseOut
+                        options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
                          [self.pinViewHeader setFrame:CGRectMake(0, -pinFrame.size.height, pinFrame.size.width, pinFrame.size.height)];
                      }
@@ -342,7 +343,7 @@
 
 - (PinViewHeader *)pinViewHeader {
     if ( !_pinViewHeader ) {
-        _pinViewHeader = [[PinViewHeader alloc] initWithFrame:CGRectMake(0, 0, 320, 32)];
+        _pinViewHeader = [[PinViewHeader alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
     }
     return _pinViewHeader;
 }

@@ -20,30 +20,27 @@
 }
 
 -(void)drawRect:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    UIColor *fillColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
-
-    UIColor *shadowColor = [UIColor colorWithRed:0.776 green:0.776 blue:0.773 alpha:1];
-    CGSize shadowOffset = CGSizeMake(0.1, -0.1);
-    CGFloat shadowBlurRadius = 2;
         
-    UIBezierPath *rectanglePath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 320, 32)];
-    CGContextSaveGState(context);
-    CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, shadowColor.CGColor);
+    UIColor *fillColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
+    UIColor *underlineColor = [UIColor colorWithRed:0.776 green:0.776 blue:0.773 alpha:1];
+        
+    UIBezierPath *rectanglePath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 320, 42)];
     [fillColor setFill];
     [rectanglePath fill];
-    CGContextRestoreGState(context);
+    
+    UIBezierPath *underline = [UIBezierPath bezierPathWithRect:CGRectMake(0, 43, 320, 44)];
+    [underlineColor setFill];
+    [underline fill];
 }
 
 - (void)loadSubviews {
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, 55, 28)];
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 55, 28)];
     [nameLabel setText:@"Name:"];
     [nameLabel setTextColor:[UIColor lightGrayColor]];
     [nameLabel setFont:[UIFont fontWithName:@"Whitney-Book" size:18]];
     
-    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(85, 4, 210, 28)];
+    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(85, 6, 210, 28)];
     [self.textField setOpaque:NO];
     [self.textField setBorderStyle:UITextBorderStyleNone];
     [self.textField setFont:[UIFont fontWithName:@"Whitney-Book" size:18]];
