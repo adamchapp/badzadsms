@@ -25,15 +25,7 @@
 		3F03B711176BAB4E00469072 /* UserLocation+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F03B710176BAB4E00469072 /* UserLocation+Extensions.m */; };
 		3F0A62E7176D2C62006D61CF /* MapMessage_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A62E6176D2C62006D61CF /* MapMessage_Icon.png */; };
 		3F0A62E9176D2C66006D61CF /* MapMessage_Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0A62E8176D2C66006D61CF /* MapMessage_Icon@2x.png */; };
-		3F0E2EF217652A4A00D41BD6 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EEB17652A4A00D41BD6 /* MMDrawerBarButtonItem.m */; };
-		3F0E2EF317652A4A00D41BD6 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EED17652A4A00D41BD6 /* MMDrawerController.m */; };
-		3F0E2EF417652A4A00D41BD6 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EEF17652A4A00D41BD6 /* MMDrawerVisualState.m */; };
-		3F0E2EF517652A4A00D41BD6 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EF117652A4A00D41BD6 /* UIViewController+MMDrawerController.m */; };
 		3F0E2F0717653F1900D41BD6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F0517653E3000D41BD6 /* Constants.m */; };
-		3F0E2F08176544F100D41BD6 /* MMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EFE17652AA000D41BD6 /* MMTableViewCell.m */; };
-		3F0E2F09176544F100D41BD6 /* MMSideDrawerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EFC17652AA000D41BD6 /* MMSideDrawerTableViewCell.m */; };
-		3F0E2F0A176544F100D41BD6 /* MMCenterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EF817652AA000D41BD6 /* MMCenterTableViewCell.m */; };
-		3F0E2F0B176544F100D41BD6 /* MMSideDrawerSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2EFA17652AA000D41BD6 /* MMSideDrawerSectionHeaderView.m */; };
 		3F0E2F101765504200D41BD6 /* PrettyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F0F1765504200D41BD6 /* PrettyNavigationController.m */; };
 		3F0E2F251765508B00D41BD6 /* PrettyCustomViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F131765508B00D41BD6 /* PrettyCustomViewTableViewCell.m */; };
 		3F0E2F261765508B00D41BD6 /* PrettyGridTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E2F151765508B00D41BD6 /* PrettyGridTableViewCell.m */; };
@@ -87,6 +79,8 @@
 		3F7C71A517724EEC0017770B /* send-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C719F17724EEC0017770B /* send-button@2x.png */; };
 		3F7C71A817724EF40017770B /* back-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C71A617724EF40017770B /* back-button.png */; };
 		3F7C71A917724EF40017770B /* back-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C71A717724EF40017770B /* back-button@2x.png */; };
+		3F7C71B117725D9F0017770B /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C71AE17725D9F0017770B /* ECSlidingViewController.m */; };
+		3F7C71B217725D9F0017770B /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C71B017725D9F0017770B /* UIImage+ImageWithUIView.m */; };
 		3F81111B1764195400975702 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81111A1764195400975702 /* HistoryViewController.m */; };
 		3F81111D176419B600975702 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F81111C176419B600975702 /* QuartzCore.framework */; };
 		3F81112117642EE300975702 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81112017642EE300975702 /* LocationModel.m */; };
@@ -184,22 +178,6 @@
 		3F03B710176BAB4E00469072 /* UserLocation+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserLocation+Extensions.m"; sourceTree = "<group>"; };
 		3F0A62E6176D2C62006D61CF /* MapMessage_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapMessage_Icon.png; sourceTree = "<group>"; };
 		3F0A62E8176D2C66006D61CF /* MapMessage_Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapMessage_Icon@2x.png"; sourceTree = "<group>"; };
-		3F0E2EEA17652A4A00D41BD6 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
-		3F0E2EEB17652A4A00D41BD6 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
-		3F0E2EEC17652A4A00D41BD6 /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
-		3F0E2EED17652A4A00D41BD6 /* MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerController.m; sourceTree = "<group>"; };
-		3F0E2EEE17652A4A00D41BD6 /* MMDrawerVisualState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerVisualState.h; sourceTree = "<group>"; };
-		3F0E2EEF17652A4A00D41BD6 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
-		3F0E2EF017652A4A00D41BD6 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
-		3F0E2EF117652A4A00D41BD6 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
-		3F0E2EF717652AA000D41BD6 /* MMCenterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMCenterTableViewCell.h; sourceTree = "<group>"; };
-		3F0E2EF817652AA000D41BD6 /* MMCenterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMCenterTableViewCell.m; sourceTree = "<group>"; };
-		3F0E2EF917652AA000D41BD6 /* MMSideDrawerSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSideDrawerSectionHeaderView.h; sourceTree = "<group>"; };
-		3F0E2EFA17652AA000D41BD6 /* MMSideDrawerSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSideDrawerSectionHeaderView.m; sourceTree = "<group>"; };
-		3F0E2EFB17652AA000D41BD6 /* MMSideDrawerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSideDrawerTableViewCell.h; sourceTree = "<group>"; };
-		3F0E2EFC17652AA000D41BD6 /* MMSideDrawerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSideDrawerTableViewCell.m; sourceTree = "<group>"; };
-		3F0E2EFD17652AA000D41BD6 /* MMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTableViewCell.h; sourceTree = "<group>"; };
-		3F0E2EFE17652AA000D41BD6 /* MMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTableViewCell.m; sourceTree = "<group>"; };
 		3F0E2F0417653E3000D41BD6 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		3F0E2F0517653E3000D41BD6 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		3F0E2F0E1765504200D41BD6 /* PrettyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrettyNavigationController.h; path = PrettyKit/PrettyNavigationController.h; sourceTree = "<group>"; };
@@ -276,6 +254,10 @@
 		3F7C719F17724EEC0017770B /* send-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-button@2x.png"; sourceTree = "<group>"; };
 		3F7C71A617724EF40017770B /* back-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-button.png"; sourceTree = "<group>"; };
 		3F7C71A717724EF40017770B /* back-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-button@2x.png"; sourceTree = "<group>"; };
+		3F7C71AD17725D9F0017770B /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
+		3F7C71AE17725D9F0017770B /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
+		3F7C71AF17725D9F0017770B /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
+		3F7C71B017725D9F0017770B /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
 		3F8111191764195400975702 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		3F81111A1764195400975702 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		3F81111C176419B600975702 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -518,37 +500,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		3F0E2EE917652A4A00D41BD6 /* MMDrawerController */ = {
-			isa = PBXGroup;
-			children = (
-				3F0E2EF617652A9500D41BD6 /* TableViewHelpers */,
-				3F0E2EEA17652A4A00D41BD6 /* MMDrawerBarButtonItem.h */,
-				3F0E2EEB17652A4A00D41BD6 /* MMDrawerBarButtonItem.m */,
-				3F0E2EEC17652A4A00D41BD6 /* MMDrawerController.h */,
-				3F0E2EED17652A4A00D41BD6 /* MMDrawerController.m */,
-				3F0E2EEE17652A4A00D41BD6 /* MMDrawerVisualState.h */,
-				3F0E2EEF17652A4A00D41BD6 /* MMDrawerVisualState.m */,
-				3F0E2EF017652A4A00D41BD6 /* UIViewController+MMDrawerController.h */,
-				3F0E2EF117652A4A00D41BD6 /* UIViewController+MMDrawerController.m */,
-			);
-			path = MMDrawerController;
-			sourceTree = "<group>";
-		};
-		3F0E2EF617652A9500D41BD6 /* TableViewHelpers */ = {
-			isa = PBXGroup;
-			children = (
-				3F0E2EFD17652AA000D41BD6 /* MMTableViewCell.h */,
-				3F0E2EFE17652AA000D41BD6 /* MMTableViewCell.m */,
-				3F0E2EFB17652AA000D41BD6 /* MMSideDrawerTableViewCell.h */,
-				3F0E2EFC17652AA000D41BD6 /* MMSideDrawerTableViewCell.m */,
-				3F0E2EF717652AA000D41BD6 /* MMCenterTableViewCell.h */,
-				3F0E2EF817652AA000D41BD6 /* MMCenterTableViewCell.m */,
-				3F0E2EF917652AA000D41BD6 /* MMSideDrawerSectionHeaderView.h */,
-				3F0E2EFA17652AA000D41BD6 /* MMSideDrawerSectionHeaderView.m */,
-			);
-			name = TableViewHelpers;
-			sourceTree = "<group>";
-		};
 		3F0E2F0D1765502800D41BD6 /* PrettyKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -740,12 +691,23 @@
 			name = model;
 			sourceTree = "<group>";
 		};
+		3F7C71AC17725D9F0017770B /* ECSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3F7C71AD17725D9F0017770B /* ECSlidingViewController.h */,
+				3F7C71AE17725D9F0017770B /* ECSlidingViewController.m */,
+				3F7C71AF17725D9F0017770B /* UIImage+ImageWithUIView.h */,
+				3F7C71B017725D9F0017770B /* UIImage+ImageWithUIView.m */,
+			);
+			path = ECSlidingViewController;
+			sourceTree = "<group>";
+		};
 		3F81110E1764179F00975702 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3F7C71AC17725D9F0017770B /* ECSlidingViewController */,
 				EEE9CF6C1769D6B800070A29 /* MagicalRecord */,
 				3F0E2F0D1765502800D41BD6 /* PrettyKit */,
-				3F0E2EE917652A4A00D41BD6 /* MMDrawerController */,
 			);
 			name = Libraries;
 			path = Vendor;
@@ -1119,28 +1081,22 @@
 				3F81111B1764195400975702 /* HistoryViewController.m in Sources */,
 				3F81112117642EE300975702 /* LocationModel.m in Sources */,
 				3F03B711176BAB4E00469072 /* UserLocation+Extensions.m in Sources */,
-				3F0E2EF217652A4A00D41BD6 /* MMDrawerBarButtonItem.m in Sources */,
-				3F0E2EF317652A4A00D41BD6 /* MMDrawerController.m in Sources */,
 				EEE9CFB01769D6B800070A29 /* NSManagedObject+MagicalDataImport.m in Sources */,
 				EEE9CFB81769D6B800070A29 /* NSManagedObjectModel+MagicalRecord.m in Sources */,
-				3F0E2EF417652A4A00D41BD6 /* MMDrawerVisualState.m in Sources */,
 				3FEE8424176A375400E54628 /* MapOverlay.m in Sources */,
 				EEE9CFAF1769D6B800070A29 /* NSManagedObject+MagicalAggregation.m in Sources */,
+				3F7C71B217725D9F0017770B /* UIImage+ImageWithUIView.m in Sources */,
 				3F03B6B4176A9D0C00469072 /* KMLLocation.m in Sources */,
-				3F0E2EF517652A4A00D41BD6 /* UIViewController+MMDrawerController.m in Sources */,
+				3F7C71B117725D9F0017770B /* ECSlidingViewController.m in Sources */,
 				3F0E2F0717653F1900D41BD6 /* Constants.m in Sources */,
 				3F03B70A176B8EC600469072 /* PinViewHeader.m in Sources */,
 				3F4C78F0176D1BF400F357D4 /* UserLocation.m in Sources */,
-				3F0E2F08176544F100D41BD6 /* MMTableViewCell.m in Sources */,
-				3F0E2F09176544F100D41BD6 /* MMSideDrawerTableViewCell.m in Sources */,
 				EEE9CFB91769D6B800070A29 /* NSPersistentStore+MagicalRecord.m in Sources */,
-				3F0E2F0A176544F100D41BD6 /* MMCenterTableViewCell.m in Sources */,
 				EEE9CFB61769D6B800070A29 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				EEE9CFC11769D6B800070A29 /* MagicalRecord.m in Sources */,
 				EEE9CFAA1769D6B800070A29 /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				EEE9CFAD1769D6B800070A29 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				EEE9CFBD1769D6B800070A29 /* MagicalRecord+iCloud.m in Sources */,
-				3F0E2F0B176544F100D41BD6 /* MMSideDrawerSectionHeaderView.m in Sources */,
 				3F0E2F101765504200D41BD6 /* PrettyNavigationController.m in Sources */,
 				3FB25BE6176BCBF900E01B78 /* UserAnnotationView.m in Sources */,
 				3F0E2F251765508B00D41BD6 /* PrettyCustomViewTableViewCell.m in Sources */,
@@ -1270,7 +1226,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MampMessage/MapMessage-Prefix.pch";
 				INFOPLIST_FILE = "MampMessage/MapMessage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = MapMessage;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1283,7 +1239,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MampMessage/MapMessage-Prefix.pch";
 				INFOPLIST_FILE = "MampMessage/MapMessage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = MapMessage;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

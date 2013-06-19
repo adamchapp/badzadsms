@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="and-pa-BXH">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.6"/>
     </dependencies>
@@ -11,17 +11,17 @@
             <objects>
                 <viewController storyboardIdentifier="MapView" title="Back" id="and-pa-BXH" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="31L-au-yx9">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Aef-BF-inF">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <connections>
                                     <outlet property="delegate" destination="and-pa-BXH" id="ntk-Es-wIa"/>
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DM-Gt-Bft">
-                                <rect key="frame" x="252" y="480" width="48" height="48"/>
+                                <rect key="frame" x="252" y="392" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="Zu4-do-dDC"/>
                                 </constraints>
@@ -37,7 +37,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbV-0A-WsS">
-                                <rect key="frame" x="186" y="480" width="48" height="48"/>
+                                <rect key="frame" x="186" y="392" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="0ac-S5-jgp"/>
                                     <constraint firstAttribute="height" constant="48" id="kJu-Wy-W63"/>
@@ -85,17 +85,17 @@
             <objects>
                 <viewController storyboardIdentifier="DetailView" id="LPc-19-oZ8" customClass="AnnotationDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VLE-kS-kQO">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTY-6r-4Lc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="172"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="172" id="Y0Z-r6-IRh"/>
+                                    <constraint firstAttribute="height" constant="140" id="J8O-wX-fU1"/>
                                 </constraints>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4L-ho-hfU">
-                                <rect key="frame" x="130" y="451" width="60" height="77"/>
+                                <rect key="frame" x="130" y="363" width="60" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="77" id="FJQ-xA-cCt"/>
                                     <constraint firstAttribute="width" constant="60" id="SkL-0b-fss"/>
@@ -113,7 +113,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylZ-VX-chf">
-                                <rect key="frame" x="240" y="450" width="60" height="77"/>
+                                <rect key="frame" x="240" y="362" width="60" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="CXb-4c-eXn"/>
                                     <constraint firstAttribute="height" constant="77" id="Es0-Ms-1Gu"/>
@@ -131,7 +131,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0n-qc-pcE">
-                                <rect key="frame" x="20" y="450" width="61" height="79"/>
+                                <rect key="frame" x="20" y="362" width="61" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="79" id="PeS-HT-Wyf"/>
@@ -149,7 +149,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtX-lJ-gwG">
-                                <rect key="frame" x="20" y="189" width="61" height="21"/>
+                                <rect key="frame" x="20" y="149" width="61" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="lGB-uv-NbW"/>
@@ -159,7 +159,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17th July 1:57" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAD-oO-lA0">
-                                <rect key="frame" x="20" y="218" width="280" height="21"/>
+                                <rect key="frame" x="20" y="178" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="k4L-iJ-ZzJ"/>
@@ -169,7 +169,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Longitude:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gU6-eH-kcw">
-                                <rect key="frame" x="20" y="325" width="84" height="21"/>
+                                <rect key="frame" x="20" y="285" width="84" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" type="user" id="0qc-Gb-EJB"/>
@@ -180,7 +180,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jE-aa-To1">
-                                <rect key="frame" x="20" y="271" width="62" height="21"/>
+                                <rect key="frame" x="20" y="231" width="62" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="X4b-Mf-K0T"/>
@@ -190,7 +190,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latitude:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5h3-Dz-FnW">
-                                <rect key="frame" x="20" y="296" width="71" height="21"/>
+                                <rect key="frame" x="20" y="256" width="71" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="71" id="GAM-w8-bhU"/>
@@ -201,7 +201,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25.157" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5M-Lr-tyQ">
-                                <rect key="frame" x="112" y="325" width="188" height="21"/>
+                                <rect key="frame" x="112" y="285" width="188" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" type="user" id="oE4-ec-aq5"/>
@@ -211,7 +211,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25.157" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LaG-IK-E8r">
-                                <rect key="frame" x="99" y="296" width="188" height="21"/>
+                                <rect key="frame" x="99" y="256" width="188" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" type="user" id="HYU-xp-G1g"/>
@@ -224,8 +224,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="W5M-Lr-tyQ" firstAttribute="baseline" secondItem="gU6-eH-kcw" secondAttribute="baseline" type="default" id="7b8-70-pe5"/>
-                            <constraint firstItem="5jE-aa-To1" firstAttribute="top" secondItem="VLE-kS-kQO" secondAttribute="top" constant="271" id="7dO-FN-Mqs"/>
+                            <constraint firstAttribute="bottom" secondItem="5jE-aa-To1" secondAttribute="bottom" constant="208" id="4Je-VF-o20"/>
+                            <constraint firstItem="NtX-lJ-gwG" firstAttribute="top" secondItem="VLE-kS-kQO" secondAttribute="top" constant="149" id="4a9-Cz-Z0f"/>
                             <constraint firstItem="gU6-eH-kcw" firstAttribute="top" secondItem="5h3-Dz-FnW" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="CUj-4m-p5b"/>
                             <constraint firstItem="FTY-6r-4Lc" firstAttribute="top" secondItem="VLE-kS-kQO" secondAttribute="top" type="user" id="Eae-DG-dS2"/>
                             <constraint firstItem="FTY-6r-4Lc" firstAttribute="top" secondItem="VLE-kS-kQO" secondAttribute="top" type="user" id="Ffq-jy-CJj"/>
@@ -235,21 +235,21 @@
                             <constraint firstItem="ylZ-VX-chf" firstAttribute="trailing" secondItem="W5M-Lr-tyQ" secondAttribute="trailing" type="default" id="LhN-1f-uT2"/>
                             <constraint firstItem="gU6-eH-kcw" firstAttribute="leading" secondItem="R0n-qc-pcE" secondAttribute="leading" type="default" id="Nkn-Df-tEZ"/>
                             <constraint firstItem="s4L-ho-hfU" firstAttribute="centerX" secondItem="mAD-oO-lA0" secondAttribute="centerX" type="default" id="QlH-3F-H5L"/>
-                            <constraint firstItem="mAD-oO-lA0" firstAttribute="leading" secondItem="VLE-kS-kQO" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Ryl-dZ-Ra8"/>
                             <constraint firstAttribute="trailing" secondItem="mAD-oO-lA0" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Szl-dQ-4B2"/>
                             <constraint firstItem="mAD-oO-lA0" firstAttribute="leading" secondItem="NtX-lJ-gwG" secondAttribute="leading" type="default" id="W8T-Az-h5B"/>
                             <constraint firstItem="W5M-Lr-tyQ" firstAttribute="leading" secondItem="gU6-eH-kcw" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="Xld-fz-zzG"/>
                             <constraint firstItem="LaG-IK-E8r" firstAttribute="leading" secondItem="5h3-Dz-FnW" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="YAv-yD-Zha"/>
-                            <constraint firstItem="LaG-IK-E8r" firstAttribute="baseline" secondItem="5h3-Dz-FnW" secondAttribute="baseline" type="default" id="ef5-T9-jck"/>
+                            <constraint firstItem="LaG-IK-E8r" firstAttribute="baseline" secondItem="5h3-Dz-FnW" secondAttribute="baseline" type="default" id="chU-K7-mhE"/>
+                            <constraint firstItem="NtX-lJ-gwG" firstAttribute="leading" secondItem="VLE-kS-kQO" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="hCu-IE-1Yt"/>
                             <constraint firstItem="s4L-ho-hfU" firstAttribute="centerY" secondItem="R0n-qc-pcE" secondAttribute="centerY" type="default" id="hWD-16-b97"/>
                             <constraint firstItem="mAD-oO-lA0" firstAttribute="top" secondItem="NtX-lJ-gwG" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="n5e-LD-FwC"/>
                             <constraint firstAttribute="bottom" secondItem="s4L-ho-hfU" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="njK-PL-mhf"/>
                             <constraint firstItem="W5M-Lr-tyQ" firstAttribute="trailing" secondItem="mAD-oO-lA0" secondAttribute="trailing" type="default" id="rQI-Vs-8DM"/>
+                            <constraint firstAttribute="bottom" secondItem="gU6-eH-kcw" secondAttribute="bottom" constant="154" id="ro4-4m-jWB"/>
                             <constraint firstItem="5h3-Dz-FnW" firstAttribute="leading" secondItem="5jE-aa-To1" secondAttribute="leading" type="default" id="rxo-LL-re4"/>
-                            <constraint firstItem="NtX-lJ-gwG" firstAttribute="top" secondItem="VLE-kS-kQO" secondAttribute="top" constant="189" id="szx-n6-gLC"/>
                             <constraint firstItem="NtX-lJ-gwG" firstAttribute="trailing" secondItem="R0n-qc-pcE" secondAttribute="trailing" type="user" id="vlr-AZ-aQr"/>
                             <constraint firstItem="5h3-Dz-FnW" firstAttribute="leading" secondItem="gU6-eH-kcw" secondAttribute="leading" type="default" id="vmp-sW-MS0"/>
-                            <constraint firstItem="gU6-eH-kcw" firstAttribute="top" secondItem="VLE-kS-kQO" secondAttribute="top" constant="325" type="user" id="x5W-1f-qox"/>
+                            <constraint firstItem="W5M-Lr-tyQ" firstAttribute="baseline" secondItem="gU6-eH-kcw" secondAttribute="baseline" type="default" id="vvP-dV-Xid"/>
                             <constraint firstItem="5jE-aa-To1" firstAttribute="leading" secondItem="mAD-oO-lA0" secondAttribute="leading" type="default" id="xof-Vu-qy2"/>
                             <constraint firstItem="ylZ-VX-chf" firstAttribute="top" secondItem="R0n-qc-pcE" secondAttribute="top" type="default" id="ziq-qp-wYE"/>
                         </constraints>
@@ -274,9 +274,37 @@
         <image name="open-in-button" width="16" height="16"/>
         <image name="send-button" width="16" height="16"/>
     </resources>
+    <classes>
+        <class className="AnnotationDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AnnotationDetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="openLinkInGoogleMaps:"/>
+                <relationship kind="action" name="removeAnnotation:"/>
+                <relationship kind="action" name="sendSMS:"/>
+                <relationship kind="outlet" name="creationDateLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="latitudeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="longitudeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="handleSMSButtonClicked:"/>
+                <relationship kind="action" name="toggleCompass:"/>
+                <relationship kind="action" name="toggleViewMode:"/>
+                <relationship kind="outlet" name="compassButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="satelliteButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

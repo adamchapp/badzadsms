@@ -13,10 +13,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "HistoryViewController.h"
 #import "LocationModel.h"
-#import "MMDrawerBarButtonItem.h"
 #import "UserLocation+Extensions.h"
 #import "KMLLocation+Extensions.h"
-#import "UIViewController+MMDrawerController.h"
+#import "ECSlidingViewController.h"
 #import "Constants.h"
 #import "URLParser.h"
 #import "KMLAnnotationView.h"

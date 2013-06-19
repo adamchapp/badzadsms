@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ECSlidingViewController.h"
 
 @implementation AppDelegate
 {
@@ -20,26 +21,24 @@
 {
     [MagicalRecord setupAutoMigratingCoreDataStack];
     
-    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:self.mapController];
-    UINavigationBar *navBar = [navigationController navigationBar];
-    [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIColor whiteColor],NSForegroundColorAttributeName,
-                                    [UIFont fontWithName:@"Whitney-Book" size:20],NSFontAttributeName, nil]];
-    UIImage *backgroundImage = [UIImage imageNamed:@"header"];
-    [navBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+    UIFont *whitney = [UIFont fontWithName:@"Whitney-Book" size:20];
+    UIColor *white = [UIColor whiteColor];
     
-    [[UILabel appearance] setFont:[UIFont fontWithName:@"Whitney-Book" size:19]];
+    [[UILabel appearance] setFont:whitney];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                    white,
+                                    NSForegroundColorAttributeName,
+                                    whitney,
+                                    NSFontAttributeName, nil]];
+    [[[UIButton appearance] titleLabel] setFont:whitney];
     
-   
     [self checkForFirstRun];
     
-    MMDrawerController * drawerController = [[MMDrawerController alloc]
-                                             initWithCenterViewController:navigationController
-                                             leftDrawerViewController:self.historyController
-                                             rightDrawerViewController:nil];
-    [drawerController setMaximumRightDrawerWidth:240.0];
-    [drawerController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
-    [drawerController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    ECSlidingViewController * drawerController = [[ECSlidingViewController alloc] init];
+    [drawerController setTopViewController:[self mapNavController]];
+    [drawerController setUnderLeftViewController:[self historyNavController]];
+    [drawerController setAnchorRightRevealAmount:270.f];
+    [drawerController setUnderLeftWidthLayout:ECFixedRevealWidth];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window setRootViewController:drawerController];
@@ -116,6 +115,24 @@
 //////////////////////////////////////////////////////////////
 #pragma mark  - Getters and setters
 //////////////////////////////////////////////////////////////
+
+- (UINavigationController *)mapNavController {
+    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:self.mapController];
+    UINavigationBar *navBar = [navigationController navigationBar];
+    UIImage *backgroundImage = [UIImage imageNamed:@"header"];
+    [navBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+    
+    return navigationController;
+}
+
+- (UINavigationController *)historyNavController {
+    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:self.historyController];
+    UINavigationBar *navBar = [navigationController navigationBar];
+    UIImage *backgroundImage = [UIImage imageNamed:@"header"];
+    [navBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+    
+    return navigationController;
+}
 
 - (HistoryViewController *)historyController {
     if ( !_historyController ) {

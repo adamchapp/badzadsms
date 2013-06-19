@@ -14,7 +14,7 @@
     NSInteger pin_height;
 }
 
-@property (strong, nonatomic) MMDrawerBarButtonItem *leftDrawerButtonItem;
+@property (strong, nonatomic) UIButton *leftDrawerButtonItem;
 @property (nonatomic, strong) UIButton *plusButton;
 @property (nonatomic, strong) UIButton *saveAnnotationButton;
 @property (nonatomic, strong) UIButton *cancelAnnotationButton;
@@ -58,7 +58,9 @@
 //////////////////////////////////////////////////////////////
 
 - (void)createMenuButtons{
-    self.leftDrawerButtonItem = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(leftDrawerButtonPress:)];
+    self.leftDrawerButtonItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 27, 15)];
+    [self.leftDrawerButtonItem setBackgroundImage:[UIImage imageNamed:@"SidebarButton"] forState:UIControlStateNormal];
+    [self.leftDrawerButtonItem addTarget:self action:@selector(leftDrawerButtonPress:) forControlEvents:UIControlEventTouchUpInside];
     
     self.plusButton = [[UIButton alloc] initWithFrame:CGRectMake(40, -10, 35, 32)];
     [self.plusButton addTarget:self action:@selector(handleSMSButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -249,7 +251,7 @@
 }
 
 -(void)leftDrawerButtonPress:(id)sender{
-    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 - (IBAction)toggleCompass:(id)sender {
@@ -295,8 +297,9 @@
         [self.navigationItem setTitleView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Add_a_Pin"]]];
     } else {
         UIBarButtonItem *standardRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.plusButton];
-
-        [self.navigationItem setLeftBarButtonItem:self.leftDrawerButtonItem animated:NO];
+        UIBarButtonItem *standardLeftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftDrawerButtonItem];
+        
+        [self.navigationItem setLeftBarButtonItem:standardLeftBarButtonItem animated:NO];
         [self.navigationItem setRightBarButtonItem:standardRightBarButtonItem animated:NO];
         
         [self.navigationItem setTitleView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title"]]];
@@ -343,7 +346,7 @@
 
 - (PinViewHeader *)pinViewHeader {
     if ( !_pinViewHeader ) {
-        _pinViewHeader = [[PinViewHeader alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
+        _pinViewHeader = [[PinViewHeader alloc] initWithFrame:CGRectMake(0, 0, 320, 43)];
     }
     return _pinViewHeader;
 }

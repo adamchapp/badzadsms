@@ -6,9 +6,8 @@
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
-#import "MMSideDrawerTableViewCell.h"
-#import "MMSideDrawerSectionHeaderView.h"
 #import "HistoryViewController.h"
+#import "ECSlidingViewController.h"
 #import "Constants.h"
 
 @interface HistoryViewController ()
@@ -32,9 +31,7 @@
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHistoryView:) name:BZCoordinateDataChanged object:nil];
 }
@@ -80,6 +77,7 @@
     
     if ( !cell ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        [cell.textLabel setFont:[UIFont fontWithName:@"Whitney-Book" size:19.f]];
         [cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
     }
     

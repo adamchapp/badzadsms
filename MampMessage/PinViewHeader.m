@@ -23,12 +23,12 @@
         
     UIColor *fillColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     UIColor *underlineColor = [UIColor colorWithRed:0.776 green:0.776 blue:0.773 alpha:1];
-        
+    
     UIBezierPath *rectanglePath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 320, 42)];
     [fillColor setFill];
     [rectanglePath fill];
     
-    UIBezierPath *underline = [UIBezierPath bezierPathWithRect:CGRectMake(0, 43, 320, 44)];
+    UIBezierPath *underline = [UIBezierPath bezierPathWithRect:CGRectMake(0, 42, 320, 43)];
     [underlineColor setFill];
     [underline fill];
 }
@@ -40,7 +40,7 @@
     [nameLabel setTextColor:[UIColor lightGrayColor]];
     [nameLabel setFont:[UIFont fontWithName:@"Whitney-Book" size:18]];
     
-    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(85, 6, 210, 28)];
+    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(85, 8, 210, 28)];
     [self.textField setOpaque:NO];
     [self.textField setBorderStyle:UITextBorderStyleNone];
     [self.textField setFont:[UIFont fontWithName:@"Whitney-Book" size:18]];

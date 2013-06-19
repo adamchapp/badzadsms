@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "URLParser.h"
 #import <MapKit/MapKit.h>
-#import "MMDrawerController.h"
-#import "MMDrawerVisualState.h"
 #import "MapViewController.h"
 #import "HistoryViewController.h"
 #import "UserLocation.h"
