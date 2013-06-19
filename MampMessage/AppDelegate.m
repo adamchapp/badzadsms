@@ -22,9 +22,13 @@
     
     UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:self.mapController];
     UINavigationBar *navBar = [navigationController navigationBar];
-    [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor]];
+    [navBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                    [UIColor whiteColor],NSForegroundColorAttributeName,
+                                    [UIFont fontWithName:@"Whitney-Book" size:20],NSFontAttributeName, nil]];
     UIImage *backgroundImage = [UIImage imageNamed:@"header"];
     [navBar setBackgroundImage:backgroundImage forBarMetrics:UIBarMetricsDefault];
+    
+    [[UILabel appearance] setFont:[UIFont fontWithName:@"Whitney-Book" size:19]];
     
    
     [self checkForFirstRun];
@@ -107,7 +111,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
 }
 
 //////////////////////////////////////////////////////////////

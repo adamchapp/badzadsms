@@ -27,8 +27,9 @@
 @property (nonatomic, assign) id<AnnotationDetailViewDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UILabel *topLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bottomLabel;
+@property (weak, nonatomic) IBOutlet UILabel *creationDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *latitudeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *longitudeLabel;
 
 @property (strong, nonatomic) id <MKAnnotation> annotation;
 
@@ -36,5 +37,6 @@
 
 - (IBAction)sendSMS:(id)sender;
 - (IBAction)removeAnnotation:(id)sender;
+- (IBAction)openLinkInGoogleMaps:(id)sender;
 
 @end

@@ -30,26 +30,20 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.navigationItem setTitle:@"Location"];
-    
-    [self.topLabel setFont:[UIFont fontWithName:@"WhitneyCondensed-Black" size:19]];
-    [self.bottomLabel setFont:[UIFont fontWithName:@"Whitney-Book" size:17]];
-    
     [self.mapView setMapType:MKMapTypeHybrid];
-    [self.topLabel setText:self.annotation.title];
-    
-    NSString *creationTimeAndUserString = [NSString stringWithFormat:@"Created on %@", self.annotation.subtitle];
-    
-    [self.bottomLabel setText:creationTimeAndUserString];
-    
-    UIImageView *pin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"annotation-view-menu"]];
-    [pin setFrame:CGRectMake(0, 0, 29, 40)];
-    [pin setCenter:self.mapView.center];
+
+    [self.navigationItem setTitle:self.annotation.title];
+    [self.creationDateLabel setText:self.annotation.subtitle];    
+    [self.latitudeLabel setText:[NSString stringWithFormat:@"%.4f", self.annotation.coordinate.latitude]];
+    [self.longitudeLabel setText:[NSString stringWithFormat:@"%.4f", self.annotation.coordinate.longitude]];
+    [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-button"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)]];
     
     self.mapView.region = MKCoordinateRegionMakeWithDistance(self.annotation.coordinate, 250, 250);
     [self.mapView setCenterCoordinate:self.annotation.coordinate];
-    
-    [self.mapView addSubview:pin];
+}
+     
+- (void)goBack {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,6 +65,9 @@
 
 - (IBAction)removeAnnotation:(id)sender {
     [self.delegate deleteSelectedAnnotation:self.annotation];
+}
+
+- (IBAction)openLinkInGoogleMaps:(id)sender {
 }
 
 -(UITapGestureRecognizer *)gestureRecognizer {
