@@ -9,8 +9,11 @@
 #import <MapKit/MapKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface UserAnnotationView : MKAnnotationView
+@interface AnnotationView : MKAnnotationView
 
 @property (nonatomic, strong) UILabel *annotationLabel;
+@property (nonatomic, strong) NSString *imagePath;
+
+-(void)setText:(NSString *)text;
 
 @end

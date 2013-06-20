@@ -11,21 +11,28 @@
 #import <MessageUI/MessageUI.h>
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
+
+#import "Constants.h"
+
+#import "ECSlidingViewController.h"
 #import "HistoryViewController.h"
+#import "PinViewHeader.h"
+#import "AnnotationDetailViewController.h"
+
 #import "LocationModel.h"
 #import "UserLocation+Extensions.h"
 #import "KMLLocation+Extensions.h"
-#import "ECSlidingViewController.h"
-#import "Constants.h"
+
 #import "URLParser.h"
+
 #import "KMLAnnotationView.h"
-#import "UserAnnotationView.h"
+#import "AnnotationView.h"
 #import "MapOverlay.h"
 #import "MapOverlayView.h"
-#import "PinViewHeader.h"
+
 #import "DeviceNameUtil.h"
 #import "SMSController.h"
-#import "AnnotationDetailViewController.h"
+
 
 @interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, AnnotationDetailViewDelegate>
 {

@@ -81,13 +81,14 @@
 		3F7C71A917724EF40017770B /* back-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C71A717724EF40017770B /* back-button@2x.png */; };
 		3F7C71B117725D9F0017770B /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C71AE17725D9F0017770B /* ECSlidingViewController.m */; };
 		3F7C71B217725D9F0017770B /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C71B017725D9F0017770B /* UIImage+ImageWithUIView.m */; };
+		3F7C71B4177275150017770B /* Whitney-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3F7C71B3177275150017770B /* Whitney-Semibold.otf */; };
+		3F7C71B71772862A0017770B /* KMLAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7C71B61772862A0017770B /* KMLAnnotationView.m */; };
 		3F81111B1764195400975702 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81111A1764195400975702 /* HistoryViewController.m */; };
 		3F81111D176419B600975702 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F81111C176419B600975702 /* QuartzCore.framework */; };
 		3F81112117642EE300975702 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F81112017642EE300975702 /* LocationModel.m */; };
 		3F8AC87D17694C7900F78ED9 /* Whitney-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3F8AC87C17694C7900F78ED9 /* Whitney-Light.otf */; };
 		3F8AC88117694D4100F78ED9 /* WhitneyCondensed-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3F8AC88017694D4100F78ED9 /* WhitneyCondensed-Black.otf */; };
-		3F8AC888176955A800F78ED9 /* KMLAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8AC8871769556400F78ED9 /* KMLAnnotationView.m */; };
-		3FB25BE6176BCBF900E01B78 /* UserAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB25BE5176BCBF900E01B78 /* UserAnnotationView.m */; };
+		3FB25BE6176BCBF900E01B78 /* AnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB25BE5176BCBF900E01B78 /* AnnotationView.m */; };
 		3FB25BE8176BCE0A00E01B78 /* Whitney-MediumSC.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3FB25BE7176BCE0A00E01B78 /* Whitney-MediumSC.otf */; };
 		3FB25BEA176BF93400E01B78 /* tiles in Resources */ = {isa = PBXBuildFile; fileRef = 3FB25BE9176BF93400E01B78 /* tiles */; };
 		3FB25BED176C031A00E01B78 /* MapTileCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB25BEC176C031A00E01B78 /* MapTileCollection.m */; };
@@ -258,6 +259,9 @@
 		3F7C71AE17725D9F0017770B /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
 		3F7C71AF17725D9F0017770B /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
 		3F7C71B017725D9F0017770B /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
+		3F7C71B3177275150017770B /* Whitney-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Whitney-Semibold.otf"; sourceTree = "<group>"; };
+		3F7C71B51772862A0017770B /* KMLAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLAnnotationView.h; sourceTree = "<group>"; };
+		3F7C71B61772862A0017770B /* KMLAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLAnnotationView.m; sourceTree = "<group>"; };
 		3F8111191764195400975702 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		3F81111A1764195400975702 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		3F81111C176419B600975702 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -265,10 +269,8 @@
 		3F81112017642EE300975702 /* LocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationModel.m; sourceTree = "<group>"; };
 		3F8AC87C17694C7900F78ED9 /* Whitney-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Whitney-Light.otf"; sourceTree = "<group>"; };
 		3F8AC88017694D4100F78ED9 /* WhitneyCondensed-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WhitneyCondensed-Black.otf"; sourceTree = "<group>"; };
-		3F8AC8861769556400F78ED9 /* KMLAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KMLAnnotationView.h; sourceTree = "<group>"; };
-		3F8AC8871769556400F78ED9 /* KMLAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KMLAnnotationView.m; sourceTree = "<group>"; };
-		3FB25BE4176BCBF900E01B78 /* UserAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAnnotationView.h; sourceTree = "<group>"; };
-		3FB25BE5176BCBF900E01B78 /* UserAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAnnotationView.m; sourceTree = "<group>"; };
+		3FB25BE4176BCBF900E01B78 /* AnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationView.h; sourceTree = "<group>"; };
+		3FB25BE5176BCBF900E01B78 /* AnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationView.m; sourceTree = "<group>"; };
 		3FB25BE7176BCE0A00E01B78 /* Whitney-MediumSC.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Whitney-MediumSC.otf"; sourceTree = "<group>"; };
 		3FB25BE9176BF93400E01B78 /* tiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tiles; sourceTree = "<group>"; };
 		3FB25BEB176C031A00E01B78 /* MapTileCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapTileCollection.h; path = MampMessage/MapTileCollection.h; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 		3F03B69B176A96C000469072 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				3F7C71B3177275150017770B /* Whitney-Semibold.otf */,
 				3F4C78DA176CD03300F357D4 /* Whitney-Book.otf */,
 				3FB25BE7176BCE0A00E01B78 /* Whitney-MediumSC.otf */,
 				3F8AC88017694D4100F78ED9 /* WhitneyCondensed-Black.otf */,
@@ -724,10 +727,10 @@
 				3FEE8423176A375400E54628 /* MapTile.m */,
 				3F03B708176B8EC600469072 /* PinViewHeader.h */,
 				3F03B709176B8EC600469072 /* PinViewHeader.m */,
-				3F8AC8861769556400F78ED9 /* KMLAnnotationView.h */,
-				3F8AC8871769556400F78ED9 /* KMLAnnotationView.m */,
-				3FB25BE4176BCBF900E01B78 /* UserAnnotationView.h */,
-				3FB25BE5176BCBF900E01B78 /* UserAnnotationView.m */,
+				3FB25BE4176BCBF900E01B78 /* AnnotationView.h */,
+				3FB25BE5176BCBF900E01B78 /* AnnotationView.m */,
+				3F7C71B51772862A0017770B /* KMLAnnotationView.h */,
+				3F7C71B61772862A0017770B /* KMLAnnotationView.m */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -1027,6 +1030,7 @@
 				3F7C71A417724EEC0017770B /* send-button.png in Resources */,
 				3F0A62E7176D2C62006D61CF /* MapMessage_Icon.png in Resources */,
 				3F0A62E9176D2C66006D61CF /* MapMessage_Icon@2x.png in Resources */,
+				3F7C71B4177275150017770B /* Whitney-Semibold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1065,12 +1069,12 @@
 				EEE9CFBB1769D6B800070A29 /* MagicalRecord+Actions.m in Sources */,
 				3F60C4341763BE140043EB2A /* main.m in Sources */,
 				3F60C4381763BE140043EB2A /* AppDelegate.m in Sources */,
+				3F7C71B71772862A0017770B /* KMLAnnotationView.m in Sources */,
 				EEE9CFBC1769D6B800070A29 /* MagicalRecord+ErrorHandling.m in Sources */,
 				EEE9CFB51769D6B800070A29 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				EEE9CFBA1769D6B800070A29 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
 				EEE9CFAC1769D6B800070A29 /* NSObject+MagicalDataImport.m in Sources */,
 				EEE9CFB71769D6B800070A29 /* NSManagedObjectContext+MagicalThreading.m in Sources */,
-				3F8AC888176955A800F78ED9 /* KMLAnnotationView.m in Sources */,
 				EEE9CFAB1769D6B800070A29 /* NSNumber+MagicalDataImport.m in Sources */,
 				3F60C4411763BE140043EB2A /* MapMessage.xcdatamodeld in Sources */,
 				3F60C4671763C3AA0043EB2A /* MapViewController.m in Sources */,
@@ -1098,7 +1102,7 @@
 				EEE9CFAD1769D6B800070A29 /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				EEE9CFBD1769D6B800070A29 /* MagicalRecord+iCloud.m in Sources */,
 				3F0E2F101765504200D41BD6 /* PrettyNavigationController.m in Sources */,
-				3FB25BE6176BCBF900E01B78 /* UserAnnotationView.m in Sources */,
+				3FB25BE6176BCBF900E01B78 /* AnnotationView.m in Sources */,
 				3F0E2F251765508B00D41BD6 /* PrettyCustomViewTableViewCell.m in Sources */,
 				3F4C78F4176D1E0A00F357D4 /* SMSController.m in Sources */,
 				3F0E2F261765508B00D41BD6 /* PrettyGridTableViewCell.m in Sources */,

@@ -76,6 +76,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Whitney-Semibold.otf</string>
 		<string>Whitney-Book.otf</string>
 		<string>Whitney-MediumSC.otf</string>
 		<string>WhitneyCondensed-Black.otf</string>

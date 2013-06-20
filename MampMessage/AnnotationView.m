@@ -6,24 +6,27 @@
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
-#import "UserAnnotationView.h"
+#import "AnnotationView.h"
 
-@implementation UserAnnotationView
+@implementation AnnotationView
 
 - (id)initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.annotationLabel = [[UILabel alloc] initWithFrame:CGRectMake(-30,-32,85,48)];
-        [self.annotationLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.annotationLabel setFont:[UIFont fontWithName:@"Whitney-MediumSC" size:12]];
-        [self.annotationLabel setBackgroundColor:[UIColor clearColor]];
-        [self addSubview:self.annotationLabel];
-        
         self.image = [UIImage imageNamed:[self pathForUnselectedImage]];
         self.layer.anchorPoint = CGPointMake(0.5f, 1.0f);
         self.canShowCallout = YES;
         self.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        
+        self.annotationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,125,24)];
+        [self.annotationLabel setTextAlignment:NSTextAlignmentCenter];
+        [self.annotationLabel setFont:[UIFont fontWithName:@"Whitney-Semibold" size:14]];
+        [self.annotationLabel setBackgroundColor:rgb(216,223,219)];
+        [self.annotationLabel setAlpha:0.6];
+        [self.annotationLabel setNumberOfLines:0];
+                
+        [self addSubview:self.annotationLabel];
     }
     return self;
 }
@@ -44,6 +47,11 @@
     return @"annotation-view-user";
 }
 
+- (void)setText:(NSString *)text {
+    [self.annotationLabel setText:text];
+    [self.annotationLabel sizeToFit];
+    [self.annotationLabel setCenter:CGPointMake((self.frame.size.width/2), -15)];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

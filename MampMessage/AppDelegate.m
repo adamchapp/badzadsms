@@ -27,9 +27,9 @@
     [[UILabel appearance] setFont:whitney];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                     white,
-                                    NSForegroundColorAttributeName,
+                                    UITextAttributeTextColor,
                                     whitney,
-                                    NSFontAttributeName, nil]];
+                                    UITextAttributeFont, nil]];
     [[[UIButton appearance] titleLabel] setFont:whitney];
     
     [self checkForFirstRun];

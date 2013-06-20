@@ -46,6 +46,14 @@
     [self setEditing:NO];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    self.view.layer.shadowOpacity = 0.75f;
+    self.view.layer.shadowRadius = 10.0f;
+    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -266,22 +274,6 @@
     [self.pinViewHeader hideKeyboard:sender];
 }
 
-- (void)toggleAnnotationLabelColors:(BOOL)isWhite
-{
-    for (id<MKAnnotation> annotation in mapView.annotations){
-        
-        if ( ![annotation isKindOfClass:[MKUserLocation class]]) {
-            
-            KMLAnnotationView* view = (KMLAnnotationView *)[mapView viewForAnnotation:annotation];
-            if (view){
-                
-                UIColor *textColor = (isWhite == YES) ? [UIColor whiteColor] : [UIColor blackColor];
-                [view.annotationLabel setTextColor:textColor];
-            }
-        }
-    }
-}
-
 - (void)toggleMenuItems:(BOOL)isEditing
 {
     if ( isEditing ) {
@@ -311,11 +303,9 @@
     if ( [mapView mapType] == MKMapTypeStandard ) {
         [mapView setMapType:MKMapTypeHybrid];
         [satelliteButton setBackgroundImage:[UIImage imageNamed:@"SatelliteSelected"] forState:UIControlStateNormal];
-        [self toggleAnnotationLabelColors:YES];
     } else if ( [mapView mapType] == MKMapTypeHybrid ) {
         [mapView setMapType:MKMapTypeStandard];
         [satelliteButton setBackgroundImage:[UIImage imageNamed:@"SatelliteUnselected"] forState:UIControlStateNormal];
-        [self toggleAnnotationLabelColors:NO];
     }
 }
 
@@ -376,17 +366,20 @@
         //Don't trample the user location annotation (pulsing blue dot).
         return nil;
     }
-   
+    
+    //
+    // NB need two classes here as we need two identifiers to prevent the wrong symbol being used
+    //
     static NSString *kmlIdentifier = @"kmlIdentifier";
     static NSString *userIdentifier = @"userIdentifier";
     
     if ( [annotation isKindOfClass:[UserLocation class]]) {
-        UserAnnotationView *annotationView = (UserAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:userIdentifier];
+        AnnotationView *annotationView = (AnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:userIdentifier];
         
         if (annotationView == nil) {
-            annotationView = [[UserAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:userIdentifier];
+            annotationView = [[AnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:userIdentifier];
         }
-        [annotationView.annotationLabel setText:[annotation title]];
+        [annotationView setText:annotation.title];
         
         return annotationView;
     } else {
@@ -395,7 +388,7 @@
         if (annotationView == nil) {
             annotationView = [[KMLAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kmlIdentifier];
         }
-        [annotationView.annotationLabel setText:[annotation title]];
+        [annotationView setText:annotation.title];
         
         return annotationView;
     }
