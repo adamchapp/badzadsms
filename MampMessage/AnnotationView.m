@@ -24,7 +24,7 @@
         [self.annotationLabel setFont:[UIFont fontWithName:@"Whitney-Semibold" size:14]];
         [self.annotationLabel setBackgroundColor:rgb(216,223,219)];
         [self.annotationLabel setAlpha:0.6];
-        [self.annotationLabel setNumberOfLines:0];
+        [self.annotationLabel setNumberOfLines:1];
                 
         [self addSubview:self.annotationLabel];
     }
@@ -35,7 +35,7 @@
     [super setSelected:selected animated:animated];
     
     if ( selected ) {
-        self.image = [UIImage imageNamed:@"annotation-view"];
+        self.image = [UIImage imageNamed:@"annotation-view-selected"];
         [self.annotationLabel setHidden:YES];
     } else {
         self.image = [UIImage imageNamed:[self pathForUnselectedImage]];
@@ -44,7 +44,7 @@
 }
 
 -(NSString *)pathForUnselectedImage {
-    return @"annotation-view-user";
+    return @"annotation-view-unselected";
 }
 
 - (void)setText:(NSString *)text {

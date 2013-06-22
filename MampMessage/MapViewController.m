@@ -121,7 +121,7 @@
     //load user annotations
     for (UserLocation *location in self.locationModel.userLocations) {
         if (  [[location isVisible] boolValue] == YES ) {
-            [mapView addAnnotation:location];
+            [mapView addAnnotation:(id<MKAnnotation>)location];
         }
     }
 }
@@ -129,9 +129,7 @@
 - (void)deleteSelectedAnnotation:(id<MKAnnotation>)annotation
 {
     if ( [annotation isKindOfClass:[UserLocation class]] ) {
-        NSLog(@"Removing annotation");
-        [self.locationModel removeUserLocation:(UserLocation *)annotation];
-        
+        [self.locationModel removeUserLocation:(UserLocation *)annotation];        
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
@@ -139,12 +137,12 @@
 - (void)setStartingLocation
 {
     // Set the starting game location.
-    CLLocationCoordinate2D startingLocation;
-    startingLocation.latitude = 51.154047246473084;
-    startingLocation.longitude =-2.5871944427490234;
-    
-    mapView.region = MKCoordinateRegionMakeWithDistance(startingLocation, 1000, 1000);
-    [mapView setCenterCoordinate:startingLocation];
+//    CLLocationCoordinate2D startingLocation;
+//    startingLocation.latitude = 51.154047246473084;
+//    startingLocation.longitude =-2.5871944427490234;
+//    
+//    mapView.region = MKCoordinateRegionMakeWithDistance(startingLocation, 1000, 1000);
+//    [mapView setCenterCoordinate:startingLocation];
 }
 
 //////////////////////////////////////////////////////////////
@@ -162,7 +160,7 @@
     CGPoint point = [gesture locationInView:mapView];
     point.y -= pin_height/2;
     
-    self.dropPin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"drop-pin"]];
+    self.dropPin = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"annotation-view-selected"]];
     [self.dropPin setFrame:CGRectMake(0, 0, pin_width, pin_height)];
     [self.dropPin setCenter:point];
     
@@ -176,7 +174,7 @@
     //move the header off screen
     [self.pinViewHeader setFrame:CGRectMake(0, -pinFrame.size.height, pinFrame.size.width, pinFrame.size.height)];
     
-    [UIView animateWithDuration:0.1
+    [UIView animateWithDuration:0.2
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
@@ -207,7 +205,7 @@
 
     [self.pinViewHeader.textField setText:@""];
     
-    [UIView animateWithDuration:0.1
+    [UIView animateWithDuration:0.2
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
@@ -336,7 +334,7 @@
 
 - (PinViewHeader *)pinViewHeader {
     if ( !_pinViewHeader ) {
-        _pinViewHeader = [[PinViewHeader alloc] initWithFrame:CGRectMake(0, 0, 320, 43)];
+        _pinViewHeader = [[PinViewHeader alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
     }
     return _pinViewHeader;
 }

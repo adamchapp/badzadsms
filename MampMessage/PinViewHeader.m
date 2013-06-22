@@ -24,23 +24,23 @@
     UIColor *fillColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     UIColor *underlineColor = [UIColor colorWithRed:0.776 green:0.776 blue:0.773 alpha:1];
     
-    UIBezierPath *rectanglePath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 320, 42)];
+    UIBezierPath *rectanglePath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 320, 44)];
     [fillColor setFill];
     [rectanglePath fill];
     
-    UIBezierPath *underline = [UIBezierPath bezierPathWithRect:CGRectMake(0, 42, 320, 43)];
+    UIBezierPath *underline = [UIBezierPath bezierPathWithRect:CGRectMake(0, 44, 320, 45)];
     [underlineColor setFill];
     [underline fill];
 }
 
 - (void)loadSubviews {
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 55, 28)];
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 6, 55, 28)];
     [nameLabel setText:@"Name:"];
     [nameLabel setTextColor:[UIColor lightGrayColor]];
     [nameLabel setFont:[UIFont fontWithName:@"Whitney-Book" size:18]];
     
-    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(85, 8, 210, 28)];
+    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(85, 10, 210, 28)];
     [self.textField setOpaque:NO];
     [self.textField setBorderStyle:UITextBorderStyleNone];
     [self.textField setFont:[UIFont fontWithName:@"Whitney-Book" size:18]];
@@ -62,7 +62,6 @@
 
 - (void)hideKeyboard:(id)sender
 {
-    NSLog(@"is this being called too much");
    [self.textField endEditing:NO];
 }
 

@@ -36,7 +36,17 @@
     [self.creationDateLabel setText:self.annotation.subtitle];    
     [self.latitudeLabel setText:[NSString stringWithFormat:@"%.4f", self.annotation.coordinate.latitude]];
     [self.longitudeLabel setText:[NSString stringWithFormat:@"%.4f", self.annotation.coordinate.longitude]];
-    [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-button"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)]];
+
+    if(self.navigationController.viewControllers.count > 1) {
+        UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [backButton setBackgroundImage:[UIImage imageNamed:@"back-button"] forState:UIControlStateNormal];
+        [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+        backButton.frame = CGRectMake(0.0f, 0.0f, 49.0f, 17.0f);
+        UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        
+        self.navigationItem.leftBarButtonItem = backButtonItem;
+    }
     
     self.mapView.region = MKCoordinateRegionMakeWithDistance(self.annotation.coordinate, 250, 250);
     [self.mapView setCenterCoordinate:self.annotation.coordinate];

@@ -11,7 +11,7 @@
 @implementation KMLAnnotationView
 
 -(NSString *)pathForUnselectedImage {
-    return @"annotation-view-unselected";
+    return @"annotation-view-kml";
 }
 
 @end

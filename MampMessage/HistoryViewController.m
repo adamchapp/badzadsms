@@ -12,6 +12,8 @@
 
 @interface HistoryViewController ()
 
+@property (nonatomic, strong) UIButton *editButton;
+
 @end
 
 @implementation HistoryViewController
@@ -31,14 +33,35 @@
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    self.editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 13)];
+    [self.editButton addTarget:self action:@selector(toggleEditingMode) forControlEvents:UIControlEventTouchUpInside];
+    [self.editButton setBackgroundImage:[UIImage imageNamed:@"edit-button"] forState:UIControlStateNormal];
+    [self.editButton setBackgroundImage:[UIImage imageNamed:@"done-button"] forState:UIControlStateSelected];
+    
+    UIBarButtonItem *editBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.editButton];
+    
+    self.navigationItem.leftBarButtonItem = editBarButtonItem;
     [self.navigationItem setTitle:@"Locations"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHistoryView:) name:BZCoordinateDataChanged object:nil];
 }
 
+- (void)toggleEditingMode {
+    NSLog(@"toggle editing");
+    
+    if ( self.isEditing ) {
+        [self setEditing:NO animated:YES];
+        [self.editButton setBackgroundImage:[UIImage imageNamed:@"edit-button"] forState:UIControlStateNormal];
+        [self.editButton setFrame:CGRectMake(0, 0, 25, 13)];
+    } else {
+        [self setEditing:YES animated:YES];
+        [self.editButton setBackgroundImage:[UIImage imageNamed:@"done-button"] forState:UIControlStateNormal];
+        [self.editButton setFrame:CGRectMake(0, 0, 36, 13)];
+    }
+}
+
 - (void)reloadHistoryView:(id)sender {
-    NSLog(@"Reloading history view items");
     [self.tableView reloadData];
 }
 
@@ -118,7 +141,7 @@
         case 0:
             return @"User locations";
         case 1:
-            return @"KML preset locations";
+            return @"Imported (KML) locations";
         case 2:
             return @"Map tiles";
         default:
