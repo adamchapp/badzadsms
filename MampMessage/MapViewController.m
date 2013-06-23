@@ -120,7 +120,7 @@
     [mapView addAnnotations:self.locationModel.userLocations];
     
     for ( Location *location in self.locationModel.userLocations ) {
-        if ( location.selected == [NSNumber numberWithBool:YES] )
+        if ( [location.selected boolValue] == YES )
         {
             NSLog(@"[MVC] Setting destination in location model...");
             [self.locationModel setDestination:location];
@@ -128,7 +128,7 @@
     }
     
     for ( Location *kmlLocation in self.locationModel.kmlLocations ) {
-        if ( kmlLocation.selected == [NSNumber numberWithBool:YES] )
+        if ( [kmlLocation.selected boolValue] == YES )
         {
             NSLog(@"[MVC] Setting (kml) destination in location model...");
             [self.locationModel setDestination:kmlLocation];
@@ -144,6 +144,20 @@
     
     MKMapRect zoomRect = MKMapRectNull;
     
+    #warning This seems a bit excessive is there a way of not forcing a redraw on all items?
+    for (id<MKAnnotation> myAnnot in self.locationModel.userLocations){
+        AnnotationView* view = (AnnotationView *)[mapView viewForAnnotation:myAnnot];
+        view.image = [UIImage imageNamed:@"annotation-view-unselected"];
+    }
+    
+    for (id<MKAnnotation> myAnnot in self.locationModel.kmlLocations){
+        KMLAnnotationView* view = (KMLAnnotationView *)[mapView viewForAnnotation:myAnnot];
+        view.image = [UIImage imageNamed:@"annotation-view-kml"];
+    }
+    
+    //intersect with destination
+    if ( self.locationModel.currentDestination == nil ) return;
+        
     //create zoom rect from user location
     if ( self.latitude != 0.000 & self.longitude != 0.000 ) {
         NSLog(@"Have user location %.4f/%.4f", self.latitude, self.longitude);
@@ -153,21 +167,15 @@
         NSLog(@"Don't have user location");
     }
     
-    //intersect with destination
-    if ( self.locationModel.currentDestination ) {
-        
-        id <MKAnnotation>annotation = (id <MKAnnotation>)self.locationModel.currentDestination;
-        MKAnnotationView *annotationView = [mapView viewForAnnotation:annotation];
-        [annotationView setImage:[UIImage imageNamed:@"annotation-view-destination"]];
-        
-        NSLog(@"Have current destination %.4f/%.4f", self.locationModel.currentDestination.coordinate.latitude, self.locationModel.currentDestination.coordinate.longitude);
-        MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationModel.currentDestination.coordinate);
-        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-        zoomRect = MKMapRectUnion(zoomRect, pointRect);
-    } else {
-        NSLog(@"Don't have current destination");
-    }
-
+    id <MKAnnotation>annotation = (id <MKAnnotation>)self.locationModel.currentDestination;
+    MKAnnotationView *annotationView = [mapView viewForAnnotation:annotation];
+    [annotationView setSelected:YES animated:YES];
+    
+    NSLog(@"Have current destination %.4f/%.4f", self.locationModel.currentDestination.coordinate.latitude, self.locationModel.currentDestination.coordinate.longitude);
+    MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationModel.currentDestination.coordinate);
+    MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+    zoomRect = MKMapRectUnion(zoomRect, pointRect);
+    
     [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(25, 25, 25, 25) animated:YES];
 }
 

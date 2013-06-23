@@ -37,8 +37,8 @@
     Location *location = (Location *)self.annotation;
     
     //if this annotation is the current destination, just show that image
-    //otherwise toggle between selected and unselected
-    if ( location.selected == [NSNumber numberWithBool:YES] ) {
+    //otherwise toggle between selected and unselected    
+    if ( [location.selected boolValue] == YES ) {
         self.image = [UIImage imageNamed:@"annotation-view-destination"];
     } else {
         if ( selected ) {

@@ -127,16 +127,7 @@
     newLocation.latitude = [NSNumber numberWithDouble:latitude];
     newLocation.longitude = [NSNumber numberWithDouble:longitude];
     newLocation.selected = [NSNumber numberWithBool:YES];
-    
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"item was saved to persistent store");
-        }
-        else {
-            NSLog(@"item was not saved");
-        }
-    }];
-    
+        
     self.confirmBlock = nil;
     
     [self setDestination:newLocation];
