@@ -24,25 +24,37 @@
 #pragma mark  - Locations
 //////////////////////////////////////////////////////////////
 
-- (BOOL)isLocationValid:(NSString *)title
+/**
+ Checks for an exising location and compares the timestamp to see 
+ if the proposed location is newer than the existing one
+ */
+- (BOOL)isLocationValid:(NSString *)title timestamp:(NSDate *)timestamp
 {
-//    Location *location = [self.creator locationFromURL:url parser:parser formatter:self.formatter];
-//    
-//    Location *previousLocation;// = [self.locationModel getLocationByName:location.title];
-//    
-//    if ( previousLocation ) {
-//        
-//        NSDate *previousDate = [previousLocation timestamp];
-//        NSDate *newDate = [location timestamp];
-//        
-//        if ([previousDate compare:newDate] == NSOrderedDescending) {
-//            return NO;
-//        } else if ([previousDate compare:newDate] == NSOrderedAscending) {
-//            return YES;
-//        }
-//    } else {
+    Location *previousLocation = [[Location MR_findByAttribute:@"title" withValue:title inContext:self.context] firstObject];
+    
+    if ( !previousLocation ) return YES;
+    
+    if ( [previousLocation isKindOfClass:[UserLocation class]] ) {
+        NSDate *previousDate = [(UserLocation *)previousLocation timestamp];
+        return ( [self isDate:timestamp laterThanPreviousDate:previousDate] ) ? YES : NO;
+        
+    } else if ( [previousLocation isKindOfClass:[KMLLocation class]] ) {
+        
+    } else if ( [previousLocation isKindOfClass:[MapTileCollection class]] ) {
+        
+    }
+    
+    return YES;
+}
+
+- (BOOL)isDate:(NSDate *)newDate laterThanPreviousDate:(NSDate *)previousDate {
+    //new date is earlier than previousDate
+    if ([newDate compare:previousDate] == NSOrderedAscending) {
+        return NO;
+    } else if ([newDate compare:previousDate] == NSOrderedDescending) {
         return YES;
-//    }
+    }
+    return YES;
 }
 
 - (void)showAlertView:(NSString *)locationTitle
@@ -50,16 +62,21 @@
     NSString *message = [NSString stringWithFormat:@"Are you sure you want to replace the current location for %@ with an older one?", locationTitle];
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:message delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-    
-    //            completionBlock = ^{
-    //                //[self addLocation:location];
-    //            };
+    [alertView setDelegate:self];
     
     [alertView show];
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( buttonIndex == 1 ) {
+        self.confirmBlock();
+    }
+}
+
 - (void)addUserLocationFromURL:(NSURL *)url
 {
+    NSLog(@"[LM] Adding new user location from URL");
     self.urlParser = [[URLParser alloc] initWithURLString:url.absoluteString];
     
     NSString *title = [[self.urlParser valueForVariable:@"title"] stringByReplacingOccurrencesOfString:@"-" withString:@" "];
@@ -71,7 +88,17 @@
     double latitude = [[self.urlParser valueForVariable:@"lat"] doubleValue];
     double longitude = [[self.urlParser valueForVariable:@"long"] doubleValue];
     
-    [self addUserLocationWithTitle:title sender:sender timestamp:timestamp latitude:latitude longitude:longitude isVisible:YES];
+    __weak typeof(self) weakSelf = self;
+    
+    self.confirmBlock = ^ {
+        [weakSelf addUserLocationWithTitle:title sender:sender timestamp:timestamp latitude:latitude longitude:longitude selected:YES];
+    };
+    
+    if ( [self isLocationValid:title timestamp:timestamp] ) {
+        self.confirmBlock();
+    } else {
+        [self showAlertView:title];
+    }
 }
 
 - (void)addUserLocationWithTitle:(NSString *)title
@@ -79,19 +106,27 @@
                        timestamp:(NSDate *)timestamp
                         latitude:(double)latitude
                        longitude:(double)longitude
-                       isVisible:(BOOL)isVisible
+                       selected:(BOOL)selected
 {
     NSDateFormatter *readableFormatter = [[NSDateFormatter alloc] init];
     [readableFormatter setDateFormat:BZReadableDateFormat];
     
-    UserLocation *location = [UserLocation MR_createInContext:self.context];
-    location.sender = sender;
-    location.title = title;
-    location.subtitle = [readableFormatter stringFromDate:timestamp];
-    location.timestamp = timestamp;
-    location.latitude = [NSNumber numberWithDouble:latitude];
-    location.longitude = [NSNumber numberWithDouble:longitude];
-    location.isVisible = [NSNumber numberWithBool:YES];
+    UserLocation *previousLocation = [[UserLocation MR_findByAttribute:@"title" withValue:title inContext:self.context] firstObject];
+    UserLocation *newLocation;
+    
+    if ( previousLocation ) {
+        newLocation = previousLocation;
+    } else {
+        newLocation = [UserLocation MR_createInContext:self.context];
+    }
+    
+    newLocation.sender = sender;
+    newLocation.title = title;
+    newLocation.subtitle = [readableFormatter stringFromDate:timestamp];
+    newLocation.timestamp = timestamp;
+    newLocation.latitude = [NSNumber numberWithDouble:latitude];
+    newLocation.longitude = [NSNumber numberWithDouble:longitude];
+    newLocation.selected = [NSNumber numberWithBool:YES];
     
     [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if ( success ) {
@@ -102,50 +137,27 @@
         }
     }];
     
+    self.confirmBlock = nil;
+    
+    [self setDestination:newLocation];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
 - (void)removeUserLocation:(UserLocation *)location
 {
     [location MR_deleteInContext:self.context];
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"item was deleted from persistent store");
-        }
-        else {
-            NSLog(@"item was not deleted");
-        }
-    }];
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
-- (void)showUserLocation:(UserLocation *)location
+- (void)setUserLocationAsSelected:(UserLocation *)location
 {
-    [location setIsVisible:[NSNumber numberWithBool:YES]];
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"item show/hide was updated in persistent store (to show)");
-        }
-        else {
-            NSLog(@"item show/hide was not updated");
-        }
-    }];
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+    [location setSelected:[NSNumber numberWithBool:YES]];    
 }
 
-- (void)hideUserLocation:(UserLocation *)location
+- (void)setUserLocationAsDeselected:(UserLocation *)location
 {
-    [location setIsVisible:[NSNumber numberWithBool:NO]];
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"item show/hide was updated in persistent store (to hide)");
-        }
-        else {
-            NSLog(@"item show/hide was not updated");
-        }
-    }];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+    [location setSelected:[NSNumber numberWithBool:NO]];
 }
 
 - (UserLocation *)getUserLocationByName:(NSString *)name
@@ -154,29 +166,58 @@
     return location;
 }
 
+- (void)setDestination:(Location *)destination
+{
+    NSLog(@"[LM] Setting destination");
+    
+    if ( [self.currentDestination isKindOfClass:[UserLocation class]] ) {
+        [self setUserLocationAsDeselected:(UserLocation *)self.currentDestination];
+    } else {
+        [self setKMLLocationAsDeselected:(KMLLocation *)self.currentDestination];
+    }
+    
+    if ( destination ) {
+        if ([destination isKindOfClass:[UserLocation class]] ) {
+            [self setUserLocationAsSelected:(UserLocation *)destination];
+        } else {
+            [self setKMLLocationAsSelected:(KMLLocation *)destination];
+        }
+    }
+    
+    self.currentDestination = destination;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+}
+
 //////////////////////////////////////////////////////////////
 #pragma mark  - KML Locations
 //////////////////////////////////////////////////////////////
 
 - (void)addKMLLocationFromURL:(NSURL *)url
-{
+{        
+    self.kmlParser = [[KMLParser alloc] initWithURL:url];
+    [self.kmlParser parseKML];
     
-    NSString *filenameWithExtension = [url lastPathComponent];
-    NSString *filename = [filenameWithExtension stringByDeletingPathExtension];
+    // Add all of the MKOverlay objects parsed from the KML file to the map.
+    NSArray *kmlAnnotations = [self.kmlParser points];
+    
+    for ( id<MKAnnotation>annotation in kmlAnnotations ) {
         
-    KMLLocation *location = [KMLLocation MR_createInContext:self.context];
-    location.title = filename;
-    location.locationFilePath = url.path;
-    location.isVisible = [NSNumber numberWithBool:YES];
-    
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"kmlLocation was saved in persistent store");
+        KMLLocation *location;
+        KMLLocation *previousLocation = [[KMLLocation MR_findByAttribute:@"title" withValue:annotation.title inContext:self.context] firstObject];
+        
+        if ( previousLocation ) {
+            location = previousLocation;
+        } else {
+            location = [KMLLocation MR_createInContext:self.context];
         }
-        else {
-            NSLog(@"kmlLocation was not saved");
-        }
-    }];
+        
+        location.title = annotation.title;
+        location.subtitle = annotation.subtitle;
+        location.latitude = [NSNumber numberWithDouble:annotation.coordinate.latitude];
+        location.longitude = [NSNumber numberWithDouble:annotation.coordinate.longitude];
+        location.selected = [NSNumber numberWithBool:NO];
+    }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
@@ -184,47 +225,17 @@
 - (void)removeKMLLocation:(KMLLocation *)location
 {
     [location MR_deleteInContext:self.context];
-    
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"kmlLocation was deleted from persistent store");
-        }
-        else {
-            NSLog(@"kmlLocation was not deleted");
-        }
-    }];
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
-- (void)showKMLLocation:(KMLLocation *)location
+- (void)setKMLLocationAsSelected:(KMLLocation *)location
 {
-    [location setIsVisible:[NSNumber numberWithBool:YES]];
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"kmlLocation show/hide was updated in persistent store (to show)");
-        }
-        else {
-            NSLog(@"kmlLocation show/hide was not updated");
-        }
-    }];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+    [location setSelected:[NSNumber numberWithBool:YES]];    
 }
 
-- (void)hideKMLLocation:(KMLLocation *)location
+- (void)setKMLLocationAsDeselected:(KMLLocation *)location
 {
-    [location setIsVisible:[NSNumber numberWithBool:NO]];
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"kmlLocation show/hide was updated in persistent store (to hide)");
-        }
-        else {
-            NSLog(@"kmlLocation show/hide was not updated");
-        }
-    }];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+    [location setSelected:[NSNumber numberWithBool:NO]];
 }
 
 //////////////////////////////////////////////////////////////
@@ -258,7 +269,7 @@
             NSLog(@"MapTileCollection was deleted from persistent store");
         }
         else {
-            NSLog(@"MapTileCollection was not delete");
+            NSLog(@"MapTileCollection was not deleted");
         }
     }];
 }
@@ -266,31 +277,26 @@
 - (void)showMapTileCollection:(MapTileCollection *)location
 {
     [location setIsVisible:[NSNumber numberWithBool:YES]];
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"maptilecollection show/hide was updated in persistent store (to show)");
-        }
-        else {
-            NSLog(@"maptilecollection show/hide was not updated");
-        }
-    }];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BZMapTileCollectionLoaded object:nil];
 }
 
 - (void)hideMapTileCollection:(MapTileCollection *)location
 {
     [location setIsVisible:[NSNumber numberWithBool:NO]];
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"maptilecollection show/hide was updated in persistent store (to hide)");
-        }
-        else {
-            NSLog(@"maptilecollection show/hide was not updated");
-        }
-    }];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BZMapTileCollectionLoaded object:nil];
+}
+
+- (void)saveContext {
+    if ( [self.context hasChanges] ) {
+        [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            if ( success ) {
+                NSLog(@"all items were saved successfully");
+            }
+            else {
+                NSLog(@"there was an error saving one or more of the items : %@", error.debugDescription);
+            }
+        }];
+    }
 }
 
 //////////////////////////////////////////////////////////////
@@ -345,30 +351,6 @@
     }
     
     return collectionViews;
-}
-
-- (NSArray *)kmlLocationViews {
-    NSArray *kmlLocations = [KMLLocation MR_findAllSortedBy:@"title" ascending:YES inContext:self.context];
-    
-    NSMutableArray *kmlViews = [NSMutableArray array];
-    
-    for ( KMLLocation *location in kmlLocations ) {
-        BOOL showItem = [[location isVisible] boolValue];
-        
-        if ( showItem == YES ) {
-            
-            NSURL *url = [NSURL fileURLWithPath:[location locationFilePath]];
-            self.kmlParser = [[KMLParser alloc] initWithURL:url];
-            [self.kmlParser parseKML];
-            
-            // Add all of the MKOverlay objects parsed from the KML file to the map.
-            NSArray *kmlAnnotations = [self.kmlParser points];
-            
-            [kmlViews addObject:kmlAnnotations];
-        }
-    }
-    
-    return kmlViews;
 }
 
 //////////////////////////////////////////////////////////////

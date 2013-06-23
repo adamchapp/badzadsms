@@ -145,7 +145,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="openLinkInGoogleMaps:" destination="LPc-19-oZ8" eventType="touchUpInside" id="YOR-0m-KLr"/>
+                                    <action selector="openLinkInExternalMapApp:" destination="LPc-19-oZ8" eventType="touchUpInside" id="NQd-Oo-0Xg"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtX-lJ-gwG">

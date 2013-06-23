@@ -10,27 +10,8 @@
 
 @implementation KMLLocation (Extensions)
 
-- (id)initWithTitle:(NSString *)title path:(NSString *)overlayPath isVisible:(BOOL)visible
-{
-    self = [super init];
-    
-    if ( self ) {
-        self.title = title;
-        self.locationFilePath = overlayPath;
-        self.isVisible = [NSNumber numberWithBool:visible];
-    }
-    
-    return self;
-}
-
-+ (KMLLocation *)locationFromURL:(NSURL *)url
-{
-    NSString *filenameWithExtension = [url lastPathComponent];
-    NSString *filename = [filenameWithExtension stringByDeletingPathExtension];
-    
-    KMLLocation *kmlLocation = [[self alloc] initWithTitle:filename path:url.path isVisible:YES];
-    
-    return kmlLocation;
+-(CLLocationCoordinate2D)coordinate {
+    return CLLocationCoordinate2DMake([self.latitude doubleValue], [self.longitude doubleValue]);
 }
 
 @end

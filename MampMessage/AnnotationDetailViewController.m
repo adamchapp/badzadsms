@@ -60,15 +60,20 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    self.latitudeLabel = nil;
+    self.longitudeLabel = nil;
+    self.creationDateLabel = nil;
+    self.mapView = nil;
 }
 
 - (IBAction)sendSMS:(id)sender {
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:BZReadableDateFormat];
-    NSDate *formattedDate = [formatter dateFromString:self.annotation.subtitle];
     [formatter setDateFormat:BZDateFormat];
-    NSString *formattedTimeStamp = [formatter stringFromDate:formattedDate];
+
+    NSDate *date = [NSDate date];
+    NSString *formattedTimeStamp = [formatter stringFromDate:date];
     
     [self.delegate sendSMSNamed:self.annotation.title timestamp:formattedTimeStamp latitude:self.annotation.coordinate.latitude longitude:self.annotation.coordinate.longitude];
 }
@@ -77,8 +82,42 @@
     [self.delegate deleteSelectedAnnotation:self.annotation];
 }
 
-- (IBAction)openLinkInGoogleMaps:(id)sender {
+- (IBAction)openLinkInExternalMapApp:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Open in" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Apple Maps", @"Google Maps", nil];
+    [actionSheet showInView:self.view];
 }
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - UIActionSheetDelegate methods
+//////////////////////////////////////////////////////////////
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"Clicked actionsheet");
+    if ( buttonIndex == 0 ) {
+        NSDictionary *addressDict = @{
+                                      (NSString *) kABPersonAddressStreetKey : self.annotation.title,
+                                      };
+
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:self.annotation.coordinate addressDictionary:addressDict];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [mapItem openInMapsWithLaunchOptions:nil];
+    } else if ( buttonIndex == 1 ) {
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"comgooglemaps://?center=%f,%f",self.annotation.coordinate.latitude,self.annotation.coordinate.longitude]];
+        if (![[UIApplication sharedApplication] canOpenURL:url]) {
+            NSLog(@"Google Maps app is not installed");
+            //left as an exercise for the reader: open the Google Maps mobile website instead!
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You do not have the Google Maps iOS app installed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+        }
+        else {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - Gesture recognizer methods
+//////////////////////////////////////////////////////////////
 
 -(UITapGestureRecognizer *)gestureRecognizer {
     
@@ -89,11 +128,6 @@
     }
     
     return _gestureRecognizer;
-}
-
-- (void)hideKeyboard:(UITapGestureRecognizer *)recognizer
-{
-    NSLog(@"this would hide first responder if there was one");
 }
 
 @end

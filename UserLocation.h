@@ -2,22 +2,18 @@
 //  UserLocation.h
 //  MapMessage
 //
-//  Created by Adam Chappell on 15/06/2013.
+//  Created by Adam Chappell on 22/06/2013.
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "Location.h"
 
 
-@interface UserLocation : NSManagedObject
+@interface UserLocation : Location
 
-@property (nonatomic, retain) NSNumber * isVisible;
-@property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSString * subtitle;
-@property (nonatomic, retain) NSDate * timestamp;
-@property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * sender;
+@property (nonatomic, retain) NSDate * timestamp;
 
 @end

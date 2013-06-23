@@ -1,16 +1,16 @@
 //
-//  UserLocation+Extensions.m
+//  Location+Extensions.m
 //  MapMessage
 //
-//  Created by Adam Chappell on 14/06/2013.
+//  Created by Adam Chappell on 23/06/2013.
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
-#import "UserLocation+Extensions.h"
+#import "Location+Extensions.h"
 
-@implementation UserLocation (Extensions)
+@implementation Location (Extensions)
 
--(CLLocationCoordinate2D)coordinate {
+- (CLLocationCoordinate2D)coordinate {
     return CLLocationCoordinate2DMake([self.latitude doubleValue], [self.longitude doubleValue]);
 }
 

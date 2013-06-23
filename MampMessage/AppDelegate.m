@@ -21,16 +21,7 @@
 {
     [MagicalRecord setupAutoMigratingCoreDataStack];
     
-    UIFont *whitney = [UIFont fontWithName:@"Whitney-Book" size:20];
-    UIColor *white = [UIColor whiteColor];
-    
-    [[UILabel appearance] setFont:whitney];
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                    white,
-                                    UITextAttributeTextColor,
-                                    whitney,
-                                    UITextAttributeFont, nil]];
-    [[[UIButton appearance] titleLabel] setFont:whitney];
+    [self setAppearance];
     
     [self checkForFirstRun];
     
@@ -44,6 +35,20 @@
     [self.window setRootViewController:drawerController];
     [self.window makeKeyAndVisible];    
     return YES;
+}
+
+- (void)setAppearance
+{
+    UIFont *whitney = [UIFont fontWithName:@"Whitney-Book" size:20];
+    UIColor *white = [UIColor whiteColor];
+    
+    [[UILabel appearance] setFont:whitney];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          white,
+                                                          UITextAttributeTextColor,
+                                                          whitney,
+                                                          UITextAttributeFont, nil]];
+    [[[UIButton appearance] titleLabel] setFont:whitney];
 }
 
 - (void)checkForFirstRun
@@ -110,6 +115,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
+    [MagicalRecord cleanUp];
 }
 
 //////////////////////////////////////////////////////////////

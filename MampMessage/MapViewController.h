@@ -41,8 +41,8 @@
     IBOutlet UIButton *satelliteButton;
 }
 
-@property (strong, nonatomic) NSString *latitude;
-@property (strong, nonatomic) NSString *longitude;
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
 
 @property (strong, nonatomic) UIImageView *dropPin;
 

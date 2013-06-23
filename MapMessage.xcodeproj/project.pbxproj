@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F03B6B4176A9D0C00469072 /* KMLLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F03B6B3176A9D0C00469072 /* KMLLocation.m */; };
 		3F03B6BD176A9D8C00469072 /* KMLLocation+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F03B6BC176A9D8C00469072 /* KMLLocation+Extensions.m */; };
 		3F03B6CB176AA2C200469072 /* MapTileCollection+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F03B6CA176AA2C200469072 /* MapTileCollection+Extension.m */; };
 		3F03B6D3176B4CBF00469072 /* detailed in Resources */ = {isa = PBXBuildFile; fileRef = 3F03B6D2176B4CBF00469072 /* detailed */; };
@@ -20,6 +19,10 @@
 		3F149A2E17760AD10035B712 /* done-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F149A2A17760AD10035B712 /* done-button@2x.png */; };
 		3F149A2F17760AD10035B712 /* edit-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F149A2B17760AD10035B712 /* edit-button.png */; };
 		3F149A3017760AD10035B712 /* edit-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F149A2C17760AD10035B712 /* edit-button@2x.png */; };
+		3F149A3917761AEF0035B712 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F149A3817761AEF0035B712 /* Location.m */; };
+		3F149A3F17761AF00035B712 /* UserLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F149A3E17761AF00035B712 /* UserLocation.m */; };
+		3F149A42177620190035B712 /* KMLLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F149A41177620190035B712 /* KMLLocation.m */; };
+		3F149A46177687D70035B712 /* Location+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F149A45177687D70035B712 /* Location+Extensions.m */; };
 		3F1C0D9E1775F55C009106D7 /* annotation-view-unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1C0D9C1775F55C009106D7 /* annotation-view-unselected@2x.png */; };
 		3F1C0D9F1775F55C009106D7 /* annotation-view-unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1C0D9D1775F55C009106D7 /* annotation-view-unselected.png */; };
 		3F1C0DA21775F5DA009106D7 /* annotation-view-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1C0DA01775F5DA009106D7 /* annotation-view-selected@2x.png */; };
@@ -39,7 +42,6 @@
 		3F4C78E6176CD7C800F357D4 /* Save.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4C78E0176CD7C800F357D4 /* Save.png */; };
 		3F4C78E7176CD7C800F357D4 /* Save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4C78E1176CD7C800F357D4 /* Save@2x.png */; };
 		3F4C78ED176CED8900F357D4 /* AnnotationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C78EC176CED8900F357D4 /* AnnotationDetailViewController.m */; };
-		3F4C78F0176D1BF400F357D4 /* UserLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C78EF176D1BF400F357D4 /* UserLocation.m */; };
 		3F4C78F4176D1E0A00F357D4 /* SMSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C78F3176D1E0A00F357D4 /* SMSController.m */; };
 		3F60C4261763BE140043EB2A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C4251763BE140043EB2A /* UIKit.framework */; };
 		3F60C4281763BE140043EB2A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F60C4271763BE140043EB2A /* Foundation.framework */; };
@@ -83,6 +85,8 @@
 		3FB25BEA176BF93400E01B78 /* tiles in Resources */ = {isa = PBXBuildFile; fileRef = 3FB25BE9176BF93400E01B78 /* tiles */; };
 		3FB25BED176C031A00E01B78 /* MapTileCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB25BEC176C031A00E01B78 /* MapTileCollection.m */; };
 		3FB25BEF176C0E4200E01B78 /* OpenStreetMap in Resources */ = {isa = PBXBuildFile; fileRef = 3FB25BEE176C0E4200E01B78 /* OpenStreetMap */; };
+		3FD3441417775D2000E5DD7A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD3441317775D2000E5DD7A /* AddressBook.framework */; };
+		3FD3441617775D4F00E5DD7A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD3441517775D4F00E5DD7A /* AddressBookUI.framework */; };
 		3FEE8424176A375400E54628 /* MapOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE841F176A375400E54628 /* MapOverlay.m */; };
 		3FEE8425176A375400E54628 /* MapOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE8421176A375400E54628 /* MapOverlayView.m */; };
 		3FEE8426176A375400E54628 /* MapTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE8423176A375400E54628 /* MapTile.m */; };
@@ -146,8 +150,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3F03B6B2176A9D0C00469072 /* KMLLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLLocation.h; sourceTree = "<group>"; };
-		3F03B6B3176A9D0C00469072 /* KMLLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLLocation.m; sourceTree = "<group>"; };
 		3F03B6BB176A9D8C00469072 /* KMLLocation+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KMLLocation+Extensions.h"; sourceTree = "<group>"; };
 		3F03B6BC176A9D8C00469072 /* KMLLocation+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KMLLocation+Extensions.m"; sourceTree = "<group>"; };
 		3F03B6C9176AA2C200469072 /* MapTileCollection+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MapTileCollection+Extension.h"; sourceTree = "<group>"; };
@@ -165,6 +167,14 @@
 		3F149A2A17760AD10035B712 /* done-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-button@2x.png"; sourceTree = "<group>"; };
 		3F149A2B17760AD10035B712 /* edit-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit-button.png"; sourceTree = "<group>"; };
 		3F149A2C17760AD10035B712 /* edit-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit-button@2x.png"; sourceTree = "<group>"; };
+		3F149A3717761AEF0035B712 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		3F149A3817761AEF0035B712 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		3F149A3D17761AF00035B712 /* UserLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocation.h; sourceTree = "<group>"; };
+		3F149A3E17761AF00035B712 /* UserLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocation.m; sourceTree = "<group>"; };
+		3F149A40177620190035B712 /* KMLLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLLocation.h; sourceTree = "<group>"; };
+		3F149A41177620190035B712 /* KMLLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLLocation.m; sourceTree = "<group>"; };
+		3F149A44177687D70035B712 /* Location+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location+Extensions.h"; sourceTree = "<group>"; };
+		3F149A45177687D70035B712 /* Location+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Location+Extensions.m"; sourceTree = "<group>"; };
 		3F1C0D9C1775F55C009106D7 /* annotation-view-unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-unselected@2x.png"; sourceTree = "<group>"; };
 		3F1C0D9D1775F55C009106D7 /* annotation-view-unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-unselected.png"; sourceTree = "<group>"; };
 		3F1C0DA01775F5DA009106D7 /* annotation-view-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-selected@2x.png"; sourceTree = "<group>"; };
@@ -186,8 +196,6 @@
 		3F4C78E1176CD7C800F357D4 /* Save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Save@2x.png"; sourceTree = "<group>"; };
 		3F4C78EB176CED8900F357D4 /* AnnotationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationDetailViewController.h; sourceTree = "<group>"; };
 		3F4C78EC176CED8900F357D4 /* AnnotationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationDetailViewController.m; sourceTree = "<group>"; };
-		3F4C78EE176D1BF400F357D4 /* UserLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocation.h; sourceTree = "<group>"; };
-		3F4C78EF176D1BF400F357D4 /* UserLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocation.m; sourceTree = "<group>"; };
 		3F4C78F2176D1E0A00F357D4 /* SMSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSController.h; sourceTree = "<group>"; };
 		3F4C78F3176D1E0A00F357D4 /* SMSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSController.m; sourceTree = "<group>"; };
 		3F60C4221763BE140043EB2A /* MapMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +253,8 @@
 		3FB25BEB176C031A00E01B78 /* MapTileCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapTileCollection.h; path = MampMessage/MapTileCollection.h; sourceTree = "<group>"; };
 		3FB25BEC176C031A00E01B78 /* MapTileCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapTileCollection.m; path = MampMessage/MapTileCollection.m; sourceTree = "<group>"; };
 		3FB25BEE176C0E4200E01B78 /* OpenStreetMap */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OpenStreetMap; sourceTree = "<group>"; };
+		3FD3441317775D2000E5DD7A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		3FD3441517775D4F00E5DD7A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		3FEE841E176A375400E54628 /* MapOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapOverlay.h; sourceTree = "<group>"; };
 		3FEE841F176A375400E54628 /* MapOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapOverlay.m; sourceTree = "<group>"; };
 		3FEE8420176A375400E54628 /* MapOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapOverlayView.h; sourceTree = "<group>"; };
@@ -334,6 +344,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FD3441617775D4F00E5DD7A /* AddressBookUI.framework in Frameworks */,
+				3FD3441417775D2000E5DD7A /* AddressBook.framework in Frameworks */,
 				3F81111D176419B600975702 /* QuartzCore.framework in Frameworks */,
 				3F60C46D1763CE140043EB2A /* CoreLocation.framework in Frameworks */,
 				3F60C4691763C3CB0043EB2A /* MapKit.framework in Frameworks */,
@@ -516,6 +528,8 @@
 		3F60C4241763BE140043EB2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3FD3441517775D4F00E5DD7A /* AddressBookUI.framework */,
+				3FD3441317775D2000E5DD7A /* AddressBook.framework */,
 				3F81111C176419B600975702 /* QuartzCore.framework */,
 				3F60C46C1763CE140043EB2A /* CoreLocation.framework */,
 				3F60C4681763C3CB0043EB2A /* MapKit.framework */,
@@ -704,12 +718,14 @@
 		EEE9CF641769D00000070A29 /* core data */ = {
 			isa = PBXGroup;
 			children = (
-				3F4C78EE176D1BF400F357D4 /* UserLocation.h */,
-				3F4C78EF176D1BF400F357D4 /* UserLocation.m */,
+				3F149A40177620190035B712 /* KMLLocation.h */,
+				3F149A41177620190035B712 /* KMLLocation.m */,
+				3F149A3D17761AF00035B712 /* UserLocation.h */,
+				3F149A3E17761AF00035B712 /* UserLocation.m */,
+				3F149A3717761AEF0035B712 /* Location.h */,
+				3F149A3817761AEF0035B712 /* Location.m */,
 				3FB25BEB176C031A00E01B78 /* MapTileCollection.h */,
 				3FB25BEC176C031A00E01B78 /* MapTileCollection.m */,
-				3F03B6B2176A9D0C00469072 /* KMLLocation.h */,
-				3F03B6B3176A9D0C00469072 /* KMLLocation.m */,
 				EEE9CFD11769EAD600070A29 /* categories */,
 			);
 			name = "core data";
@@ -826,6 +842,8 @@
 				3F03B6CA176AA2C200469072 /* MapTileCollection+Extension.m */,
 				3F03B70F176BAB4E00469072 /* UserLocation+Extensions.h */,
 				3F03B710176BAB4E00469072 /* UserLocation+Extensions.m */,
+				3F149A44177687D70035B712 /* Location+Extensions.h */,
+				3F149A45177687D70035B712 /* Location+Extensions.m */,
 			);
 			name = categories;
 			sourceTree = "<group>";
@@ -878,6 +896,11 @@
 				CLASSPREFIX = MM;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Chappelltime;
+				TargetAttributes = {
+					3F60C4211763BE140043EB2A = {
+						DevelopmentTeam = SA424LF48W;
+					};
+				};
 			};
 			buildConfigurationList = 3F60C41D1763BE140043EB2A /* Build configuration list for PBXProject "MapMessage" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1001,6 +1024,7 @@
 				3F60C4341763BE140043EB2A /* main.m in Sources */,
 				3F60C4381763BE140043EB2A /* AppDelegate.m in Sources */,
 				3F7C71B71772862A0017770B /* KMLAnnotationView.m in Sources */,
+				3F149A3917761AEF0035B712 /* Location.m in Sources */,
 				EEE9CFBC1769D6B800070A29 /* MagicalRecord+ErrorHandling.m in Sources */,
 				EEE9CFB51769D6B800070A29 /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				EEE9CFBA1769D6B800070A29 /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
@@ -1009,6 +1033,7 @@
 				EEE9CFAB1769D6B800070A29 /* NSNumber+MagicalDataImport.m in Sources */,
 				3F60C4411763BE140043EB2A /* MapMessage.xcdatamodeld in Sources */,
 				3F60C4671763C3AA0043EB2A /* MapViewController.m in Sources */,
+				3F149A3F17761AF00035B712 /* UserLocation.m in Sources */,
 				3FB25BED176C031A00E01B78 /* MapTileCollection.m in Sources */,
 				3F60C4711763F3A70043EB2A /* URLParser.m in Sources */,
 				3F03B6CB176AA2C200469072 /* MapTileCollection+Extension.m in Sources */,
@@ -1021,11 +1046,9 @@
 				3FEE8424176A375400E54628 /* MapOverlay.m in Sources */,
 				EEE9CFAF1769D6B800070A29 /* NSManagedObject+MagicalAggregation.m in Sources */,
 				3F7C71B217725D9F0017770B /* UIImage+ImageWithUIView.m in Sources */,
-				3F03B6B4176A9D0C00469072 /* KMLLocation.m in Sources */,
 				3F7C71B117725D9F0017770B /* ECSlidingViewController.m in Sources */,
 				3F0E2F0717653F1900D41BD6 /* Constants.m in Sources */,
 				3F03B70A176B8EC600469072 /* PinViewHeader.m in Sources */,
-				3F4C78F0176D1BF400F357D4 /* UserLocation.m in Sources */,
 				EEE9CFB91769D6B800070A29 /* NSPersistentStore+MagicalRecord.m in Sources */,
 				EEE9CFB61769D6B800070A29 /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				EEE9CFC11769D6B800070A29 /* MagicalRecord.m in Sources */,
@@ -1036,6 +1059,7 @@
 				3F4C78F4176D1E0A00F357D4 /* SMSController.m in Sources */,
 				EEE9CFAE1769D6B800070A29 /* NSString+MagicalDataImport.m in Sources */,
 				3F4C78ED176CED8900F357D4 /* AnnotationDetailViewController.m in Sources */,
+				3F149A42177620190035B712 /* KMLLocation.m in Sources */,
 				EEE9CFBF1769D6B800070A29 /* MagicalRecord+Setup.m in Sources */,
 				EEE9CFA91769D6B800070A29 /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				EEE9CFC01769D6B800070A29 /* MagicalRecord+ShorthandSupport.m in Sources */,
@@ -1045,6 +1069,7 @@
 				EEE9CFB31769D6B800070A29 /* NSManagedObject+MagicalRequests.m in Sources */,
 				EEE9CFB41769D6B800070A29 /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				EEE9CFB11769D6B800070A29 /* NSManagedObject+MagicalFinders.m in Sources */,
+				3F149A46177687D70035B712 /* Location+Extensions.m in Sources */,
 				EEE9CFBE1769D6B800070A29 /* MagicalRecord+Options.m in Sources */,
 				3F03B6BD176A9D8C00469072 /* KMLLocation+Extensions.m in Sources */,
 				EE6E82A217660E9200A17859 /* KMLParser.m in Sources */,
@@ -1148,6 +1173,7 @@
 		3F60C45B1763BE140043EB2A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MampMessage/MapMessage-Prefix.pch";
 				INFOPLIST_FILE = "MampMessage/MapMessage-Info.plist";
@@ -1161,6 +1187,7 @@
 		3F60C45C1763BE140043EB2A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MampMessage/MapMessage-Prefix.pch";
 				INFOPLIST_FILE = "MampMessage/MapMessage-Info.plist";

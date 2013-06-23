@@ -11,6 +11,6 @@
 
 @interface UserLocation (Extensions)
 
-@property (nonatomic) CLLocationCoordinate2D coordinate;
+- (CLLocationCoordinate2D)coordinate;
 
 @end

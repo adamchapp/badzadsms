@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Location+Extensions.h"
+#import "KMLLocation.h"
 #import "UserLocation+Extensions.h"
 #import "LocationModel.h"
 

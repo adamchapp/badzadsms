@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Chappelltime. All rights reserved.
 //
 
+#define CLCOORDINATES_EQUAL( coord1, coord2 ) ((coord1.latitude == coord2.latitude && coord1.longitude == coord2.longitude))
+
 #import "MapViewController.h"
 
 @interface MapViewController ()
@@ -31,8 +33,8 @@
 {
     [super viewDidLoad];
     
-    pin_width = 29;
-    pin_height = 40;
+    pin_width = 33;
+    pin_height = 44;
     
     [self.navigationController setTitle:@"Back"];
     
@@ -41,7 +43,6 @@
     [self addObservers];
     [self setupLocationManager];
     [self loadAnnotations];
-    [self setStartingLocation];
     
     [self setEditing:NO];
 }
@@ -93,7 +94,8 @@
 - (void)addObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateDataChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateViewDataChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZMapTileCollectionLoaded object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomMap) name:BZCoordinateViewDataChanged object:nil];
 }
 
 - (void)setupLocationManager
@@ -114,35 +116,70 @@
     
     [mapView addOverlays:self.locationModel.mapTileCollectionViews];
     
-    for ( NSArray *annotations in self.locationModel.kmlLocationViews ) {
-        [mapView addAnnotations:annotations];
-    }
+    [mapView addAnnotations:self.locationModel.kmlLocations];
+    [mapView addAnnotations:self.locationModel.userLocations];
     
-    //load user annotations
-    for (UserLocation *location in self.locationModel.userLocations) {
-        if (  [[location isVisible] boolValue] == YES ) {
-            [mapView addAnnotation:(id<MKAnnotation>)location];
+    for ( Location *location in self.locationModel.userLocations ) {
+        if ( location.selected == [NSNumber numberWithBool:YES] )
+        {
+            NSLog(@"[MVC] Setting destination in location model...");
+            [self.locationModel setDestination:location];
         }
     }
+    
+    for ( Location *kmlLocation in self.locationModel.kmlLocations ) {
+        if ( kmlLocation.selected == [NSNumber numberWithBool:YES] )
+        {
+            NSLog(@"[MVC] Setting (kml) destination in location model...");
+            [self.locationModel setDestination:kmlLocation];
+        }
+    }
+    
+    [mapView setShowsUserLocation:YES];
+    
+    [self zoomMap];
+}
+
+- (void)zoomMap {
+    
+    MKMapRect zoomRect = MKMapRectNull;
+    
+    //create zoom rect from user location
+    if ( self.latitude != 0.000 & self.longitude != 0.000 ) {
+        NSLog(@"Have user location %.4f/%.4f", self.latitude, self.longitude);
+        MKMapPoint userLocation = MKMapPointForCoordinate(CLLocationCoordinate2DMake(self.latitude, self.longitude));
+        zoomRect = MKMapRectMake(userLocation.x, userLocation.y, 0.1, 0.1);
+    } else {
+        NSLog(@"Don't have user location");
+    }
+    
+    //intersect with destination
+    if ( self.locationModel.currentDestination ) {
+        
+        id <MKAnnotation>annotation = (id <MKAnnotation>)self.locationModel.currentDestination;
+        MKAnnotationView *annotationView = [mapView viewForAnnotation:annotation];
+        [annotationView setImage:[UIImage imageNamed:@"annotation-view-destination"]];
+        
+        NSLog(@"Have current destination %.4f/%.4f", self.locationModel.currentDestination.coordinate.latitude, self.locationModel.currentDestination.coordinate.longitude);
+        MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationModel.currentDestination.coordinate);
+        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+        zoomRect = MKMapRectUnion(zoomRect, pointRect);
+    } else {
+        NSLog(@"Don't have current destination");
+    }
+
+    [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(25, 25, 25, 25) animated:YES];
 }
 
 - (void)deleteSelectedAnnotation:(id<MKAnnotation>)annotation
 {
     if ( [annotation isKindOfClass:[UserLocation class]] ) {
         [self.locationModel removeUserLocation:(UserLocation *)annotation];        
-        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else if ( [annotation isKindOfClass:[KMLLocation class]] ) {
+        [self.locationModel removeKMLLocation:(KMLLocation *)annotation];
     }
-}
-
-- (void)setStartingLocation
-{
-    // Set the starting game location.
-//    CLLocationCoordinate2D startingLocation;
-//    startingLocation.latitude = 51.154047246473084;
-//    startingLocation.longitude =-2.5871944427490234;
-//    
-//    mapView.region = MKCoordinateRegionMakeWithDistance(startingLocation, 1000, 1000);
-//    [mapView setCenterCoordinate:startingLocation];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 //////////////////////////////////////////////////////////////
@@ -234,7 +271,7 @@
                                        timestamp:[NSDate date]
                                         latitude:coordinates.latitude
                                        longitude:coordinates.longitude
-                                       isVisible:YES];
+                                       selected:YES];
         
     [self removeNewAnnotationView];
 }
@@ -248,7 +285,7 @@
     NSString *timestamp = [formatter stringFromDate:date];
     NSString *name = [DeviceNameUtil nameFromDevice];
     
-    [self sendSMSNamed:name timestamp:timestamp latitude:[self.latitude doubleValue] longitude:[self.longitude doubleValue]];
+    [self sendSMSNamed:name timestamp:timestamp latitude:self.latitude longitude:self.longitude];
 }
 
 - (void)sendSMSNamed:(NSString *)title timestamp:(NSString *)timestamp latitude:(double)latitude longitude:(double)longitude
@@ -371,25 +408,37 @@
     static NSString *kmlIdentifier = @"kmlIdentifier";
     static NSString *userIdentifier = @"userIdentifier";
     
+    AnnotationView *annotationView;
+    
     if ( [annotation isKindOfClass:[UserLocation class]]) {
-        AnnotationView *annotationView = (AnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:userIdentifier];
+        annotationView = (AnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:userIdentifier];
         
         if (annotationView == nil) {
             annotationView = [[AnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:userIdentifier];
         }
-        [annotationView setText:annotation.title];
-        
-        return annotationView;
     } else {
-        KMLAnnotationView *annotationView = (KMLAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:kmlIdentifier];
+        annotationView = (KMLAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:kmlIdentifier];
         
         if (annotationView == nil) {
             annotationView = [[KMLAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kmlIdentifier];
         }
-        [annotationView setText:annotation.title];
-        
-        return annotationView;
     }
+    
+    UserLocation *location = (UserLocation *)annotation;
+    
+    if ( [location selected] == [NSNumber numberWithBool:YES ] ) {
+        NSLog(@"Changing this annotation (%@) to selected image", annotation.title);
+        [annotationView setImage:[UIImage imageNamed:@"annotation-view-destination"]];
+    }
+    
+    [annotationView setText:annotation.title];
+    
+    double xOffset = 0.0f;
+    double yOffset = -(pin_height/2);
+    
+    [annotationView setCenterOffset:CGPointMake(xOffset, yOffset)];
+    
+    return annotationView;
 }
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
@@ -444,8 +493,6 @@
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation {
     
-    NSLog(@"Location manager update");
-    
     double miles = 12.0;
     double scalingFactor =
     ABS( cos(2 * M_PI * newLocation.coordinate.latitude /360.0) );
@@ -453,21 +500,22 @@
     MKCoordinateSpan span;
     span.latitudeDelta = miles/69.0;
     span.longitudeDelta = miles/( scalingFactor*69.0 );
-
-    //update view rect
-//    MKCoordinateRegion region;
-//    region.span = span;
-//    region.center = newLocation.coordinate;
-//    
-//    [mapView setRegion:region animated:YES];
     
     mapView.showsUserLocation = YES;
     
-    self.latitude =
-    [NSString stringWithFormat:@"%f", newLocation.coordinate.latitude];
-    self.longitude =
-    [NSString stringWithFormat:@"%f", newLocation.coordinate.longitude];
+    NSLog(@"Location manager update %.4f/%.4f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     
+    CLLocationCoordinate2D currentLocation = CLLocationCoordinate2DMake(self.latitude, self.longitude);
+
+    NSLog(@"currentLocation (from self.latitude/longitude...) : %.4f/%.4f", currentLocation.latitude, currentLocation.longitude);
+    NSLog(@"old location (from location manager) : %.4f/%.4f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
+    
+    self.latitude = newLocation.coordinate.latitude;
+    self.longitude = newLocation.coordinate.longitude;
+    
+    if ( !CLCOORDINATES_EQUAL(newLocation.coordinate, currentLocation)) {
+        [self zoomMap];
+    }
 }
 
 @end

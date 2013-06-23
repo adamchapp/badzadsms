@@ -30,14 +30,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    self.editButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 13)];
+    self.editButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 0, 25, 13)];
     [self.editButton addTarget:self action:@selector(toggleEditingMode) forControlEvents:UIControlEventTouchUpInside];
     [self.editButton setBackgroundImage:[UIImage imageNamed:@"edit-button"] forState:UIControlStateNormal];
-    [self.editButton setBackgroundImage:[UIImage imageNamed:@"done-button"] forState:UIControlStateSelected];
+    [self setEditing:NO animated:NO];
     
     UIBarButtonItem *editBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.editButton];
     
@@ -45,6 +41,14 @@
     [self.navigationItem setTitle:@"Locations"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHistoryView:) name:BZCoordinateDataChanged object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    NSLog(@"Saving context...");
+    
+    [self.locationModel saveContext];
 }
 
 - (void)toggleEditingMode {
@@ -63,10 +67,6 @@
 
 - (void)reloadHistoryView:(id)sender {
     [self.tableView reloadData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-  //  [self.locationModel removeObserver:self forKeyPath:@"coordinates" context:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,12 +112,21 @@
         UserLocation *location = [self.locationModel.userLocations objectAtIndex:indexPath.row];
         
         title = [NSString stringWithFormat:@"%@ %@",location.title, location.subtitle];
-        showCoordinate = [location.isVisible boolValue];
+        showCoordinate = [location.selected boolValue];
+        
+        if (showCoordinate) {
+            [self.locationModel setDestination:location];
+        }
+        
     } else if ( indexPath.section == 1 ) {
         KMLLocation *location = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
         
         title = [NSString stringWithFormat:@"%@", location.title];
-        showCoordinate = [location.isVisible boolValue];
+        showCoordinate = [location.selected boolValue];
+        
+        if ( showCoordinate ) {
+            [self.locationModel setDestination:location];
+        }
     } else {
         MapTileCollection *collection = [self.locationModel.mapTileCollections objectAtIndex:indexPath.row];
         
@@ -156,16 +165,17 @@
 	
 	// create the button object
 	UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-	headerLabel.backgroundColor = [UIColor clearColor];
-	headerLabel.opaque = NO;
+	headerLabel.backgroundColor = [UIColor whiteColor];
+	headerLabel.opaque = YES;
 	headerLabel.frame = CGRectMake(10.0, 0.0, 300.0, 44.0);
     [headerLabel setFont:[UIFont fontWithName:@"Whitney-Semibold" size:22]];
     
-	// If you want to align the header text as centered
-	// headerLabel.frame = CGRectMake(150.0, 0.0, 300.0, 44.0);
-    
+    UIButton * infoButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    [infoButton setCenter:CGPointMake(320, 10)];
+        
 	headerLabel.text = [self tableView:tableView titleForHeaderInSection:section];
 	[customView addSubview:headerLabel];
+    [customView addSubview:infoButton];
     
 	return customView;
 }
@@ -186,9 +196,15 @@
     return YES;
 }
 
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return UITableViewCellEditingStyleDelete;
+    // Detemine if it's in editing mode
+    if (self.editing)
+    {
+        return UITableViewCellEditingStyleDelete;
+    }
+    
+    return UITableViewCellEditingStyleNone;
 }
 
 // Override to support editing the table view.
@@ -226,22 +242,20 @@
         UserLocation *userLocation = [[self.locationModel userLocations] objectAtIndex:indexPath.row];
         
         if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
-            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-            [self.locationModel showUserLocation:userLocation];
-        } else {
-            [cell setAccessoryType:UITableViewCellAccessoryNone];
-            [self.locationModel hideUserLocation:userLocation];
-        }        
+            [self.locationModel setDestination:userLocation];
+        } else if ( cell.accessoryType == UITableViewCellAccessoryCheckmark ) {
+            [self.locationModel setDestination:nil];
+        }
+        [self.tableView reloadData];
     } else if ( indexPath.section == 1 ){
         KMLLocation *kmlLocation = [[self.locationModel kmlLocations] objectAtIndex:indexPath.row];
         
         if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
-            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-            [self.locationModel showKMLLocation:kmlLocation];
-        } else {
-            [cell setAccessoryType:UITableViewCellAccessoryNone];
-            [self.locationModel hideKMLLocation:kmlLocation];
+            [self.locationModel setDestination:kmlLocation];
+        } else if ( cell.accessoryType == UITableViewCellAccessoryCheckmark ) {
+            [self.locationModel setDestination:nil];
         }
+        [self.tableView reloadData];
     } else {
         MapTileCollection *collection = [[self.locationModel mapTileCollections] objectAtIndex:indexPath.row];
         

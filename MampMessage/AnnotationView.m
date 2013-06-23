@@ -7,6 +7,7 @@
 //
 
 #import "AnnotationView.h"
+#import "Location+Extensions.h"
 
 @implementation AnnotationView
 
@@ -15,7 +16,6 @@
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     if (self) {
         self.image = [UIImage imageNamed:[self pathForUnselectedImage]];
-        self.layer.anchorPoint = CGPointMake(0.5f, 1.0f);
         self.canShowCallout = YES;
         self.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         
@@ -23,7 +23,7 @@
         [self.annotationLabel setTextAlignment:NSTextAlignmentCenter];
         [self.annotationLabel setFont:[UIFont fontWithName:@"Whitney-Semibold" size:14]];
         [self.annotationLabel setBackgroundColor:rgb(216,223,219)];
-        [self.annotationLabel setAlpha:0.6];
+        [self.annotationLabel setAlpha:0.7];
         [self.annotationLabel setNumberOfLines:1];
                 
         [self addSubview:self.annotationLabel];
@@ -34,12 +34,20 @@
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
-    if ( selected ) {
-        self.image = [UIImage imageNamed:@"annotation-view-selected"];
-        [self.annotationLabel setHidden:YES];
+    Location *location = (Location *)self.annotation;
+    
+    //if this annotation is the current destination, just show that image
+    //otherwise toggle between selected and unselected
+    if ( location.selected == [NSNumber numberWithBool:YES] ) {
+        self.image = [UIImage imageNamed:@"annotation-view-destination"];
     } else {
-        self.image = [UIImage imageNamed:[self pathForUnselectedImage]];
-        [self.annotationLabel setHidden:NO];
+        if ( selected ) {
+            self.image = [UIImage imageNamed:@"annotation-view-selected"];
+            [self.annotationLabel setHidden:YES];
+        } else {
+            self.image = [UIImage imageNamed:[self pathForUnselectedImage]];
+            [self.annotationLabel setHidden:NO];
+        }
     }
 }
 
@@ -50,7 +58,7 @@
 - (void)setText:(NSString *)text {
     [self.annotationLabel setText:text];
     [self.annotationLabel sizeToFit];
-    [self.annotationLabel setCenter:CGPointMake((self.frame.size.width/2), -15)];
+    [self.annotationLabel setCenter:CGPointMake((self.frame.size.width/2), -10)];
 }
 
 /*

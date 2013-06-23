@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <MessageUI/MessageUI.h>
+#import <AddressBook/AddressBook.h>
 #import "DeviceNameUtil.h"
 #import "Constants.h"
 
@@ -22,7 +23,7 @@
 
 @end
 
-@interface AnnotationDetailViewController : UIViewController <UIGestureRecognizerDelegate>
+@interface AnnotationDetailViewController : UIViewController <UIGestureRecognizerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, assign) id<AnnotationDetailViewDelegate> delegate;
 
@@ -37,6 +38,6 @@
 
 - (IBAction)sendSMS:(id)sender;
 - (IBAction)removeAnnotation:(id)sender;
-- (IBAction)openLinkInGoogleMaps:(id)sender;
+- (IBAction)openLinkInExternalMapApp:(id)sender;
 
 @end

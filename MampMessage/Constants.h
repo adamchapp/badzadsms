@@ -12,6 +12,7 @@
 
 extern NSString * const BZCoordinateDataChanged;
 extern NSString * const BZCoordinateViewDataChanged;
+extern NSString * const BZMapTileCollectionLoaded;
 
 extern NSString * const BZDateFormat;
 extern NSString * const BZReadableDateFormat;

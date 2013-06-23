@@ -12,6 +12,7 @@
 
 NSString * const BZCoordinateDataChanged = @"coordinateDataChanged";
 NSString * const BZCoordinateViewDataChanged = @"coordinateViewDataChanged";
+NSString * const BZMapTileCollectionLoaded = @"mapTileCollectionLoaded";
 
 NSString * const BZDateFormat = @"dd-MM-HH:mm";
 
