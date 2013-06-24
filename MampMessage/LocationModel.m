@@ -132,13 +132,13 @@
     
     [self setDestination:newLocation];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
+    [self saveContext];
 }
 
 - (void)removeUserLocation:(UserLocation *)location
 {
     [self.context deleteObject:location];
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
+    [self saveContext];
 }
 
 - (void)setUserLocationAsSelected:(UserLocation *)location
@@ -227,13 +227,13 @@
         location.selected = [NSNumber numberWithBool:NO];
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
+    [self saveContext];
 }
 
 - (void)removeKMLLocation:(KMLLocation *)location
 {
     [self.context deleteObject:location];
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
+    [self saveContext];
 }
 
 - (void)setKMLLocationAsSelected:(KMLLocation *)location
@@ -309,7 +309,11 @@
 - (void)saveContext {
     if ( [self.context hasChanges] ) {
         NSError *error;
-        [self.context save:&error];
+        if (![self.context save:&error] ) {
+            NSLog(@"There was an error saving %@", error.description);
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
+        }
     }
 }
 
