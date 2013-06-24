@@ -30,7 +30,7 @@
  */
 - (BOOL)isLocationValid:(NSString *)title timestamp:(NSDate *)timestamp
 {
-    Location *previousLocation = [[Location MR_findByAttribute:@"title" withValue:title inContext:self.context] firstObject];
+    Location *previousLocation = [[Location MR_findByAttribute:@"title" withValue:title inContext:self.context] lastObject];
     
     if ( !previousLocation ) return YES;
     
@@ -111,7 +111,7 @@
     NSDateFormatter *readableFormatter = [[NSDateFormatter alloc] init];
     [readableFormatter setDateFormat:BZReadableDateFormat];
     
-    UserLocation *previousLocation = [[UserLocation MR_findByAttribute:@"title" withValue:title inContext:self.context] firstObject];
+    UserLocation *previousLocation = [[UserLocation MR_findByAttribute:@"title" withValue:title inContext:self.context] lastObject];
     UserLocation *newLocation;
     
     if ( previousLocation ) {
@@ -195,7 +195,7 @@
     for ( id<MKAnnotation>annotation in kmlAnnotations ) {
         
         KMLLocation *location;
-        KMLLocation *previousLocation = [[KMLLocation MR_findByAttribute:@"title" withValue:annotation.title inContext:self.context] firstObject];
+        KMLLocation *previousLocation = [[KMLLocation MR_findByAttribute:@"title" withValue:annotation.title inContext:self.context] lastObject];
         
         if ( previousLocation ) {
             location = previousLocation;
