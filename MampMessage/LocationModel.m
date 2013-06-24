@@ -11,7 +11,6 @@
 
 @interface LocationModel ()
 
-@property (nonatomic, strong) NSManagedObjectContext *context;
 @property (strong, nonatomic) NSDateFormatter *formatter;
 @property (strong, nonatomic) URLParser *urlParser;
 @property (nonatomic, strong) KMLParser *kmlParser;
@@ -30,8 +29,7 @@
  */
 - (BOOL)isLocationValid:(NSString *)title timestamp:(NSDate *)timestamp
 {
-    Location *previousLocation = [[Location MR_findByAttribute:@"title" withValue:title inContext:self.context] lastObject];
-    
+    Location *previousLocation = [self getUserLocationByName:title];
     if ( !previousLocation ) return YES;
     
     if ( [previousLocation isKindOfClass:[UserLocation class]] ) {
@@ -111,13 +109,15 @@
     NSDateFormatter *readableFormatter = [[NSDateFormatter alloc] init];
     [readableFormatter setDateFormat:BZReadableDateFormat];
     
-    UserLocation *previousLocation = [[UserLocation MR_findByAttribute:@"title" withValue:title inContext:self.context] lastObject];
+    UserLocation *previousLocation = [self getUserLocationByName:title];
     UserLocation *newLocation;
     
     if ( previousLocation ) {
         newLocation = previousLocation;
     } else {
-        newLocation = [UserLocation MR_createInContext:self.context];
+        newLocation = [NSEntityDescription
+                       insertNewObjectForEntityForName:@"UserLocation"
+                       inManagedObjectContext:self.context];
     }
     
     newLocation.sender = sender;
@@ -137,7 +137,7 @@
 
 - (void)removeUserLocation:(UserLocation *)location
 {
-    [location MR_deleteInContext:self.context];
+    [self.context deleteObject:location];
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
@@ -153,8 +153,23 @@
 
 - (UserLocation *)getUserLocationByName:(NSString *)name
 {
-    UserLocation *location = [UserLocation MR_findFirstByAttribute:@"title" withValue:name];
-    return location;
+    NSError *error;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"UserLocation" inManagedObjectContext:self.context];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"title == %@", name];
+    [request setPredicate:predicate];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [request setSortDescriptors:sortDescriptors];
+    
+    NSArray *fetchedObjects = [self.context executeFetchRequest:request error:&error];
+    return [fetchedObjects lastObject];
 }
 
 - (void)setDestination:(Location *)destination
@@ -195,12 +210,14 @@
     for ( id<MKAnnotation>annotation in kmlAnnotations ) {
         
         KMLLocation *location;
-        KMLLocation *previousLocation = [[KMLLocation MR_findByAttribute:@"title" withValue:annotation.title inContext:self.context] lastObject];
+        KMLLocation *previousLocation = [self getKMLLocationByName:annotation.title];
         
         if ( previousLocation ) {
             location = previousLocation;
         } else {
-            location = [KMLLocation MR_createInContext:self.context];
+            location = [NSEntityDescription
+                        insertNewObjectForEntityForName:@"KMLLocation"
+                        inManagedObjectContext:self.context];
         }
         
         location.title = annotation.title;
@@ -215,7 +232,7 @@
 
 - (void)removeKMLLocation:(KMLLocation *)location
 {
-    [location MR_deleteInContext:self.context];
+    [self.context deleteObject:location];
     [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
 }
 
@@ -229,40 +246,52 @@
     [location setSelected:[NSNumber numberWithBool:NO]];
 }
 
+- (KMLLocation *)getKMLLocationByName:(NSString *)name
+{
+    NSError *error;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"KMLLocation" inManagedObjectContext:self.context];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"title == %@", name];
+    [request setPredicate:predicate];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [request setSortDescriptors:sortDescriptors];
+    
+    NSArray *fetchedObjects = [self.context executeFetchRequest:request error:&error];
+    return [fetchedObjects lastObject];
+}
+
 //////////////////////////////////////////////////////////////
 #pragma mark  - MapTile Collections
 //////////////////////////////////////////////////////////////
 
 - (void)addMapTileCollectionWithName:(NSString *)name directoryPath:(NSString *)path isFlippedAxis:(BOOL)flipped
 {
-    MapTileCollection *collection = [MapTileCollection MR_createInContext:self.context];
+    MapTileCollection *collection = [NSEntityDescription
+                                     insertNewObjectForEntityForName:@"MapTileCollection"
+                                     inManagedObjectContext:self.context];
     collection.title = name;
     collection.directoryPath = path;
     collection.isVisible = [NSNumber numberWithBool:NO];
     collection.isFlippedAxis = [NSNumber numberWithBool:flipped];
     
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"MapTileCollection was added in persistent store");
-        }
-        else {
-            NSLog(@"MapTileCollection was not added");
-        }
-    }];
+    NSError *error;
+    
+    [self.context save:&error];
 }
 
 - (void)removeMapTileCollection:(MapTileCollection *)location
 {
-    [location MR_deleteInContext:self.context];
+    [self.context deleteObject:location];
     
-    [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        if ( success ) {
-            NSLog(@"MapTileCollection was deleted from persistent store");
-        }
-        else {
-            NSLog(@"MapTileCollection was not deleted");
-        }
-    }];
+    NSError *error;
+    [self.context save:&error];
 }
 
 - (void)showMapTileCollection:(MapTileCollection *)location
@@ -279,27 +308,14 @@
 
 - (void)saveContext {
     if ( [self.context hasChanges] ) {
-        [self.context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-            if ( success ) {
-                NSLog(@"all items were saved successfully");
-            }
-            else {
-                NSLog(@"there was an error saving one or more of the items : %@", error.debugDescription);
-            }
-        }];
+        NSError *error;
+        [self.context save:&error];
     }
 }
 
 //////////////////////////////////////////////////////////////
 #pragma mark  - Getters and setters
 //////////////////////////////////////////////////////////////
-
-- (NSManagedObjectContext *)context {
-    if ( !_context ) {
-        _context = [NSManagedObjectContext MR_contextForCurrentThread];
-    }
-    return _context;
-}
 
 - (NSDateFormatter *)formatter {
     if ( !_formatter ) {
@@ -311,27 +327,42 @@
 
 
 - (NSArray *)userLocations {
-    NSArray *_userLocations = [UserLocation MR_findAllSortedBy:@"timestamp" ascending:YES inContext:self.context];
-    return _userLocations;
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"UserLocation" inManagedObjectContext:self.context];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [self.context executeFetchRequest:fetchRequest error:&error];
+    return fetchedObjects;
 }
 
 - (NSArray *)kmlLocations {
-    NSArray *_kmlLocations = [KMLLocation MR_findAllSortedBy:@"title" ascending:YES inContext:self.context];
-    return _kmlLocations;
-}
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"KMLLocation" inManagedObjectContext:self.context];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [self.context executeFetchRequest:fetchRequest error:&error];
+    return fetchedObjects;}
 
 - (NSArray *)mapTileCollections {
-    NSArray *_mapTileCollections = [MapTileCollection MR_findAllSortedBy:@"title" ascending:YES inContext:self.context];
-    return _mapTileCollections;
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"MapTileCollection" inManagedObjectContext:self.context];
+    [fetchRequest setEntity:entity];
+    NSArray *fetchedObjects = [self.context executeFetchRequest:fetchRequest error:&error];
+    return fetchedObjects;
 }
 
 - (NSArray *)mapTileCollectionViews {
     
-    NSArray *tileCollections = [MapTileCollection MR_findAllSortedBy:@"title" ascending:YES inContext:self.context];
+    NSMutableArray *collectionViews = [NSMutableArray arrayWithCapacity:[[self mapTileCollections] count]];
     
-    NSMutableArray *collectionViews = [NSMutableArray arrayWithCapacity:[tileCollections count]];
-    
-    for ( MapTileCollection *collection in tileCollections ) {
+    for ( MapTileCollection *collection in self.mapTileCollections ) {
         if ( [collection.isVisible boolValue] ) {
             NSString *tileDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:collection.directoryPath];
             

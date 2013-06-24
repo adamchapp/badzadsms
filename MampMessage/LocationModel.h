@@ -19,6 +19,8 @@ typedef void (^ConfirmAddLocationBlock)(void);
 
 @interface LocationModel : NSObject <UIAlertViewDelegate>
 
+@property (nonatomic, strong) NSManagedObjectContext *context;
+
 @property (nonatomic, copy) ConfirmAddLocationBlock confirmBlock;
 
 - (void)addUserLocationFromURL:(NSURL *)url;
