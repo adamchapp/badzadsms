@@ -130,8 +130,6 @@
         
     self.confirmBlock = nil;
     
-    [self setDestination:newLocation];
-    
     [self saveContext];
 }
 
@@ -174,25 +172,27 @@
 
 - (void)setDestination:(Location *)destination
 {
-    NSLog(@"[LM] Setting destination");
-    
-    if ( [self.currentDestination isKindOfClass:[UserLocation class]] ) {
-        [self setUserLocationAsDeselected:(UserLocation *)self.currentDestination];
-    } else {
-        [self setKMLLocationAsDeselected:(KMLLocation *)self.currentDestination];
-    }
-    
-    if ( destination ) {
-        if ([destination isKindOfClass:[UserLocation class]] ) {
-            [self setUserLocationAsSelected:(UserLocation *)destination];
-        } else {
-            [self setKMLLocationAsSelected:(KMLLocation *)destination];
-        }
-    }
-    
-    self.currentDestination = destination;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+//    NSLog(@"[LM] Setting destination");
+//    
+//    if ( self.currentDestination ) {
+//        if ( [self.currentDestination isKindOfClass:[UserLocation class]] ) {
+//            [self setUserLocationAsDeselected:(UserLocation *)self.currentDestination];
+//        } else {
+//            [self setKMLLocationAsDeselected:(KMLLocation *)self.currentDestination];
+//        }
+//    }
+//    
+//    if ( destination ) {
+//        if ([destination isKindOfClass:[UserLocation class]] ) {
+//            [self setUserLocationAsSelected:(UserLocation *)destination];
+//        } else {
+//            [self setKMLLocationAsSelected:(KMLLocation *)destination];
+//        }
+//    }
+//    
+//    self.currentDestination = destination;
+//    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
 }
 
 //////////////////////////////////////////////////////////////
@@ -337,6 +337,10 @@
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"UserLocation" inManagedObjectContext:self.context];
     [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
     NSArray *fetchedObjects = [self.context executeFetchRequest:fetchRequest error:&error];
     return fetchedObjects;
 }
@@ -348,6 +352,10 @@
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"KMLLocation" inManagedObjectContext:self.context];
     [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
     NSArray *fetchedObjects = [self.context executeFetchRequest:fetchRequest error:&error];
     return fetchedObjects;}
 
@@ -358,6 +366,10 @@
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"MapTileCollection" inManagedObjectContext:self.context];
     [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
     NSArray *fetchedObjects = [self.context executeFetchRequest:fetchRequest error:&error];
     return fetchedObjects;
 }

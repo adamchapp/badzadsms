@@ -119,21 +119,21 @@
     [mapView addAnnotations:self.locationModel.kmlLocations];
     [mapView addAnnotations:self.locationModel.userLocations];
     
-    for ( Location *location in self.locationModel.userLocations ) {
-        if ( [location.selected boolValue] == YES )
-        {
-            NSLog(@"[MVC] Setting destination in location model...");
-            [self.locationModel setDestination:location];
-        }
-    }
-    
-    for ( Location *kmlLocation in self.locationModel.kmlLocations ) {
-        if ( [kmlLocation.selected boolValue] == YES )
-        {
-            NSLog(@"[MVC] Setting (kml) destination in location model...");
-            [self.locationModel setDestination:kmlLocation];
-        }
-    }
+//    for ( Location *location in self.locationModel.userLocations ) {
+//        if ( [location.selected boolValue] == YES )
+//        {
+//            NSLog(@"[MVC] Setting destination in location model...");
+//            [self.locationModel setDestination:location];
+//        }
+//    }
+//    
+//    for ( Location *kmlLocation in self.locationModel.kmlLocations ) {
+//        if ( [kmlLocation.selected boolValue] == YES )
+//        {
+//            NSLog(@"[MVC] Setting (kml) destination in location model...");
+//            [self.locationModel setDestination:kmlLocation];
+//        }
+//    }
     
     [mapView setShowsUserLocation:YES];
     

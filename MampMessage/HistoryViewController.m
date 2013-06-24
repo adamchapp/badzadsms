@@ -66,6 +66,7 @@
 }
 
 - (void)reloadHistoryView:(id)sender {
+    NSLog(@"reloading history view data");
     [self.tableView reloadData];
 }
 

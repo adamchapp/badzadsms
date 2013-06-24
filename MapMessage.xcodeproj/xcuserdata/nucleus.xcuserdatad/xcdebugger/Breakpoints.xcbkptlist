@@ -13,8 +13,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "93"
          endingLineNumber = "93"
-         landmarkName = "-loadAnnotations"
-         landmarkType = "5">
+         landmarkName = "@implementation MapViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -39,7 +39,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "235"
          endingLineNumber = "235"
-         landmarkName = "-newNamesFromDeviceName:"
+         landmarkName = "-handleAnnotationTitleEntered:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
