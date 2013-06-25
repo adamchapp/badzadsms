@@ -116,8 +116,6 @@
     [mapView addAnnotations:self.locationModel.userLocations];
 
     [mapView setShowsUserLocation:YES];
-    
-    [self zoomMap];
 }
 
 - (void)zoomMap {
@@ -125,15 +123,15 @@
     MKMapRect zoomRect = MKMapRectNull;
     
     #warning This seems a bit excessive is there a way of not forcing a redraw on all items?
-    for (id<MKAnnotation> myAnnot in self.locationModel.userLocations){
-        AnnotationView* view = (AnnotationView *)[mapView viewForAnnotation:myAnnot];
-        view.image = [UIImage imageNamed:@"annotation-view-unselected"];
-    }
-    
-    for (id<MKAnnotation> myAnnot in self.locationModel.kmlLocations){
-        KMLAnnotationView* view = (KMLAnnotationView *)[mapView viewForAnnotation:myAnnot];
-        view.image = [UIImage imageNamed:@"annotation-view-kml"];
-    }
+//    for (id<MKAnnotation> myAnnot in self.locationModel.userLocations){
+//        AnnotationView* view = (AnnotationView *)[mapView viewForAnnotation:myAnnot];
+//        view.image = [UIImage imageNamed:@"annotation-view-unselected"];
+//    }
+//    
+//    for (id<MKAnnotation> myAnnot in self.locationModel.kmlLocations){
+//        KMLAnnotationView* view = (KMLAnnotationView *)[mapView viewForAnnotation:myAnnot];
+//        view.image = [UIImage imageNamed:@"annotation-view-kml"];
+//    }
     
     //intersect with destination
 
@@ -147,9 +145,9 @@
         NSLog(@"Don't have user location");
     }
     
-    id <MKAnnotation>annotation = (id <MKAnnotation>)self.locationModel.currentDestination;
-    MKAnnotationView *annotationView = [mapView viewForAnnotation:annotation];
-    [annotationView setSelected:YES animated:YES];
+//    id <MKAnnotation>annotation = (id <MKAnnotation>)self.locationModel.currentDestination;
+//    MKAnnotationView *annotationView = [mapView viewForAnnotation:annotation];
+//
 
     if ( self.locationModel.currentDestination ) {
         NSLog(@"Have current destination %.4f/%.4f", self.locationModel.currentDestination.coordinate.latitude, self.locationModel.currentDestination.coordinate.longitude);
@@ -234,7 +232,9 @@
 }
 
 - (void)setDestination:(Location *)location {
+    self.locationModel.currentDestination = location;
     
+    [self zoomMap];
 }
 
 //////////////////////////////////////////////////////////////
@@ -492,7 +492,7 @@
     
     if ( [location selected] == [NSNumber numberWithBool:YES ] ) {
         NSLog(@"Changing this annotation (%@) to selected image", annotation.title);
-        [annotationView setImage:[UIImage imageNamed:@"annotation-view-destination"]];
+        [annotationView setImage:[UIImage imageNamed:@"annotation-view-selected"]];
     }
     
     [annotationView setText:annotation.title];
