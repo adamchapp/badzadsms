@@ -113,7 +113,7 @@
         showCoordinate = [location.selected boolValue];
         
         if (showCoordinate) {
-            [self.locationModel setDestination:location];
+            [self.delegate setDestination:location];
         }
         
     } else if ( indexPath.section == 1 ) {
@@ -123,7 +123,7 @@
         showCoordinate = [location.selected boolValue];
         
         if ( showCoordinate ) {
-            [self.locationModel setDestination:location];
+            [self.delegate setDestination:location];
         }
     } else {
         MapTileCollection *collection = [self.locationModel.mapTileCollections objectAtIndex:indexPath.row];
@@ -215,13 +215,13 @@
         
         if ( indexPath.section == 0 ) {
             UserLocation *userLocation = [self.locationModel.userLocations objectAtIndex:indexPath.row];
-            [self.locationModel removeUserLocation:userLocation];
+            [self.delegate deleteSelectedAnnotation:(id)userLocation];
         } else if ( indexPath.section == 1 ) {
             KMLLocation *kmlLocation = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
-            [self.locationModel removeKMLLocation:kmlLocation];
+            [self.delegate deleteSelectedAnnotation:(id)kmlLocation];
         } else {
             MapTileCollection *collection = [self.locationModel.mapTileCollections objectAtIndex:indexPath.row];
-            [self.locationModel removeMapTileCollection:collection];
+            [self.delegate deleteSelectedMapTileCollection:collection];
         }
 
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];

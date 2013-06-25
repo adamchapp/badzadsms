@@ -11,8 +11,11 @@
 #import "KMLLocation.h"
 #import "UserLocation+Extensions.h"
 #import "LocationModel.h"
+#import "AnnotationDelegate.h"
 
 @interface HistoryViewController : UITableViewController
+
+@property (nonatomic, assign) id<AnnotationDelegate> delegate;
 
 @property (nonatomic, strong) LocationModel *locationModel;
 

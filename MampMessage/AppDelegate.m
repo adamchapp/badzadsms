@@ -156,6 +156,7 @@
     if ( !_historyController ) {
         _historyController =  [[HistoryViewController alloc] initWithStyle:UITableViewStylePlain];
         _historyController.locationModel = self.locationModel;
+        _historyController.delegate = self.mapController;
     }
     return _historyController;
 }

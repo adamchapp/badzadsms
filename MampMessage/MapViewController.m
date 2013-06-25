@@ -45,6 +45,7 @@
     [self addGestureRecognisers];
     [self setupLocationManager];
     [self loadAnnotations];
+    [self zoomMap];
     
     [self setEditing:NO];
 }
@@ -244,6 +245,10 @@
     }
     
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)setDestination:(Location *)location {
+    
 }
 
 //////////////////////////////////////////////////////////////
