@@ -21,7 +21,7 @@
 
 @property (nonatomic, strong) Location *currentDestination;
 
-- (void)addUserLocationWithTitle:(NSString *)title sender:(NSString *)sender timestamp:(NSDate *)timestamp latitude:(double)latitude longitude:(double)longitude selected:(BOOL)selected;
+- (UserLocation *)addUserLocationWithTitle:(NSString *)title sender:(NSString *)sender timestamp:(NSDate *)timestamp latitude:(double)latitude longitude:(double)longitude selected:(BOOL)selected;
 - (void)removeUserLocation:(UserLocation *)location;
 
 - (UserLocation *)getUserLocationByName:(NSString *)name;

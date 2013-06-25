@@ -51,7 +51,7 @@
     return YES;
 }
 
-- (void)addUserLocationWithTitle:(NSString *)title
+- (UserLocation *)addUserLocationWithTitle:(NSString *)title
                           sender:(NSString *)sender
                        timestamp:(NSDate *)timestamp
                         latitude:(double)latitude
@@ -81,6 +81,8 @@
     newLocation.selected = [NSNumber numberWithBool:YES];
     
     [self saveContext];
+    
+    return newLocation;
 }
 
 - (void)removeUserLocation:(UserLocation *)location
@@ -91,12 +93,14 @@
 
 - (void)setUserLocationAsSelected:(UserLocation *)location
 {
-    [location setSelected:[NSNumber numberWithBool:YES]];    
+    [location setSelected:[NSNumber numberWithBool:YES]];
+    [self saveContext];
 }
 
 - (void)setUserLocationAsDeselected:(UserLocation *)location
 {
     [location setSelected:[NSNumber numberWithBool:NO]];
+    [self saveContext];
 }
 
 - (UserLocation *)getUserLocationByName:(NSString *)name
@@ -124,25 +128,16 @@
 {
     NSLog(@"[LM] Setting destination");
     
-//    if ( self.currentDestination ) {
-//        if ( [self.currentDestination isKindOfClass:[UserLocation class]] ) {
-//            [self setUserLocationAsDeselected:(UserLocation *)self.currentDestination];
-//        } else {
-//            [self setKMLLocationAsDeselected:(KMLLocation *)self.currentDestination];
-//        }
-//    }
-//    
-//    if ( destination ) {
-//        if ([destination isKindOfClass:[UserLocation class]] ) {
-//            [self setUserLocationAsSelected:(UserLocation *)destination];
-//        } else {
-//            [self setKMLLocationAsSelected:(KMLLocation *)destination];
-//        }
-//    }
+    if ( self.currentDestination ) {
+        [self.currentDestination setSelected:[NSNumber numberWithBool:NO]];
+    }
+    
+    if ( destination ) {
+        [destination setSelected:[NSNumber numberWithBool:YES]];
+    }
+
     
     self.currentDestination = destination;
-    
-
 }
 
 //////////////////////////////////////////////////////////////

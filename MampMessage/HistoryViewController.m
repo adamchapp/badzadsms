@@ -27,6 +27,15 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"[HVC] viewWillAppear");
+    
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,13 +48,6 @@
     
     self.navigationItem.leftBarButtonItem = editBarButtonItem;
     [self.navigationItem setTitle:@"Locations"];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    NSLog(@"[MVC] (viewWillDisappear) Saving context...");
-    [self.locationModel saveContext];
 }
 
 - (void)toggleEditingMode {

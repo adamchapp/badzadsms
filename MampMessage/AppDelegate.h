@@ -33,7 +33,6 @@ typedef void (^UIAlertViewBlock)(void);
 @property (strong, nonatomic) MapViewController *mapController;
 @property (strong, nonatomic) LocationModel *locationModel;
 
-- (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
 @end

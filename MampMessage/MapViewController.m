@@ -114,23 +114,7 @@
     
     [mapView addAnnotations:self.locationModel.kmlLocations];
     [mapView addAnnotations:self.locationModel.userLocations];
-    
-//    for ( Location *location in self.locationModel.userLocations ) {
-//        if ( [location.selected boolValue] == YES )
-//        {
-//            NSLog(@"[MVC] Setting destination in location model...");
-//            [self.locationModel setDestination:location];
-//        }
-//    }
-//    
-//    for ( Location *kmlLocation in self.locationModel.kmlLocations ) {
-//        if ( [kmlLocation.selected boolValue] == YES )
-//        {
-//            NSLog(@"[MVC] Setting (kml) destination in location model...");
-//            [self.locationModel setDestination:kmlLocation];
-//        }
-//    }
-    
+
     [mapView setShowsUserLocation:YES];
     
     [self zoomMap];
@@ -152,7 +136,7 @@
     }
     
     //intersect with destination
-    if ( self.locationModel.currentDestination == nil ) return;
+
         
     //create zoom rect from user location
     if ( self.latitude != 0.000 & self.longitude != 0.000 ) {
@@ -166,11 +150,13 @@
     id <MKAnnotation>annotation = (id <MKAnnotation>)self.locationModel.currentDestination;
     MKAnnotationView *annotationView = [mapView viewForAnnotation:annotation];
     [annotationView setSelected:YES animated:YES];
-    
-    NSLog(@"Have current destination %.4f/%.4f", self.locationModel.currentDestination.coordinate.latitude, self.locationModel.currentDestination.coordinate.longitude);
-    MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationModel.currentDestination.coordinate);
-    MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
-    zoomRect = MKMapRectUnion(zoomRect, pointRect);
+
+    if ( self.locationModel.currentDestination ) {
+        NSLog(@"Have current destination %.4f/%.4f", self.locationModel.currentDestination.coordinate.latitude, self.locationModel.currentDestination.coordinate.longitude);
+        MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationModel.currentDestination.coordinate);
+        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+        zoomRect = MKMapRectUnion(zoomRect, pointRect);
+    }
     
     [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(25, 25, 25, 25) animated:YES];
 }
@@ -335,13 +321,14 @@
                                           convertPoint:point
                                           toCoordinateFromView:mapView];
     
-    [self.locationModel addUserLocationWithTitle:self.pinViewHeader.textField.text
-                                          sender:[DeviceNameUtil nameFromDevice]
-                                       timestamp:[NSDate date]
-                                        latitude:coordinates.latitude
-                                       longitude:coordinates.longitude
-                                       selected:YES];
-        
+    UserLocation *location = [self.locationModel addUserLocationWithTitle:self.pinViewHeader.textField.text
+                                                                   sender:[DeviceNameUtil nameFromDevice]
+                                                                timestamp:[NSDate date]
+                                                                 latitude:coordinates.latitude
+                                                                longitude:coordinates.longitude
+                                                                    selected:YES];
+    [mapView addAnnotation:(id)location];
+    
     [self removeNewAnnotationView];
 }
 
