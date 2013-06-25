@@ -20,6 +20,9 @@
 @property (nonatomic, strong) UIButton *plusButton;
 @property (nonatomic, strong) UIButton *saveAnnotationButton;
 @property (nonatomic, strong) UIButton *cancelAnnotationButton;
+@property (strong, nonatomic) NSDateFormatter *formatter;
+@property (strong, nonatomic) URLParser *urlParser;
+@property (nonatomic, strong) KMLParser *kmlParser;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
@@ -40,7 +43,6 @@
     
     [self createMenuButtons];
     [self addGestureRecognisers];
-    [self addObservers];
     [self setupLocationManager];
     [self loadAnnotations];
     
@@ -89,13 +91,6 @@
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showNewAnnotationView:)];
     longPress.minimumPressDuration = 0.7;
     [mapView addGestureRecognizer:longPress];
-}
-
-- (void)addObservers
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZCoordinateDataChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAnnotations) name:BZMapTileCollectionLoaded object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomMap) name:BZCoordinateViewDataChanged object:nil];
 }
 
 - (void)setupLocationManager
@@ -177,6 +172,67 @@
     zoomRect = MKMapRectUnion(zoomRect, pointRect);
     
     [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(25, 25, 25, 25) animated:YES];
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - AnnotationDelegate methods
+//////////////////////////////////////////////////////////////
+
+- (void)showAlertView:(NSString *)locationTitle
+{
+    NSString *message = [NSString stringWithFormat:@"Are you sure you want to replace the current location for %@ with an older one?", locationTitle];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:message delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    [alertView setDelegate:self];
+    
+    [alertView show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( buttonIndex == 1 ) {
+        self.confirmBlock();
+    }
+}
+
+- (void)addUserLocationFromURL:(NSURL *)url
+{
+    NSLog(@"[LM] Adding new user location from URL");
+    self.urlParser = [[URLParser alloc] initWithURLString:url.absoluteString];
+    
+    NSString *title = [[self.urlParser valueForVariable:@"title"] stringByReplacingOccurrencesOfString:@"-" withString:@" "];
+    NSString *timeStampString = [self.urlParser valueForVariable:@"timestamp"];
+    NSString *sender = [self.urlParser valueForVariable:@"sender"];
+    
+    NSDate *timestamp = [self.formatter dateFromString:timeStampString];
+    
+    double latitude = [[self.urlParser valueForVariable:@"lat"] doubleValue];
+    double longitude = [[self.urlParser valueForVariable:@"long"] doubleValue];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    self.confirmBlock = ^ {
+        [weakSelf.locationModel addUserLocationWithTitle:title sender:sender timestamp:timestamp latitude:latitude longitude:longitude selected:YES];
+    };
+    
+    if ( [weakSelf.locationModel isLocationValid:title timestamp:timestamp] ) {
+        self.confirmBlock();
+    } else {
+        [self showAlertView:title];
+    }
+}
+
+- (void)addKMLLocationFromURL:(NSURL *)url
+{
+    self.kmlParser = [[KMLParser alloc] initWithURL:url];
+    [self.kmlParser parseKML];
+    
+    // Add all of the MKOverlay objects parsed from the KML file to the map.
+    NSArray *kmlAnnotations = [self.kmlParser points];
+    
+    
+    [self.locationModel addKMLLocations:kmlAnnotations];
+    
 }
 
 - (void)deleteSelectedAnnotation:(id<MKAnnotation>)annotation
@@ -389,6 +445,14 @@
         _smsController = [[SMSController alloc] initWithRootViewController:self];
     }
     return _smsController;
+}
+
+- (NSDateFormatter *)formatter {
+    if ( !_formatter ) {
+        _formatter = [[NSDateFormatter alloc] init];
+        [_formatter setDateFormat:BZDateFormat];
+    }
+    return _formatter;
 }
 
 //////////////////////////////////////////////////////////////

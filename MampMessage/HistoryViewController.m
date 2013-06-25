@@ -39,15 +39,12 @@
     
     self.navigationItem.leftBarButtonItem = editBarButtonItem;
     [self.navigationItem setTitle:@"Locations"];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHistoryView:) name:BZCoordinateDataChanged object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    NSLog(@"Saving context...");
-    
+    NSLog(@"[MVC] (viewWillDisappear) Saving context...");
     [self.locationModel saveContext];
 }
 

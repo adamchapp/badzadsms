@@ -12,20 +12,11 @@
 #import <AddressBook/AddressBook.h>
 #import "DeviceNameUtil.h"
 #import "Constants.h"
-
-@protocol AnnotationDetailViewDelegate <MFMessageComposeViewControllerDelegate>
-
-/**
- Sends an SMS. The message content depends on whether the title is the same as the sender name.
- */
-- (void)sendSMSNamed:(NSString *)title timestamp:(NSString *)timestamp latitude:(double)latitude longitude:(double)longitude;
-- (void)deleteSelectedAnnotation:(id <MKAnnotation>)annotation;
-
-@end
+#import "AnnotationDelegate.h"
 
 @interface AnnotationDetailViewController : UIViewController <UIGestureRecognizerDelegate, UIActionSheetDelegate>
 
-@property (nonatomic, assign) id<AnnotationDetailViewDelegate> delegate;
+@property (nonatomic, assign) id<AnnotationDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *creationDateLabel;

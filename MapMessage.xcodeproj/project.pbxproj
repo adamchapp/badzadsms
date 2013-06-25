@@ -257,6 +257,7 @@
 		3FFF3CCF1769023500813BD9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		EE6E82A017660E9200A17859 /* KMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLParser.h; sourceTree = "<group>"; };
 		EE6E82A117660E9200A17859 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
+		EEC96DBE1779D48A00B023AA /* AnnotationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -520,6 +521,7 @@
 				3F81111A1764195400975702 /* HistoryViewController.m */,
 				3F4C78EB176CED8900F357D4 /* AnnotationDetailViewController.h */,
 				3F4C78EC176CED8900F357D4 /* AnnotationDetailViewController.m */,
+				EEC96DBE1779D48A00B023AA /* AnnotationDelegate.h */,
 			);
 			name = views;
 			sourceTree = "<group>";

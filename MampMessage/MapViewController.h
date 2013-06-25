@@ -32,14 +32,18 @@
 
 #import "DeviceNameUtil.h"
 #import "SMSController.h"
+#import "AnnotationDelegate.h"
 
+typedef void (^ConfirmAddLocationBlock)(void);
 
-@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, AnnotationDetailViewDelegate>
+@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, AnnotationDelegate>
 {
     IBOutlet MKMapView *mapView;
     IBOutlet UIButton *compassButton;
     IBOutlet UIButton *satelliteButton;
 }
+
+@property (nonatomic, copy) ConfirmAddLocationBlock confirmBlock;
 
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
@@ -56,5 +60,8 @@
 - (IBAction)handleSMSButtonClicked:(id)sender;
 - (IBAction)toggleCompass:(id)sender;
 - (IBAction)toggleViewMode:(id)sender;
+
+- (void)addUserLocationFromURL:(NSURL *)url;
+- (void)addKMLLocationFromURL:(NSURL *)url;
 
 @end

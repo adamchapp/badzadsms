@@ -67,11 +67,11 @@
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     if ( [url isFileURL] ) {
-        [self.locationModel addKMLLocationFromURL:url];
+        [self.mapController addKMLLocationFromURL:url];
     }
     else
     {
-        [self.locationModel addUserLocationFromURL:url];
+        [self.mapController addUserLocationFromURL:url];
     }
     
     return YES;

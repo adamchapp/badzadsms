@@ -15,15 +15,12 @@
 #import "KMLLocation+Extensions.h"
 #import "MapTileCollection+Extension.h"
 
-typedef void (^ConfirmAddLocationBlock)(void);
-
 @interface LocationModel : NSObject <UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *context;
 
-@property (nonatomic, copy) ConfirmAddLocationBlock confirmBlock;
+@property (nonatomic, strong) Location *currentDestination;
 
-- (void)addUserLocationFromURL:(NSURL *)url;
 - (void)addUserLocationWithTitle:(NSString *)title sender:(NSString *)sender timestamp:(NSDate *)timestamp latitude:(double)latitude longitude:(double)longitude selected:(BOOL)selected;
 - (void)removeUserLocation:(UserLocation *)location;
 
@@ -31,7 +28,7 @@ typedef void (^ConfirmAddLocationBlock)(void);
 
 - (void)setDestination:(Location *)destination;
 
-- (void)addKMLLocationFromURL:(NSURL *)url;
+- (void)addKMLLocations:(NSArray *)annotations;
 - (void)removeKMLLocation:(KMLLocation *)location;
 
 - (void)addMapTileCollectionWithName:(NSString *)name directoryPath:(NSString *)path isFlippedAxis:(BOOL)flipped;
@@ -40,13 +37,13 @@ typedef void (^ConfirmAddLocationBlock)(void);
 - (void)showMapTileCollection:(MapTileCollection *)location;
 - (void)hideMapTileCollection:(MapTileCollection *)location;
 
+- (BOOL)isLocationValid:(NSString *)title timestamp:(NSDate *)timestamp;
+
 - (NSArray *)userLocations;
 - (NSArray *)kmlLocations;
 - (NSArray *)mapTileCollections;
 
 - (NSArray *)mapTileCollectionViews;
-
-@property (nonatomic, strong) Location *currentDestination;
 
 - (void)saveContext;
 

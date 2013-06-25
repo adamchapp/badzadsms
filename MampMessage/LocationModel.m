@@ -11,10 +11,6 @@
 
 @interface LocationModel ()
 
-@property (strong, nonatomic) NSDateFormatter *formatter;
-@property (strong, nonatomic) URLParser *urlParser;
-@property (nonatomic, strong) KMLParser *kmlParser;
-
 @end
 
 @implementation LocationModel
@@ -55,50 +51,6 @@
     return YES;
 }
 
-- (void)showAlertView:(NSString *)locationTitle
-{
-    NSString *message = [NSString stringWithFormat:@"Are you sure you want to replace the current location for %@ with an older one?", locationTitle];
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Warning" message:message delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-    [alertView setDelegate:self];
-    
-    [alertView show];
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if ( buttonIndex == 1 ) {
-        self.confirmBlock();
-    }
-}
-
-- (void)addUserLocationFromURL:(NSURL *)url
-{
-    NSLog(@"[LM] Adding new user location from URL");
-    self.urlParser = [[URLParser alloc] initWithURLString:url.absoluteString];
-    
-    NSString *title = [[self.urlParser valueForVariable:@"title"] stringByReplacingOccurrencesOfString:@"-" withString:@" "];
-    NSString *timeStampString = [self.urlParser valueForVariable:@"timestamp"];
-    NSString *sender = [self.urlParser valueForVariable:@"sender"];
-    
-    NSDate *timestamp = [self.formatter dateFromString:timeStampString];
-    
-    double latitude = [[self.urlParser valueForVariable:@"lat"] doubleValue];
-    double longitude = [[self.urlParser valueForVariable:@"long"] doubleValue];
-    
-    __weak typeof(self) weakSelf = self;
-    
-    self.confirmBlock = ^ {
-        [weakSelf addUserLocationWithTitle:title sender:sender timestamp:timestamp latitude:latitude longitude:longitude selected:YES];
-    };
-    
-    if ( [self isLocationValid:title timestamp:timestamp] ) {
-        self.confirmBlock();
-    } else {
-        [self showAlertView:title];
-    }
-}
-
 - (void)addUserLocationWithTitle:(NSString *)title
                           sender:(NSString *)sender
                        timestamp:(NSDate *)timestamp
@@ -127,8 +79,6 @@
     newLocation.latitude = [NSNumber numberWithDouble:latitude];
     newLocation.longitude = [NSNumber numberWithDouble:longitude];
     newLocation.selected = [NSNumber numberWithBool:YES];
-        
-    self.confirmBlock = nil;
     
     [self saveContext];
 }
@@ -172,8 +122,8 @@
 
 - (void)setDestination:(Location *)destination
 {
-//    NSLog(@"[LM] Setting destination");
-//    
+    NSLog(@"[LM] Setting destination");
+    
 //    if ( self.currentDestination ) {
 //        if ( [self.currentDestination isKindOfClass:[UserLocation class]] ) {
 //            [self setUserLocationAsDeselected:(UserLocation *)self.currentDestination];
@@ -189,25 +139,19 @@
 //            [self setKMLLocationAsSelected:(KMLLocation *)destination];
 //        }
 //    }
-//    
-//    self.currentDestination = destination;
-//    
-//    [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateViewDataChanged object:nil];
+    
+    self.currentDestination = destination;
+    
+
 }
 
 //////////////////////////////////////////////////////////////
 #pragma mark  - KML Locations
 //////////////////////////////////////////////////////////////
 
-- (void)addKMLLocationFromURL:(NSURL *)url
-{        
-    self.kmlParser = [[KMLParser alloc] initWithURL:url];
-    [self.kmlParser parseKML];
-    
-    // Add all of the MKOverlay objects parsed from the KML file to the map.
-    NSArray *kmlAnnotations = [self.kmlParser points];
-    
-    for ( id<MKAnnotation>annotation in kmlAnnotations ) {
+- (void)addKMLLocations:(NSArray *)annotations
+{
+    for ( id<MKAnnotation>annotation in annotations ) {
         
         KMLLocation *location;
         KMLLocation *previousLocation = [self getKMLLocationByName:annotation.title];
@@ -238,12 +182,14 @@
 
 - (void)setKMLLocationAsSelected:(KMLLocation *)location
 {
-    [location setSelected:[NSNumber numberWithBool:YES]];    
+    [location setSelected:[NSNumber numberWithBool:YES]];
+    [self saveContext];
 }
 
 - (void)setKMLLocationAsDeselected:(KMLLocation *)location
 {
     [location setSelected:[NSNumber numberWithBool:NO]];
+    [self saveContext];
 }
 
 - (KMLLocation *)getKMLLocationByName:(NSString *)name
@@ -297,13 +243,11 @@
 - (void)showMapTileCollection:(MapTileCollection *)location
 {
     [location setIsVisible:[NSNumber numberWithBool:YES]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZMapTileCollectionLoaded object:nil];
 }
 
 - (void)hideMapTileCollection:(MapTileCollection *)location
 {
     [location setIsVisible:[NSNumber numberWithBool:NO]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:BZMapTileCollectionLoaded object:nil];
 }
 
 - (void)saveContext {
@@ -312,7 +256,7 @@
         if (![self.context save:&error] ) {
             NSLog(@"There was an error saving %@", error.description);
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:BZCoordinateDataChanged object:nil];
+            NSLog(@"Context saved without error");
         }
     }
 }
@@ -320,15 +264,6 @@
 //////////////////////////////////////////////////////////////
 #pragma mark  - Getters and setters
 //////////////////////////////////////////////////////////////
-
-- (NSDateFormatter *)formatter {
-    if ( !_formatter ) {
-        _formatter = [[NSDateFormatter alloc] init];
-        [_formatter setDateFormat:BZDateFormat];
-    }
-    return _formatter;
-}
-
 
 - (NSArray *)userLocations {
     NSError *error;
@@ -390,6 +325,8 @@
     
     return collectionViews;
 }
+
+
 
 //////////////////////////////////////////////////////////////
 #pragma mark  - Utility methods
