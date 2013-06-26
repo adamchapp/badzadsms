@@ -85,6 +85,8 @@
 		3FB25BEA176BF93400E01B78 /* tiles in Resources */ = {isa = PBXBuildFile; fileRef = 3FB25BE9176BF93400E01B78 /* tiles */; };
 		3FB25BED176C031A00E01B78 /* MapTileCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB25BEC176C031A00E01B78 /* MapTileCollection.m */; };
 		3FB25BEF176C0E4200E01B78 /* OpenStreetMap in Resources */ = {isa = PBXBuildFile; fileRef = 3FB25BEE176C0E4200E01B78 /* OpenStreetMap */; };
+		3FC8FEFB177A56E800DA389E /* annotation-view-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC8FEF9177A56E700DA389E /* annotation-view-menu.png */; };
+		3FC8FEFC177A56E800DA389E /* annotation-view-menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC8FEFA177A56E700DA389E /* annotation-view-menu@2x.png */; };
 		3FD3441417775D2000E5DD7A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD3441317775D2000E5DD7A /* AddressBook.framework */; };
 		3FD3441617775D4F00E5DD7A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD3441517775D4F00E5DD7A /* AddressBookUI.framework */; };
 		3FEE8424176A375400E54628 /* MapOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEE841F176A375400E54628 /* MapOverlay.m */; };
@@ -227,6 +229,8 @@
 		3FB25BEB176C031A00E01B78 /* MapTileCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapTileCollection.h; path = MampMessage/MapTileCollection.h; sourceTree = "<group>"; };
 		3FB25BEC176C031A00E01B78 /* MapTileCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapTileCollection.m; path = MampMessage/MapTileCollection.m; sourceTree = "<group>"; };
 		3FB25BEE176C0E4200E01B78 /* OpenStreetMap */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OpenStreetMap; sourceTree = "<group>"; };
+		3FC8FEF9177A56E700DA389E /* annotation-view-menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-menu.png"; sourceTree = "<group>"; };
+		3FC8FEFA177A56E700DA389E /* annotation-view-menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "annotation-view-menu@2x.png"; sourceTree = "<group>"; };
 		3FD3441317775D2000E5DD7A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3FD3441517775D4F00E5DD7A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		3FEE841E176A375400E54628 /* MapOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapOverlay.h; sourceTree = "<group>"; };
@@ -295,6 +299,8 @@
 		3F03B697176A968000469072 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				3FC8FEF9177A56E700DA389E /* annotation-view-menu.png */,
+				3FC8FEFA177A56E700DA389E /* annotation-view-menu@2x.png */,
 				3F1C0D9C1775F55C009106D7 /* annotation-view-unselected@2x.png */,
 				3F1C0D9D1775F55C009106D7 /* annotation-view-unselected.png */,
 				3F1C0DA01775F5DA009106D7 /* annotation-view-selected@2x.png */,
@@ -805,6 +811,8 @@
 				3F1C0DA71775F60F009106D7 /* annotation-view-kml.png in Resources */,
 				3F1C0DAA1775F667009106D7 /* annotation-view-destination@2x.png in Resources */,
 				3F1C0DAB1775F667009106D7 /* annotation-view-destination.png in Resources */,
+				3FC8FEFB177A56E800DA389E /* annotation-view-menu.png in Resources */,
+				3FC8FEFC177A56E800DA389E /* annotation-view-menu@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,7 +979,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MampMessage/MapMessage-Prefix.pch";
 				INFOPLIST_FILE = "MampMessage/MapMessage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = MapMessage;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -985,7 +993,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MampMessage/MapMessage-Prefix.pch";
 				INFOPLIST_FILE = "MampMessage/MapMessage-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = MapMessage;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

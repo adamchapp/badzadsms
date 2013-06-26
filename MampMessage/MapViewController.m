@@ -45,7 +45,6 @@
     [self addGestureRecognisers];
     [self setupLocationManager];
     [self loadAnnotations];
-    [self zoomMap];
     
     [self setEditing:NO];
 }
@@ -100,7 +99,8 @@
     
     if ( [CLLocationManager locationServicesEnabled] ) {
         self.locationManager.delegate = self;
-        self.locationManager.distanceFilter = 200;
+        self.locationManager.distanceFilter = 10;
+        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
         [self.locationManager startUpdatingLocation];
     }
 }
@@ -109,54 +109,50 @@
     
     [mapView removeOverlays:mapView.overlays];
     [mapView removeAnnotations:mapView.annotations];
-    
-    [mapView addOverlays:self.locationModel.mapTileCollectionViews];
-    
+        
     [mapView addAnnotations:self.locationModel.kmlLocations];
     [mapView addAnnotations:self.locationModel.userLocations];
+    
+    for ( UserLocation *location in self.locationModel.userLocations ) {
+        if ( [location.selected boolValue] == YES) {
+            NSLog(@"[MVC] %@ is current destination at startup", location.title);
+            [self setDestination:location];
+        }
+    }
+
+    for ( KMLLocation *location in self.locationModel.kmlLocations ) {
+        if ( [location.selected boolValue] == YES) {
+            NSLog(@"[MVC] %@ is current destination at startup", location.title);
+            [self setDestination:location];
+        }
+    }
 
     [mapView setShowsUserLocation:YES];
 }
 
 - (void)zoomMap {
     
+    NSLog(@"[MVC] Zoom map");
+    
     MKMapRect zoomRect = MKMapRectNull;
     
-    #warning This seems a bit excessive is there a way of not forcing a redraw on all items?
-//    for (id<MKAnnotation> myAnnot in self.locationModel.userLocations){
-//        AnnotationView* view = (AnnotationView *)[mapView viewForAnnotation:myAnnot];
-//        view.image = [UIImage imageNamed:@"annotation-view-unselected"];
-//    }
-//    
-//    for (id<MKAnnotation> myAnnot in self.locationModel.kmlLocations){
-//        KMLAnnotationView* view = (KMLAnnotationView *)[mapView viewForAnnotation:myAnnot];
-//        view.image = [UIImage imageNamed:@"annotation-view-kml"];
-//    }
-    
-    //intersect with destination
-
-        
     //create zoom rect from user location
     if ( self.latitude != 0.000 & self.longitude != 0.000 ) {
-        NSLog(@"Have user location %.4f/%.4f", self.latitude, self.longitude);
+        NSLog(@"[MVC] Have user location %.4f/%.4f", self.latitude, self.longitude);
         MKMapPoint userLocation = MKMapPointForCoordinate(CLLocationCoordinate2DMake(self.latitude, self.longitude));
         zoomRect = MKMapRectMake(userLocation.x, userLocation.y, 0.1, 0.1);
     } else {
-        NSLog(@"Don't have user location");
+        NSLog(@"[MVC] Don't have user location");
     }
     
-//    id <MKAnnotation>annotation = (id <MKAnnotation>)self.locationModel.currentDestination;
-//    MKAnnotationView *annotationView = [mapView viewForAnnotation:annotation];
-//
-
     if ( self.locationModel.currentDestination ) {
-        NSLog(@"Have current destination %.4f/%.4f", self.locationModel.currentDestination.coordinate.latitude, self.locationModel.currentDestination.coordinate.longitude);
+        NSLog(@"[MVC] Have current destination %.4f/%.4f", self.locationModel.currentDestination.coordinate.latitude, self.locationModel.currentDestination.coordinate.longitude);
         MKMapPoint annotationPoint = MKMapPointForCoordinate(self.locationModel.currentDestination.coordinate);
         MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
         zoomRect = MKMapRectUnion(zoomRect, pointRect);
+        
+        [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(25, 25, 25, 25) animated:YES];
     }
-    
-    [mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(25, 25, 25, 25) animated:YES];
 }
 
 //////////////////////////////////////////////////////////////
@@ -194,10 +190,14 @@
     double latitude = [[self.urlParser valueForVariable:@"lat"] doubleValue];
     double longitude = [[self.urlParser valueForVariable:@"long"] doubleValue];
     
+    //var that = this;
     __weak typeof(self) weakSelf = self;
+    __weak typeof(MKMapView) *weakMap = mapView;
     
     self.confirmBlock = ^ {
-        [weakSelf.locationModel addUserLocationWithTitle:title sender:sender timestamp:timestamp latitude:latitude longitude:longitude selected:YES];
+        UserLocation *location = [weakSelf.locationModel addUserLocationWithTitle:title sender:sender timestamp:timestamp latitude:latitude longitude:longitude selected:YES];
+        [weakSelf setDestination:location];
+        [weakMap addAnnotation:(id)location];
     };
     
     if ( [weakSelf.locationModel isLocationValid:title timestamp:timestamp] ) {
@@ -215,13 +215,21 @@
     // Add all of the MKOverlay objects parsed from the KML file to the map.
     NSArray *kmlAnnotations = [self.kmlParser points];
     
-    
     [self.locationModel addKMLLocations:kmlAnnotations];
-    
+    [mapView addAnnotations:kmlAnnotations];
 }
 
 - (void)deleteSelectedAnnotation:(id<MKAnnotation>)annotation
 {
+    [mapView removeAnnotation:annotation];
+    
+    Location *location = (Location *)annotation;
+    
+    if ( [location.selected boolValue] == YES ) {
+        NSLog(@"[MVC] this item was selected in the model, unset before delete");
+        [self.locationModel setDestination:nil];
+    }
+    
     if ( [annotation isKindOfClass:[UserLocation class]] ) {
         [self.locationModel removeUserLocation:(UserLocation *)annotation];        
     } else if ( [annotation isKindOfClass:[KMLLocation class]] ) {
@@ -232,9 +240,44 @@
 }
 
 - (void)setDestination:(Location *)location {
-    self.locationModel.currentDestination = location;
+    
+    [self.locationModel setDestination:location];
+    
+    NSLog(@"[MVC] setDestination: Unselecting all items");
+    for (id<MKAnnotation> myAnnot in self.locationModel.userLocations){
+        AnnotationView* view = (AnnotationView *)[mapView viewForAnnotation:myAnnot];
+        view.image = [UIImage imageNamed:@"annotation-view-unselected"];
+        [view setSelected:NO animated:NO];
+    }
+    
+    for (id<MKAnnotation> myAnnot in self.locationModel.kmlLocations){
+        KMLAnnotationView* view = (KMLAnnotationView *)[mapView viewForAnnotation:myAnnot];
+        view.image = [UIImage imageNamed:@"annotation-view-kml"];
+        [view setSelected:NO animated:NO];
+    }
+    
+    if ( location ) {
+        NSLog(@"[MVC] setDestination: Selecting new item");
+        id <MKAnnotation>annotation = (id <MKAnnotation>)location;
+        MKAnnotationView *annotationView = [mapView viewForAnnotation:annotation];
+        [annotationView setImage:[UIImage imageNamed:@"annotation-view-destination"]];
+    }
     
     [self zoomMap];
+}
+
+-(void)showMapTileCollection:(MapTileCollection *)collection {
+    
+    MapOverlay *overlay = [self.locationModel mapOverlayForMapTileCollection:collection];
+    [mapView addOverlay:overlay];
+    [self.locationModel showMapTileCollection:collection];
+}
+
+-(void)hideMapTileCollection:(MapTileCollection *)collection {
+    
+//    MapOverlay *overlay = [self.locationModel mapOverlayForMapTileCollection:collection];
+    [mapView removeOverlays:[self.locationModel mapTileCollectionViews]];
+    [self.locationModel hideMapTileCollection:collection];
 }
 
 //////////////////////////////////////////////////////////////
@@ -326,9 +369,11 @@
                                                                 timestamp:[NSDate date]
                                                                  latitude:coordinates.latitude
                                                                 longitude:coordinates.longitude
-                                                                    selected:YES];
+                                                                 selected:YES];
     [mapView addAnnotation:(id)location];
     
+    NSLog(@"[MVC] Calling set destination");
+    [self setDestination:location];
     [self removeNewAnnotationView];
 }
 
@@ -491,7 +536,6 @@
     UserLocation *location = (UserLocation *)annotation;
     
     if ( [location selected] == [NSNumber numberWithBool:YES ] ) {
-        NSLog(@"Changing this annotation (%@) to selected image", annotation.title);
         [annotationView setImage:[UIImage imageNamed:@"annotation-view-selected"]];
     }
     

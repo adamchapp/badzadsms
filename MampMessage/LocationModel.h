@@ -39,6 +39,8 @@
 
 - (BOOL)isLocationValid:(NSString *)title timestamp:(NSDate *)timestamp;
 
+- (MapOverlay *)mapOverlayForMapTileCollection:(MapTileCollection *)collection;
+
 - (NSArray *)userLocations;
 - (NSArray *)kmlLocations;
 - (NSArray *)mapTileCollections;

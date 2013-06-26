@@ -48,10 +48,21 @@
     
     self.navigationItem.leftBarButtonItem = editBarButtonItem;
     [self.navigationItem setTitle:@"Locations"];
+    
+//    [self.slidingViewController.panGesture setDelegate:self];
+    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+}
+
+- (void)viewDidUnload {
+    
+    [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
+    self.editButton = nil;
+    
+    [super viewDidUnload];
 }
 
 - (void)toggleEditingMode {
-    NSLog(@"toggle editing");
+    NSLog(@"[HVC] Toggle editing");
     
     if ( self.isEditing ) {
         [self setEditing:NO animated:YES];
@@ -62,11 +73,6 @@
         [self.editButton setBackgroundImage:[UIImage imageNamed:@"done-button"] forState:UIControlStateNormal];
         [self.editButton setFrame:CGRectMake(0, 0, 36, 13)];
     }
-}
-
-- (void)reloadHistoryView:(id)sender {
-    NSLog(@"reloading history view data");
-    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,7 +87,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -89,9 +95,12 @@
     if ( section == 0 ) {
         return [self.locationModel.userLocations count];
     } else if ( section == 1 ) {
-        return [self.locationModel.kmlLocations count];
+        return [self.locationModel.mapTileCollections count];
     }
-    return [self.locationModel.mapTileCollections count];
+    //        return [self.locationModel.kmlLocations count];
+    //    }
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,7 +115,7 @@
     }
     
     NSString *title;
-    BOOL showCoordinate;
+    BOOL showCoordinate = NO;
     
     if ( indexPath.section == 0 ) {
         UserLocation *location = [self.locationModel.userLocations objectAtIndex:indexPath.row];
@@ -114,32 +123,42 @@
         title = [NSString stringWithFormat:@"%@ %@",location.title, location.subtitle];
         showCoordinate = [location.selected boolValue];
         
-        if (showCoordinate) {
-            [self.delegate setDestination:location];
-        }
+//        if (showCoordinate) {
+//            [self.delegate setDestination:location];
+//        }
         
     } else if ( indexPath.section == 1 ) {
-        KMLLocation *location = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
-        
-        title = [NSString stringWithFormat:@"%@", location.title];
-        showCoordinate = [location.selected boolValue];
-        
-        if ( showCoordinate ) {
-            [self.delegate setDestination:location];
-        }
-    } else {
+//        KMLLocation *location = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
+//        
+//        title = [NSString stringWithFormat:@"%@", location.title];
+//        showCoordinate = [location.selected boolValue];
+//        
+////        if ( showCoordinate ) {
+////            [self.delegate setDestination:location];
+////        }
+//    } else {
         MapTileCollection *collection = [self.locationModel.mapTileCollections objectAtIndex:indexPath.row];
         
         title = [NSString stringWithFormat:@"%@", collection.title];
-        showCoordinate = [collection.isVisible boolValue];
+#warning Get isVisible working again for map selection
+//        showCoordinate = [collection.isVisible boolValue];
     }
     
     cell.textLabel.text = title;
     
     if ( showCoordinate == YES ) {
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        
+        if ( indexPath.section == 0 ) {
+            [cell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"annotation-view-menu"]]];
+        } else {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        }
     } else {
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        if ( indexPath.section == 0 ) {
+            [cell setAccessoryView:nil];
+        } else {
+            [cell setAccessoryView:nil];
+        }
     }
     
     return cell;
@@ -149,9 +168,9 @@
     switch (section) {
         case 0:
             return @"User locations";
+//        case 1:
+//            return @"Imported (KML) locations";
         case 1:
-            return @"Imported (KML) locations";
-        case 2:
             return @"Map tiles";
         default:
             return nil;
@@ -193,6 +212,9 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
+    if ( indexPath.section == 1 ) {
+        return NO;
+    }
     return YES;
 }
 
@@ -218,60 +240,83 @@
         if ( indexPath.section == 0 ) {
             UserLocation *userLocation = [self.locationModel.userLocations objectAtIndex:indexPath.row];
             [self.delegate deleteSelectedAnnotation:(id)userLocation];
-        } else if ( indexPath.section == 1 ) {
-            KMLLocation *kmlLocation = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
-            [self.delegate deleteSelectedAnnotation:(id)kmlLocation];
-        } else {
-            MapTileCollection *collection = [self.locationModel.mapTileCollections objectAtIndex:indexPath.row];
-            [self.delegate deleteSelectedMapTileCollection:collection];
         }
+        //            KMLLocation *kmlLocation = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
+        //            [self.delegate deleteSelectedAnnotation:(id)kmlLocation];
+        //        } else {
 
+        
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
     }
 }
 
 
-#pragma mark - Table view delegate
+//////////////////////////////////////////////////////////////
+#pragma mark  - UITableViewDelegate methods
+//////////////////////////////////////////////////////////////
+
+- (void)unsetPreviousDestination
+{
+    UITableViewCell *previousDestinationCell;
+    Location *currentDestination = self.locationModel.currentDestination;
+    
+    if ( [currentDestination isKindOfClass:[UserLocation class]] ) {
+        NSInteger index = [self.locationModel.userLocations indexOfObject:currentDestination];
+        previousDestinationCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    } else if ( [currentDestination isKindOfClass:[KMLLocation class]] ) {
+        NSInteger index = [self.locationModel.kmlLocations indexOfObject:currentDestination];
+        previousDestinationCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:1]];
+    }
+    
+    [self.delegate setDestination:nil];
+    [previousDestinationCell setAccessoryView:nil];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
+    //We're about to unset the previous destination, so save the title for comparison
+    NSString *currentDestinationTitle = self.locationModel.currentDestination.title;
+    
+    if ( self.locationModel.currentDestination ) {
+        [self unsetPreviousDestination];
+    }
+    
     if ( indexPath.section == 0 ) {
         UserLocation *userLocation = [[self.locationModel userLocations] objectAtIndex:indexPath.row];
         
-        if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
-            [self.locationModel setDestination:userLocation];
-        } else if ( cell.accessoryType == UITableViewCellAccessoryCheckmark ) {
-            [self.locationModel setDestination:nil];
-        }
-        [self.tableView reloadData];
+        if ( ![userLocation.title isEqualToString:currentDestinationTitle] ) {
+            NSLog(@"[HVC] Setting user location (%@) as new destination", userLocation.title);
+            
+            [cell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"annotation-view-menu"]]];
+            [self.delegate setDestination:userLocation];
+        } 
     } else if ( indexPath.section == 1 ){
-        KMLLocation *kmlLocation = [[self.locationModel kmlLocations] objectAtIndex:indexPath.row];
-        
-        if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
-            [self.locationModel setDestination:kmlLocation];
-        } else if ( cell.accessoryType == UITableViewCellAccessoryCheckmark ) {
-            [self.locationModel setDestination:nil];
-        }
-        [self.tableView reloadData];
-    } else {
         MapTileCollection *collection = [[self.locationModel mapTileCollections] objectAtIndex:indexPath.row];
         
         if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
-            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-            [self.locationModel showMapTileCollection:collection];
+            [self.delegate showMapTileCollection:collection];
         } else {
-            [cell setAccessoryType:UITableViewCellAccessoryNone];
-            [self.locationModel hideMapTileCollection:collection];
+            [self.delegate hideMapTileCollection:collection];
         }
     }
+
+    [self.slidingViewController resetTopView];
+//        KMLLocation *kmlLocation = [[self.locationModel kmlLocations] objectAtIndex:indexPath.row];
+//
+//        if ( ![kmlLocation.title isEqualToString:currentDestinationTitle] ) {
+//            NSLog(@"[HVC] Setting kml location (%@) as new destination", kmlLocation.title);
+//            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+//            [self.delegate setDestination:kmlLocation];
+//        }
+//    } else {
     
 }
 
 //////////////////////////////////////////////////////////////
-#pragma mark  - Getters and setters
+#pragma mark  - UIGestureRecogniserDelegate methods
 //////////////////////////////////////////////////////////////
 
 

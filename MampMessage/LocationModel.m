@@ -126,18 +126,26 @@
 
 - (void)setDestination:(Location *)destination
 {
-    NSLog(@"[LM] Setting destination");
-    
-    if ( self.currentDestination ) {
+    if ( self.currentDestination != nil ) {
+        NSLog(@"[LM] unsetting previous destination");
         [self.currentDestination setSelected:[NSNumber numberWithBool:NO]];
+        NSLog(@"[LM] phew");
     }
+    
+    NSLog(@"[LM] done.");
     
     if ( destination ) {
+        NSLog(@"[LM] Setting destination");
         [destination setSelected:[NSNumber numberWithBool:YES]];
+    } else {
+        NSLog(@"[LM] setting destination to nil");
     }
 
+    NSLog(@"[LM] done.");
     
     self.currentDestination = destination;
+    
+    [self saveContext];
 }
 
 //////////////////////////////////////////////////////////////
@@ -221,37 +229,36 @@
     collection.directoryPath = path;
     collection.isVisible = [NSNumber numberWithBool:NO];
     collection.isFlippedAxis = [NSNumber numberWithBool:flipped];
-    
-    NSError *error;
-    
-    [self.context save:&error];
+        
+    [self saveContext];
 }
 
 - (void)removeMapTileCollection:(MapTileCollection *)location
 {
     [self.context deleteObject:location];
     
-    NSError *error;
-    [self.context save:&error];
+    [self saveContext];
 }
 
 - (void)showMapTileCollection:(MapTileCollection *)location
 {
     [location setIsVisible:[NSNumber numberWithBool:YES]];
+    [self saveContext];
 }
 
 - (void)hideMapTileCollection:(MapTileCollection *)location
 {
     [location setIsVisible:[NSNumber numberWithBool:NO]];
+    [self saveContext];
 }
 
 - (void)saveContext {
     if ( [self.context hasChanges] ) {
         NSError *error;
         if (![self.context save:&error] ) {
-            NSLog(@"There was an error saving %@", error.description);
+            NSLog(@"[LM] There was an error saving %@", error.description);
         } else {
-            NSLog(@"Context saved without error");
+            NSLog(@"[LM] Context saved without error");
         }
     }
 }
@@ -321,7 +328,14 @@
     return collectionViews;
 }
 
-
+- (MapOverlay *)mapOverlayForMapTileCollection:(MapTileCollection *)collection
+{
+    NSString *tileDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:collection.directoryPath];
+    
+    MapOverlay *overlay = [[MapOverlay alloc] initWithDirectory:tileDirectory shouldFlipOrigin:[collection.isFlippedAxis boolValue]];
+    
+    return overlay;
+}
 
 //////////////////////////////////////////////////////////////
 #pragma mark  - Utility methods

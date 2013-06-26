@@ -38,17 +38,25 @@
     
     //if this annotation is the current destination, just show that image
     //otherwise toggle between selected and unselected    
-//    if ( [location.selected boolValue] == YES ) {
-//        self.image = [UIImage imageNamed:@"annotation-view-destination"];
-//    } else {
+    if ( [location.selected boolValue] == YES ) {
+        NSLog(@"[AV] this location (%@) is current destination, use destination icon", location.title);
+        self.image = [UIImage imageNamed:@"annotation-view-destination"];
+    } else {
         if ( selected ) {
+            NSLog(@"[AV] this location (%@) is selected", location.title);
             self.image = [UIImage imageNamed:@"annotation-view-selected"];
-            [self.annotationLabel setHidden:YES];
         } else {
+            NSLog(@"[AV] this location (%@) is not selected", location.title);
             self.image = [UIImage imageNamed:[self pathForUnselectedImage]];
-            [self.annotationLabel setHidden:NO];
         }
-//    }
+    }
+    
+    if ( selected ) {
+        [self.annotationLabel setHidden:YES];
+    } else {
+        [self.annotationLabel setHidden:NO];
+    }
+
 }
 
 -(NSString *)pathForUnselectedImage {

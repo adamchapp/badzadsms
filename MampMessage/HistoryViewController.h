@@ -13,7 +13,7 @@
 #import "LocationModel.h"
 #import "AnnotationDelegate.h"
 
-@interface HistoryViewController : UITableViewController
+@interface HistoryViewController : UITableViewController <UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) id<AnnotationDelegate> delegate;
 

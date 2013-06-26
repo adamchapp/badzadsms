@@ -19,8 +19,10 @@
 - (void)sendSMSNamed:(NSString *)title timestamp:(NSString *)timestamp latitude:(double)latitude longitude:(double)longitude;
 
 - (void)deleteSelectedAnnotation:(id <MKAnnotation>)annotation;
-- (void)deleteSelectedMapTileCollection:(MapTileCollection *)collection;
 
 - (void)setDestination:(Location *)location;
+
+- (void)showMapTileCollection:(MapTileCollection *)collection;
+- (void)hideMapTileCollection:(MapTileCollection *)collection;
 
 @end

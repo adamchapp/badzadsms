@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="and-pa-BXH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="and-pa-BXH">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.6"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--Map View Controller - Back-->
@@ -15,13 +14,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Aef-BF-inF">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <connections>
                                     <outlet property="delegate" destination="and-pa-BXH" id="ntk-Es-wIa"/>
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DM-Gt-Bft">
-                                <rect key="frame" x="252" y="392" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="Zu4-do-dDC"/>
                                 </constraints>
@@ -37,7 +34,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbV-0A-WsS">
-                                <rect key="frame" x="186" y="392" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="0ac-S5-jgp"/>
                                     <constraint firstAttribute="height" constant="48" id="kJu-Wy-W63"/>
@@ -68,7 +64,6 @@
                             <constraint firstItem="Aef-BF-inF" firstAttribute="top" secondItem="31L-au-yx9" secondAttribute="top" type="default" id="xde-0V-oKV"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Back" id="u3U-yb-IHg"/>
                     <connections>
                         <outlet property="compassButton" destination="3DM-Gt-Bft" id="ycE-Qb-IeP"/>
@@ -89,13 +84,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTY-6r-4Lc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="140" id="J8O-wX-fU1"/>
                                 </constraints>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4L-ho-hfU">
-                                <rect key="frame" x="130" y="363" width="60" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="77" id="FJQ-xA-cCt"/>
                                     <constraint firstAttribute="width" constant="60" id="SkL-0b-fss"/>
@@ -113,7 +106,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylZ-VX-chf">
-                                <rect key="frame" x="240" y="362" width="60" height="77"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="CXb-4c-eXn"/>
                                     <constraint firstAttribute="height" constant="77" id="Es0-Ms-1Gu"/>
@@ -131,8 +123,6 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0n-qc-pcE">
-                                <rect key="frame" x="20" y="362" width="61" height="79"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="79" id="PeS-HT-Wyf"/>
                                 </constraints>
@@ -149,8 +139,6 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NtX-lJ-gwG">
-                                <rect key="frame" x="20" y="154" width="61" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" type="user" id="lGB-uv-NbW"/>
                                 </constraints>
@@ -159,8 +147,6 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17th July 1:57" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAD-oO-lA0">
-                                <rect key="frame" x="20" y="183" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" type="user" id="k4L-iJ-ZzJ"/>
                                 </constraints>
@@ -169,8 +155,6 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Longitude:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gU6-eH-kcw">
-                                <rect key="frame" x="20" y="306" width="99" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" type="user" id="0qc-Gb-EJB"/>
                                     <constraint firstAttribute="width" constant="99" id="G89-4U-xLx"/>
@@ -180,8 +164,6 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jE-aa-To1">
-                                <rect key="frame" x="20" y="257" width="62" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" type="user" id="X4b-Mf-K0T"/>
                                 </constraints>
@@ -190,8 +172,6 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latitude:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5h3-Dz-FnW">
-                                <rect key="frame" x="20" y="282" width="84" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" type="user" id="Nd4-Sf-cfI"/>
                                     <constraint firstAttribute="width" constant="84" id="z4T-DR-g9W"/>
@@ -201,8 +181,6 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25.157" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5M-Lr-tyQ">
-                                <rect key="frame" x="122" y="306" width="188" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="188" id="5Fb-51-uaF"/>
                                     <constraint firstAttribute="height" constant="21" type="user" id="oE4-ec-aq5"/>
@@ -212,8 +190,6 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25.157" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LaG-IK-E8r">
-                                <rect key="frame" x="109" y="282" width="188" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" type="user" id="HYU-xp-G1g"/>
                                     <constraint firstAttribute="width" constant="188" id="JPu-EM-EK5"/>
@@ -254,7 +230,6 @@
                             <constraint firstItem="ylZ-VX-chf" firstAttribute="top" secondItem="R0n-qc-pcE" secondAttribute="top" type="default" id="ziq-qp-wYE"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="creationDateLabel" destination="mAD-oO-lA0" id="hhR-Xr-AJh"/>
@@ -278,7 +253,7 @@
         <class className="AnnotationDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AnnotationDetailViewController.h"/>
             <relationships>
-                <relationship kind="action" name="openLinkInGoogleMaps:"/>
+                <relationship kind="action" name="openLinkInExternalMapApp:"/>
                 <relationship kind="action" name="removeAnnotation:"/>
                 <relationship kind="action" name="sendSMS:"/>
                 <relationship kind="outlet" name="creationDateLabel" candidateClass="UILabel"/>
