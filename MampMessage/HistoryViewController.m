@@ -49,8 +49,7 @@
     self.navigationItem.leftBarButtonItem = editBarButtonItem;
     [self.navigationItem setTitle:@"Locations"];
     
-//    [self.slidingViewController.panGesture setDelegate:self];
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+//    [self.tableView addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (void)viewDidUnload {
@@ -123,25 +122,10 @@
         title = [NSString stringWithFormat:@"%@ %@",location.title, location.subtitle];
         showCoordinate = [location.selected boolValue];
         
-//        if (showCoordinate) {
-//            [self.delegate setDestination:location];
-//        }
-        
     } else if ( indexPath.section == 1 ) {
-//        KMLLocation *location = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
-//        
-//        title = [NSString stringWithFormat:@"%@", location.title];
-//        showCoordinate = [location.selected boolValue];
-//        
-////        if ( showCoordinate ) {
-////            [self.delegate setDestination:location];
-////        }
-//    } else {
         MapTileCollection *collection = [self.locationModel.mapTileCollections objectAtIndex:indexPath.row];
-        
         title = [NSString stringWithFormat:@"%@", collection.title];
-#warning Get isVisible working again for map selection
-//        showCoordinate = [collection.isVisible boolValue];
+        showCoordinate = [collection.isVisible boolValue];
     }
     
     cell.textLabel.text = title;
@@ -168,8 +152,6 @@
     switch (section) {
         case 0:
             return @"User locations";
-//        case 1:
-//            return @"Imported (KML) locations";
         case 1:
             return @"Map tiles";
         default:
@@ -207,11 +189,8 @@
     return 40.0;
 }
 
-
-// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
     if ( indexPath.section == 1 ) {
         return NO;
     }
@@ -220,7 +199,6 @@
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Detemine if it's in editing mode
     if (self.editing)
     {
         return UITableViewCellEditingStyleDelete;
@@ -229,22 +207,16 @@
     return UITableViewCellEditingStyleNone;
 }
 
-// Override to support editing the table view.
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-
         [tableView beginUpdates];
         
         if ( indexPath.section == 0 ) {
             UserLocation *userLocation = [self.locationModel.userLocations objectAtIndex:indexPath.row];
             [self.delegate deleteSelectedAnnotation:(id)userLocation];
         }
-        //            KMLLocation *kmlLocation = [self.locationModel.kmlLocations objectAtIndex:indexPath.row];
-        //            [self.delegate deleteSelectedAnnotation:(id)kmlLocation];
-        //        } else {
-
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView endUpdates];
@@ -288,8 +260,6 @@
         UserLocation *userLocation = [[self.locationModel userLocations] objectAtIndex:indexPath.row];
         
         if ( ![userLocation.title isEqualToString:currentDestinationTitle] ) {
-            NSLog(@"[HVC] Setting user location (%@) as new destination", userLocation.title);
-            
             [cell setAccessoryView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"annotation-view-menu"]]];
             [self.delegate setDestination:userLocation];
         } 
@@ -297,22 +267,15 @@
         MapTileCollection *collection = [[self.locationModel mapTileCollections] objectAtIndex:indexPath.row];
         
         if ( cell.accessoryType == UITableViewCellAccessoryNone ) {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
             [self.delegate showMapTileCollection:collection];
         } else {
             [self.delegate hideMapTileCollection:collection];
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
         }
     }
 
     [self.slidingViewController resetTopView];
-//        KMLLocation *kmlLocation = [[self.locationModel kmlLocations] objectAtIndex:indexPath.row];
-//
-//        if ( ![kmlLocation.title isEqualToString:currentDestinationTitle] ) {
-//            NSLog(@"[HVC] Setting kml location (%@) as new destination", kmlLocation.title);
-//            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-//            [self.delegate setDestination:kmlLocation];
-//        }
-//    } else {
-    
 }
 
 //////////////////////////////////////////////////////////////

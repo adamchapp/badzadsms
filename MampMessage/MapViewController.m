@@ -99,17 +99,13 @@
     
     if ( [CLLocationManager locationServicesEnabled] ) {
         self.locationManager.delegate = self;
-        self.locationManager.distanceFilter = 10;
-        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
         [self.locationManager startUpdatingLocation];
     }
 }
 
 - (void)loadAnnotations {
     
-    [mapView removeOverlays:mapView.overlays];
-    [mapView removeAnnotations:mapView.annotations];
-        
     [mapView addAnnotations:self.locationModel.kmlLocations];
     [mapView addAnnotations:self.locationModel.userLocations];
     
@@ -126,6 +122,8 @@
             [self setDestination:location];
         }
     }
+    
+    [mapView addOverlays:self.locationModel.mapTileCollectionViews];
 
     [mapView setShowsUserLocation:YES];
 }
@@ -275,8 +273,15 @@
 
 -(void)hideMapTileCollection:(MapTileCollection *)collection {
     
-//    MapOverlay *overlay = [self.locationModel mapOverlayForMapTileCollection:collection];
-    [mapView removeOverlays:[self.locationModel mapTileCollectionViews]];
+    //iterate through mapView overlays, comparing the basedirectory with collection's directoryPath
+    for ( MKOverlayView *overlayView in mapView.overlays ) {
+        
+        NSString *overlayDirectoryName = [[overlayView valueForKey:@"baseDirectory"] lastPathComponent];
+        
+        if ( [overlayDirectoryName isEqualToString:collection.directoryPath] ) {
+            [mapView removeOverlay:(id)overlayView];
+        }
+    }
     [self.locationModel hideMapTileCollection:collection];
 }
 
@@ -550,7 +555,6 @@
 }
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    NSLog(@"Show detail screen");
     AnnotationDetailViewController *detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailView"];
     [detailViewController setDelegate:self];
     [detailViewController setAnnotation:view.annotation];
@@ -625,5 +629,44 @@
         [self zoomMap];
     }
 }
+
+//- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+//    // test the age of the location measurement to determine if the measurement is cached
+//    // in most cases you will not want to rely on cached measurements
+//    NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
+//    
+//    if (locationAge > 5.0) return;
+//    
+//    // test that the horizontal accuracy does not indicate an invalid measurement
+//    if (newLocation.horizontalAccuracy < 0) return;
+//    
+//    // test the measurement to see if it is more accurate than the previous measurement
+//    if (bestEffortAtLocation == nil || bestEffortAtLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
+//        // store the location as the "best effort"
+//        self.bestEffortAtLocation = newLocation;
+//        
+//        // test the measurement to see if it meets the desired accuracy
+//        //
+//        // IMPORTANT!!! kCLLocationAccuracyBest should not be used for comparison with location coordinate or altitidue
+//        // accuracy because it is a negative value. Instead, compare against some predetermined "real" measure of
+//        // acceptable accuracy, or depend on the timeout to stop updating. This sample depends on the timeout.
+//        //
+//        if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
+//            // we have a measurement that meets our requirements, so we can stop updating the location
+//            //
+//            // IMPORTANT!!! Minimize power usage by stopping the location manager as soon as possible.
+//            //
+//            [self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
+//            
+//            // we can also cancel our previous performSelector:withObject:afterDelay: - it's no longer necessary
+//            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
+//        }
+//    }
+//}
+
+
+
+
+
 
 @end
