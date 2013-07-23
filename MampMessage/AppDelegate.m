@@ -21,8 +21,6 @@
 {
     [self setAppearance];
     
-    [self checkForFirstRun];
-    
     ECSlidingViewController * drawerController = [[ECSlidingViewController alloc] init];
     [drawerController setTopViewController:[self mapNavController]];
     [drawerController setUnderLeftViewController:[self historyNavController]];
@@ -49,24 +47,12 @@
     [[[UIButton appearance] titleLabel] setFont:whitney];
 }
 
-- (void)checkForFirstRun
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    BOOL hasRunBefore = [defaults boolForKey:@"hasRunBefore"];
-    
-    if ( !hasRunBefore ) {
-        [self.locationModel addMapTileCollectionWithName:@"Glasto HD map" directoryPath:@"detailed" isFlippedAxis:YES];
-        [self.locationModel addMapTileCollectionWithName:@"Glasto OpenStreetMap" directoryPath:@"OpenStreetMap" isFlippedAxis:YES];
-        [self.locationModel addMapTileCollectionWithName:@"EE Map" directoryPath:@"tiles" isFlippedAxis:NO];
-    }
-    
-    [defaults setBool:YES forKey:@"hasRunBefore"];
-}
-
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     if ( [url isFileURL] ) {
+        
+        if ( [[url lastPathComponent] pathExtension])
+        
         [self.mapController addKMLLocationFromURL:url];
     }
     else

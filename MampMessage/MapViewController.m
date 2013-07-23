@@ -10,6 +10,7 @@
 
 #import "MapViewController.h"
 
+
 @interface MapViewController ()
 {
     NSInteger pin_width;
@@ -95,13 +96,9 @@
 
 - (void)setupLocationManager
 {
-    self.locationManager = [[CLLocationManager alloc] init];
-    
-    if ( [CLLocationManager locationServicesEnabled] ) {
-        self.locationManager.delegate = self;
-        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
-        [self.locationManager startUpdatingLocation];
-    }
+    [PSLocationManager sharedLocationManager].delegate = self;
+    [[PSLocationManager sharedLocationManager] prepLocationUpdates];
+    [[PSLocationManager sharedLocationManager] startLocationUpdates];
 }
 
 - (void)loadAnnotations {
@@ -598,75 +595,57 @@
 }
 
 //////////////////////////////////////////////////////////////
-#pragma mark  - CLLocationManagerDelegate methods
+#pragma mark  - PSLocationManagerDelegate methods
 //////////////////////////////////////////////////////////////
 
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation {
+- (void)locationManager:(PSLocationManager *)locationManager signalStrengthChanged:(PSLocationManagerGPSSignalStrength)signalStrength {
+    NSString *strengthText;
+    if (signalStrength == PSLocationManagerGPSSignalStrengthWeak) {
+        strengthText = NSLocalizedString(@"Weak", @"");
+    } else if (signalStrength == PSLocationManagerGPSSignalStrengthStrong) {
+        strengthText = NSLocalizedString(@"Strong", @"");
+    } else {
+        strengthText = NSLocalizedString(@"...", @"");
+    }
     
+    NSLog(@"%@", strengthText);
+}
+
+- (void)locationManagerSignalConsistentlyWeak:(PSLocationManager *)locationManager {
+    NSLog(@"%@", NSLocalizedString(@"Consistently Weak", @""));
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance {
+    NSLog(@"%@",[NSString stringWithFormat:@"%.2f %@", distance, NSLocalizedString(@"meters", @"")]);
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed {
+    NSLog(@"New location : %.4f/%.4f", waypoint.coordinate.latitude, waypoint.coordinate.longitude );
+
     double miles = 12.0;
     double scalingFactor =
-    ABS( cos(2 * M_PI * newLocation.coordinate.latitude /360.0) );
-    
+    ABS( cos(2 * M_PI * waypoint.coordinate.latitude /360.0) );
+
     MKCoordinateSpan span;
     span.latitudeDelta = miles/69.0;
     span.longitudeDelta = miles/( scalingFactor*69.0 );
-    
+
     mapView.showsUserLocation = YES;
-    
-    NSLog(@"Location manager update %.4f/%.4f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-    
+
+    NSLog(@"Location manager update %.4f/%.4f", waypoint.coordinate.latitude, waypoint.coordinate.longitude);
+
     CLLocationCoordinate2D currentLocation = CLLocationCoordinate2DMake(self.latitude, self.longitude);
 
     NSLog(@"currentLocation (from self.latitude/longitude...) : %.4f/%.4f", currentLocation.latitude, currentLocation.longitude);
-    NSLog(@"old location (from location manager) : %.4f/%.4f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
-    
-    self.latitude = newLocation.coordinate.latitude;
-    self.longitude = newLocation.coordinate.longitude;
-    
-    if ( !CLCOORDINATES_EQUAL(newLocation.coordinate, currentLocation)) {
-        [self zoomMap];
-    }
+
+    self.latitude = waypoint.coordinate.latitude;
+    self.longitude = waypoint.coordinate.longitude;
 }
+    
 
-//- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-//    // test the age of the location measurement to determine if the measurement is cached
-//    // in most cases you will not want to rely on cached measurements
-//    NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
-//    
-//    if (locationAge > 5.0) return;
-//    
-//    // test that the horizontal accuracy does not indicate an invalid measurement
-//    if (newLocation.horizontalAccuracy < 0) return;
-//    
-//    // test the measurement to see if it is more accurate than the previous measurement
-//    if (bestEffortAtLocation == nil || bestEffortAtLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
-//        // store the location as the "best effort"
-//        self.bestEffortAtLocation = newLocation;
-//        
-//        // test the measurement to see if it meets the desired accuracy
-//        //
-//        // IMPORTANT!!! kCLLocationAccuracyBest should not be used for comparison with location coordinate or altitidue
-//        // accuracy because it is a negative value. Instead, compare against some predetermined "real" measure of
-//        // acceptable accuracy, or depend on the timeout to stop updating. This sample depends on the timeout.
-//        //
-//        if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
-//            // we have a measurement that meets our requirements, so we can stop updating the location
-//            //
-//            // IMPORTANT!!! Minimize power usage by stopping the location manager as soon as possible.
-//            //
-//            [self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
-//            
-//            // we can also cancel our previous performSelector:withObject:afterDelay: - it's no longer necessary
-//            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
-//        }
-//    }
-//}
-
-
-
-
-
+- (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
+    // location services is probably not enabled for the app
+    NSLog(@"%@",NSLocalizedString(@"Unable to determine location", @""));
+}
 
 @end

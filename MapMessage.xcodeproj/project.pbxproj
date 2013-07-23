@@ -113,6 +113,7 @@
 		3FFF3CD11769023500813BD9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCE1769023500813BD9 /* Default-568h@2x.png */; };
 		3FFF3CD21769023500813BD9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCF1769023500813BD9 /* Default@2x.png */; };
 		EE6E82A217660E9200A17859 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E82A117660E9200A17859 /* KMLParser.m */; };
+		EEE2492F179EC0A500F76354 /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE2492E179EC0A500F76354 /* PSLocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -262,6 +263,8 @@
 		EE6E82A017660E9200A17859 /* KMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLParser.h; sourceTree = "<group>"; };
 		EE6E82A117660E9200A17859 /* KMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLParser.m; sourceTree = "<group>"; };
 		EEC96DBE1779D48A00B023AA /* AnnotationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationDelegate.h; sourceTree = "<group>"; };
+		EEE2492D179EC0A500F76354 /* PSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
+		EEE2492E179EC0A500F76354 /* PSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLocationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -582,6 +585,7 @@
 		3F81110E1764179F00975702 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				EEE2492C179EC09400F76354 /* PSLocationManager */,
 				3F7C71AC17725D9F0017770B /* ECSlidingViewController */,
 			);
 			name = Libraries;
@@ -640,6 +644,15 @@
 				3FFA271E1767DD7900E7B9F3 /* app icons and splash */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		EEE2492C179EC09400F76354 /* PSLocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				EEE2492D179EC0A500F76354 /* PSLocationManager.h */,
+				EEE2492E179EC0A500F76354 /* PSLocationManager.m */,
+			);
+			name = PSLocationManager;
 			sourceTree = "<group>";
 		};
 		EEE9CF641769D00000070A29 /* core data */ = {
@@ -875,6 +888,7 @@
 				3F149A46177687D70035B712 /* Location+Extensions.m in Sources */,
 				3F03B6BD176A9D8C00469072 /* KMLLocation+Extensions.m in Sources */,
 				EE6E82A217660E9200A17859 /* KMLParser.m in Sources */,
+				EEE2492F179EC0A500F76354 /* PSLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

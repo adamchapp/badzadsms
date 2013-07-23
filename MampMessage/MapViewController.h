@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <MessageUI/MessageUI.h>
-#import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
+#import "PSLocationManager.h"
 
 #import "Constants.h"
 
@@ -36,7 +36,7 @@
 
 typedef void (^ConfirmAddLocationBlock)(void);
 
-@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, AnnotationDelegate>
+@interface MapViewController : UIViewController <MFMessageComposeViewControllerDelegate, PSLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, AnnotationDelegate>
 {
     IBOutlet MKMapView *mapView;
     IBOutlet UIButton *compassButton;
