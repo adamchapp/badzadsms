@@ -114,6 +114,13 @@
 		3FFF3CD21769023500813BD9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFF3CCF1769023500813BD9 /* Default@2x.png */; };
 		EE6E82A217660E9200A17859 /* KMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6E82A117660E9200A17859 /* KMLParser.m */; };
 		EEE2492F179EC0A500F76354 /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE2492E179EC0A500F76354 /* PSLocationManager.m */; };
+		EEE2493E17A02A3F00F76354 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = EEE2493417A02A3F00F76354 /* ioapi.c */; };
+		EEE2493F17A02A3F00F76354 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = EEE2493617A02A3F00F76354 /* mztools.c */; };
+		EEE2494017A02A3F00F76354 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = EEE2493817A02A3F00F76354 /* unzip.c */; };
+		EEE2494117A02A3F00F76354 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = EEE2493A17A02A3F00F76354 /* zip.c */; };
+		EEE2494217A02A3F00F76354 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = EEE2493D17A02A3F00F76354 /* ZipArchive.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EEE2494517A02A5500F76354 /* OverlayImportController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEE2494417A02A5500F76354 /* OverlayImportController.m */; };
+		EEE2494717A02B2500F76354 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EEE2494617A02B2500F76354 /* libz.1.2.5.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +272,20 @@
 		EEC96DBE1779D48A00B023AA /* AnnotationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotationDelegate.h; sourceTree = "<group>"; };
 		EEE2492D179EC0A500F76354 /* PSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
 		EEE2492E179EC0A500F76354 /* PSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLocationManager.m; sourceTree = "<group>"; };
+		EEE2493317A02A3F00F76354 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		EEE2493417A02A3F00F76354 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		EEE2493517A02A3F00F76354 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		EEE2493617A02A3F00F76354 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		EEE2493717A02A3F00F76354 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		EEE2493817A02A3F00F76354 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		EEE2493917A02A3F00F76354 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		EEE2493A17A02A3F00F76354 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		EEE2493B17A02A3F00F76354 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		EEE2493C17A02A3F00F76354 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		EEE2493D17A02A3F00F76354 /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
+		EEE2494317A02A5500F76354 /* OverlayImportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayImportController.h; sourceTree = "<group>"; };
+		EEE2494417A02A5500F76354 /* OverlayImportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayImportController.m; sourceTree = "<group>"; };
+		EEE2494617A02B2500F76354 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +293,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEE2494717A02B2500F76354 /* libz.1.2.5.dylib in Frameworks */,
 				3FD3441617775D4F00E5DD7A /* AddressBookUI.framework in Frameworks */,
 				3FD3441417775D2000E5DD7A /* AddressBook.framework in Frameworks */,
 				3F81111D176419B600975702 /* QuartzCore.framework in Frameworks */,
@@ -430,6 +452,8 @@
 		3F4C78F1176D1DE100F357D4 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				EEE2494317A02A5500F76354 /* OverlayImportController.h */,
+				EEE2494417A02A5500F76354 /* OverlayImportController.m */,
 				3F4C78F2176D1E0A00F357D4 /* SMSController.h */,
 				3F4C78F3176D1E0A00F357D4 /* SMSController.m */,
 			);
@@ -458,6 +482,7 @@
 		3F60C4241763BE140043EB2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EEE2494617A02B2500F76354 /* libz.1.2.5.dylib */,
 				3FD3441517775D4F00E5DD7A /* AddressBookUI.framework */,
 				3FD3441317775D2000E5DD7A /* AddressBook.framework */,
 				3F81111C176419B600975702 /* QuartzCore.framework */,
@@ -585,6 +610,7 @@
 		3F81110E1764179F00975702 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				EEE2493117A02A3F00F76354 /* ZipArchive */,
 				EEE2492C179EC09400F76354 /* PSLocationManager */,
 				3F7C71AC17725D9F0017770B /* ECSlidingViewController */,
 			);
@@ -653,6 +679,32 @@
 				EEE2492E179EC0A500F76354 /* PSLocationManager.m */,
 			);
 			name = PSLocationManager;
+			sourceTree = "<group>";
+		};
+		EEE2493117A02A3F00F76354 /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				EEE2493217A02A3F00F76354 /* minizip */,
+				EEE2493C17A02A3F00F76354 /* ZipArchive.h */,
+				EEE2493D17A02A3F00F76354 /* ZipArchive.mm */,
+			);
+			path = ZipArchive;
+			sourceTree = "<group>";
+		};
+		EEE2493217A02A3F00F76354 /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				EEE2493317A02A3F00F76354 /* crypt.h */,
+				EEE2493417A02A3F00F76354 /* ioapi.c */,
+				EEE2493517A02A3F00F76354 /* ioapi.h */,
+				EEE2493617A02A3F00F76354 /* mztools.c */,
+				EEE2493717A02A3F00F76354 /* mztools.h */,
+				EEE2493817A02A3F00F76354 /* unzip.c */,
+				EEE2493917A02A3F00F76354 /* unzip.h */,
+				EEE2493A17A02A3F00F76354 /* zip.c */,
+				EEE2493B17A02A3F00F76354 /* zip.h */,
+			);
+			path = minizip;
 			sourceTree = "<group>";
 		};
 		EEE9CF641769D00000070A29 /* core data */ = {
@@ -889,6 +941,12 @@
 				3F03B6BD176A9D8C00469072 /* KMLLocation+Extensions.m in Sources */,
 				EE6E82A217660E9200A17859 /* KMLParser.m in Sources */,
 				EEE2492F179EC0A500F76354 /* PSLocationManager.m in Sources */,
+				EEE2493E17A02A3F00F76354 /* ioapi.c in Sources */,
+				EEE2493F17A02A3F00F76354 /* mztools.c in Sources */,
+				EEE2494017A02A3F00F76354 /* unzip.c in Sources */,
+				EEE2494117A02A3F00F76354 /* zip.c in Sources */,
+				EEE2494217A02A3F00F76354 /* ZipArchive.mm in Sources */,
+				EEE2494517A02A5500F76354 /* OverlayImportController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
