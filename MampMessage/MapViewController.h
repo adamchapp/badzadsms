@@ -41,6 +41,7 @@ typedef void (^ConfirmAddLocationBlock)(void);
     IBOutlet MKMapView *mapView;
     IBOutlet UIButton *compassButton;
     IBOutlet UIButton *satelliteButton;
+    __weak IBOutlet UILabel *signalStrengthLabel;
 }
 
 @property (nonatomic, copy) ConfirmAddLocationBlock confirmBlock;

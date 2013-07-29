@@ -317,7 +317,7 @@
     
     for ( MapTileCollection *collection in self.mapTileCollections ) {
         if ( [collection.isVisible boolValue] ) {
-            NSString *tileDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:collection.directoryPath];
+            NSString *tileDirectory = [[[self applicationDocumentsDirectory] absoluteString] stringByAppendingPathComponent:collection.directoryPath];
             
             MapOverlay *overlay = [[MapOverlay alloc] initWithDirectory:tileDirectory shouldFlipOrigin:[collection.isFlippedAxis boolValue]];
             
@@ -349,6 +349,16 @@
 - (NSString *)makeKeyFromKMLLocation:(KMLLocation *)location
 {
     return [NSString stringWithFormat:@"%@", location.title];
+}
+
+//////////////////////////////////////////////////////////////
+#pragma mark  - Getters and setters
+//////////////////////////////////////////////////////////////
+
+// Returns the URL to the application's Documents directory.
+- (NSURL *)applicationDocumentsDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
 @end

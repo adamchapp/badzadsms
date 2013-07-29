@@ -9,24 +9,44 @@
 #import "OverlayImportController.h"
 #import "ZipArchive.h"
 
+@interface OverlayImportController ()
+
+@property (nonatomic, strong) NSString *mapName;
+
+@end
+
 @implementation OverlayImportController
 
-- (void)addOverlayToDocumentsDirectory:(NSURL *)url
+- (BOOL)addOverlayToDocumentsDirectory:(NSURL *)url
 {
     NSLog(@"%@", url.lastPathComponent);
     
+    __block BOOL unzip;
  
-    dispatch_queue_t queue = dispatch_get_global_queue(
-                                                       DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
     dispatch_async(queue, ^{
-        BOOL unzip = [self downloadZipFileToDocumentsDirectory:url];
+        unzip = [self downloadZipFileToDocumentsDirectory:url];
+        
+        NSString *overlayTitle = [url.lastPathComponent stringByDeletingPathExtension];
         
         if ( unzip ) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"Told main queue everyting fine");
+                
+                [self.delegate addMapTileCollectionWithName:self.mapName directoryPath:self.mapName isFlippedAxis:NO];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Successful import" message:[NSString stringWithFormat:@"Added %@ as a map overlay", overlayTitle] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"There was an error trying to import %@", overlayTitle] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
             });
         }
     });
+    
+    return unzip;
 }
 
 - (BOOL)downloadZipFileToDocumentsDirectory:(NSURL *)url {
@@ -37,18 +57,30 @@
     
     if(!error)
     {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *savePath = [paths objectAtIndex:0];
+        NSArray *cachePaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSArray *savePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *savePath = [savePaths objectAtIndex:0];
+        NSString *cachePath = [cachePaths objectAtIndex:0];
         
-        NSString *zipPath = [savePath stringByAppendingPathComponent:url.lastPathComponent];
+        NSString *zipPath = [cachePath stringByAppendingPathComponent:url.lastPathComponent];
+                
         [data writeToFile:zipPath options:0 error:&error];
         
         if(!error)
         {
-            BOOL didUnzip = [self unzipFileAtPath:zipPath toSavePath:savePath];
+            NSLog(@"Created temp ZIP, unzipping");
             
-            if ( didUnzip ) {
+            NSMutableArray *fileContents = [self unzipFileAtPath:zipPath toSavePath:savePath];
+            
+            if ( fileContents != nil ) {
+                
+                
                 NSLog(@"Delete original downloaded zip");
+                
+                NSLog(@"Let's get the filename %@", [fileContents objectAtIndex:0]);
+                
+                self.mapName = [fileContents objectAtIndex:0];
+                
                 //clean up
                 NSURL *originalZipURL = url;
                 NSURL *createdZipURL = [NSURL URLWithString:url.lastPathComponent relativeToURL:[NSURL URLWithString:savePath]];
@@ -76,17 +108,20 @@
     return unzippedCorrectly;
 }
 
-- (BOOL)unzipFileAtPath:(NSString *)zipPath toSavePath:(NSString *)savePath
+- (NSMutableArray *)unzipFileAtPath:(NSString *)zipPath toSavePath:(NSString *)savePath
 {
+    NSLog(@"Zip path is %@", zipPath);
+    NSMutableArray *contents;
     BOOL ret = NO;
     ZipArchive *za = [[ZipArchive alloc] init];
     if ([za UnzipOpenFile: zipPath]) {
         NSLog(@"Available for unzipping");
         ret = [za UnzipFileTo: savePath overWrite: YES];
+        contents = [za getZipFileContents];
         if (NO == ret){} [za UnzipCloseFile];
     }
     
-    return ret;
+    return contents;
 }
 
 @end

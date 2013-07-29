@@ -8,8 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol OverlayImportControllerDelegate <NSObject>
+
+- (void)addMapTileCollectionWithName:(NSString *)name directoryPath:(NSString *)path isFlippedAxis:(BOOL)flipped;
+
+@end
+
 @interface OverlayImportController : NSObject
 
-- (void)addOverlayToDocumentsDirectory:(NSURL *)url;
+@property (nonatomic, weak) id<OverlayImportControllerDelegate> delegate;
+
+- (BOOL)addOverlayToDocumentsDirectory:(NSURL *)url;
 
 @end

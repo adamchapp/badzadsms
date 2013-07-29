@@ -50,19 +50,14 @@
     [self setEditing:NO];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    
-    self.view.layer.shadowOpacity = 0.75f;
-    self.view.layer.shadowRadius = 10.0f;
-    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
-}
-
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    _pinViewHeader = nil;
+    _smsController = nil;
+    _formatter = nil;
+    
+    [super didReceiveMemoryWarning];
 }
 
 //////////////////////////////////////////////////////////////
@@ -608,6 +603,8 @@
         strengthText = NSLocalizedString(@"...", @"");
     }
     
+    [signalStrengthLabel setText:[NSString stringWithFormat:@"Signal strength: %@", strengthText]];
+    [signalStrengthLabel setFont:[UIFont fontWithName:@"Whitney-Book" size:12]];
     NSLog(@"%@", strengthText);
 }
 
@@ -643,9 +640,13 @@
 }
     
 
-- (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
-    // location services is probably not enabled for the app
-    NSLog(@"%@",NSLocalizedString(@"Unable to determine location", @""));
+- (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Location services error" message:@"Unable to determine location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
 }
 
+- (void)viewDidUnload {
+    signalStrengthLabel = nil;
+    [super viewDidUnload];
+}
 @end

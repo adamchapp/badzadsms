@@ -14,8 +14,9 @@
 #import "UserLocation+Extensions.h"
 #import "KMLLocation+Extensions.h"
 #import "MapTileCollection+Extension.h"
+#import "OverlayImportController.h"
 
-@interface LocationModel : NSObject <UIAlertViewDelegate>
+@interface LocationModel : NSObject <OverlayImportControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *context;
 
