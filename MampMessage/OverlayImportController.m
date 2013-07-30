@@ -33,7 +33,7 @@
         if ( unzip ) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [self.delegate addMapTileCollectionWithName:self.mapName directoryPath:self.mapName isFlippedAxis:NO];
+                [self.delegate addMapTileCollectionWithName:self.mapName directoryPath:self.mapName isFlippedAxis:YES];
                 
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Successful import" message:[NSString stringWithFormat:@"Added %@ as a map overlay", overlayTitle] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alert show];
@@ -72,14 +72,16 @@
             
             NSMutableArray *fileContents = [self unzipFileAtPath:zipPath toSavePath:savePath];
             
+            NSLog(@"Saving to path %@", savePath);
+            
             if ( fileContents != nil ) {
                 
-                
                 NSLog(@"Delete original downloaded zip");
+                NSString *uncleanName = [fileContents objectAtIndex:0];
                 
-                NSLog(@"Let's get the filename %@", [fileContents objectAtIndex:0]);
-                
-                self.mapName = [fileContents objectAtIndex:0];
+                self.mapName = [uncleanName stringByReplacingOccurrencesOfString:@"/" withString:@""];
+
+                NSLog(@"Let's get the filename %@", self.mapName);
                 
                 //clean up
                 NSURL *originalZipURL = url;

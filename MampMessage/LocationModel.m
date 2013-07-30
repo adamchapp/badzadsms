@@ -317,7 +317,9 @@
     
     for ( MapTileCollection *collection in self.mapTileCollections ) {
         if ( [collection.isVisible boolValue] ) {
-            NSString *tileDirectory = [[[self applicationDocumentsDirectory] absoluteString] stringByAppendingPathComponent:collection.directoryPath];
+            NSString *tileDirectory = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:collection.directoryPath];
+            
+            NSLog(@"using tiledirectory %@", tileDirectory);
             
             MapOverlay *overlay = [[MapOverlay alloc] initWithDirectory:tileDirectory shouldFlipOrigin:[collection.isFlippedAxis boolValue]];
             
@@ -330,7 +332,7 @@
 
 - (MapOverlay *)mapOverlayForMapTileCollection:(MapTileCollection *)collection
 {
-    NSString *tileDirectory = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:collection.directoryPath];
+    NSString *tileDirectory = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:collection.directoryPath];
     
     MapOverlay *overlay = [[MapOverlay alloc] initWithDirectory:tileDirectory shouldFlipOrigin:[collection.isFlippedAxis boolValue]];
     
@@ -356,9 +358,10 @@
 //////////////////////////////////////////////////////////////
 
 // Returns the URL to the application's Documents directory.
-- (NSURL *)applicationDocumentsDirectory
+- (NSString *)applicationDocumentsDirectory
 {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSArray *documentsPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [documentsPaths objectAtIndex:0];
 }
 
 @end
